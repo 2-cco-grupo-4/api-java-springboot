@@ -2,6 +2,7 @@ package com.example.picmejava;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class UsuarioController {
     //CADASTRAR
     @GetMapping("/cadastrar")
     public Usuario cadastrarUsuario(@RequestBody Usuario novoUsuario){
+        novoUsuario.setAutenticado(false);
         usuarios.add(novoUsuario);
         return novoUsuario;
     }
@@ -29,7 +31,7 @@ public class UsuarioController {
     public Usuario alterarEmail(@RequestBody Usuario novoUsuario){
         for (Usuario usuario : usuarios){
             if (usuario.getEmail().equals(novoUsuario.getEmail()) && usuario.getSenha().equals(novoUsuario.getSenha())){
-                usuario.setNome(novoUsuario.getNome());
+                usuario.setEmail(novoUsuario.getEmail());
                 return usuario;
             }
         }
@@ -48,13 +50,32 @@ public class UsuarioController {
         return String.format("Email ou senha incorreto!");
     }
 
-    //GETTERS AND SETTERS
-
-    public List<Usuario> getUsuarios() {
-        return usuarios;
+    //LOGIN
+    @PatchMapping("/entrar")
+    public String login(Usuario findUsuario) {
+        for (Usuario usuario : usuarios){
+            if (usuario.getEmail().equals(findUsuario.getEmail()) && usuario.getSenha().equals(findUsuario.getSenha())){
+                usuario.setAutenticado(true);
+                return String.format("Usuario %s autenticado!", usuario.getNome());
+            }
+        }
+        return "Usuário não encontrado!";
     }
 
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
+    //LOGOFF
+    @PatchMapping("/sair")
+    public String logoff(Usuario findUsuario) {
+        for (Usuario usuario : usuarios){
+            if (usuario.getEmail().equals(findUsuario.getEmail()) && usuario.getSenha().equals(findUsuario.getSenha())){
+                if (usuario.getAutenticado().equals(false)){
+                    return String.format("Usuário %s não está ativo", usuario.getNome());
+                }else {
+                    usuario.setAutenticado(false);
+                    return String.format("Usuario %s fez logoff com sucesso!", usuario.getNome());
+                }
+            }
+        }
+
+        return "Usuario não encontrado!";
     }
 }

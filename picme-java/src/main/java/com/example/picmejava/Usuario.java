@@ -1,5 +1,8 @@
 package com.example.picmejava;
 
+import org.springframework.cglib.core.Local;
+
+import java.time.LocalDate;
 import java.util.Date;
 
 public abstract class Usuario {
@@ -8,11 +11,11 @@ public abstract class Usuario {
     private String email;
     private String senha;
     private String cpf;
-    private Date dataNasc;
+    private LocalDate dataNasc;
     private String numCelular;
     private Boolean autenticado;
 
-    public Usuario(String nome, String email, String senha, String cpf, Date dataNasc, String numCelular, Boolean autenticado) {
+    public Usuario(String nome, String email, String senha, String cpf, LocalDate dataNasc, String numCelular, Boolean autenticado) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
@@ -22,12 +25,9 @@ public abstract class Usuario {
         this.autenticado = autenticado;
     }
 
-    // METODOS
-    // LOGIN
-    public abstract String login(Usuario usuario);
+    public Usuario() {
 
-    //LOGOFF
-    public abstract String logoff(Usuario usuario);
+    }
 
     //GETTERS AND SETTERS
 
@@ -63,11 +63,11 @@ public abstract class Usuario {
         this.cpf = cpf;
     }
 
-    public Date getDataNasc() {
+    public LocalDate getDataNasc() {
         return dataNasc;
     }
 
-    public void setDataNasc(Date dataNasc) {
+    public void setDataNasc(LocalDate dataNasc) {
         this.dataNasc = dataNasc;
     }
 
