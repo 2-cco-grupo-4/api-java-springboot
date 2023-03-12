@@ -7,20 +7,29 @@ public abstract class Usuario {
     private String nome;
     private String email;
     private String senha;
+    private String cpf;
     private Date dataNasc;
     private String numCelular;
     private Boolean autenticado;
 
-    public Usuario(String nome, String email, String senha, Date dataNasc, String numCelular, Boolean autenticado) {
+    public Usuario(String nome, String email, String senha, String cpf, Date dataNasc, String numCelular, Boolean autenticado) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
+        this.cpf = cpf;
         this.dataNasc = dataNasc;
         this.numCelular = numCelular;
         this.autenticado = autenticado;
     }
 
-    public abstract String editarPerfil(Usuario usuario);
+    // METODOS
+    // LOGIN
+    public abstract String login(Usuario usuario);
+
+    //LOGOFF
+    public abstract String logoff(Usuario usuario);
+
+    //GETTERS AND SETTERS
 
     public String getNome() {
         return nome;
@@ -46,6 +55,14 @@ public abstract class Usuario {
         this.senha = senha;
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
     public Date getDataNasc() {
         return dataNasc;
     }
@@ -60,5 +77,13 @@ public abstract class Usuario {
 
     public void setNumCelular(String numCelular) {
         this.numCelular = numCelular;
+    }
+
+    public Boolean getAutenticado() {
+        return autenticado;
+    }
+
+    public void setAutenticado(Boolean autenticado) {
+        this.autenticado = autenticado;
     }
 }
