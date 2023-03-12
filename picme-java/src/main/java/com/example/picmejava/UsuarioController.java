@@ -21,9 +21,12 @@ public class UsuarioController {
     //CADASTRAR
     @GetMapping("/cadastrar")
     public Usuario cadastrarUsuario(@RequestBody Usuario novoUsuario){
-        novoUsuario.setAutenticado(false);
-        usuarios.add(novoUsuario);
-        return novoUsuario;
+        if (novoUsuario.isMaiordeIdade(novoUsuario.getDataNasc()).equals(true)){
+            novoUsuario.setAutenticado(false);
+            usuarios.add(novoUsuario);
+            return novoUsuario;
+        }
+        return null;
     }
 
     //ALTERAR E-MAIL

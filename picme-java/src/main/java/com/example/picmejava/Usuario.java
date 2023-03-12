@@ -29,6 +29,11 @@ public abstract class Usuario {
 
     }
 
+    // METODOS
+
+    //É MAIOR DE IDADE?
+    public abstract Boolean isMaiordeIdade(LocalDate dataNasc);
+
     //GETTERS AND SETTERS
 
     public String getNome() {

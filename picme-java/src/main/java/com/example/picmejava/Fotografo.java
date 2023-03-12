@@ -18,6 +18,19 @@ public class Fotografo extends Usuario{
 
     //METODOS
 
+    //VERIFICAR IDADE
+    @Override
+    public Boolean isMaiordeIdade(LocalDate dataNasc) {
+        LocalDate dataAtual = LocalDate.now();
+        int idade = Period.between(dataNasc, dataAtual).getYears();
+
+        if (idade < 18){
+            return false;
+        }else {
+            return true;
+        }
+    }
+
     //POSTAR IMAGEM
     public String postarImagem(){
         return null;
