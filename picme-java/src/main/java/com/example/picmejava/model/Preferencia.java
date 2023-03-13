@@ -1,4 +1,4 @@
-package com.example.picmejava;
+package com.example.picmejava.model;
 
 public class Preferencia {
 

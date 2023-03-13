@@ -1,4 +1,4 @@
-package com.example.picmejava;
+package com.example.picmejava.model;
 
 import java.util.ArrayList;
 import java.util.List;

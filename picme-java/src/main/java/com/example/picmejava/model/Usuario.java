@@ -1,40 +1,47 @@
-package com.example.picmejava;
-
-import org.springframework.cglib.core.Local;
-
-import java.time.LocalDate;
-import java.util.Date;
+package com.example.picmejava.model;
 
 public abstract class Usuario {
 
+    private Integer id;
     private String nome;
     private String email;
     private String senha;
     private String cpf;
-    private LocalDate dataNasc;
+    private String dataNasc;
     private String numCelular;
     private Boolean autenticado;
 
-    public Usuario(String nome, String email, String senha, String cpf, LocalDate dataNasc, String numCelular, Boolean autenticado) {
+    public Usuario(String nome,
+                   String email,
+                   String senha,
+                   String cpf,
+                   String dataNasc,
+                   String numCelular) {
+        this.id = (int) (Math.random() * 10000);
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.cpf = cpf;
         this.dataNasc = dataNasc;
         this.numCelular = numCelular;
-        this.autenticado = autenticado;
+        this.autenticado = false;
     }
 
     public Usuario() {
-
     }
 
-    // METODOS
+    public abstract String getTipoUsuario();
 
-    //É MAIOR DE IDADE?
-    public abstract Boolean isMaiordeIdade(LocalDate dataNasc);
+    public Boolean verificarUsuario(Usuario usuario, Usuario buscarUsuario){
+        if (usuario.getEmail().equals(buscarUsuario.getEmail()) && usuario.getSenha().equals(buscarUsuario.getSenha())){
+            return true;
+        }
+        return false;
+    }
 
-    //GETTERS AND SETTERS
+    public int getId() {
+        return id;
+    }
 
     public String getNome() {
         return nome;
@@ -68,11 +75,11 @@ public abstract class Usuario {
         this.cpf = cpf;
     }
 
-    public LocalDate getDataNasc() {
+    public String getDataNasc() {
         return dataNasc;
     }
 
-    public void setDataNasc(LocalDate dataNasc) {
+    public void setDataNasc(String dataNasc) {
         this.dataNasc = dataNasc;
     }
 
