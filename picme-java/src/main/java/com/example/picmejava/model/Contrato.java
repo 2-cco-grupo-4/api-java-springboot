@@ -4,30 +4,25 @@ import java.util.Date;
 
 public class Contrato {
 
-    private Date dataContrato;
+    private String dataContrato;
     private Cliente cliente;
     private Fotografo fotografo;
 
-    public Contrato(Date dataContrato, Cliente cliente, Fotografo fotografo) {
+    public Contrato(String dataContrato, Cliente cliente, Fotografo fotografo) {
         this.dataContrato = dataContrato;
         this.cliente = cliente;
         this.fotografo = fotografo;
     }
 
-    //METODO
-
-    //CRIAR CONTRATO
     public String criarContrato(Contrato contrato){
         return String.format("Data do contrato: " + dataContrato + "Cliente: " + cliente + "Fotografo: " + fotografo);
     }
 
-    //GETTERS AND SETTERS
-
-    public Date getDataContrato() {
+    public String getDataContrato() {
         return dataContrato;
     }
 
-    public void setDataContrato(Date dataContrato) {
+    public void setDataContrato(String dataContrato) {
         this.dataContrato = dataContrato;
     }
 

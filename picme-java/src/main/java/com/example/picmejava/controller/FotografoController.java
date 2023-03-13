@@ -17,8 +17,8 @@ public class FotografoController {
     }
 
     @PostMapping()
-    public UsuarioDTO cadastrar(@RequestBody Fotografo usuario){
-        return new UsuarioDTO(serviceFotografo.cadastrar(usuario));
+    public Fotografo cadastrar(@RequestBody Fotografo usuario){
+        return serviceFotografo.cadastrar(usuario);
     }
 
     @PutMapping("/alterar/senha")

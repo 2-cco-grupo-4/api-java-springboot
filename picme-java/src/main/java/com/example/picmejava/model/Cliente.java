@@ -1,10 +1,11 @@
 package com.example.picmejava.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Cliente extends Usuario{
 
-    private List<Preferencia> preferencias;
+    private List<Caracteristica> preferencias;
 
     public Cliente(String nome,
                    String email,
@@ -12,7 +13,7 @@ public class Cliente extends Usuario{
                    String cpf,
                    String dataNasc,
                    String numCelular,
-                   List<Preferencia> preferencias) {
+                   List<Caracteristica> preferencias) {
         super(nome, email, senha, cpf, dataNasc, numCelular);
         this.preferencias = preferencias;
     }
@@ -22,11 +23,11 @@ public class Cliente extends Usuario{
         return "Cliente";
     }
 
-    public List<Preferencia> getPreferencias() {
+    public List<Caracteristica> getPreferencias() {
         return preferencias;
     }
 
-    public void setPreferencias(List<Preferencia> preferencias) {
+    public void setPreferencias(List<Caracteristica> preferencias) {
         this.preferencias = preferencias;
     }
 }

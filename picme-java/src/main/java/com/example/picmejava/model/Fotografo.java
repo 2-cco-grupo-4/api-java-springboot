@@ -3,7 +3,7 @@ package com.example.picmejava.model;
 
 public class Fotografo extends Usuario{
     private Integer tokenSolicitacao;
-    private String especificacao;
+    private String caracteristica;
 
     public Fotografo(String nome,
                      String email,
@@ -12,35 +12,15 @@ public class Fotografo extends Usuario{
                      String dataNasc,
                      String numCelular,
                      Integer tokenSolicitacao,
-                     String especificacao) {
+                     String caracteristica) {
         super(nome, email, senha, cpf, dataNasc, numCelular);
         this.tokenSolicitacao = tokenSolicitacao;
-        this.especificacao = especificacao;
+        this.caracteristica = caracteristica;
     }
 
     @Override
     public String getTipoUsuario() {
         return "Fotografo";
-    }
-
-    public String postarImagem(){
-        return null;
-    }
-
-    public String criarAlbum(){
-        return null;
-    }
-
-    public String editarAlbum(){
-        return null;
-    }
-
-    public String excluirAlbum(){
-        return null;
-    }
-
-    public String atualizarAlbum(){
-        return null;
     }
 
     public Integer getTokenSolicitacao() {
@@ -51,11 +31,11 @@ public class Fotografo extends Usuario{
         this.tokenSolicitacao = tokenSolicitacao;
     }
 
-    public String getEspecificacao() {
-        return especificacao;
+    public String getCaracteristica() {
+        return caracteristica;
     }
 
-    public void setEspecificacao(String especificacao) {
-        this.especificacao = especificacao;
+    public void setCaracteristica(String caracteristica) {
+        this.caracteristica = caracteristica;
     }
 }

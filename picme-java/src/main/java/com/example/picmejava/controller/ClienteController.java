@@ -16,8 +16,8 @@ public class ClienteController {
     }
 
     @PostMapping()
-    public UsuarioDTO cadastrar(@RequestBody Cliente usuario){
-        return new UsuarioDTO(serviceCliente.cadastrar(usuario));
+    public Cliente cadastrar(@RequestBody Cliente usuario){
+        return serviceCliente.cadastrar(usuario);
     }
 
     @PutMapping("/alterar/senha")

@@ -1,11 +1,16 @@
 package com.example.picmejava.model;
 
-public class Preferencia {
-
+public class Caracteristica {
+    private Integer id;
     private String categoria;
 
-    public Preferencia(String categoria) {
+    public Caracteristica(String categoria) {
+        this.id = (int) (Math.random() * 10000);
         this.categoria = categoria;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public String getCategoria() {

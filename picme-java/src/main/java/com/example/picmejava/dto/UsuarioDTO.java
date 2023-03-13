@@ -1,6 +1,10 @@
 package com.example.picmejava.dto;
 
+import com.example.picmejava.model.Caracteristica;
 import com.example.picmejava.model.Usuario;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UsuarioDTO {
     private Integer id;
@@ -8,6 +12,7 @@ public class UsuarioDTO {
     private String dataNasc;
     private Boolean autenticado;
     private String tipoUsuario;
+    private String caracteristica;
 
     public UsuarioDTO(Usuario usuario) {
         this.id = usuario.getId();
