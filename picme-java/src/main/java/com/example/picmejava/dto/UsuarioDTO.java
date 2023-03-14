@@ -8,7 +8,6 @@ public class UsuarioDTO {
     private String dataNasc;
     private Boolean autenticado;
     private String tipoUsuario;
-    private String caracteristica;
 
     public UsuarioDTO(Usuario usuario) {
         this.id = usuario.getId();

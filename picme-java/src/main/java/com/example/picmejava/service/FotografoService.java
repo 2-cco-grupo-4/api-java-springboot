@@ -2,6 +2,7 @@ package com.example.picmejava.service;
 
 import com.example.picmejava.model.Album;
 import com.example.picmejava.model.Fotografo;
+import com.example.picmejava.model.Imagem;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,16 +12,46 @@ import java.util.List;
 public class FotografoService {
 
     private List<Fotografo> fotografos;
-    private List<Album> albums;
-
     public FotografoService() {
         this.fotografos = new ArrayList<>();
-        this.albums = new ArrayList<>();
     }
 
     public Fotografo cadastrar(Fotografo novoUsuario){
         fotografos.add(novoUsuario);
         return novoUsuario;
+    }
+
+    public Fotografo buscarPorId(Integer idFotografo) throws Exception{
+        for (Fotografo fotografo : fotografos){
+            if (idFotografo.equals(fotografo.getId())){
+                return fotografo;
+            }
+        }
+        throw new Exception(String.format("ERROOOOOOOO idFotografo: " + idFotografo));
+    }
+
+    public Fotografo adicionarAlbumAoFotografo(Integer id, Album album) throws Exception{
+        Fotografo fotografo = buscarPorId(id);
+        if (!fotografo.equals(null)){
+            fotografo.getAlbuns().add(album);
+            return fotografo;
+        }else {
+            return null;
+        }
+    }
+
+    public Album adiconarImagemAoAlbum(Integer idFotografo, Integer idAlbum, Imagem novaImagem) throws Exception{
+        Fotografo fotografo = buscarPorId(idFotografo);
+        if (!fotografo.equals(null)){
+            List <Album> listaAlbum = fotografo.getAlbuns();
+            for(Album album : listaAlbum){
+                if (idAlbum.equals(album.getId())){
+                    album.getImagems().add(novaImagem);
+                    return album;
+                }
+            }
+        }
+        return null;
     }
 
     public Fotografo alterarSenha(Integer id, String novaSenha){
@@ -61,10 +92,4 @@ public class FotografoService {
 
         throw new Exception(String.format("Usuário não encontrado!"));
     }
-
-    public Album criarAlbum(Album album){
-        albums.add(album);
-        return album;
-    }
-
 }

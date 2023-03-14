@@ -1,7 +1,5 @@
 package com.example.picmejava.model;
 
-import java.util.List;
-
 public class Cliente extends Usuario{
 
     public Cliente(String nome,

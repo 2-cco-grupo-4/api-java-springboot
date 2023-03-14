@@ -55,5 +55,4 @@ public class ClienteService {
 
         throw new Exception(String.format("Usuário não encontrado!"));
     }
-
 }

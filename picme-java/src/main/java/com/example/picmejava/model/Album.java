@@ -19,7 +19,7 @@ public class Album {
     }
 
     public Integer getId() {
-        return id;
+        return this.id;
     }
 
     public String getTitulo() {

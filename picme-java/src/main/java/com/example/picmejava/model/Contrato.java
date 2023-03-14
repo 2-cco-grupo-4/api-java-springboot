@@ -1,7 +1,5 @@
 package com.example.picmejava.model;
 
-import java.util.Date;
-
 public class Contrato {
 
     private String dataContrato;

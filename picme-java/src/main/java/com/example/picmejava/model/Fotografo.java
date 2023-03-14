@@ -15,11 +15,18 @@ public class Fotografo extends Usuario{
                      String cpf,
                      String dataNasc,
                      String numCelular,
-                     Integer tokenSolicitacao,
-                     List<Album> albuns) {
+                     Integer tokenSolicitacao) {
         super(nome, email, senha, cpf, dataNasc, numCelular);
         this.tokenSolicitacao = tokenSolicitacao;
-        this.albuns = albuns;
+        this.albuns = new ArrayList<>();
+    }
+
+    @Override
+    public String toString() {
+        return "Fotografo{" +
+                "tokenSolicitacao=" + tokenSolicitacao +
+                ", albuns=" + albuns +
+                "} " + super.toString();
     }
 
     @Override
