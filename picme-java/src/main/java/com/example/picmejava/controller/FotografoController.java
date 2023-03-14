@@ -1,9 +1,11 @@
 package com.example.picmejava.controller;
 
 import com.example.picmejava.dto.UsuarioDTO;
+import com.example.picmejava.model.Album;
 import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.Usuario;
 import com.example.picmejava.service.FotografoService;
+import org.apache.catalina.valves.AbstractAccessLogValve;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,8 +19,8 @@ public class FotografoController {
     }
 
     @PostMapping()
-    public Fotografo cadastrar(@RequestBody Fotografo usuario){
-        return serviceFotografo.cadastrar(usuario);
+    public UsuarioDTO cadastrar(@RequestBody Fotografo usuario){
+        return new UsuarioDTO(serviceFotografo.cadastrar(usuario));
     }
 
     @PutMapping("/alterar/senha")
@@ -34,5 +36,10 @@ public class FotografoController {
     @PatchMapping("/sair")
     public String logoff(@RequestBody Fotografo usuario) throws Exception{
         return serviceFotografo.logoff(usuario);
+    }
+
+    @PostMapping("/criar-album")
+    public Album criarAlbum(@RequestBody Album album){
+        return serviceFotografo.criarAlbum(album);
     }
 }

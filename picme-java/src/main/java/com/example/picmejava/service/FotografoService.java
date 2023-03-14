@@ -1,13 +1,22 @@
 package com.example.picmejava.service;
 
+import com.example.picmejava.model.Album;
 import com.example.picmejava.model.Fotografo;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class FotografoService {
 
-    private List<Fotografo> fotografos = new ArrayList<>();
+    private List<Fotografo> fotografos;
+    private List<Album> albums;
+
+    public FotografoService() {
+        this.fotografos = new ArrayList<>();
+        this.albums = new ArrayList<>();
+    }
 
     public Fotografo cadastrar(Fotografo novoUsuario){
         fotografos.add(novoUsuario);
@@ -51,6 +60,11 @@ public class FotografoService {
         }
 
         throw new Exception(String.format("Usuário não encontrado!"));
+    }
+
+    public Album criarAlbum(Album album){
+        albums.add(album);
+        return album;
     }
 
 }
