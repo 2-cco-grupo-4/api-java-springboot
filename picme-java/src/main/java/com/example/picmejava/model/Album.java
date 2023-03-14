@@ -10,9 +10,7 @@ public class Album {
     private String descricao;
     private List<Imagem> imagems;
 
-    public Album(String titulo,
-                 String tipo,
-                 String descricao) {
+    public Album(String titulo, String tipo, String descricao) {
         this.id = (int) (Math.random() * 10000);
         this.titulo = titulo;
         this.tipo = tipo;

@@ -15,10 +15,11 @@ public class Fotografo extends Usuario{
                      String cpf,
                      String dataNasc,
                      String numCelular,
-                     Integer tokenSolicitacao) {
+                     Integer tokenSolicitacao,
+                     List<Album> albuns) {
         super(nome, email, senha, cpf, dataNasc, numCelular);
         this.tokenSolicitacao = tokenSolicitacao;
-        this.albuns = new ArrayList<>();
+        this.albuns = albuns;
     }
 
     @Override
