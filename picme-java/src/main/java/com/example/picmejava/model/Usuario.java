@@ -32,20 +32,6 @@ public abstract class Usuario {
 
     public abstract String getTipoUsuario();
 
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", email='" + email + '\'' +
-                ", senha='" + senha + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", dataNasc='" + dataNasc + '\'' +
-                ", numCelular='" + numCelular + '\'' +
-                ", autenticado=" + autenticado +
-                '}';
-    }
-
     public Boolean verificarUsuario(Usuario usuario, Usuario buscarUsuario){
         if (usuario.getEmail().equals(buscarUsuario.getEmail()) && usuario.getSenha().equals(buscarUsuario.getSenha())){
             return true;

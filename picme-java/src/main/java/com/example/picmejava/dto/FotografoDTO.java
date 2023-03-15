@@ -1,25 +1,26 @@
 package com.example.picmejava.dto;
 
 import com.example.picmejava.model.Album;
+import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.Usuario;
 
 import java.util.List;
 
-public class UsuarioDTO {
+public class FotografoDTO {
     private Integer id;
     private String nome;
     private String dataNasc;
     private Boolean autenticado;
-
     private List<Album> albums;
     private String tipoUsuario;
 
-    public UsuarioDTO(Usuario usuario) {
-        this.id = usuario.getId();
-        this.nome = usuario.getNome();
-        this.dataNasc = usuario.getDataNasc();
-        this.autenticado = usuario.getAutenticado();
-        this.tipoUsuario = usuario.getTipoUsuario();
+    public FotografoDTO(Fotografo fotografo) {
+        this.id = fotografo.getId();
+        this.nome = fotografo.getNome();
+        this.dataNasc = fotografo.getDataNasc();
+        this.autenticado = fotografo.getAutenticado();
+        this.tipoUsuario = fotografo.getTipoUsuario();
+        this.albums = fotografo.getAlbuns();
     }
 
     public Integer getId() {
@@ -48,6 +49,14 @@ public class UsuarioDTO {
 
     public void setAutenticado(Boolean autenticado) {
         this.autenticado = autenticado;
+    }
+
+    public List<Album> getAlbums() {
+        return albums;
+    }
+
+    public void setAlbums(List<Album> albums) {
+        this.albums = albums;
     }
 
     public String getTipoUsuario() {

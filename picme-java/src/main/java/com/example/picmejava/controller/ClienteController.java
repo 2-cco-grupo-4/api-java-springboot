@@ -16,22 +16,27 @@ public class ClienteController {
     }
 
     @PostMapping()
-    public Cliente cadastrar(@RequestBody Cliente usuario){
-        return serviceCliente.cadastrar(usuario);
+    public UsuarioDTO cadastrar(@RequestBody Cliente novoCliente){
+        return new UsuarioDTO(serviceCliente.cadastrar(novoCliente));
+    }
+
+    @GetMapping("/{idCliente}")
+    public UsuarioDTO buscarCLientePorId(@PathVariable Integer idCliente) throws Exception{
+        return new UsuarioDTO(serviceCliente.buscarClientePorId(idCliente));
     }
 
     @PutMapping("/alterar/senha")
-    public UsuarioDTO alterarSenha(@RequestBody Cliente usuario) throws Exception{
-        return new UsuarioDTO(serviceCliente.alterarSenha(usuario.getId(), usuario.getSenha()));
+    public UsuarioDTO alterarSenha(@RequestBody Cliente buscarCliente) throws Exception{
+        return new UsuarioDTO(serviceCliente.alterarSenha(buscarCliente.getId(), buscarCliente.getSenha()));
     }
 
     @PatchMapping("/entrar")
-    public UsuarioDTO login(@RequestBody Cliente usuario) throws Exception{
-        return new UsuarioDTO(serviceCliente.login(usuario));
+    public UsuarioDTO login(@RequestBody Cliente buscarCliente) throws Exception{
+        return new UsuarioDTO(serviceCliente.login(buscarCliente));
     }
 
     @PatchMapping("/sair")
-    public String logoff(@RequestBody Cliente usuario) throws Exception{
-        return serviceCliente.logoff(usuario);
+    public String logoff(@RequestBody Cliente buscarCliente) throws Exception{
+        return serviceCliente.logoff(buscarCliente);
     }
 }
