@@ -1,13 +1,7 @@
 package com.example.picmejava.model;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class Fotografo extends Usuario{
     private Integer tokenSolicitacao;
-
-    private List<Album> albuns;
 
     public Fotografo(String nome,
                      String email,
@@ -18,15 +12,6 @@ public class Fotografo extends Usuario{
                      Integer tokenSolicitacao) {
         super(nome, email, senha, cpf, dataNasc, numCelular);
         this.tokenSolicitacao = tokenSolicitacao;
-        this.albuns = new ArrayList<>();
-    }
-
-    @Override
-    public String toString() {
-        return "Fotografo{" +
-                "tokenSolicitacao=" + tokenSolicitacao +
-                ", albuns=" + albuns +
-                "} " + super.toString();
     }
 
     @Override
@@ -41,13 +26,5 @@ public class Fotografo extends Usuario{
 
     public void setTokenSolicitacao(Integer tokenSolicitacao) {
         this.tokenSolicitacao = tokenSolicitacao;
-    }
-
-    public List<Album> getAlbuns() {
-        return albuns;
-    }
-
-    public void setAlbuns(List<Album> albuns) {
-        this.albuns = albuns;
     }
 }

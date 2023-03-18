@@ -1,21 +1,22 @@
 package com.example.picmejava.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Album {
     private Integer id;
     private String titulo;
     private String tipo;
     private String descricao;
-    private List<Imagem> imagems;
+    private Integer idFotografo;
 
-    public Album(String titulo, String tipo, String descricao) {
+    public Album(String titulo, String tipo, String descricao, Integer idFotografo) {
         this.id = (int) (Math.random() * 10000);
         this.titulo = titulo;
         this.tipo = tipo;
         this.descricao = descricao;
-        this.imagems = new ArrayList<>();
+        this.idFotografo = idFotografo;
+    }
+
+    public Integer getIdFotografo() {
+        return idFotografo;
     }
 
     public Integer getId() {
@@ -46,11 +47,7 @@ public class Album {
         this.descricao = descricao;
     }
 
-    public List<Imagem> getImagems() {
-        return imagems;
-    }
-
-    public void setImagems(List<Imagem> imagems) {
-        this.imagems = imagems;
+    public void setIdFotografo(Integer idFotografo) {
+        this.idFotografo = idFotografo;
     }
 }

@@ -1,8 +1,6 @@
 package com.example.picmejava.service;
 
-import com.example.picmejava.model.Album;
 import com.example.picmejava.model.Fotografo;
-import com.example.picmejava.model.Imagem;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,15 +19,6 @@ public class FotografoService {
         return novoFotografo;
     }
 
-    public Fotografo buscarFotografoPorId(Integer idFotografo) throws Exception{
-        for (Fotografo fotografo : fotografos){
-            if (idFotografo.equals(fotografo.getId())){
-                return fotografo;
-            }
-        }
-        throw new Exception(String.format("ERRO não encontrou, idFotografo: " + idFotografo));
-    }
-
     public Fotografo alterarSenha(Integer idFotografo, String novaSenha)throws Exception{
         Fotografo fotografo = buscarFotografoPorId(idFotografo);
         if (!fotografo.equals(null)){
@@ -37,6 +26,15 @@ public class FotografoService {
             return fotografo;
         }
         throw new Exception("Fotografo não encontrado!");
+    }
+
+    public Fotografo buscarFotografoPorId(Integer idFotografo) throws Exception{
+        for (Fotografo fotografo : fotografos){
+            if (idFotografo.equals(fotografo.getId())){
+                return fotografo;
+            }
+        }
+        throw new Exception(String.format("ERRO não encontrou, idFotografo: " + idFotografo));
     }
 
     public Fotografo login(Fotografo buscarFotografo) throws Exception{
@@ -65,28 +63,5 @@ public class FotografoService {
             }
         }
         throw new Exception(String.format("Fotografo não encontrado!"));
-    }
-
-    public Fotografo adicionarAlbumAoFotografo(Integer idFotografo, Album album) throws Exception{
-        Fotografo fotografo = buscarFotografoPorId(idFotografo);
-        if (!fotografo.equals(null)){
-            fotografo.getAlbuns().add(album);
-            return fotografo;
-        }else {
-            throw new Exception(String.format("Erro adicionarAlbumAoFotografo"));
-        }
-    }
-
-    public Album adicionarImagemAoAlbum(Integer idFotografo, Integer idAlbum, Imagem novaImagem) throws Exception{
-        Fotografo fotografo = buscarFotografoPorId(idFotografo);
-        if (!fotografo.equals(null)){
-            for(Album album : fotografo.getAlbuns()){
-                if (idAlbum.equals(album.getId())){
-                    album.getImagems().add(novaImagem);
-                    return album;
-                }
-            }
-        }
-        throw new Exception(String.format("Erro adiconarImagemAoAlbum"));
     }
 }

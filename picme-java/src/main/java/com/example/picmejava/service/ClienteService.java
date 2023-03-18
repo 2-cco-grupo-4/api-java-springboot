@@ -1,7 +1,6 @@
 package com.example.picmejava.service;
 
 import com.example.picmejava.model.Cliente;
-import com.example.picmejava.model.Usuario;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

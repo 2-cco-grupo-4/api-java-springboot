@@ -6,12 +6,23 @@ public class Imagem {
     private String path;
     private String tipo;
     private String descricao;
+    private Integer idAlbum;
 
-    public Imagem(String path, String tipo, String descricao) {
+    public Imagem(String path, String tipo, String descricao, Integer idAlbum) {
         this.id = (int) (Math.random() * 1000);
         this.path = path;
         this.tipo = tipo;
         this.descricao = descricao;
+        this.idAlbum = idAlbum;
+    }
+
+
+    public Integer getIdAlbum() {
+        return idAlbum;
+    }
+
+    public void setIdAlbum(Integer idAlbum) {
+        this.idAlbum = idAlbum;
     }
 
     public Integer getId() {

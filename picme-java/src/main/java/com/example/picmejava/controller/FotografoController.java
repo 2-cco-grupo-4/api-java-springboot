@@ -1,13 +1,9 @@
 package com.example.picmejava.controller;
 
-import com.example.picmejava.dto.FotografoDTO;
-import com.example.picmejava.dto.UsuarioDTO;
-import com.example.picmejava.model.Album;
+import com.example.picmejava.model.dto.UsuarioDTO;
 import com.example.picmejava.model.Fotografo;
-import com.example.picmejava.model.Imagem;
-import com.example.picmejava.model.Usuario;
+
 import com.example.picmejava.service.FotografoService;
-import org.apache.catalina.valves.AbstractAccessLogValve;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,18 +17,18 @@ public class FotografoController {
     }
 
     @PostMapping()
-    public UsuarioDTO cadastrar(@RequestBody Fotografo novoFotografo){
-        return new UsuarioDTO(serviceFotografo.cadastrar(novoFotografo));
+    public Fotografo cadastrar(@RequestBody Fotografo novoFotografo){
+        return serviceFotografo.cadastrar(novoFotografo);
     }
 
     @PutMapping("/alterar/senha")
-    public UsuarioDTO alterarSenha(@RequestBody Fotografo buscarFotografo) throws Exception{
-        return new UsuarioDTO(serviceFotografo.alterarSenha(buscarFotografo.getId(), buscarFotografo.getSenha()));
+    public Fotografo alterarSenha(@RequestBody Fotografo buscarFotografo) throws Exception{
+        return serviceFotografo.alterarSenha(buscarFotografo.getId(), buscarFotografo.getSenha());
     }
 
     @PatchMapping("/entrar")
-    public UsuarioDTO login(@RequestBody Fotografo buscarFotografo) throws Exception {
-        return new UsuarioDTO(serviceFotografo.login(buscarFotografo));
+    public Fotografo login(@RequestBody Fotografo buscarFotografo) throws Exception {
+        return serviceFotografo.login(buscarFotografo);
     }
 
     @PatchMapping("/sair")
@@ -41,17 +37,7 @@ public class FotografoController {
     }
 
     @GetMapping("/{idFotografo}")
-    public FotografoDTO buscarFotografoPorId(@PathVariable Integer idFotografo) throws Exception{
-        return new FotografoDTO(serviceFotografo.buscarFotografoPorId(idFotografo));
-    }
-
-    @PostMapping("/album/{idFotografo}")
-    public FotografoDTO adicionarAlbumAoFotografo(@PathVariable Integer idFotografo, @RequestBody Album album) throws Exception{
-        return new FotografoDTO(serviceFotografo.adicionarAlbumAoFotografo(idFotografo, album));
-    }
-
-    @PutMapping("/{idFotografo}/albums/{idAlbum}")
-    public Album adicionarImagemAoAlbum(@PathVariable Integer idFotografo, @PathVariable Integer idAlbum, @RequestBody Imagem imagem) throws Exception{
-        return serviceFotografo.adicionarImagemAoAlbum(idFotografo, idAlbum, imagem);
+    public Fotografo buscarFotografoPorId(@PathVariable Integer idFotografo) throws Exception{
+        return serviceFotografo.buscarFotografoPorId(idFotografo);
     }
 }

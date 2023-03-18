@@ -1,8 +1,7 @@
 package com.example.picmejava.controller;
 
-import com.example.picmejava.dto.UsuarioDTO;
+import com.example.picmejava.model.dto.UsuarioDTO;
 import com.example.picmejava.model.Cliente;
-import com.example.picmejava.model.Usuario;
 import com.example.picmejava.service.ClienteService;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,4 +1,4 @@
-package com.example.picmejava.dto;
+package com.example.picmejava.model.dto;
 
 import com.example.picmejava.model.Album;
 import com.example.picmejava.model.Usuario;
@@ -10,8 +10,6 @@ public class UsuarioDTO {
     private String nome;
     private String dataNasc;
     private Boolean autenticado;
-
-    private List<Album> albums;
     private String tipoUsuario;
 
     public UsuarioDTO(Usuario usuario) {
