@@ -10,6 +10,7 @@ public abstract class Usuario {
     private String dataNasc;
     private String numCelular;
     private Boolean autenticado;
+    private String tipoUsuario;
 
     public Usuario(String nome,
                    String email,
@@ -25,6 +26,7 @@ public abstract class Usuario {
         this.dataNasc = dataNasc;
         this.numCelular = numCelular;
         this.autenticado = false;
+        this.tipoUsuario = getTipoUsuario();
     }
 
     public Usuario() {

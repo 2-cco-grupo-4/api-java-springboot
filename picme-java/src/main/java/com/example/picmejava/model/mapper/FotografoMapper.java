@@ -11,7 +11,7 @@ public class FotografoMapper {
         dto.setId(fotografo.getId());
         dto.setNome(fotografo.getNome());
         dto.setAutenticado(fotografo.getAutenticado());
-
+        dto.setTipoUsuario(fotografo.getTipoUsuario());
 
         return dto;
     }

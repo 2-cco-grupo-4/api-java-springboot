@@ -1,9 +1,7 @@
 package com.example.picmejava.model.dto;
 
-import com.example.picmejava.model.Album;
 import com.example.picmejava.model.Usuario;
 
-import java.util.List;
 
 public class UsuarioDTO {
     private Integer id;

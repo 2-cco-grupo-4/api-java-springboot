@@ -1,6 +1,10 @@
 package com.example.picmejava.service;
 
+
+import com.example.picmejava.exceptionhandler.UsuarioNaoEncontradoException;
 import com.example.picmejava.model.Fotografo;
+import com.example.picmejava.model.dto.PerfilFotografoDTO;
+import com.example.picmejava.model.mapper.FotografoMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,31 +14,29 @@ import java.util.List;
 public class FotografoService {
 
     private List<Fotografo> fotografos;
+    private FotografoMapper fotografoMapper = new FotografoMapper();
     public FotografoService() {
         this.fotografos = new ArrayList<>();
     }
 
-    public Fotografo cadastrar(Fotografo novoFotografo){
+    public PerfilFotografoDTO cadastrar(Fotografo novoFotografo){
         fotografos.add(novoFotografo);
-        return novoFotografo;
+        return fotografoMapper.toPerfilFotografoDTO(novoFotografo);
     }
 
-    public Fotografo alterarSenha(Integer idFotografo, String novaSenha)throws Exception{
+    public PerfilFotografoDTO alterarSenha(Integer idFotografo, String novaSenha){
         Fotografo fotografo = buscarFotografoPorId(idFotografo);
-        if (!fotografo.equals(null)){
             fotografo.setSenha(novaSenha);
-            return fotografo;
-        }
-        throw new Exception("Fotografo não encontrado!");
+            return fotografoMapper.toPerfilFotografoDTO(fotografo);
     }
 
-    public Fotografo buscarFotografoPorId(Integer idFotografo) throws Exception{
+    public Fotografo buscarFotografoPorId(Integer idFotografo){
         for (Fotografo fotografo : fotografos){
             if (idFotografo.equals(fotografo.getId())){
                 return fotografo;
             }
         }
-        throw new Exception(String.format("ERRO não encontrou, idFotografo: " + idFotografo));
+        throw new UsuarioNaoEncontradoException(String.format("Fotografo com id %d não encontrado", idFotografo));
     }
 
     public Fotografo login(Fotografo buscarFotografo) throws Exception{
@@ -48,7 +50,7 @@ public class FotografoService {
                 }
             }
         }
-        throw new Exception(String.format("Fotografo não encontrado"));
+        throw new UsuarioNaoEncontradoException(String.format("Fotografo com id %d não encontrado", buscarFotografo.getId()));
     }
 
     public String logoff(Fotografo buscarFotografo) throws Exception{

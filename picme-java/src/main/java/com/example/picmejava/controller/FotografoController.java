@@ -1,9 +1,11 @@
 package com.example.picmejava.controller;
 
-import com.example.picmejava.model.dto.UsuarioDTO;
+
+import com.example.picmejava.model.dto.PerfilFotografoDTO;
 import com.example.picmejava.model.Fotografo;
 
 import com.example.picmejava.service.FotografoService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,12 +19,12 @@ public class FotografoController {
     }
 
     @PostMapping()
-    public Fotografo cadastrar(@RequestBody Fotografo novoFotografo){
-        return serviceFotografo.cadastrar(novoFotografo);
+    public ResponseEntity<PerfilFotografoDTO> cadastrar(@RequestBody Fotografo novoFotografo){
+        return ResponseEntity.status(201).body(serviceFotografo.cadastrar(novoFotografo));
     }
 
     @PutMapping("/alterar/senha")
-    public Fotografo alterarSenha(@RequestBody Fotografo buscarFotografo) throws Exception{
+    public PerfilFotografoDTO alterarSenha(@RequestBody Fotografo buscarFotografo){
         return serviceFotografo.alterarSenha(buscarFotografo.getId(), buscarFotografo.getSenha());
     }
 
@@ -37,7 +39,7 @@ public class FotografoController {
     }
 
     @GetMapping("/{idFotografo}")
-    public Fotografo buscarFotografoPorId(@PathVariable Integer idFotografo) throws Exception{
+    public Fotografo buscarFotografoPorId(@PathVariable Integer idFotografo){
         return serviceFotografo.buscarFotografoPorId(idFotografo);
     }
 }
