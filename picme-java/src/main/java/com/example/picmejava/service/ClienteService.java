@@ -1,13 +1,10 @@
 package com.example.picmejava.service;
 
 import com.example.picmejava.model.Cliente;
-import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
