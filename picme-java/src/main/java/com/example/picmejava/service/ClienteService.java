@@ -1,65 +1,44 @@
 package com.example.picmejava.service;
 
 import com.example.picmejava.model.Cliente;
+import com.example.picmejava.model.Fotografo;
+import com.example.picmejava.repository.ClienteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClienteService {
 
-    private List<Cliente> clientes = new ArrayList<>();
+    @Autowired
+    private ClienteRepository clienteRepository;
 
     public Cliente cadastrar(Cliente novoCliente){
-        clientes.add(novoCliente);
-        return novoCliente;
+        novoCliente.setAutenticado(false);
+        return clienteRepository.save(novoCliente);
     }
 
-//    public Cliente alterarSenha(Integer idCliente, String novaSenha) throws Exception{
-//        Cliente cliente = buscarClientePorId(idCliente);
-//        if (!cliente.equals(null)){
-//            cliente.setSenha(novaSenha);
-//            return cliente;
-//        }
-//        throw new Exception("Cliente não encontrado!");
-//    }
-//
-//    public Cliente buscarClientePorId(Integer idCliente) throws Exception{
-//        for (Cliente cliente : clientes){
-//            if (cliente.getId().equals(idCliente)){
-//                return cliente;
-//            }
-//        }
-//        throw new Exception("Cliente não encontrado!");
-//    }
-//
-//    public Cliente login(Cliente buscarCliente) throws Exception{
-//        for (Cliente cliente : clientes){
-//            if (cliente.verificarUsuario(cliente, buscarCliente)){
-//                if (cliente.getAutenticado().equals(true)){
-//                    throw new Exception(String.format("Cliente %s já está ativo", cliente.getNome()));
-//                }else {
-//                    cliente.setAutenticado(true);
-//                    return cliente;
-//                }
-//            }
-//        }
-//        throw new Exception(String.format("Cliente não encontrado!"));
-//    }
-//
-//    public String logoff(Cliente buscarCliente) throws Exception{
-//        for (Cliente cliente : clientes){
-//            if (cliente.verificarUsuario(cliente, buscarCliente)){
-//                if (cliente.getAutenticado().equals(false)){
-//                    throw new Exception(String.format("Cliente %s não está ativo", cliente.getNome()));
-//                }else {
-//                    cliente.setAutenticado(false);
-//                    return String.format("Cliente %s fez logoff com sucesso!", cliente.getNome());
-//                }
-//            }
-//        }
-//
-//        throw new Exception(String.format("Cliente não encontrado!"));
-//    }
+    public Cliente alterarSenha(Integer idCliente, String novaSenha) throws Exception{
+        Optional<Cliente> clienteAlterado = clienteRepository.findById(idCliente);
+        Cliente cliente = clienteAlterado.orElseThrow(() -> new Exception("Cliente não encontrado"));
+        cliente.setSenha(novaSenha);
+        return clienteRepository.save(cliente);
+    }
+
+    public Cliente login(Cliente buscarCliente) throws Exception{
+        Optional<Cliente> clienteEncontrado = clienteRepository.findByEmail(buscarCliente.getEmail());
+        Cliente cliente = clienteEncontrado.orElseThrow(() -> new Exception("Cliente não encontrado"));
+        cliente.setAutenticado(true);
+        return clienteRepository.save(cliente);
+    }
+
+    public Cliente logoff(Cliente buscarCliente) throws Exception{
+        Optional<Cliente> clienteEncontrado = clienteRepository.findByEmail(buscarCliente.getEmail());
+        Cliente cliente = clienteEncontrado.orElseThrow(() -> new Exception("Cliente não encontrado"));
+        cliente.setAutenticado(false);
+        return clienteRepository.save(cliente);
+    }
 }

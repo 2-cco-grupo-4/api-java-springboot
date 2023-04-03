@@ -22,7 +22,7 @@ public class FotografoService {
         Optional<Fotografo> fotografoOptional = fotografoRepository.findById(idFotografo);
         Fotografo fotografo = fotografoOptional.orElseThrow(() -> new Exception("Fotografo não existe"));
         fotografo.setSenha(senhaAtualizada);
-        return fotografoRepository.save(fotografoRepository.save(fotografo));
+        return fotografoRepository.save(fotografo);
     }
 
     public Fotografo login(Fotografo buscarFotografo) throws Exception{
