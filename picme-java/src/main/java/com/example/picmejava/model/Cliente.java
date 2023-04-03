@@ -1,15 +1,9 @@
 package com.example.picmejava.model;
 
-public class Cliente extends Usuario{
+import javax.persistence.Entity;
 
-    public Cliente(String nome,
-                   String email,
-                   String senha,
-                   String cpf,
-                   String dataNasc,
-                   String numCelular) {
-        super(nome, email, senha, cpf, dataNasc, numCelular);
-    }
+@Entity
+public class Cliente extends Usuario{
 
     @Override
     public String getTipoUsuario() {
