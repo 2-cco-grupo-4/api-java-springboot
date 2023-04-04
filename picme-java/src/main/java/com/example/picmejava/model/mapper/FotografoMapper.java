@@ -1,7 +1,6 @@
 package com.example.picmejava.model.mapper;
 
 import com.example.picmejava.model.Fotografo;
-import com.example.picmejava.model.dto.PerfilClienteDTO;
 import com.example.picmejava.model.dto.PerfilFotogradoDTO;
 
 public class FotografoMapper {
