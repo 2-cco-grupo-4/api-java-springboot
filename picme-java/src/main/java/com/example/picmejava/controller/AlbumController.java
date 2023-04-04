@@ -29,7 +29,8 @@ public class AlbumController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Album> deletar(@PathVariable int id) throws Exception{
-        return ResponseEntity.status(200).body(albumService.deletar(id));
+        albumService.deletar(id);
+        return ResponseEntity.status(204).build();
     }
 
     @GetMapping("/{id}")

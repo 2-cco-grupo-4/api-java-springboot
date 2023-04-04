@@ -9,5 +9,4 @@ public class PerfilFotogradoDTO {
     private Boolean autenticado;
     private String tipoUsuario;
 
-
 }
