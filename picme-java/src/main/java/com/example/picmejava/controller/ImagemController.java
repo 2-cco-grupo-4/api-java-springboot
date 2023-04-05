@@ -1,9 +1,7 @@
 package com.example.picmejava.controller;
 
 import com.example.picmejava.model.Imagem;
-import com.example.picmejava.repository.ImagemRepository;
 import com.example.picmejava.service.ImagemService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,5 +31,4 @@ public class ImagemController {
     public ResponseEntity<List<Imagem>> listar(@PathVariable Integer id){
         return ResponseEntity.status(200).body(imagemService.listar(id));
     }
-
 }
