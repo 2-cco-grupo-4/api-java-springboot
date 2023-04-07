@@ -1,43 +1,44 @@
 package com.example.picmejava.service;
 
 import com.example.picmejava.model.Album;
-import com.example.picmejava.model.Fotografo;
+import com.example.picmejava.repository.AlbumRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AlbumService {
 
-    private List<Album> albums;
-
-    public AlbumService() {
-        this.albums = new ArrayList<>();
-    }
+    @Autowired
+    private AlbumRepository albumRepository;
 
     public Album cadastrar(Integer idFotografo, Album novoAlbum){
-            novoAlbum.setIdFotografo(idFotografo);
-            albums.add(novoAlbum);
-
-            return novoAlbum;
+        novoAlbum.setIdFotografo(idFotografo);
+        return albumRepository.save(novoAlbum);
     }
 
-    public Album buscarPorId(Integer idAlbum){
-        for (Album album : albums){
-            if (album.getId().equals(idAlbum)){
-                return album;
-            }
-        }
-        return null;
+    public Album atualizar(Integer idAlbum, Album albumAtualizado) throws Exception {
+        Album album = buscarPorId(idAlbum);
+        albumAtualizado.setId(album.getId());
+        return albumRepository.save(albumAtualizado);
     }
 
-    public String deletar(Integer idAlbum){
-        Album album = this.buscarPorId(idAlbum);
-        if (!album.equals(null)){
-            albums.remove(album);
-            return "Album Removido!";
-        }
-        return "Album nao encontrado!";
+    public Album buscarPorId(Integer idAlbum) throws Exception {
+        Optional<Album> albumOptional = albumRepository.findById(idAlbum);
+        Album album = albumOptional.orElseThrow(() -> new Exception("Album não encontrado"));
+        return album;
     }
+
+    public Album deletar(Integer idAlbum) throws Exception{
+        Album album = buscarPorId(idAlbum);
+        albumRepository.deleteById(idAlbum);
+        return album;
+    }
+
+    public List<Album> listar(Integer idFotografo){
+        return albumRepository.findAllByIdFotografo(idFotografo);
+    }
+
 }

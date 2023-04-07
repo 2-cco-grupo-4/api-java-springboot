@@ -1,32 +1,26 @@
 package com.example.picmejava.model;
 
-public class Imagem {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
+public class Imagem {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String path;
     private String tipo;
     private String descricao;
     private Integer idAlbum;
 
-    public Imagem(String path, String tipo, String descricao, Integer idAlbum) {
-        this.id = (int) (Math.random() * 1000);
-        this.path = path;
-        this.tipo = tipo;
-        this.descricao = descricao;
-        this.idAlbum = idAlbum;
-    }
-
-
-    public Integer getIdAlbum() {
-        return idAlbum;
-    }
-
-    public void setIdAlbum(Integer idAlbum) {
-        this.idAlbum = idAlbum;
-    }
-
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getPath() {
@@ -53,4 +47,11 @@ public class Imagem {
         this.descricao = descricao;
     }
 
+    public Integer getIdAlbum() {
+        return idAlbum;
+    }
+
+    public void setIdAlbum(Integer idAlbum) {
+        this.idAlbum = idAlbum;
+    }
 }

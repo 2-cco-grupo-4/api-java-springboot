@@ -1,26 +1,26 @@
 package com.example.picmejava.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Album {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String titulo;
     private String tipo;
     private String descricao;
     private Integer idFotografo;
 
-    public Album(String titulo, String tipo, String descricao, Integer idFotografo) {
-        this.id = (int) (Math.random() * 10000);
-        this.titulo = titulo;
-        this.tipo = tipo;
-        this.descricao = descricao;
-        this.idFotografo = idFotografo;
-    }
-
-    public Integer getIdFotografo() {
-        return idFotografo;
-    }
-
     public Integer getId() {
-        return this.id;
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getTitulo() {
@@ -45,6 +45,10 @@ public class Album {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public Integer getIdFotografo() {
+        return idFotografo;
     }
 
     public void setIdFotografo(Integer idFotografo) {

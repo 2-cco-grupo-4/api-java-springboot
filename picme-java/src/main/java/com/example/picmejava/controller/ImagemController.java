@@ -2,18 +2,33 @@ package com.example.picmejava.controller;
 
 import com.example.picmejava.model.Imagem;
 import com.example.picmejava.service.ImagemService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
 @RestController
 @RequestMapping("/imagens")
 public class ImagemController {
 
-    ImagemService serviceImagem = new ImagemService();
+    @Autowired
+    public ImagemService imagemService;
 
-    @PostMapping("/{idAlbum}")
-    public Imagem cadastrar(@PathVariable Integer idAlbum, @RequestBody Imagem novaImagem){
-        return serviceImagem.cadastrar(idAlbum, novaImagem);
+    @PostMapping("/{id}")
+    public ResponseEntity<Imagem> cadastrar(@PathVariable Integer idAlbum, @RequestBody Imagem novaImagem){
+        imagemService.cadastrar(idAlbum, novaImagem);
+        return ResponseEntity.status(201).body(novaImagem);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Imagem> remover(@PathVariable int idImagem) throws Exception {
+        imagemService.deletar(idImagem);
+        return ResponseEntity.status(204).build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<List<Imagem>> listar(@PathVariable Integer id){
+        return ResponseEntity.status(200).body(imagemService.listar(id));
+    }
 }

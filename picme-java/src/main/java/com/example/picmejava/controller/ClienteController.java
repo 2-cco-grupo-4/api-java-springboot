@@ -1,41 +1,39 @@
 package com.example.picmejava.controller;
 
-import com.example.picmejava.model.dto.UsuarioDTO;
 import com.example.picmejava.model.Cliente;
+import com.example.picmejava.model.dto.PerfilClienteDTO;
+import com.example.picmejava.model.mapper.ClienteMapper;
 import com.example.picmejava.service.ClienteService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
+    @Autowired
     private ClienteService serviceCliente;
-
-    public ClienteController() {
-        this.serviceCliente = new ClienteService();
-    }
+    private ClienteMapper clienteMapper = new ClienteMapper();
 
     @PostMapping()
-    public UsuarioDTO cadastrar(@RequestBody Cliente novoCliente){
-        return new UsuarioDTO(serviceCliente.cadastrar(novoCliente));
-    }
-
-    @GetMapping("/{idCliente}")
-    public UsuarioDTO buscarCLientePorId(@PathVariable Integer idCliente) throws Exception{
-        return new UsuarioDTO(serviceCliente.buscarClientePorId(idCliente));
+    public ResponseEntity<PerfilClienteDTO> cadastrar(@RequestBody @Valid Cliente novoCliente){
+        return ResponseEntity.status(201).body(clienteMapper.toPerfilClienteDTO(serviceCliente.cadastrar(novoCliente)));
     }
 
     @PutMapping("/alterar/senha")
-    public UsuarioDTO alterarSenha(@RequestBody Cliente buscarCliente) throws Exception{
-        return new UsuarioDTO(serviceCliente.alterarSenha(buscarCliente.getId(), buscarCliente.getSenha()));
+    public ResponseEntity<PerfilClienteDTO> alterarSenha(@RequestBody @Valid Cliente clienteAtualizado) throws Exception{
+        return ResponseEntity.status(200).body(clienteMapper.toPerfilClienteDTO(serviceCliente.alterarSenha(clienteAtualizado.getId(), clienteAtualizado.getSenha())));
     }
 
     @PatchMapping("/entrar")
-    public UsuarioDTO login(@RequestBody Cliente buscarCliente) throws Exception{
-        return new UsuarioDTO(serviceCliente.login(buscarCliente));
+    public ResponseEntity<PerfilClienteDTO> login(@RequestBody @Valid Cliente buscarCliente) throws Exception{
+        return ResponseEntity.status(200).body(clienteMapper.toPerfilClienteDTO(serviceCliente.login(buscarCliente)));
     }
 
     @PatchMapping("/sair")
-    public String logoff(@RequestBody Cliente buscarCliente) throws Exception{
-        return serviceCliente.logoff(buscarCliente);
+    public ResponseEntity<PerfilClienteDTO> logoff(@RequestBody @Valid Cliente buscarCliente) throws Exception{
+        return ResponseEntity.status(200).body(clienteMapper.toPerfilClienteDTO(serviceCliente.logoff(buscarCliente)));
     }
 }

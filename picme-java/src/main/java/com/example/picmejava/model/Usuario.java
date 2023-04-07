@@ -1,7 +1,13 @@
 package com.example.picmejava.model;
 
+import javax.persistence.*;
+
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Usuario {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
     private String email;
@@ -11,26 +17,6 @@ public abstract class Usuario {
     private String numCelular;
     private Boolean autenticado;
     private String tipoUsuario;
-
-    public Usuario(String nome,
-                   String email,
-                   String senha,
-                   String cpf,
-                   String dataNasc,
-                   String numCelular) {
-        this.id = (int) (Math.random() * 10000);
-        this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-        this.cpf = cpf;
-        this.dataNasc = dataNasc;
-        this.numCelular = numCelular;
-        this.autenticado = false;
-        this.tipoUsuario = getTipoUsuario();
-    }
-
-    public Usuario() {
-    }
 
     public abstract String getTipoUsuario();
 
@@ -43,6 +29,10 @@ public abstract class Usuario {
 
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -99,5 +89,9 @@ public abstract class Usuario {
 
     public void setAutenticado(Boolean autenticado) {
         this.autenticado = autenticado;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
 }
