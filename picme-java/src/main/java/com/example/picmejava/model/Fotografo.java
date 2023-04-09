@@ -1,7 +1,12 @@
 package com.example.picmejava.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.Entity;
 
+@Getter
+@Setter
 @Entity
 public class Fotografo extends Usuario{
     private Integer tokenSolicitacao;
@@ -11,11 +16,4 @@ public class Fotografo extends Usuario{
         return String.format("Fotografo, token: %s", this.tokenSolicitacao);
     }
 
-    public Integer getTokenSolicitacao() {
-        return tokenSolicitacao;
-    }
-
-    public void setTokenSolicitacao(Integer tokenSolicitacao) {
-        this.tokenSolicitacao = tokenSolicitacao;
-    }
 }

@@ -1,7 +1,6 @@
 package com.example.picmejava.controller;
 
 import com.example.picmejava.model.Fotografo;
-
 import com.example.picmejava.model.dto.PerfilFotogradoDTO;
 import com.example.picmejava.model.mapper.FotografoMapper;
 import com.example.picmejava.service.FotografoService;

@@ -1,6 +1,5 @@
 package com.example.picmejava.service;
 
-import com.example.picmejava.model.Album;
 import com.example.picmejava.model.Imagem;
 import com.example.picmejava.repository.ImagemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
