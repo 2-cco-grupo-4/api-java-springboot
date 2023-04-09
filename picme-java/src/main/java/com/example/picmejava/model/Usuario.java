@@ -20,13 +20,6 @@ public abstract class Usuario {
 
     public abstract String getTipoUsuario();
 
-    public Boolean verificarUsuario(Usuario usuario, Usuario buscarUsuario){
-        if (usuario.getEmail().equals(buscarUsuario.getEmail()) && usuario.getSenha().equals(buscarUsuario.getSenha())){
-            return true;
-        }
-        return false;
-    }
-
     public Integer getId() {
         return id;
     }
