@@ -11,5 +11,4 @@ public class PerfilClienteDTO {
     private String nome;
     private Boolean autenticado;
     private String tipoUsuario;
-    private List<Tema> preferencias;
 }
