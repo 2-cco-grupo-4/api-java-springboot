@@ -19,21 +19,29 @@ public class ClienteController {
 
     @PostMapping()
     public ResponseEntity<PerfilClienteDTO> cadastrar(@RequestBody @Valid Cliente novoCliente){
-        return ResponseEntity.status(201).body(clienteMapper.toPerfilClienteDTO(serviceCliente.cadastrar(novoCliente)));
+        return ResponseEntity.status(201).body(clienteMapper.toPerfilClienteDTO(
+                serviceCliente.cadastrar(novoCliente)
+        ));
     }
 
     @PutMapping("/alterar/senha")
     public ResponseEntity<PerfilClienteDTO> alterarSenha(@RequestBody @Valid Cliente clienteAtualizado) throws Exception{
-        return ResponseEntity.status(200).body(clienteMapper.toPerfilClienteDTO(serviceCliente.alterarSenha(clienteAtualizado.getId(), clienteAtualizado.getSenha())));
+        return ResponseEntity.status(200).body(clienteMapper.toPerfilClienteDTO(
+                serviceCliente.alterarSenha(clienteAtualizado.getId(), clienteAtualizado.getSenha())
+        ));
     }
 
     @PatchMapping("/entrar")
     public ResponseEntity<PerfilClienteDTO> login(@RequestBody @Valid Cliente buscarCliente) throws Exception{
-        return ResponseEntity.status(200).body(clienteMapper.toPerfilClienteDTO(serviceCliente.login(buscarCliente)));
+        return ResponseEntity.status(200).body(clienteMapper.toPerfilClienteDTO(
+                serviceCliente.login(buscarCliente)
+        ));
     }
 
     @PatchMapping("/sair")
     public ResponseEntity<PerfilClienteDTO> logoff(@RequestBody @Valid Cliente buscarCliente) throws Exception{
-        return ResponseEntity.status(200).body(clienteMapper.toPerfilClienteDTO(serviceCliente.logoff(buscarCliente)));
+        return ResponseEntity.status(200).body(clienteMapper.toPerfilClienteDTO(
+                serviceCliente.logoff(buscarCliente)
+        ));
     }
 }

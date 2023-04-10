@@ -1,7 +1,6 @@
 package com.example.picmejava.controller;
 
 import com.example.picmejava.model.Fotografo;
-
 import com.example.picmejava.model.dto.PerfilFotogradoDTO;
 import com.example.picmejava.model.mapper.FotografoMapper;
 import com.example.picmejava.service.FotografoService;
@@ -22,21 +21,29 @@ public class FotografoController {
 
     @PostMapping()
     public ResponseEntity<PerfilFotogradoDTO> cadastrar(@RequestBody @Valid Fotografo novoFotografo){
-        return ResponseEntity.status(201).body(fotografoMapper.toPerfilFotogradoDTO(serviceFotografo.cadastrar(novoFotografo)));
+        return ResponseEntity.status(201).body(fotografoMapper.toPerfilFotogradoDTO(
+                serviceFotografo.cadastrar(novoFotografo)
+        ));
     }
 
     @PutMapping("/alterar/senha")
-    public ResponseEntity<PerfilFotogradoDTO> alterarSenha(@RequestBody @Valid Fotografo fotografoAtualizado) throws Exception {
-        return ResponseEntity.status(200).body(fotografoMapper.toPerfilFotogradoDTO(serviceFotografo.alterarSenha(fotografoAtualizado.getId(), fotografoAtualizado.getSenha())));
+    public ResponseEntity<PerfilFotogradoDTO> alterarSenha(@RequestBody @Valid Fotografo fotografoAtualizado){
+        return ResponseEntity.status(200).body(fotografoMapper.toPerfilFotogradoDTO(
+                serviceFotografo.alterarSenha(fotografoAtualizado.getId(), fotografoAtualizado.getSenha())
+        ));
     }
 
     @PatchMapping("/entrar")
-    public ResponseEntity<PerfilFotogradoDTO> login(@RequestBody @Valid Fotografo buscarFotografo) throws Exception {
-        return ResponseEntity.status(200).body(fotografoMapper.toPerfilFotogradoDTO(serviceFotografo.login(buscarFotografo)));
+    public ResponseEntity<PerfilFotogradoDTO> login(@RequestBody @Valid Fotografo buscarFotografo){
+        return ResponseEntity.status(200).body(fotografoMapper.toPerfilFotogradoDTO(
+                serviceFotografo.login(buscarFotografo)
+        ));
     }
 
     @PatchMapping("/sair")
-    public ResponseEntity<PerfilFotogradoDTO> logoff(@RequestBody @Valid Fotografo buscarFotografo) throws Exception{
-        return ResponseEntity.status(200).body(fotografoMapper.toPerfilFotogradoDTO(serviceFotografo.logoff(buscarFotografo)));
+    public ResponseEntity<PerfilFotogradoDTO> logoff(@RequestBody @Valid Fotografo buscarFotografo){
+        return ResponseEntity.status(200).body(fotografoMapper.toPerfilFotogradoDTO(
+                serviceFotografo.logoff(buscarFotografo)
+        ));
     }
 }

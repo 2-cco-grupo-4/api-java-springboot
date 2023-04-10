@@ -1,7 +1,9 @@
 package com.example.picmejava.service;
 
 import com.example.picmejava.model.Album;
+import com.example.picmejava.model.Tema;
 import com.example.picmejava.repository.AlbumRepository;
+import com.example.picmejava.repository.TemaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +16,13 @@ public class AlbumService {
     @Autowired
     private AlbumRepository albumRepository;
 
-    public Album cadastrar(Integer idFotografo, Album novoAlbum){
+    @Autowired
+    private TemaRepository temaRepository;
+
+    public Album cadastrar(Integer idFotografo, Album novoAlbum) throws Exception{
+        Optional<Tema> temaOptional = temaRepository.findById(novoAlbum.getTipo().getId());
+        temaOptional.orElseThrow(() -> new Exception("Tema não encontrado"));
+        novoAlbum.setTipo(temaOptional.get());
         novoAlbum.setIdFotografo(idFotografo);
         return albumRepository.save(novoAlbum);
     }

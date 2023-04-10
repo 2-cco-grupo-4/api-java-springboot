@@ -1,5 +1,6 @@
 package com.example.picmejava.service;
 
+import com.example.picmejava.exceptionhandler.UsuarioNaoEncontradoException;
 import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.repository.FotografoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,24 +19,31 @@ public class FotografoService {
         return fotografoRepository.save(novoFotografo);
     }
 
-    public Fotografo alterarSenha(Integer idFotografo, String senhaAtualizada)throws Exception{
+    public Fotografo alterarSenha(Integer idFotografo, String senhaAtualizada){
         Optional<Fotografo> fotografoOptional = fotografoRepository.findById(idFotografo);
-        Fotografo fotografo = fotografoOptional.orElseThrow(() -> new Exception("Fotografo não existe"));
+        Fotografo fotografo = fotografoOptional.orElseThrow(() -> new UsuarioNaoEncontradoException(
+                "Fotografo não existe")
+        );
         fotografo.setSenha(senhaAtualizada);
         return fotografoRepository.save(fotografo);
     }
 
-    public Fotografo login(Fotografo buscarFotografo) throws Exception{
-        Optional<Fotografo> fotografoOptional = fotografoRepository.findByEmail(buscarFotografo.getEmail());
-        Fotografo fotografo = fotografoOptional.orElseThrow(() -> new Exception("Fotografo não existe"));
+    public Fotografo login(Fotografo buscarFotografo){
+        Fotografo fotografo = validarFotografo(buscarFotografo.getEmail(), buscarFotografo.getSenha());
         fotografo.setAutenticado(true);
-        return fotografoRepository.save(fotografoRepository.save(fotografo));
+        return fotografoRepository.save(fotografo);
     }
 
-    public Fotografo logoff(Fotografo buscarFotografo) throws Exception{
-        Optional<Fotografo> fotografoOptional = fotografoRepository.findByEmail(buscarFotografo.getEmail());
-        Fotografo fotografo = fotografoOptional.orElseThrow(() -> new Exception("Fotografo não existe"));
+    public Fotografo logoff(Fotografo buscarFotografo){
+        Fotografo fotografo = validarFotografo(buscarFotografo.getEmail(), buscarFotografo.getSenha());
         fotografo.setAutenticado(false);
-        return fotografoRepository.save(fotografoRepository.save(fotografo));
+        return fotografoRepository.save(fotografo);
+    }
+
+    public Fotografo validarFotografo(String email, String senha){
+        Optional<Fotografo> fotografoOptional = fotografoRepository.findByEmailAndSenha(email, senha);
+        fotografoOptional.orElseThrow(() -> new UsuarioNaoEncontradoException("Fotografo não existe"));
+        return fotografoRepository.findByEmail(email).get();
+
     }
 }
