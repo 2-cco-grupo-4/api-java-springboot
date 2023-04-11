@@ -2,6 +2,7 @@ package com.example.picmejava.model.mapper;
 
 import com.example.picmejava.model.Cliente;
 import com.example.picmejava.model.Fotografo;
+import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
 import com.example.picmejava.model.dto.PerfilUsuarioDTO;
 
 public class UsuarioMapper {
@@ -25,5 +26,37 @@ public class UsuarioMapper {
         dto.setTipoUsuario(fotografo.getTipoUsuario());
 
         return dto;
+    }
+
+    public Cliente atualizarInformacoes(Cliente cliente, AtualizarUsuarioDTO dadosAtualizados){
+        if (dadosAtualizados.getNome() != null){
+            cliente.setNome(dadosAtualizados.getNome());
+        }
+        if (dadosAtualizados.getSenha() != null){
+            cliente.setSenha(dadosAtualizados.getSenha());
+        }
+        if (dadosAtualizados.getNumCelular() != null){
+            cliente.setNumCelular(dadosAtualizados.getNumCelular());
+        }
+        if (dadosAtualizados.getDataNasc() != null){
+            cliente.setDataNasc(dadosAtualizados.getDataNasc());
+        }
+        return cliente;
+    }
+
+    public Fotografo atualizarInformacoes(Fotografo fotografo, AtualizarUsuarioDTO dadosAtualizados){
+        if (dadosAtualizados.getNome() != null){
+            fotografo.setNome(dadosAtualizados.getNome());
+        }
+        if (dadosAtualizados.getSenha() != null){
+            fotografo.setSenha(dadosAtualizados.getSenha());
+        }
+        if (dadosAtualizados.getNumCelular() != null){
+            fotografo.setNumCelular(dadosAtualizados.getNumCelular());
+        }
+        if (dadosAtualizados.getDataNasc() != null){
+            fotografo.setDataNasc(dadosAtualizados.getDataNasc());
+        }
+        return fotografo;
     }
 }

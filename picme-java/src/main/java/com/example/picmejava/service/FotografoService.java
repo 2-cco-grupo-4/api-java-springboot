@@ -5,6 +5,7 @@ import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
 import com.example.picmejava.model.dto.CadastroUsuarioDTO;
 import com.example.picmejava.model.dto.LoginUsuarioDTO;
+import com.example.picmejava.model.mapper.UsuarioMapper;
 import com.example.picmejava.repository.FotografoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ public class FotografoService {
 
     @Autowired
     private FotografoRepository fotografoRepository;
+    private UsuarioMapper usuarioMapper = new UsuarioMapper();
 
     public Fotografo cadastrar(CadastroUsuarioDTO novoFotografo){
         Fotografo fotografo = new Fotografo(novoFotografo);
@@ -34,8 +36,7 @@ public class FotografoService {
         Fotografo fotografo = fotografoOptional.orElseThrow(() -> new UsuarioNaoEncontradoException(
                 "Fotografo não existe")
         );
-        fotografo.atualizarInformacoes(fotografoAtualizado);
-        return fotografoRepository.save(fotografo);
+        return fotografoRepository.save(usuarioMapper.atualizarInformacoes(fotografo, fotografoAtualizado));
     }
 
     public Fotografo login(LoginUsuarioDTO buscarFotografo){

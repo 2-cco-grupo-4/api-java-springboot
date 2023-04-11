@@ -28,9 +28,4 @@ public class Fotografo extends Usuario{
     public String getTipoUsuario() {
         return String.format("Fotografo, token: %s", this.tokenSolicitacao);
     }
-
-    @Override
-    public void atualizarInformacoes(AtualizarUsuarioDTO dados) {
-        super.atualizarInformacoes(dados);
-    }
 }

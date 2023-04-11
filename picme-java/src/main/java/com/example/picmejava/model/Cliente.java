@@ -1,6 +1,5 @@
 package com.example.picmejava.model;
 
-import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
 import com.example.picmejava.model.dto.CadastroUsuarioDTO;
 import lombok.NoArgsConstructor;
 
@@ -23,10 +22,5 @@ public class Cliente extends Usuario{
     @Override
     public String getTipoUsuario() {
         return "Cliente";
-    }
-
-    @Override
-    public void atualizarInformacoes(AtualizarUsuarioDTO dados) {
-        super.atualizarInformacoes(dados);
     }
 }
