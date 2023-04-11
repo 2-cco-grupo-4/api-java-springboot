@@ -1,6 +1,7 @@
 package com.example.picmejava.controller;
 
 import com.example.picmejava.model.Cliente;
+import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
 import com.example.picmejava.model.dto.CadastroUsuarioDTO;
 import com.example.picmejava.model.dto.PerfilClienteDTO;
 import com.example.picmejava.model.mapper.ClienteMapper;
@@ -25,10 +26,12 @@ public class ClienteController {
         ));
     }
 
-    @PutMapping("/alterar/senha")
-    public ResponseEntity<PerfilClienteDTO> alterarSenha(@RequestBody @Valid Cliente clienteAtualizado){
+    @PutMapping("/atualizar/{idCliente}")
+    public ResponseEntity<PerfilClienteDTO> atualizar(
+            @PathVariable Integer idCliente, @RequestBody @Valid AtualizarUsuarioDTO clienteAtualizado
+    ){
         return ResponseEntity.status(200).body(clienteMapper.toPerfilClienteDTO(
-                serviceCliente.alterarSenha(clienteAtualizado.getId(), clienteAtualizado.getSenha())
+                serviceCliente.atualizar(idCliente, clienteAtualizado)
         ));
     }
 

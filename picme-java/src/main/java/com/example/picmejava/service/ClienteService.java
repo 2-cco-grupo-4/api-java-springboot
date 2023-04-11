@@ -2,6 +2,7 @@ package com.example.picmejava.service;
 
 import com.example.picmejava.exceptionhandler.UsuarioNaoEncontradoException;
 import com.example.picmejava.model.Cliente;
+import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
 import com.example.picmejava.model.dto.CadastroUsuarioDTO;
 import com.example.picmejava.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +22,10 @@ public class ClienteService {
         return clienteRepository.save(cliente);
     }
 
-    public Cliente alterarSenha(Integer idCliente, String novaSenha){
-        Optional<Cliente> clienteAlterado = clienteRepository.findById(idCliente);
-        Cliente cliente = clienteAlterado.orElseThrow(() -> new UsuarioNaoEncontradoException("Cliente não encontrado"));
-        cliente.setSenha(novaSenha);
+    public Cliente atualizar(Integer idCliente, AtualizarUsuarioDTO clienteAtualizado){
+        Optional<Cliente> clienteOptional = clienteRepository.findById(idCliente);
+        Cliente cliente = clienteOptional.orElseThrow(() -> new UsuarioNaoEncontradoException("Cliente não encontrado"));
+        cliente.atualizarInformacoes(clienteAtualizado);
         return clienteRepository.save(cliente);
     }
 

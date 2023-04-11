@@ -1,5 +1,6 @@
 package com.example.picmejava.model;
 
+import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
 import com.example.picmejava.model.dto.CadastroUsuarioDTO;
 import lombok.NoArgsConstructor;
 
@@ -24,4 +25,10 @@ public class Cliente extends Usuario{
         return "Cliente";
     }
 
+    public void atualizarInformacoes(AtualizarUsuarioDTO dados) {
+        this.setNome(dados.getNome());
+        this.setSenha(dados.getSenha());
+        this.setNumCelular(dados.getNumCelular());
+        this.setDataNasc(dados.getDataNasc());
+    }
 }
