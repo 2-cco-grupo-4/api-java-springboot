@@ -5,7 +5,8 @@ import com.example.picmejava.model.Cliente;
 import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
 import com.example.picmejava.model.dto.CadastroUsuarioDTO;
 import com.example.picmejava.model.dto.LoginUsuarioDTO;
-import com.example.picmejava.model.mapper.UsuarioMapper;
+import com.example.picmejava.model.mapper.ClienteMapper;
+import com.example.picmejava.model.mapper.FotografoMapper;
 import com.example.picmejava.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,12 +20,10 @@ public class ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
 
-    private UsuarioMapper usuarioMapper = new UsuarioMapper();
+    private ClienteMapper clienteMapper = new ClienteMapper();
 
     public Cliente cadastrar(CadastroUsuarioDTO novoCliente){
-        Cliente cliente = new Cliente(novoCliente);
-        cliente.setAutenticado(false);
-        return clienteRepository.save(cliente);
+        return clienteRepository.save(clienteMapper.toCliente(novoCliente));
     }
 
     public List<Cliente> listar() {
@@ -35,7 +34,7 @@ public class ClienteService {
     public Cliente atualizar(Integer idCliente, AtualizarUsuarioDTO dadosAtualizados){
         Optional<Cliente> clienteOptional = clienteRepository.findById(idCliente);
         Cliente cliente = clienteOptional.orElseThrow(() -> new UsuarioNaoEncontradoException("Cliente não encontrado"));
-        return clienteRepository.save(usuarioMapper.atualizarInformacoes(cliente, dadosAtualizados));
+        return clienteRepository.save(clienteMapper.toClienteAtualizado(cliente, dadosAtualizados));
     }
 
     public Cliente login(LoginUsuarioDTO buscarCliente){

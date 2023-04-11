@@ -15,15 +15,6 @@ import javax.persistence.Entity;
 public class Fotografo extends Usuario{
     private Integer tokenSolicitacao;
 
-    public Fotografo(CadastroUsuarioDTO novoFotografo) {
-        this.setNome(novoFotografo.getNome());
-        this.setCpf(novoFotografo.getCpf());
-        this.setDataNasc(novoFotografo.getDataNasc());
-        this.setEmail(novoFotografo.getEmail());
-        this.setSenha(novoFotografo.getSenha());
-        this.setNumCelular(novoFotografo.getNumCelular());
-    }
-
     @Override
     public String getTipoUsuario() {
         return String.format("Fotografo, token: %s", this.tokenSolicitacao);

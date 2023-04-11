@@ -1,11 +1,10 @@
 package com.example.picmejava.controller;
 
-import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
 import com.example.picmejava.model.dto.CadastroUsuarioDTO;
 import com.example.picmejava.model.dto.LoginUsuarioDTO;
 import com.example.picmejava.model.dto.PerfilUsuarioDTO;
-import com.example.picmejava.model.mapper.UsuarioMapper;
+import com.example.picmejava.model.mapper.FotografoMapper;
 import com.example.picmejava.service.FotografoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,19 +19,19 @@ public class FotografoController {
 
     @Autowired
     private FotografoService serviceFotografo;
-    private UsuarioMapper usuarioMapper = new UsuarioMapper();
+    private FotografoMapper fotografoMapper = new FotografoMapper();
 
 
     @PostMapping()
     public ResponseEntity<PerfilUsuarioDTO> cadastrar(@RequestBody @Valid CadastroUsuarioDTO novoFotografo){
-        return ResponseEntity.status(201).body(usuarioMapper.toPerfilFotogradoDTO(
+        return ResponseEntity.status(201).body(fotografoMapper.toPerfilFotogradoDTO(
                 serviceFotografo.cadastrar(novoFotografo)
         ));
     }
 
     @GetMapping ResponseEntity<List<PerfilUsuarioDTO>> listar(){
         return ResponseEntity.status(200).body(serviceFotografo.listar().stream().map(
-                        fotografo -> usuarioMapper.toPerfilFotogradoDTO(fotografo))
+                        fotografo -> fotografoMapper.toPerfilFotogradoDTO(fotografo))
                 .toList());
     }
 
@@ -40,21 +39,21 @@ public class FotografoController {
     public ResponseEntity<PerfilUsuarioDTO> atualizar(
             @PathVariable Integer idFotografo, @RequestBody @Valid AtualizarUsuarioDTO fotografoAtualizado
     ){
-        return ResponseEntity.status(200).body(usuarioMapper.toPerfilFotogradoDTO(
+        return ResponseEntity.status(200).body(fotografoMapper.toPerfilFotogradoDTO(
                 serviceFotografo.atualizar(idFotografo, fotografoAtualizado)
         ));
     }
 
     @PatchMapping("/entrar")
     public ResponseEntity<PerfilUsuarioDTO> login(@RequestBody LoginUsuarioDTO buscarFotografo){
-        return ResponseEntity.status(200).body(usuarioMapper.toPerfilFotogradoDTO(
+        return ResponseEntity.status(200).body(fotografoMapper.toPerfilFotogradoDTO(
                 serviceFotografo.login(buscarFotografo)
         ));
     }
 
     @PatchMapping("/sair")
     public ResponseEntity<PerfilUsuarioDTO> logoff(@RequestBody LoginUsuarioDTO buscarFotografo){
-        return ResponseEntity.status(200).body(usuarioMapper.toPerfilFotogradoDTO(
+        return ResponseEntity.status(200).body(fotografoMapper.toPerfilFotogradoDTO(
                 serviceFotografo.logoff(buscarFotografo)
         ));
     }
