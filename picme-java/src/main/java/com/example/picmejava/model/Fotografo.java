@@ -1,5 +1,6 @@
 package com.example.picmejava.model;
 
+import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,4 +17,8 @@ public class Fotografo extends Usuario{
         return String.format("Fotografo, token: %s", this.tokenSolicitacao);
     }
 
+    @Override
+    public void atualizarInformacoes(AtualizarUsuarioDTO dados) {
+        super.atualizarInformacoes(dados);
+    }
 }

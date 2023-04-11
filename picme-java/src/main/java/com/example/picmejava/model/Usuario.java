@@ -1,5 +1,6 @@
 package com.example.picmejava.model;
 
+import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,5 +26,20 @@ public abstract class Usuario {
     private String tipoUsuario;
 
     public abstract String getTipoUsuario();
+
+    public void atualizarInformacoes(AtualizarUsuarioDTO dados) {
+        if (dados.getNome() != null){
+            this.setNome(dados.getNome());
+        }
+        if (dados.getSenha() != null){
+            this.setSenha(dados.getSenha());
+        }
+        if (dados.getNumCelular() != null){
+            this.setNumCelular(dados.getNumCelular());
+        }
+        if (dados.getDataNasc() != null){
+            this.setDataNasc(dados.getDataNasc());
+        }
+    }
 
 }

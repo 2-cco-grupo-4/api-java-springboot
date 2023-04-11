@@ -25,10 +25,8 @@ public class Cliente extends Usuario{
         return "Cliente";
     }
 
+    @Override
     public void atualizarInformacoes(AtualizarUsuarioDTO dados) {
-        this.setNome(dados.getNome());
-        this.setSenha(dados.getSenha());
-        this.setNumCelular(dados.getNumCelular());
-        this.setDataNasc(dados.getDataNasc());
+        super.atualizarInformacoes(dados);
     }
 }

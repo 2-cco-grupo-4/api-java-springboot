@@ -1,11 +1,11 @@
 package com.example.picmejava.model.mapper;
 
 import com.example.picmejava.model.Fotografo;
-import com.example.picmejava.model.dto.PerfilFotogradoDTO;
+import com.example.picmejava.model.dto.PerfilUsuarioDTO;
 
 public class FotografoMapper {
-    public PerfilFotogradoDTO toPerfilFotogradoDTO(Fotografo fotografo){
-        PerfilFotogradoDTO dto = new PerfilFotogradoDTO();
+    public PerfilUsuarioDTO toPerfilFotogradoDTO(Fotografo fotografo){
+        PerfilUsuarioDTO dto = new PerfilUsuarioDTO();
 
         dto.setId(fotografo.getId());
         dto.setNome(fotografo.getNome());

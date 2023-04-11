@@ -2,6 +2,7 @@ package com.example.picmejava.service;
 
 import com.example.picmejava.exceptionhandler.UsuarioNaoEncontradoException;
 import com.example.picmejava.model.Fotografo;
+import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
 import com.example.picmejava.repository.FotografoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,12 +20,12 @@ public class FotografoService {
         return fotografoRepository.save(novoFotografo);
     }
 
-    public Fotografo alterarSenha(Integer idFotografo, String senhaAtualizada){
+    public Fotografo atualizar(Integer idFotografo, AtualizarUsuarioDTO fotografoAtualizado){
         Optional<Fotografo> fotografoOptional = fotografoRepository.findById(idFotografo);
         Fotografo fotografo = fotografoOptional.orElseThrow(() -> new UsuarioNaoEncontradoException(
                 "Fotografo não existe")
         );
-        fotografo.setSenha(senhaAtualizada);
+        fotografo.atualizarInformacoes(fotografoAtualizado);
         return fotografoRepository.save(fotografo);
     }
 
