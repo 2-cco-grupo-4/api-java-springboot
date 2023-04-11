@@ -4,7 +4,7 @@ import com.example.picmejava.model.Cliente;
 import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
 import com.example.picmejava.model.dto.CadastroUsuarioDTO;
 import com.example.picmejava.model.dto.PerfilUsuarioDTO;
-import com.example.picmejava.model.mapper.ClienteMapper;
+import com.example.picmejava.model.mapper.UsuarioMapper;
 import com.example.picmejava.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +18,11 @@ import java.util.List;
 public class ClienteController {
     @Autowired
     private ClienteService serviceCliente;
-    private ClienteMapper clienteMapper = new ClienteMapper();
+    private UsuarioMapper usuarioMapper = new UsuarioMapper();
 
     @PostMapping()
     public ResponseEntity<PerfilUsuarioDTO> cadastrar(@RequestBody @Valid CadastroUsuarioDTO novoCliente){
-        return ResponseEntity.status(201).body(clienteMapper.toPerfilClienteDTO(
+        return ResponseEntity.status(201).body(usuarioMapper.toPerfilClienteDTO(
                 serviceCliente.cadastrar(novoCliente)
         ));
     }
@@ -30,7 +30,7 @@ public class ClienteController {
     @GetMapping
     public ResponseEntity<List<PerfilUsuarioDTO>> listar(){
         return ResponseEntity.status(200).body(
-                serviceCliente.listar().stream().map(cliente -> clienteMapper.toPerfilClienteDTO(cliente)).toList()
+                serviceCliente.listar().stream().map(cliente -> usuarioMapper.toPerfilClienteDTO(cliente)).toList()
         );
     }
 
@@ -38,21 +38,21 @@ public class ClienteController {
     public ResponseEntity<PerfilUsuarioDTO> atualizar(
             @PathVariable Integer idCliente, @RequestBody @Valid AtualizarUsuarioDTO clienteAtualizado
     ){
-        return ResponseEntity.status(200).body(clienteMapper.toPerfilClienteDTO(
+        return ResponseEntity.status(200).body(usuarioMapper.toPerfilClienteDTO(
                 serviceCliente.atualizar(idCliente, clienteAtualizado)
         ));
     }
 
     @PatchMapping("/entrar")
-    public ResponseEntity<PerfilUsuarioDTO> login(@RequestBody @Valid Cliente buscarCliente){
-        return ResponseEntity.status(200).body(clienteMapper.toPerfilClienteDTO(
+    public ResponseEntity<PerfilUsuarioDTO> login(@RequestBody Cliente buscarCliente){
+        return ResponseEntity.status(200).body(usuarioMapper.toPerfilClienteDTO(
                 serviceCliente.login(buscarCliente)
         ));
     }
 
     @PatchMapping("/sair")
-    public ResponseEntity<PerfilUsuarioDTO> logoff(@RequestBody @Valid Cliente buscarCliente){
-        return ResponseEntity.status(200).body(clienteMapper.toPerfilClienteDTO(
+    public ResponseEntity<PerfilUsuarioDTO> logoff(@RequestBody Cliente buscarCliente){
+        return ResponseEntity.status(200).body(usuarioMapper.toPerfilClienteDTO(
                 serviceCliente.logoff(buscarCliente)
         ));
     }
