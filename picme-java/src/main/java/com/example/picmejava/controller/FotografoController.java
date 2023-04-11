@@ -2,6 +2,7 @@ package com.example.picmejava.controller;
 
 import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
+import com.example.picmejava.model.dto.LoginUsuarioDTO;
 import com.example.picmejava.model.dto.PerfilUsuarioDTO;
 import com.example.picmejava.model.mapper.UsuarioMapper;
 import com.example.picmejava.service.FotografoService;
@@ -37,14 +38,14 @@ public class FotografoController {
     }
 
     @PatchMapping("/entrar")
-    public ResponseEntity<PerfilUsuarioDTO> login(@RequestBody @Valid Fotografo buscarFotografo){
+    public ResponseEntity<PerfilUsuarioDTO> login(@RequestBody LoginUsuarioDTO buscarFotografo){
         return ResponseEntity.status(200).body(usuarioMapper.toPerfilFotogradoDTO(
                 serviceFotografo.login(buscarFotografo)
         ));
     }
 
     @PatchMapping("/sair")
-    public ResponseEntity<PerfilUsuarioDTO> logoff(@RequestBody @Valid Fotografo buscarFotografo){
+    public ResponseEntity<PerfilUsuarioDTO> logoff(@RequestBody LoginUsuarioDTO buscarFotografo){
         return ResponseEntity.status(200).body(usuarioMapper.toPerfilFotogradoDTO(
                 serviceFotografo.logoff(buscarFotografo)
         ));

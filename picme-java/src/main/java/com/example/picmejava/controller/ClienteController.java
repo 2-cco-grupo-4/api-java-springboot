@@ -3,6 +3,7 @@ package com.example.picmejava.controller;
 import com.example.picmejava.model.Cliente;
 import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
 import com.example.picmejava.model.dto.CadastroUsuarioDTO;
+import com.example.picmejava.model.dto.LoginUsuarioDTO;
 import com.example.picmejava.model.dto.PerfilUsuarioDTO;
 import com.example.picmejava.model.mapper.UsuarioMapper;
 import com.example.picmejava.service.ClienteService;
@@ -44,14 +45,14 @@ public class ClienteController {
     }
 
     @PatchMapping("/entrar")
-    public ResponseEntity<PerfilUsuarioDTO> login(@RequestBody Cliente buscarCliente){
+    public ResponseEntity<PerfilUsuarioDTO> login(@RequestBody LoginUsuarioDTO buscarCliente){
         return ResponseEntity.status(200).body(usuarioMapper.toPerfilClienteDTO(
                 serviceCliente.login(buscarCliente)
         ));
     }
 
     @PatchMapping("/sair")
-    public ResponseEntity<PerfilUsuarioDTO> logoff(@RequestBody Cliente buscarCliente){
+    public ResponseEntity<PerfilUsuarioDTO> logoff(@RequestBody LoginUsuarioDTO buscarCliente){
         return ResponseEntity.status(200).body(usuarioMapper.toPerfilClienteDTO(
                 serviceCliente.logoff(buscarCliente)
         ));

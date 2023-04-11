@@ -3,6 +3,7 @@ package com.example.picmejava.service;
 import com.example.picmejava.exceptionhandler.UsuarioNaoEncontradoException;
 import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
+import com.example.picmejava.model.dto.LoginUsuarioDTO;
 import com.example.picmejava.repository.FotografoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,13 +30,13 @@ public class FotografoService {
         return fotografoRepository.save(fotografo);
     }
 
-    public Fotografo login(Fotografo buscarFotografo){
+    public Fotografo login(LoginUsuarioDTO buscarFotografo){
         Fotografo fotografo = validarFotografo(buscarFotografo.getEmail(), buscarFotografo.getSenha());
         fotografo.setAutenticado(true);
         return fotografoRepository.save(fotografo);
     }
 
-    public Fotografo logoff(Fotografo buscarFotografo){
+    public Fotografo logoff(LoginUsuarioDTO buscarFotografo){
         Fotografo fotografo = validarFotografo(buscarFotografo.getEmail(), buscarFotografo.getSenha());
         fotografo.setAutenticado(false);
         return fotografoRepository.save(fotografo);
