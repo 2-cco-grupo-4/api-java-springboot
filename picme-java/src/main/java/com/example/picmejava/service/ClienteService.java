@@ -2,6 +2,7 @@ package com.example.picmejava.service;
 
 import com.example.picmejava.exceptionhandler.UsuarioNaoEncontradoException;
 import com.example.picmejava.model.Cliente;
+import com.example.picmejava.model.dto.CadastroUsuarioDTO;
 import com.example.picmejava.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,9 +15,10 @@ public class ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
 
-    public Cliente cadastrar(Cliente novoCliente){
-        novoCliente.setAutenticado(false);
-        return clienteRepository.save(novoCliente);
+    public Cliente cadastrar(CadastroUsuarioDTO novoCliente){
+        Cliente cliente = new Cliente(novoCliente);
+        cliente.setAutenticado(false);
+        return clienteRepository.save(cliente);
     }
 
     public Cliente alterarSenha(Integer idCliente, String novaSenha){
