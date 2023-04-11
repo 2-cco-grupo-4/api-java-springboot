@@ -2,6 +2,7 @@ package com.example.picmejava.controller;
 
 import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
+import com.example.picmejava.model.dto.CadastroUsuarioDTO;
 import com.example.picmejava.model.dto.LoginUsuarioDTO;
 import com.example.picmejava.model.dto.PerfilUsuarioDTO;
 import com.example.picmejava.model.mapper.UsuarioMapper;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/fotografos")
@@ -22,10 +24,16 @@ public class FotografoController {
 
 
     @PostMapping()
-    public ResponseEntity<PerfilUsuarioDTO> cadastrar(@RequestBody @Valid Fotografo novoFotografo){
+    public ResponseEntity<PerfilUsuarioDTO> cadastrar(@RequestBody @Valid CadastroUsuarioDTO novoFotografo){
         return ResponseEntity.status(201).body(usuarioMapper.toPerfilFotogradoDTO(
                 serviceFotografo.cadastrar(novoFotografo)
         ));
+    }
+
+    @GetMapping ResponseEntity<List<PerfilUsuarioDTO>> listar(){
+        return ResponseEntity.status(200).body(serviceFotografo.listar().stream().map(
+                        fotografo -> usuarioMapper.toPerfilFotogradoDTO(fotografo))
+                .toList());
     }
 
     @PutMapping("/atualizar/{idFotografo}")
