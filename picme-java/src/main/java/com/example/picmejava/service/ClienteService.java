@@ -8,6 +8,7 @@ import com.example.picmejava.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -45,5 +46,10 @@ public class ClienteService {
         Optional<Cliente> clienteOptional = clienteRepository.findByEmailAndSenha(email, senha);
         clienteOptional.orElseThrow(() -> new UsuarioNaoEncontradoException("Cliente não encontrado"));
         return clienteOptional.get();
+    }
+
+    public List<Cliente> listar() {
+        List<Cliente> clientes = clienteRepository.findAll();
+        return clientes;
     }
 }
