@@ -2,19 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ef51b8aa-1eef-41ff-92a2-fe581372663f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/controller/AlbumController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/controller/FotografoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/controller/FotografoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/controller/ImagemController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/dto/UsuarioDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/dto/UsuarioDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/model/Album.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/model/Album.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/model/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/model/Cliente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/model/Contrato.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/model/Contrato.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/model/Fotografo.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/model/Fotografo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/model/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/model/Usuario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/service/AlbumService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/service/ClienteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/service/ClienteService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/service/FotografoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/service/FotografoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/service/ImagemService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,14 +14,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -43,6 +31,10 @@
       <option name="presentableId" value="Default" />
       <updated>1678836843501</updated>
       <workItem from="1678836844777" duration="14000" />
+      <workItem from="1681095901825" duration="82000" />
+      <workItem from="1681096005260" duration="18000" />
+      <workItem from="1681096131531" duration="139000" />
+      <workItem from="1681156502463" duration="27000" />
     </task>
     <servers />
   </component>

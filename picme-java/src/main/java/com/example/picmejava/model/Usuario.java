@@ -1,9 +1,11 @@
 package com.example.picmejava.model;
 
+import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -18,7 +20,7 @@ public abstract class Usuario {
     private String email;
     private String senha;
     private String cpf;
-    private String dataNasc;
+    private LocalDate dataNasc;
     private String numCelular;
     private Boolean autenticado;
     private String tipoUsuario;

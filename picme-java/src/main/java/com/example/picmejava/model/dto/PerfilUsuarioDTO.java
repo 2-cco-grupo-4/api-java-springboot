@@ -1,9 +1,11 @@
 package com.example.picmejava.model.dto;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-public class PerfilClienteDTO {
+@Getter
+@Setter
+public class PerfilUsuarioDTO {
     private Integer id;
     private String nome;
     private Boolean autenticado;
