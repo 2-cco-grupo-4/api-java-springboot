@@ -24,9 +24,9 @@ public abstract class Usuario {
     private LocalDate dataNasc;
     private String numCelular;
     private Boolean autenticado;
-    private String tokenSolicitacao;
     @Column(name = "tipo_usuario", insertable = false, updatable = false)
     private String tipoUsuario;
+    private String tokenSolicitacao;
 
     public abstract String getTipoUsuario();
 
