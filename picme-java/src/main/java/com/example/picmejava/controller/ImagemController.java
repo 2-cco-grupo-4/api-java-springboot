@@ -15,7 +15,7 @@ public class ImagemController {
     @Autowired
     public ImagemService imagemService;
 
-    @PostMapping("/{id}")
+    @PostMapping("/{idAlbum}")
     public ResponseEntity<Imagem> cadastrar(@PathVariable Integer idAlbum, @RequestBody Imagem novaImagem){
         imagemService.cadastrar(idAlbum, novaImagem);
         return ResponseEntity.status(201).body(novaImagem);

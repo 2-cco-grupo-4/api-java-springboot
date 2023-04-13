@@ -1,6 +1,5 @@
 package com.example.picmejava.model;
 
-import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +9,9 @@ import java.time.LocalDate;
 @Entity
 @Getter
 @Setter
-@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "usuario")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo_usuario", discriminatorType = DiscriminatorType.STRING)
 public abstract class Usuario {
 
     @Id
@@ -23,6 +24,8 @@ public abstract class Usuario {
     private LocalDate dataNasc;
     private String numCelular;
     private Boolean autenticado;
+    private String tokenSolicitacao;
+    @Column(name = "tipo_usuario", insertable = false, updatable = false)
     private String tipoUsuario;
 
     public abstract String getTipoUsuario();

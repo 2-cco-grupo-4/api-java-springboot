@@ -1,12 +1,13 @@
 package com.example.picmejava.model;
 
-import com.example.picmejava.model.dto.CadastroUsuarioDTO;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
 @NoArgsConstructor
+@DiscriminatorValue("cliente")
 public class Cliente extends Usuario{
 
     @Override
