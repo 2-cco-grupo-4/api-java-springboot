@@ -4,7 +4,6 @@ import com.example.picmejava.model.Cliente;
 import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
 import com.example.picmejava.model.dto.CadastroUsuarioDTO;
 import com.example.picmejava.model.dto.PerfilClienteDTO;
-import com.example.picmejava.model.dto.PerfilFotografoDTO;
 
 public class ClienteMapper {
 

@@ -3,11 +3,11 @@ package com.example.picmejava.controller;
 import com.example.picmejava.model.dto.*;
 import com.example.picmejava.model.mapper.ClienteMapper;
 import com.example.picmejava.service.ClienteService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController

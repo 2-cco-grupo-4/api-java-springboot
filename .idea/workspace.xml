@@ -2,7 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ef51b8aa-1eef-41ff-92a2-fe581372663f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/controller/AlbumController.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/controller/AlbumController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/controller/ClienteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/controller/ClienteController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/controller/FotografoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/controller/FotografoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/model/Album.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/model/Album.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/model/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/model/Cliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/model/Fotografo.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/model/Fotografo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/model/Imagem.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/model/Imagem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/model/Tema.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/model/Tema.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/model/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/model/Usuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/model/mapper/ClienteMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/model/mapper/ClienteMapper.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +45,7 @@
       <workItem from="1681096005260" duration="18000" />
       <workItem from="1681096131531" duration="139000" />
       <workItem from="1681156502463" duration="27000" />
+      <workItem from="1681428164071" duration="28000" />
     </task>
     <servers />
   </component>
