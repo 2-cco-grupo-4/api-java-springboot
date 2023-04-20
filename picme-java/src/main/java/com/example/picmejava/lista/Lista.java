@@ -147,4 +147,14 @@ public class ListaFotografo {
         }
         return null;
     }
+
+    public List<Fotografo> toList() {
+        List<Fotografo> fotografoList = new ArrayList<>(tamanho);
+        for (int i = 0; i < tamanho; i++) {
+            fotografoList.add(fotografoArray[i]);
+        }
+        return fotografoList;
+    }
+
+
 }

@@ -45,7 +45,7 @@ public class AlbumService {
         return album;
     }
 
-    public List<Album> listar(Integer idFotografo){
+    public Lista listar(Integer idFotografo) {
         return albumRepository.findAllByIdFotografo(idFotografo);
     }
 
