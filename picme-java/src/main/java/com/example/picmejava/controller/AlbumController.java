@@ -36,7 +36,7 @@ public class AlbumController {
 
     @GetMapping("/{id}")
     public ResponseEntity<List<Album>> listarAlbumsFotografo(@PathVariable Integer id){
-        return ResponseEntity.status(200).body(albumService.listar(id));
+        return ResponseEntity.status(200).body(albumService.listar(id).toList());
     }
 
 }

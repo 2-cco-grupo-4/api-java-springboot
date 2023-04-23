@@ -1,6 +1,7 @@
 package com.example.picmejava.service;
 
 import com.example.picmejava.exceptionhandler.UsuarioNaoEncontradoException;
+import com.example.picmejava.lista.Lista;
 import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
 import com.example.picmejava.model.dto.CadastroUsuarioDTO;
@@ -24,8 +25,8 @@ public class FotografoService {
         return fotografoRepository.save(fotografoMapper.toFotografo(novoFotografo));
     }
 
-    public List<Fotografo> listar() {
-        List<Fotografo> fotografos = fotografoRepository.findAll();
+    public Lista<Fotografo> listar() {
+        Lista<Fotografo> fotografos = (Lista<Fotografo>) fotografoRepository.findAll();
         return fotografos;
     }
 

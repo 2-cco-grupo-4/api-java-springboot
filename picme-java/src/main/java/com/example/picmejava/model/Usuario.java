@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Usuario {
+public abstract class Usuario implements Identificavel{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,4 +27,7 @@ public abstract class Usuario {
 
     public abstract String getTipoUsuario();
 
+    public Integer getId() {
+        return id;
+    }
 }

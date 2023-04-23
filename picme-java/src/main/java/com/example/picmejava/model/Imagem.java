@@ -11,7 +11,7 @@ import javax.persistence.Id;
 @Entity
 @Setter
 @Getter
-public class Imagem {
+public class Imagem implements Identificavel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -20,4 +20,7 @@ public class Imagem {
     private String descricao;
     private Integer idAlbum;
 
+    public Integer getId() {
+        return id;
+    }
 }

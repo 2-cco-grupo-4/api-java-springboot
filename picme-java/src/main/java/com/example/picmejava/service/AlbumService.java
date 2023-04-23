@@ -6,8 +6,8 @@ import com.example.picmejava.repository.AlbumRepository;
 import com.example.picmejava.repository.TemaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.example.picmejava.lista.Lista;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -45,7 +45,7 @@ public class AlbumService {
         return album;
     }
 
-    public Lista listar(Integer idFotografo) {
+    public Lista<Album> listar(Integer idFotografo) {
         return albumRepository.findAllByIdFotografo(idFotografo);
     }
 

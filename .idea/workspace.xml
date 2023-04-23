@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ef51b8aa-1eef-41ff-92a2-fe581372663f" name="Changes" comment="adicionando a lista">
+    <list default="true" id="ef51b8aa-1eef-41ff-92a2-fe581372663f" name="Changes" comment="trocando list por lista, adicionando método novo de toList">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/controller/AlbumController.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/controller/AlbumController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/lista/ListaFotografo.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/lista/Lista.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/repository/AlbumRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/repository/AlbumRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/lista/Lista.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/lista/Lista.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/service/AlbumService.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/service/AlbumService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,12 +33,12 @@
     "git-widget-placeholder": "main",
     "ignore.preview.features.used": "true",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/rafael/Documents/api-java-springboot",
+    "last_opened_file_path": "C:/Users/rafael/Documents/api-java-springboot/picme-java",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Project",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "reference.settings.ide.settings.uml",
@@ -61,7 +59,10 @@
       <workItem from="1681096131531" duration="139000" />
       <workItem from="1681156502463" duration="27000" />
       <workItem from="1682007810809" duration="783000" />
-      <workItem from="1682008633854" duration="749000" />
+      <workItem from="1682008633854" duration="2107000" />
+      <workItem from="1682247168025" duration="884000" />
+      <workItem from="1682248118598" duration="956000" />
+      <workItem from="1682249143956" duration="155000" />
     </task>
     <task id="LOCAL-00001" summary="adicionando a lista">
       <created>1682000005991</created>
@@ -70,15 +71,34 @@
       <option name="project" value="LOCAL" />
       <updated>1682000005991</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="trocando list por lista, adicionando método novo de toList">
+      <created>1682009555393</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1682009555393</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="adicionando a lista" />
-    <option name="LAST_COMMIT_MESSAGE" value="adicionando a lista" />
+    <MESSAGE value="trocando list por lista, adicionando método novo de toList" />
+    <option name="LAST_COMMIT_MESSAGE" value="trocando list por lista, adicionando método novo de toList" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
