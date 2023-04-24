@@ -1,7 +1,6 @@
 package com.example.picmejava.model.mapper;
 
 import com.example.picmejava.model.Fotografo;
-import com.example.picmejava.model.Usuario;
 import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
 import com.example.picmejava.model.dto.CadastroUsuarioDTO;
 import com.example.picmejava.model.dto.PerfilFotografoDTO;

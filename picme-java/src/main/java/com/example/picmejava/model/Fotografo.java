@@ -1,7 +1,6 @@
 package com.example.picmejava.model;
 
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,8 +13,7 @@ public class Fotografo extends Usuario implements Identificavel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer tokenSolicitacao;
-
+    private String tokenSolicitacao;
 
     public Integer getId() {
         return id;
