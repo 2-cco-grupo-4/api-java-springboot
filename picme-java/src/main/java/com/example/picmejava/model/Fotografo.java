@@ -10,7 +10,16 @@ import lombok.Setter;
 @Setter
 @Entity
 @DiscriminatorValue("fotografo")
-public class Fotografo extends Usuario{
+public class Fotografo extends Usuario implements Identificavel{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private Integer tokenSolicitacao;
+
+
+    public Integer getId() {
+        return id;
+    }
 
     @Override
     public String getTipoUsuario() {

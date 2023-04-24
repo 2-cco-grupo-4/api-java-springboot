@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Table(name = "usuario")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo_usuario", discriminatorType = DiscriminatorType.STRING)
-public abstract class Usuario {
+public abstract class Usuario implements Identificavel{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,4 +30,7 @@ public abstract class Usuario {
 
     public abstract String getTipoUsuario();
 
+    public Integer getId() {
+        return id;
+    }
 }

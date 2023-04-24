@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Album {
+public class Album implements Identificavel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -23,4 +23,8 @@ public class Album {
     private String descricao;
     private Integer idFotografo;
 
+    @Override
+    public Integer getId() {
+        return idFotografo;
+    }
 }

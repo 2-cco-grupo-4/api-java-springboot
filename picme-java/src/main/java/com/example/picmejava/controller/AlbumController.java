@@ -17,6 +17,7 @@ public class AlbumController {
     private AlbumService albumService;
 
     @PostMapping("/{id}")
+
     public ResponseEntity<Album> cadastrar(@PathVariable Integer id, @RequestBody Album novoAlbum)throws Exception{
         albumService.cadastrar(id, novoAlbum);
         return ResponseEntity.status(201).body(novoAlbum);
@@ -35,7 +36,7 @@ public class AlbumController {
 
     @GetMapping("/{id}")
     public ResponseEntity<List<Album>> listarAlbumsFotografo(@PathVariable Integer id){
-        return ResponseEntity.status(200).body(albumService.listar(id));
+        return ResponseEntity.status(200).body(albumService.listar(id).toList());
     }
 
 }
