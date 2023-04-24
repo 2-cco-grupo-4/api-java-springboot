@@ -5,7 +5,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PerfilUsuarioDTO {
+public class PerfilClienteDTO {
+
     private Integer id;
     private String nome;
     private Boolean autenticado;

@@ -3,12 +3,12 @@ package com.example.picmejava.model.mapper;
 import com.example.picmejava.model.Cliente;
 import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
 import com.example.picmejava.model.dto.CadastroUsuarioDTO;
-import com.example.picmejava.model.dto.PerfilUsuarioDTO;
+import com.example.picmejava.model.dto.PerfilClienteDTO;
 
 public class ClienteMapper {
 
-    public PerfilUsuarioDTO toPerfilClienteDTO(Cliente cliente){
-        PerfilUsuarioDTO dto = new PerfilUsuarioDTO();
+    public PerfilClienteDTO toPerfilClienteDTO(Cliente cliente){
+        PerfilClienteDTO dto = new PerfilClienteDTO();
 
         dto.setId(cliente.getId());
         dto.setNome(cliente.getNome());

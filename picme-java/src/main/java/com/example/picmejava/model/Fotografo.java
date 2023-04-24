@@ -1,26 +1,19 @@
 package com.example.picmejava.model;
 
-import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
-import com.example.picmejava.model.dto.CadastroUsuarioDTO;
+import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @Entity
+@DiscriminatorValue("fotografo")
 public class Fotografo extends Usuario implements Identificavel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer tokenSolicitacao;
-
+    private String tokenSolicitacao;
 
     public Integer getId() {
         return id;
@@ -28,6 +21,6 @@ public class Fotografo extends Usuario implements Identificavel{
 
     @Override
     public String getTipoUsuario() {
-        return String.format("Fotografo, token: %s", this.tokenSolicitacao);
+        return String.format("Fotografo");
     }
 }
