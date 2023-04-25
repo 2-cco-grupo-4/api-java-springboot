@@ -2,10 +2,19 @@ package com.example.picmejava;
 
 import com.example.picmejava.lista.Lista;
 import com.example.picmejava.model.Fotografo;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.Scanner;
+
+@OpenAPIDefinition(
+        info = @Info(
+                title = "PICME API",
+                version = "0.7.2"
+        )
+)
 
 @SpringBootApplication
 public class PicmeJavaApplication {

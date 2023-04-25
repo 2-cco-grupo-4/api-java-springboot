@@ -1,5 +1,6 @@
 package com.example.picmejava.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,20 +14,20 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Tema implements Identificavel {
 
+    @Schema(
+            description = "Identificador do tema",
+            example = "1"
+    )
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Schema(
+            description = "Nome do tema",
+            example = "Casamento"
+    )
     @Enumerated(EnumType.STRING)
     private TemaEnum tema;
-    private String tipo;
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
 
     public TemaEnum getTema() {
         return tema;
@@ -40,8 +41,7 @@ public class Tema implements Identificavel {
     public String toString() {
         return "Tema{" +
                 "id=" + id +
-                ", tema=" + tema +
-                ", tipo='" + tipo + '\'' +
+                ", tema=" + tema + '\'' +
                 '}';
     }
 }
