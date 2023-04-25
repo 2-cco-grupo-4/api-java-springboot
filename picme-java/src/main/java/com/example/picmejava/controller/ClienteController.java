@@ -3,9 +3,12 @@ package com.example.picmejava.controller;
 import com.example.picmejava.model.dto.*;
 import com.example.picmejava.model.mapper.ClienteMapper;
 import com.example.picmejava.service.ClienteService;
+import com.example.picmejava.service.autenticacao.dto.UsuarioLoginDTO;
+import com.example.picmejava.service.autenticacao.dto.UsuarioTokenDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,12 +19,17 @@ import java.util.Objects;
 public class ClienteController {
     @Autowired
     private ClienteService serviceCliente;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     private ClienteMapper clienteMapper = new ClienteMapper();
 
-    @PostMapping()
-    public ResponseEntity<PerfilClienteDTO> cadastrar(@RequestBody @Valid CadastroUsuarioDTO novoCliente){
+    @PostMapping("/cadastrar")
+    public ResponseEntity<PerfilClienteDTO> cadastrar(@RequestBody @Valid CadastroUsuarioDTO novoCadastroCliente){
+        String senhaCriptografada = passwordEncoder.encode(novoCadastroCliente.getSenha());
+        novoCadastroCliente.setSenha(senhaCriptografada);
+
         return ResponseEntity.status(201).body(clienteMapper.toPerfilClienteDTO(
-                serviceCliente.cadastrar(novoCliente)
+                serviceCliente.cadastrar(novoCadastroCliente)
         ));
     }
 
@@ -45,10 +53,8 @@ public class ClienteController {
     }
 
     @PatchMapping("/entrar")
-    public ResponseEntity<PerfilClienteDTO> login(@RequestBody LoginUsuarioDTO buscarCliente){
-        return ResponseEntity.status(200).body(clienteMapper.toPerfilClienteDTO(
-                serviceCliente.login(buscarCliente)
-        ));
+    public ResponseEntity<UsuarioTokenDTO> login(@RequestBody UsuarioLoginDTO usuarioLoginDTO){
+        return ResponseEntity.status(200).body(serviceCliente.autenticar(usuarioLoginDTO));
     }
 
     @PatchMapping("/sair")
