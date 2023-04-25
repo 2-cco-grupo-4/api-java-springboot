@@ -6,6 +6,7 @@ import com.example.picmejava.model.dto.LoginUsuarioDTO;
 import com.example.picmejava.model.dto.PerfilFotografoDTO;
 import com.example.picmejava.model.mapper.FotografoMapper;
 import com.example.picmejava.service.FotografoService;
+import com.example.picmejava.service.autenticacao.dto.UsuarioTokenDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,8 @@ public class FotografoController {
         ));
     }
 
-    @GetMapping ResponseEntity<List<PerfilFotografoDTO>> listar(){
+    @GetMapping("/listar")
+    ResponseEntity<List<PerfilFotografoDTO>> listar(){
         return ResponseEntity.status(200).body(serviceFotografo.listar().stream().map(
                         fotografo -> fotografoMapper.toPerfilFotogradoDTO(fotografo))
                 .toList());
@@ -45,10 +47,9 @@ public class FotografoController {
     }
 
     @PatchMapping("/entrar")
-    public ResponseEntity<PerfilFotografoDTO> login(@RequestBody LoginUsuarioDTO buscarFotografo){
-        return ResponseEntity.status(200).body(fotografoMapper.toPerfilFotogradoDTO(
-                serviceFotografo.login(buscarFotografo)
-        ));
+    public ResponseEntity<UsuarioTokenDTO> login(@RequestBody LoginUsuarioDTO buscarFotografo){
+        UsuarioTokenDTO usuarioToken = this.serviceFotografo.autenticar(buscarFotografo);
+        return ResponseEntity.status(200).body(usuarioToken);
     }
 
     @PatchMapping("/sair")
