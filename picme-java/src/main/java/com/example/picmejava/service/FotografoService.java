@@ -54,6 +54,7 @@ public class FotografoService {
         return fotografoRepository.save(fotografo);
     }
 
+
     public Fotografo validarFotografo(String email, String senha){
         Optional<Fotografo> fotografoOptional = fotografoRepository.findByEmailAndSenha(email, senha);
         fotografoOptional.orElseThrow(() -> new UsuarioNaoEncontradoException("Fotografo não existe"));
