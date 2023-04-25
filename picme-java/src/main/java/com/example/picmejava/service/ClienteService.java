@@ -28,7 +28,11 @@ public class ClienteService {
     }
 
     public Lista<Cliente> listar() {
-        Lista<Cliente> clientes = (Lista<Cliente>) clienteRepository.findAll();
+
+        Lista<Cliente> clientes = new Lista();
+        for(Cliente i :  clienteRepository.findAll()){
+            clientes.add(i);
+        }
         return clientes;
     }
 

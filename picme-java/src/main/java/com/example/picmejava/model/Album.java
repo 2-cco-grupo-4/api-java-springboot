@@ -25,6 +25,6 @@ public class Album implements Identificavel{
 
     @Override
     public Integer getId() {
-        return idFotografo;
+        return id;
     }
 }

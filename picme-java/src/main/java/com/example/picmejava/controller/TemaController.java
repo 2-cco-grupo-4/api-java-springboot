@@ -1,5 +1,6 @@
 package com.example.picmejava.controller;
 
+import com.example.picmejava.lista.Lista;
 import com.example.picmejava.model.Tema;
 import com.example.picmejava.service.TemaService;
 import org.springframework.beans.factory.annotation.Autowired;

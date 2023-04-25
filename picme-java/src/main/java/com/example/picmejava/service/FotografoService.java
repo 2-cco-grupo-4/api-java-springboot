@@ -3,6 +3,7 @@ package com.example.picmejava.service;
 import com.example.picmejava.configuration.security.jwt.GerenciadorTokenJwt;
 import com.example.picmejava.exceptionhandler.UsuarioNaoEncontradoException;
 import com.example.picmejava.lista.Lista;
+import com.example.picmejava.model.Cliente;
 import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.Usuario;
 import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
@@ -46,7 +47,10 @@ public class FotografoService {
     }
 
     public Lista<Fotografo> listar() {
-        Lista<Fotografo> fotografos = (Lista<Fotografo>) fotografoRepository.findAll();
+        Lista<Fotografo> fotografos = new Lista();
+        for(Fotografo i :  fotografoRepository.findAll()){
+            fotografos.add(i);
+        }
         return fotografos;
     }
 

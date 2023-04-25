@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/fotografos")
@@ -26,15 +28,16 @@ public class FotografoController {
     @PostMapping()
     public ResponseEntity<PerfilFotografoDTO> cadastrar(@RequestBody @Valid CadastroUsuarioDTO novoFotografo){
         return ResponseEntity.status(201).body(fotografoMapper.toPerfilFotogradoDTO(
-                serviceFotografo.cadastrar(novoFotografo)
-        ));
+                serviceFotografo.cadastrar(novoFotografo)));
     }
 
-    @GetMapping("/listar")
-    ResponseEntity<List<PerfilFotografoDTO>> listar(){
-        return ResponseEntity.status(200).body(serviceFotografo.listar().stream().map(
-                        fotografo -> fotografoMapper.toPerfilFotogradoDTO(fotografo))
-                .toList());
+    @GetMapping ResponseEntity<List<PerfilFotografoDTO>> listar(){
+        return ResponseEntity.status(200).body(serviceFotografo.listar()
+                .stream()
+                .filter(Objects::nonNull)
+                .map(cliente -> fotografoMapper.toPerfilFotogradoDTO(cliente))
+                .toList()
+        );
     }
 
     @PutMapping("/atualizar/{idFotografo}")
