@@ -6,12 +6,19 @@ import com.example.picmejava.model.dto.LoginUsuarioDTO;
 import com.example.picmejava.model.dto.PerfilFotografoDTO;
 import com.example.picmejava.model.mapper.FotografoMapper;
 import com.example.picmejava.service.FotografoService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+@Tag(
+        name = "Fotografo Controller",
+        description = "Controller responsável pela entidade Fotografo"
+)
 
 @RestController
 @RequestMapping("/fotografos")
@@ -21,7 +28,7 @@ public class FotografoController {
     private FotografoService serviceFotografo;
     private FotografoMapper fotografoMapper = new FotografoMapper();
 
-
+    @Operation(summary = "Cadastrar um novo cliente", description = "Passando os dados necessários, podemos cadastrar um novo cliente")
     @PostMapping()
     public ResponseEntity<PerfilFotografoDTO> cadastrar(@RequestBody @Valid CadastroUsuarioDTO novoFotografo){
         return ResponseEntity.status(201).body(fotografoMapper.toPerfilFotogradoDTO(
