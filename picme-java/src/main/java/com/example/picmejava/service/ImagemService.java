@@ -1,5 +1,6 @@
 package com.example.picmejava.service;
 
+import com.example.picmejava.lista.Lista;
 import com.example.picmejava.model.Imagem;
 import com.example.picmejava.repository.ImagemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class ImagemService {
         return imagem;
     }
 
-    public List<Imagem> listar(Integer idAlbum){
+    public Lista<Imagem> listar(Integer idAlbum){
         return imagemRepository.findAllByIdAlbum(idAlbum);
     }
 

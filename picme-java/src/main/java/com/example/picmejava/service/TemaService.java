@@ -1,8 +1,11 @@
 package com.example.picmejava.service;
 
+import com.example.picmejava.lista.Lista;
+import com.example.picmejava.model.Cliente;
 import com.example.picmejava.model.Tema;
 import com.example.picmejava.repository.TemaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,10 +21,16 @@ public class TemaService {
     }
 
     public List<Tema> listar() throws Exception{
-        List<Tema> temas = repository.findAll();
+        Lista<Tema> temas = new Lista<>();
+        for(Tema i :  repository.findAll()){
+            temas.add(i);
+        }
         if (temas.isEmpty()){
             throw new Exception("Nenhum tema encontrado!");
         }
-        return temas;
+
+        return temas.toList() ;
     }
+
+
 }

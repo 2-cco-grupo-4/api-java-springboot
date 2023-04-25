@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/clientes")
@@ -32,10 +33,13 @@ public class ClienteController {
     @GetMapping
     public ResponseEntity<List<PerfilUsuarioDTO>> listar(){
         return ResponseEntity.status(200).body(
-                serviceCliente.listar().stream().map(cliente -> clienteMapper.toPerfilClienteDTO(cliente)).toList()
+                serviceCliente.listar()
+                        .stream()
+                        .filter(Objects::nonNull)
+                        .map(cliente -> clienteMapper.toPerfilClienteDTO(cliente))
+                        .toList()
         );
     }
-
     @PutMapping("/atualizar/{idCliente}")
     public ResponseEntity<PerfilUsuarioDTO> atualizar(
             @PathVariable Integer idCliente, @RequestBody @Valid AtualizarUsuarioDTO clienteAtualizado

@@ -22,6 +22,7 @@ public class Fotografo extends Usuario implements Identificavel{
     private Integer tokenSolicitacao;
 
 
+
     public Integer getId() {
         return id;
     }

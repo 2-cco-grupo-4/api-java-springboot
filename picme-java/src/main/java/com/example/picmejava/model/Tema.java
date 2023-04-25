@@ -26,7 +26,20 @@ public class Tema implements Identificavel {
         this.tipo = tipo;
     }
 
+    public TemaEnum getTema() {
+        return tema;
+    }
+
     public Integer getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Tema{" +
+                "id=" + id +
+                ", tema=" + tema +
+                ", tipo='" + tipo + '\'' +
+                '}';
     }
 }

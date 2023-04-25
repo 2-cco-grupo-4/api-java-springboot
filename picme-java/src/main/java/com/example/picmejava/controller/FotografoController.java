@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/fotografos")
@@ -30,7 +31,7 @@ public class FotografoController {
     }
 
     @GetMapping ResponseEntity<List<PerfilUsuarioDTO>> listar(){
-        return ResponseEntity.status(200).body(serviceFotografo.listar().stream().map(
+        return ResponseEntity.status(200).body(serviceFotografo.listar().stream().filter(Objects::nonNull).map(
                         fotografo -> fotografoMapper.toPerfilFotogradoDTO(fotografo))
                 .toList());
     }

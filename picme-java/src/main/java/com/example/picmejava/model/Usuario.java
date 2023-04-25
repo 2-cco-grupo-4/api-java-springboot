@@ -13,6 +13,8 @@ import java.time.LocalDate;
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Usuario implements Identificavel{
 
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
