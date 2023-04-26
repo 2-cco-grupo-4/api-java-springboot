@@ -10,6 +10,7 @@ import com.example.picmejava.service.FotografoService;
 import com.example.picmejava.service.autenticacao.dto.UsuarioLoginDTO;
 import com.example.picmejava.service.autenticacao.dto.UsuarioTokenDTO;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,7 @@ public class FotografoController {
     }
 
     @Operation(summary = "Listar fotógrafos", description = "Lista todos os fotógrafos cadastrados")
+    @SecurityRequirement(name = "Bearer")
     @GetMapping ResponseEntity<List<PerfilFotografoDTO>> listar(){
         return ResponseEntity.status(200).body(serviceFotografo.listar()
                 .stream()
@@ -60,6 +62,7 @@ public class FotografoController {
     }
 
     @Operation(summary = "Atualizar dados fotógrafo", description = "Passando o ID do fotógrafo e seus novos dados, podemos atualizar suas informações")
+    @SecurityRequirement(name = "Bearer")
     @PutMapping("/atualizar/{idFotografo}")
     public ResponseEntity<PerfilFotografoDTO> atualizar(
             @PathVariable Integer idFotografo, @RequestBody @Valid AtualizarUsuarioDTO fotografoAtualizado
@@ -76,6 +79,7 @@ public class FotografoController {
     }
 
     @Operation(summary = "Logoff fotógrafo", description = "EndPoint para logoff do fotógrafo, é necessário passar as suas credenciais novamente")
+    @SecurityRequirement(name = "Bearer")
     @PatchMapping("/sair")
     public ResponseEntity<PerfilFotografoDTO> logoff(@RequestBody LoginUsuarioDTO buscarFotografo){
         return ResponseEntity.status(200).body(fotografoMapper.toPerfilFotogradoDTO(

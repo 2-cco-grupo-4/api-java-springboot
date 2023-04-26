@@ -6,6 +6,7 @@ import com.example.picmejava.service.ClienteService;
 import com.example.picmejava.service.autenticacao.dto.UsuarioLoginDTO;
 import com.example.picmejava.service.autenticacao.dto.UsuarioTokenDTO;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,7 @@ public class ClienteController {
     }
 
     @Operation(summary = "Listar clientes", description = "Lista todos os clientes cadastrados")
+    @SecurityRequirement(name = "Bearer")
     @GetMapping
     public ResponseEntity<List<PerfilClienteDTO>> listar(){
         return ResponseEntity.status(200).body(
@@ -54,6 +56,7 @@ public class ClienteController {
     }
 
     @Operation(summary = "Atualizar dados cliente", description = "Passando o ID do cliente e seus novos dados, podemos atualizar suas informações")
+    @SecurityRequirement(name = "Bearer")
     @PutMapping("/atualizar/{idCliente}")
     public ResponseEntity<PerfilClienteDTO> atualizar(
             @PathVariable Integer idCliente, @RequestBody @Valid AtualizarUsuarioDTO clienteAtualizado
@@ -70,6 +73,7 @@ public class ClienteController {
     }
 
     @Operation(summary = "Logoff cliente", description = "EndPoint para logoff do cliente, é necessário passar as suas credenciais novamente")
+    @SecurityRequirement(name = "Bearer")
     @PatchMapping("/sair")
     public ResponseEntity<PerfilClienteDTO> logoff(@RequestBody LoginUsuarioDTO buscarCliente){
         return ResponseEntity.status(200).body(clienteMapper.toPerfilClienteDTO(
