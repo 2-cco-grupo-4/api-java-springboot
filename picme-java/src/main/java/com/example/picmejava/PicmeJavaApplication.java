@@ -36,7 +36,7 @@ public class PicmeJavaApplication {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             int choose = 0;
-            System.out.println("Escolha uma opção:\n1- SpringBoot API\n2- Demonstração Lista\n3- Sair");
+            System.out.println("Escolha uma opção:\n1- SpringBoot API\n2- Demonstração Lista\n0- Sair");
             choose = scanner.nextInt();
             switch (choose) {
                 case 1 -> SpringApplication.run(PicmeJavaApplication.class, args);
@@ -75,7 +75,7 @@ public class PicmeJavaApplication {
             System.out.println(listaIntegers.get(i));
         }
 
-        listaIntegers.set(1, f4);
+        listaIntegers.set(1, 95);
 
         System.out.println("Lista de números depois de atualizar o segundo elemento:");
         for (int i = 0; i < listaIntegers.size(); i++) {
@@ -90,7 +90,18 @@ public class PicmeJavaApplication {
         }
 
 
+        System.out.println("Lista de números ordenadas novamente");
+        listaIntegers.ordenarBubbleSort();
+        for (int i = 0; i < listaIntegers.size(); i++) {
+            if (listaIntegers.get(i) != null) {
+                System.out.println(listaIntegers.get(i));
+            }
+        }
+
+
+
+
         System.out.println("Existe o número 5? ");
-        System.out.println("Está no Index: " + listaIntegers.buscaBinaria(5));
+        System.out.println("Está no Index: " + listaIntegers.buscaBinaria(5) + "\n\n");
     }
 }
