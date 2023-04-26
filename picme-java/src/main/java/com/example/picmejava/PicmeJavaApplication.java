@@ -1,7 +1,6 @@
 package com.example.picmejava;
 
 import com.example.picmejava.lista.Lista;
-import com.example.picmejava.model.Fotografo;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.info.Contact;
@@ -35,16 +34,17 @@ public class PicmeJavaApplication {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
-        int choose = 0 ;
-        System.out.println("Escolha uma opção:\n1- SpringBoot API\n2- Demonstração Lista");
-        choose = scanner.nextInt();
-        switch(choose){
-            case 1 -> SpringApplication.run(PicmeJavaApplication.class, args);
-            case 2 -> testesLista();
-            default -> System.out.println("Não existe essa opção");
+        while (true) {
+            int choose = 0;
+            System.out.println("Escolha uma opção:\n1- SpringBoot API\n2- Demonstração Lista\n3- Sair");
+            choose = scanner.nextInt();
+            switch (choose) {
+                case 1 -> SpringApplication.run(PicmeJavaApplication.class, args);
+                case 2 -> testesLista();
+                case 0 -> System.exit(0);
+                default -> System.out.println("Não existe essa opção");
+            }
         }
-
 
     }
 
@@ -61,7 +61,7 @@ public class PicmeJavaApplication {
         listaIntegers.add(f3);
         listaIntegers.add(f4);
         System.out.println("Lista de números antes do Bubble Sort:");
-        for (int i = 0; i <listaIntegers.size(); i++) {
+        for (int i = 0; i < listaIntegers.size(); i++) {
             if (listaIntegers.get(i) != null) {
                 System.out.println(listaIntegers.get(i));
             }
@@ -88,5 +88,9 @@ public class PicmeJavaApplication {
         for (int i = 0; i < listaIntegers.size(); i++) {
             System.out.println(listaIntegers.get(i));
         }
+
+
+        System.out.println("Existe o número 5? ");
+        System.out.println("Está no Index: " + listaIntegers.buscaBinaria(5));
     }
 }

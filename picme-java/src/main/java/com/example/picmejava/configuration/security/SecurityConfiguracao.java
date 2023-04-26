@@ -3,6 +3,7 @@ package com.example.picmejava.configuration.security;
 import com.example.picmejava.configuration.security.jwt.GerenciadorTokenJwt;
 import com.example.picmejava.service.autenticacao.AutenticacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
@@ -27,10 +28,12 @@ import java.util.Collections;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfiguracao {
+
     private static final String ORIGENS_PERMITIDAS = "*";
 
     @Autowired
     private AutenticacaoService autenticacaoService;
+
 
     @Autowired
     private AutenticacaoEntryPoint autenticacaoJwtEntryPoint;

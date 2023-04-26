@@ -21,6 +21,7 @@ public class Lista<T> {
     public Lista(List<T> elementos) {
         this.array = (T[]) elementos.toArray();
     }
+
     private void redimensionar() {
         int novoTamanho = this.array.length * 2;
         T[] novoArray = Arrays.copyOf(this.array, novoTamanho);
@@ -93,7 +94,6 @@ public class Lista<T> {
     }
 
 
-
     public void ordenarBubbleSort() {
         for (int i = 0; i < tamanho - 1; i++) {
             for (int j = 0; j < tamanho - i - 1; j++) {
@@ -122,6 +122,7 @@ public class Lista<T> {
             }
         }
     }
+
     public boolean isElementOfIdentificavel(Object element) {
         return element instanceof Identificavel;
     }
@@ -203,12 +204,12 @@ public class Lista<T> {
     }
 
     public Identificavel buscarPesquisaBinaria(Identificavel identificavel) {
-        ordenarSelectionSort();
+        ordenarBubbleSort();
         int esq = 0;
         int dir = tamanho - 1;
         while (esq <= dir) {
             int meio = (esq + dir) / 2;
-            if(isElementOfIdentificavel(array[meio])) {
+            if (isElementOfIdentificavel(array[meio])) {
                 Identificavel identificavelMeio = (Identificavel) array[meio];
 
                 if (identificavelMeio.getId().equals(identificavel.getId())) {
@@ -222,18 +223,26 @@ public class Lista<T> {
         }
         return null;
     }
+
     public int buscaBinaria(int valor) {
-        Arrays.sort(array); // ordena o array para garantir a corretude do algoritmo
-        int esq = 0, dir = array.length - 1;
+        int esq = 0, dir = tamanho - 1;
+        ordenarBubbleSort();
         while (esq <= dir) {
             int meio = (esq + dir) / 2;
+            if (array[meio] == null) { // adicione essa verificação para evitar o erro
+                continue;
+            }
             if ((int) array[meio] == valor) {
+
                 return meio;
             } else if ((int) array[meio] < valor) {
+
                 esq = meio + 1;
             } else {
+
                 dir = meio - 1;
             }
+
         }
         return -1;
     }
@@ -284,13 +293,13 @@ public class Lista<T> {
     }
 
     public int size() {
-        int count = 0 ;
-        for(int i=0; i<tamanho;i++){
-            if(array[i] !=null){
+        int count = 0;
+        for (int i = 0; i < tamanho; i++) {
+            if (array[i] != null) {
                 count++;
             }
         }
-        return count ;
+        return count;
     }
 
     public T get(int i) {
@@ -321,11 +330,11 @@ public class Lista<T> {
     }
 
     public boolean isEmpty() {
-        return tamanho == 0 ? true : false ;
+        return tamanho == 0 ? true : false;
     }
 
-    public void listar(){
-        for(int i =0 ; i<tamanho; i++){
+    public void listar() {
+        for (int i = 0; i < tamanho; i++) {
             System.out.printf(array[i].toString() + ", ");
         }
     }
