@@ -34,8 +34,7 @@ public class Album implements Identificavel{
             example = "CASAMENTO"
     )
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "tema_id", referencedColumnName = "id")
-    private Tema tipo;
+    private Tema tema;
 
     @Schema(
             description = "Descrição do albúm",
@@ -47,10 +46,6 @@ public class Album implements Identificavel{
             description = "Identificador do Fotógrafo",
             example = "1"
     )
-    private Integer idFotografo;
-
-    @Override
-    public Integer getId() {
-        return id;
-    }
+    @ManyToOne
+    private Fotografo fotografo;
 }

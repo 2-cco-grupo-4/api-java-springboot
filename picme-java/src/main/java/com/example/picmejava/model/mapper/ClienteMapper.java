@@ -5,6 +5,8 @@ import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
 import com.example.picmejava.model.dto.CadastroUsuarioDTO;
 import com.example.picmejava.model.dto.PerfilClienteDTO;
 
+import java.time.LocalDate;
+
 public class ClienteMapper {
 
     public PerfilClienteDTO toPerfilClienteDTO(Cliente cliente){
@@ -26,6 +28,7 @@ public class ClienteMapper {
         cliente.setDataNasc(dados.getDataNasc());
         cliente.setEmail(dados.getEmail());
         cliente.setSenha(dados.getSenha());
+        cliente.setDataCadastro(LocalDate.now());
         cliente.setNumCelular(dados.getNumCelular());
         cliente.setAutenticado(false);
 

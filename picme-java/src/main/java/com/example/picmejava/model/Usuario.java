@@ -4,11 +4,12 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "usuario")
+@Table(name = "USUARIO")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo_usuario", discriminatorType = DiscriminatorType.STRING)
 public abstract class Usuario implements Identificavel{
@@ -20,8 +21,10 @@ public abstract class Usuario implements Identificavel{
     private String email;
     private String senha;
     private String cpf;
+    @Column(name = "data_nascimento")
     private LocalDate dataNasc;
     private LocalDate dataCadastro;
+    @Column(name = "celular")
     private String numCelular;
     private Boolean autenticado;
     @Column(name = "tipo_usuario", insertable = false, updatable = false)

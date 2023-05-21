@@ -1,6 +1,7 @@
 package com.example.picmejava.controller;
 
 import com.example.picmejava.model.Album;
+import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.service.AlbumService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -27,10 +28,9 @@ public class AlbumController {
     @Operation(summary = "Cadastrar um novo album", description = "Passando o ID do fotógrafo e o JSON do album, podemos cadastrar um novo album")
     @SecurityRequirement(name = "Bearer")
 
-    @PostMapping("/{id}")
-    public ResponseEntity<Album> cadastrar(@PathVariable Integer id, @RequestBody Album novoAlbum)throws Exception{
-        albumService.cadastrar(id, novoAlbum);
-        return ResponseEntity.status(201).body(novoAlbum);
+    @PostMapping
+    public ResponseEntity<Album> cadastrar(@RequestBody Album novoAlbum)throws Exception{
+        return ResponseEntity.status(201).body(albumService.cadastrar(novoAlbum));
     }
 
     @Operation(summary = "Atualizar um album", description = "Passando o ID do album e o seus novos valores, podemos atualizá-lo")
@@ -50,12 +50,12 @@ public class AlbumController {
         return ResponseEntity.status(204).build();
     }
 
-    @Operation(summary = "Listar albuns fotógrafo", description = "Passando o ID do fotógrafo podemos obter a lista de todos os seus albuns")
-    @SecurityRequirement(name = "Bearer")
-
-    @GetMapping("/{id}")
-    public ResponseEntity<List<Album>> listarAlbumsFotografo(@PathVariable Integer id){
-        return ResponseEntity.status(200).body(albumService.listar(id).toList());
-    }
+//    @Operation(summary = "Listar albuns fotógrafo", description = "Passando o ID do fotógrafo podemos obter a lista de todos os seus albuns")
+//    @SecurityRequirement(name = "Bearer")
+//
+//    @GetMapping("/{id}")
+//    public ResponseEntity<List<Album>> listarAlbumsFotografo(@PathVariable Integer id){
+//        return ResponseEntity.status(200).body(albumService.listar(id).toList());
+//    }
 
 }

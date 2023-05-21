@@ -26,22 +26,7 @@ public class Tema implements Identificavel {
             description = "Nome do tema",
             example = "Casamento"
     )
-    @Enumerated(EnumType.STRING)
-    private TemaEnum tema;
+    private String nome;
 
-    public TemaEnum getTema() {
-        return tema;
-    }
 
-    public Integer getId() {
-        return id;
-    }
-
-    @Override
-    public String toString() {
-        return "Tema{" +
-                "id=" + id +
-                ", tema=" + tema + '\'' +
-                '}';
-    }
 }

@@ -1,8 +1,11 @@
 package com.example.picmejava.service;
 
 import com.example.picmejava.model.Album;
+import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.Tema;
+import com.example.picmejava.model.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.repository.AlbumRepository;
+import com.example.picmejava.repository.FotografoRepository;
 import com.example.picmejava.repository.TemaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,13 +20,18 @@ public class AlbumService {
     private AlbumRepository albumRepository;
 
     @Autowired
+    private FotografoRepository fotografoRepository;
+
+    @Autowired
     private TemaRepository temaRepository;
 
-    public Album cadastrar(Integer idFotografo, Album novoAlbum) throws Exception{
-        Optional<Tema> temaOptional = temaRepository.findById(novoAlbum.getTipo().getId());
-        temaOptional.orElseThrow(() -> new Exception("Tema não encontrado"));
-        novoAlbum.setTipo(temaOptional.get());
-        novoAlbum.setIdFotografo(idFotografo);
+    public Album cadastrar(Album novoAlbum){
+        Optional<Tema> temaOptional = temaRepository.findById(novoAlbum.getTema().getId());
+        temaOptional.orElseThrow(() -> new EntidadeNaoEncontradaException("Tema não existe"));
+
+        Optional<Fotografo> fotografoOptional = fotografoRepository.findById(novoAlbum.getFotografo().getId());
+        fotografoOptional.orElseThrow(() -> new EntidadeNaoEncontradaException("Fotografo não encontrado"));
+
         return albumRepository.save(novoAlbum);
     }
 
@@ -45,12 +53,12 @@ public class AlbumService {
         return album;
     }
 
-    public Lista<Album> listar(Integer idFotografo) {
-        Lista<Album> albumsDoFotografo = new Lista();
-        for(Album i :  albumRepository.findAllByIdFotografo(idFotografo)){
-            albumsDoFotografo.add(i);
-        }
-        return albumsDoFotografo;
-    }
+//    public Lista<Album> listar(Integer idFotografo) {
+//        Lista<Album> albumsDoFotografo = new Lista();
+//        for(Album i :  albumRepository.findAllByIdFotografo(idFotografo)){
+//            albumsDoFotografo.add(i);
+//        }
+//        return albumsDoFotografo;
+//    }
 
 }

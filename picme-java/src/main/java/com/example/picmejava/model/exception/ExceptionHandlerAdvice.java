@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
 @RestControllerAdvice
 public class ExceptionHandlerAdvice extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(UsuarioNaoEncontradoException.class)
-    public ResponseEntity<MensagemExceptionHandler> UsuarioNaoEncontradoException(UsuarioNaoEncontradoException ex){
+    @ExceptionHandler(EntidadeNaoEncontradaException.class)
+    public ResponseEntity<MensagemExceptionHandler> UsuarioNaoEncontradoException(EntidadeNaoEncontradaException ex){
         MensagemExceptionHandler error = new MensagemExceptionHandler(
                 LocalDateTime.now(), HttpStatus.NOT_FOUND.value(), ex.getMessage()
         );

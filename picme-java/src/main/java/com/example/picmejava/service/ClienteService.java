@@ -5,7 +5,7 @@ import com.example.picmejava.model.Cliente;
 import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
 import com.example.picmejava.model.dto.CadastroUsuarioDTO;
 import com.example.picmejava.model.dto.LoginUsuarioDTO;
-import com.example.picmejava.model.exception.UsuarioNaoEncontradoException;
+import com.example.picmejava.model.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.model.mapper.ClienteMapper;
 import com.example.picmejava.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ public class ClienteService {
 
     public Cliente atualizar(Integer idCliente, AtualizarUsuarioDTO dadosAtualizados){
         Optional<Cliente> clienteOptional = clienteRepository.findById(idCliente);
-        Cliente cliente = clienteOptional.orElseThrow(() -> new UsuarioNaoEncontradoException("Cliente não encontrado"));
+        Cliente cliente = clienteOptional.orElseThrow(() -> new EntidadeNaoEncontradaException("Cliente não encontrado"));
         return clienteRepository.save(clienteMapper.toClienteAtualizado(cliente, dadosAtualizados));
     }
 
@@ -54,7 +54,7 @@ public class ClienteService {
 
     public Cliente validarCliente(String email, String senha){
         Optional<Cliente> clienteOptional = clienteRepository.findByEmailAndSenha(email, senha);
-        clienteOptional.orElseThrow(() -> new UsuarioNaoEncontradoException("Cliente não encontrado"));
+        clienteOptional.orElseThrow(() -> new EntidadeNaoEncontradaException("Cliente não encontrado"));
         return clienteOptional.get();
     }
 

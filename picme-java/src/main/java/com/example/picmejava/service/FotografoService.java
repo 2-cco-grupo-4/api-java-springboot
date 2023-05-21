@@ -5,7 +5,7 @@ import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
 import com.example.picmejava.model.dto.CadastroUsuarioDTO;
 import com.example.picmejava.model.dto.LoginUsuarioDTO;
-import com.example.picmejava.model.exception.UsuarioNaoEncontradoException;
+import com.example.picmejava.model.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.model.mapper.FotografoMapper;
 import com.example.picmejava.repository.FotografoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class FotografoService {
 
     public Fotografo atualizar(Integer idFotografo, AtualizarUsuarioDTO fotografoAtualizado){
         Optional<Fotografo> fotografoOptional = fotografoRepository.findById(idFotografo);
-        Fotografo fotografo = fotografoOptional.orElseThrow(() -> new UsuarioNaoEncontradoException(
+        Fotografo fotografo = fotografoOptional.orElseThrow(() -> new EntidadeNaoEncontradaException(
                 "Fotografo não existe")
         );
         return fotografoRepository.save(fotografoMapper.toFotografoAtualizado(fotografo, fotografoAtualizado));
@@ -55,7 +55,7 @@ public class FotografoService {
 
     public Fotografo validarFotografo(String email, String senha){
         Optional<Fotografo> fotografoOptional = fotografoRepository.findByEmailAndSenha(email, senha);
-        fotografoOptional.orElseThrow(() -> new UsuarioNaoEncontradoException("Fotografo não existe"));
+        fotografoOptional.orElseThrow(() -> new EntidadeNaoEncontradaException("Fotografo não existe"));
         return fotografoRepository.findByEmail(email).get();
 
     }
