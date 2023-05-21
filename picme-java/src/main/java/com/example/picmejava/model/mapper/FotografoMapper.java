@@ -1,24 +1,11 @@
 package com.example.picmejava.model.mapper;
 
 import com.example.picmejava.model.Fotografo;
-import com.example.picmejava.model.Usuario;
 import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
 import com.example.picmejava.model.dto.CadastroUsuarioDTO;
 import com.example.picmejava.model.dto.PerfilFotografoDTO;
-import com.example.picmejava.service.autenticacao.dto.UsuarioTokenDTO;
 
 public class FotografoMapper {
-
-    public static UsuarioTokenDTO of(Usuario usuario, String token) {
-        UsuarioTokenDTO usuarioTokenDto = new UsuarioTokenDTO();
-
-        usuarioTokenDto.setId(usuario.getId());
-        usuarioTokenDto.setEmail(usuario.getEmail());
-        usuarioTokenDto.setNome(usuario.getNome());
-        usuarioTokenDto.setToken(token);
-
-        return usuarioTokenDto;
-    }
 
     public PerfilFotografoDTO toPerfilFotogradoDTO(Fotografo fotografo){
         PerfilFotografoDTO dto = new PerfilFotografoDTO();

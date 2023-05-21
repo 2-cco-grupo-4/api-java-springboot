@@ -21,6 +21,7 @@ public abstract class Usuario implements Identificavel{
     private String senha;
     private String cpf;
     private LocalDate dataNasc;
+    private LocalDate dataCadastro;
     private String numCelular;
     private Boolean autenticado;
     @Column(name = "tipo_usuario", insertable = false, updatable = false)

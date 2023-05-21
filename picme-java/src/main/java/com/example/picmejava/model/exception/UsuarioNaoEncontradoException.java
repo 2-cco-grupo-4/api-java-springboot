@@ -1,4 +1,4 @@
-package com.example.picmejava.exceptionhandler;
+package com.example.picmejava.model.exception;
 
 public class UsuarioNaoEncontradoException extends RuntimeException{
 

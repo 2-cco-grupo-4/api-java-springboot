@@ -32,18 +32,19 @@ public class ImagemController {
         return ResponseEntity.status(201).body(novaImagem);
     }
 
-    @Operation(summary = "Remover uma imagem", description = "Passando o ID da imagem, podemos excluir determinada imagem")
-    @SecurityRequirement(name = "Bearer")
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Imagem> remover(@PathVariable int idImagem) throws Exception {
-        imagemService.deletar(idImagem);
-        return ResponseEntity.status(204).build();
-    }
-
     @Operation(summary = "Listar imagens", description = "Passando o ID do album, podemos listar todas as imagens de determinado album")
     @SecurityRequirement(name = "Bearer")
     @GetMapping("/{id}")
     public ResponseEntity<Lista<Imagem>> listar(@PathVariable Integer id){
         return ResponseEntity.status(200).body(imagemService.listar(id));
     }
+
+    @Operation(summary = "Remover uma imagem", description = "Passando o ID da imagem, podemos excluir determinada imagem")
+    @SecurityRequirement(name = "Bearer")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Imagem> deletar(@PathVariable int idImagem) throws Exception {
+        imagemService.deletar(idImagem);
+        return ResponseEntity.status(204).build();
+    }
+
 }
