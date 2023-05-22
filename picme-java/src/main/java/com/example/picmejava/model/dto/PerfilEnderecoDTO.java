@@ -1,18 +1,17 @@
-package com.example.picmejava.model;
+package com.example.picmejava.model.dto;
 
-import jakarta.persistence.*;
+import com.example.picmejava.model.*;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
+import java.time.LocalDate;
 @Getter
 @Setter
-@Entity
-public class Endereco {
+public class PerfilEnderecoDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String estado;
     private String cidade;
@@ -21,9 +20,4 @@ public class Endereco {
     private String rua;
     private Integer numero;
     private String complemento;
-    @OneToOne
-    @JoinColumn(name = "evento_id")
-    private Evento evento;
-
-
 }

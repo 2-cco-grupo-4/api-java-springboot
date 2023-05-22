@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Getter
 @Setter
@@ -19,13 +18,12 @@ public class Evento {
     private String status;
     private Double valor;
     private Integer avaliacao;
-    @OneToMany
-    @JoinColumn(name = "id")
-    private List<Fotografo> fotografos;
+    @ManyToOne
+    private Fotografo fotografo;
     @ManyToOne
     private Tema tema;
     @ManyToOne
     private Cliente cliente;
-    @OneToOne
+    @OneToOne(mappedBy = "evento")
     private Endereco endereco;
 }
