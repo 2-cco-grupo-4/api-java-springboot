@@ -16,7 +16,7 @@ public class EnderecoMapper {
         dto.setCidade(endereco.getCidade());
         dto.setEstado(endereco.getEstado());
         dto.setBairro(endereco.getBairro());
-        dto.setRua(endereco.getRua());
+        dto.setRua(endereco.getLogradouro());
         dto.setNumero(endereco.getNumero());
         dto.setComplemento(endereco.getComplemento());
 
@@ -33,7 +33,7 @@ public class EnderecoMapper {
         dto.setComplemento(endereco.getComplemento());
         dto.setEstado(endereco.getEstado());
         dto.setNumero(endereco.getNumero());
-        dto.setRua(endereco.getRua());
+        dto.setRua(endereco.getLogradouro());
         dto.setEvento(eventoMapper.toRetornoEventoDTO(endereco.getEvento()));
 
         return dto;

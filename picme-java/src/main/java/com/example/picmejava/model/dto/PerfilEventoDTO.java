@@ -12,7 +12,7 @@ public class PerfilEventoDTO {
 
     private Integer id;
     private LocalDate dataRealizacao;
-    private String status;
+    private String statusEvento;
     private Double valor;
     private Integer avaliacao;
     private PerfilFotografoDTO fotografo;

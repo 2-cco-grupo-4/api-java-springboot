@@ -18,7 +18,7 @@ public class EventoMapper {
 
         dto.setId(novoEvento.getId());
         dto.setAvaliacao(novoEvento.getAvaliacao());
-        dto.setStatus(novoEvento.getStatus());
+        dto.setStatusEvento(novoEvento.getStatusEvento());
         dto.setDataRealizacao(novoEvento.getDataRealizacao());
         dto.setValor(novoEvento.getValor());
         dto.setCliente(clienteMapper.toPerfilClienteDTO(novoEvento.getCliente()));
@@ -45,7 +45,7 @@ public class EventoMapper {
 
         dto.setId(evento.getId());
         dto.setAvaliacao(evento.getAvaliacao());
-        dto.setStatus(evento.getStatus());
+        dto.setStatusEvento(evento.getStatusEvento());
         dto.setDataRealizacao(evento.getDataRealizacao());
         dto.setValor(evento.getValor());
         dto.setCliente(clienteMapper.toPerfilClienteDTO(evento.getCliente()));

@@ -18,11 +18,11 @@ public class Endereco {
     private String cidade;
     private String cep;
     private String bairro;
-    private String rua;
+    private String logradouro;
     private Integer numero;
     private String complemento;
     @OneToOne
-    @JoinColumn(name = "evento_id")
+    @JoinColumn(name = "FK_EVENTO")
     private Evento evento;
 
 

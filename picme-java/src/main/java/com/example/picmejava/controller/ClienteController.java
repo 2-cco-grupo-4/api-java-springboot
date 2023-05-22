@@ -1,5 +1,6 @@
 package com.example.picmejava.controller;
 
+import com.example.picmejava.model.Tema;
 import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
 import com.example.picmejava.model.dto.CadastroUsuarioDTO;
 import com.example.picmejava.model.dto.LoginUsuarioDTO;

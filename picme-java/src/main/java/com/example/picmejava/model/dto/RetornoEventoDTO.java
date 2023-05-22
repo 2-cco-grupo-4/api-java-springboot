@@ -15,7 +15,7 @@ import java.time.LocalDate;
 public class RetornoEventoDTO {
     private Integer id;
     private LocalDate dataRealizacao;
-    private String status;
+    private String statusEvento;
     private Double valor;
     private Integer avaliacao;
     private PerfilFotografoDTO fotografo;
