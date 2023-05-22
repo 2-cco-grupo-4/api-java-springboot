@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 
 @Entity
 @Getter
@@ -48,4 +50,8 @@ public class Album implements Identificavel{
     )
     @ManyToOne
     private Fotografo fotografo;
+
+    @OneToMany
+    @JoinColumn(name = "id")
+    private List<Imagem> imagems;
 }

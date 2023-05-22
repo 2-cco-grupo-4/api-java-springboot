@@ -1,9 +1,6 @@
 package com.example.picmejava.controller;
 
-import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
-import com.example.picmejava.model.dto.CadastroUsuarioDTO;
-import com.example.picmejava.model.dto.LoginUsuarioDTO;
-import com.example.picmejava.model.dto.PerfilFotografoDTO;
+import com.example.picmejava.model.dto.*;
 import com.example.picmejava.model.mapper.FotografoMapper;
 import com.example.picmejava.service.FotografoService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -41,11 +38,11 @@ public class FotografoController {
 
     @Operation(summary = "Listar fotógrafos", description = "Lista todos os fotógrafos cadastrados")
     @SecurityRequirement(name = "Bearer")
-    @GetMapping ResponseEntity<List<PerfilFotografoDTO>> listar(){
+    @GetMapping ResponseEntity<List<RetornoFotografoDTO>> listar(){
         return ResponseEntity.status(200).body(serviceFotografo.listar()
                 .stream()
                 .filter(Objects::nonNull)
-                .map(cliente -> fotografoMapper.toPerfilFotogradoDTO(cliente))
+                .map(cliente -> fotografoMapper.toRetornoFotografoDTO(cliente))
                 .toList()
         );
     }
@@ -63,9 +60,9 @@ public class FotografoController {
 
     @Operation(summary = "Login fotógrafo", description = "Passando as credenciais válidas de um fotógrafo, é realizado o login na API")
     @PatchMapping("/entrar")
-    public ResponseEntity<PerfilFotografoDTO> login(@RequestBody LoginUsuarioDTO usuarioLoginDTO){
+    public ResponseEntity<RetornoFotografoDTO> login(@RequestBody LoginUsuarioDTO usuarioLoginDTO){
         return ResponseEntity.status(200).body(
-                fotografoMapper.toPerfilFotogradoDTO(serviceFotografo.login(usuarioLoginDTO))
+                fotografoMapper.toRetornoFotografoDTO(serviceFotografo.login(usuarioLoginDTO))
         );
     }
 

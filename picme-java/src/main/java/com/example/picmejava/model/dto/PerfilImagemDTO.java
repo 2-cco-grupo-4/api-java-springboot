@@ -5,9 +5,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PerfilFotografoDTO {
+public class PerfilImagemDTO {
     private Integer id;
-    private String nome;
-    private Boolean autenticado;
-    private String tipoUsuario;
+    private String path;
+    private String tipo;
+    private String descricao;
+
 }

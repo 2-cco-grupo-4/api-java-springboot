@@ -1,10 +1,7 @@
 package com.example.picmejava.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -43,9 +40,7 @@ public class Imagem implements Identificavel {
             description = "ID do albúm que a imagem pertence",
             example = "1"
     )
-    private Integer idAlbum;
+    @ManyToOne
+    private Album idAlbum;
 
-    public Integer getId() {
-        return id;
-    }
 }
