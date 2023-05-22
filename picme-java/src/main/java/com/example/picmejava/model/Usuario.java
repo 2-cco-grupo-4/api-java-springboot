@@ -29,9 +29,9 @@ public abstract class Usuario implements Identificavel{
     private Boolean autenticado;
     @Column(name = "tipo_usuario", insertable = false, updatable = false)
     private String tipoUsuario;
-    @OneToMany
-    private List<Tema> temas;
     private String tokenSolicitacao;
-
+    @OneToMany
+    @JoinColumn(name = "id")
+    private List<Tema> tema;
     public abstract String getTipoUsuario();
 }
