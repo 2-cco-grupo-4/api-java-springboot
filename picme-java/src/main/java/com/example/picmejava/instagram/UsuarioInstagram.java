@@ -1,4 +1,4 @@
-package com.example.picmejava.model;
+package com.example.picmejava.instagram;
 
 import jakarta.persistence.Entity;
 import lombok.Getter;

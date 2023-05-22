@@ -1,10 +1,9 @@
 package com.example.picmejava.controller;
 
 
-import com.example.picmejava.model.UsuarioInstagram;
-import com.example.picmejava.service.InstagramService;
+import com.example.picmejava.instagram.UsuarioInstagram;
+import com.example.picmejava.instagram.InstagramService;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +22,7 @@ public class InstagramController {
 
     @PostMapping
     public ResponseEntity<UsuarioInstagram> acessTokenUsuario(@RequestParam String codigo){
-        UsuarioInstagram usuarioInstagram = instagramService.postUsuarioInsta(codigo).block();
+        UsuarioInstagram usuarioInstagram = instagramService.postUsuarioInsta(codigo);
         return ResponseEntity.status(200).body(usuarioInstagram);
     }
 
