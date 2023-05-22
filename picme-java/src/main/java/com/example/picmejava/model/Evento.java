@@ -17,12 +17,15 @@ public class Evento {
     private Integer id;
     private LocalDate dataRealizacao;
     private String status;
+    private Double valor;
+    private Integer avaliacao;
     @OneToMany
-    private List<Fotografo> fotografo;
+    @JoinColumn(name = "id")
+    private List<Fotografo> fotografos;
     @ManyToOne
     private Tema tema;
     @ManyToOne
     private Cliente cliente;
-    private Double valor;
-    private Integer avaliacao;
+    @OneToOne
+    private Endereco endereco;
 }
