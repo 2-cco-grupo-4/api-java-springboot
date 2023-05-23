@@ -7,8 +7,8 @@ import java.util.List;
 
 @Getter
 @Setter
-public class RetornoTemaUsuarioDTO {
+public class RetornoTemaFotografoDTO {
 
     private List<PerfilTemaDTO> temas;
-    private PerfilUsuarioDTO usuario;
+    private PerfilFotografoDTO fotografo;
 }

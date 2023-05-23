@@ -22,4 +22,9 @@ public class Fotografo extends Usuario implements Identificavel{
     public String getTipoUsuario() {
         return String.format("Fotografo");
     }
+
+    @Override
+    public void adicionar(Tema tema) {
+        getTemas().add(tema);
+    }
 }

@@ -11,5 +11,4 @@ public class PerfilTemaDTO {
 
     private Integer id;
     private String nome;
-    private List<PerfilUsuarioDTO> usuarios;
 }

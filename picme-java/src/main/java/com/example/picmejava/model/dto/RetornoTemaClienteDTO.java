@@ -7,10 +7,8 @@ import java.util.List;
 
 @Getter
 @Setter
-public class PerfilFotografoDTO {
-    private Integer id;
-    private String nome;
-    private Boolean autenticado;
-    private String tipoUsuario;
+public class RetornoTemaClienteDTO {
+
     private List<PerfilTemaDTO> temas;
+    private PerfilClienteDTO cliente;
 }

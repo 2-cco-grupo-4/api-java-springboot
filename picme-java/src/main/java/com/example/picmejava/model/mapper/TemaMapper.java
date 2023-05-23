@@ -10,7 +10,6 @@ public class TemaMapper {
 
         dto.setId(tema.getId());
         dto.setNome(tema.getNome());
-        dto.setUsuarios(tema.getUsuarios().stream().map(usuario -> UsuarioMapper.toPerfilUsuarioDTO(usuario)).toList());
 
         return dto;
     }

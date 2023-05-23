@@ -30,8 +30,12 @@ public class Tema implements Identificavel {
     )
     private String nome;
 
-    @OneToMany
+    @ManyToMany(mappedBy = "temas")
     private List<Usuario> usuarios;
+
+    public void adicionar(Usuario usuario) {
+        usuarios.add(usuario);
+    }
 
 
 }

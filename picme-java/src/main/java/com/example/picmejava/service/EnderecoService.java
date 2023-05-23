@@ -7,6 +7,8 @@ import com.example.picmejava.repository.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EnderecoService {
 
@@ -17,5 +19,11 @@ public class EnderecoService {
 
     public RetornoEnderecoDTO cadastrar(Endereco novoEndereco){
         return enderecoMapper.toRetornoEnderecoDTO(enderecoRepository.save(novoEndereco));
+    }
+
+    public List<RetornoEnderecoDTO> listar() {
+        List<Endereco> enderecos = enderecoRepository.findAll();
+
+        return enderecos.stream().map(endereco -> enderecoMapper.toRetornoEnderecoDTO(endereco)).toList();
     }
 }

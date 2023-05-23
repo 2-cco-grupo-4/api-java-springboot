@@ -14,4 +14,9 @@ public class Cliente extends Usuario{
     public String getTipoUsuario() {
         return "Cliente";
     }
+
+    @Override
+    public void adicionar(Tema tema) {
+        getTemas().add(tema);
+    }
 }

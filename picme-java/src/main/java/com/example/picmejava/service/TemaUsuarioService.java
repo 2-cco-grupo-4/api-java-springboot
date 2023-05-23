@@ -4,8 +4,10 @@ import com.example.picmejava.model.Cliente;
 import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.Tema;
 import com.example.picmejava.model.Usuario;
-import com.example.picmejava.model.dto.CadastroTemaUsuarioDTO;
-import com.example.picmejava.model.dto.RetornoTemaUsuarioDTO;
+import com.example.picmejava.model.dto.CadastroTemaClienteDTO;
+import com.example.picmejava.model.dto.CadastroTemaFotografoDTO;
+import com.example.picmejava.model.dto.RetornoTemaClienteDTO;
+import com.example.picmejava.model.dto.RetornoTemaFotografoDTO;
 import com.example.picmejava.model.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.model.mapper.TemaUsuarioMapper;
 import com.example.picmejava.repository.ClienteRepository;
@@ -21,15 +23,6 @@ import java.util.Optional;
 public class TemaUsuarioService {
     
     @Autowired
-    private TemaService temaService;
-    
-    @Autowired
-    private FotografoService fotografoService;
-    
-    @Autowired
-    private ClienteService clienteService;
-    
-    @Autowired
     private TemaRepository temaRepository;
     
     @Autowired
@@ -40,49 +33,53 @@ public class TemaUsuarioService {
 
     private TemaUsuarioMapper temaUsuarioMapper = new TemaUsuarioMapper();
     
-    public RetornoTemaUsuarioDTO cadastrar(CadastroTemaUsuarioDTO novoTemaUsuario){
+    public RetornoTemaFotografoDTO cadastrarTemaFotografo(CadastroTemaFotografoDTO novoTemaFotografo) {
 
-        List<Tema> temas = novoTemaUsuario.getTemas().stream()
+        List<Tema> temas = novoTemaFotografo.getTemas().stream()
                 .map(tema -> validarTema(tema))
                 .toList();
 
-        if (novoTemaUsuario.getUsuario().getTipoUsuario().equals("fotografo")){
-            Fotografo fotografo = validarFotografo(novoTemaUsuario.getUsuario());
-            fotografo.setTema(temas);
-            temas.stream().map(tema -> tema.getUsuarios().add(fotografo));
-
-            fotografoRepository.save(fotografo);
-            temas.stream().map(tema -> temaRepository.save(tema));
-
-            return temaUsuarioMapper.toTemaUsuarioDTO(temas, fotografo);
-
+        Fotografo fotografo = validarFotografo(novoTemaFotografo.getFotografo());
+        for (Tema tema : temas) {
+            tema.adicionar(fotografo);
+            fotografo.adicionar(tema);
         }
 
-        if (novoTemaUsuario.getUsuario().getTipoUsuario().equals("cliente")){
-            Cliente cliente = validarCliente(novoTemaUsuario.getUsuario());
-            cliente.setTema(temas);
+        fotografoRepository.save(fotografo);
+        temas.stream().map(tema -> temaRepository.save(tema));
 
-            temas.stream().map(tema -> tema.getUsuarios().add(cliente));
-
-            clienteRepository.save(cliente);
-            temas.stream().map(tema -> temaRepository.save(tema));
-
-            return temaUsuarioMapper.toTemaUsuarioDTO(temas, cliente);
-        }
-
-        throw new EntidadeNaoEncontradaException("Nenhum tipo de usuário encontrado");
+        return temaUsuarioMapper.toRetornoTemaUsuarioDTO(temas, fotografo);
 
     }
 
-    public Fotografo validarFotografo(Usuario usuario){
-        Optional<Fotografo> optionalFotografo = fotografoRepository.findById(usuario.getId());
+    public RetornoTemaClienteDTO cadastrarTemaCliente(CadastroTemaClienteDTO novoTemaCliente) {
+
+        List<Tema> temas = novoTemaCliente.getTemas().stream()
+                .map(tema -> validarTema(tema))
+                .toList();
+
+        Cliente cliente = validarCliente(novoTemaCliente.getCliente());
+        for (Tema tema : temas) {
+            tema.adicionar(cliente);
+            cliente.adicionar(tema);
+        }
+
+        clienteRepository.save(cliente);
+        temas.stream().map(tema -> temaRepository.save(tema));
+
+        return temaUsuarioMapper.toRetornoTemaUsuarioDTO(temas, cliente);
+
+    }
+
+    public Fotografo validarFotografo(Fotografo fotografo){
+        Optional<Fotografo> optionalFotografo = fotografoRepository.findById(fotografo.getId());
         optionalFotografo.orElseThrow(() -> new EntidadeNaoEncontradaException("Fotografo não existe"));
 
         return optionalFotografo.get();
     }
 
-    public Cliente validarCliente(Usuario usuario){
-        Optional<Cliente> optionalCliente = clienteRepository.findById(usuario.getId());
+    public Cliente validarCliente(Cliente cliente){
+        Optional<Cliente> optionalCliente = clienteRepository.findById(cliente.getId());
         optionalCliente.orElseThrow(() -> new EntidadeNaoEncontradaException("Cliente não existe"));
 
         return optionalCliente.get();

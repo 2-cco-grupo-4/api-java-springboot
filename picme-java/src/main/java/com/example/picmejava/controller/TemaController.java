@@ -2,6 +2,7 @@ package com.example.picmejava.controller;
 
 import com.example.picmejava.lista.Lista;
 import com.example.picmejava.model.Tema;
+import com.example.picmejava.model.dto.PerfilTemaDTO;
 import com.example.picmejava.service.TemaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -34,7 +35,7 @@ public class TemaController {
     @Operation(summary = "Listar temas", description = "Lista todos os temas cadastrados")
     @SecurityRequirement(name = "Bearer")
     @GetMapping
-    public ResponseEntity<List<Tema>> listar() throws Exception{
+    public ResponseEntity<List<PerfilTemaDTO>> listar() throws Exception{
         return ResponseEntity.status(200).body(temaService.listar());
     }
 }
