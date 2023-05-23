@@ -9,8 +9,10 @@ import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.info.License;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.cloud.openfeign.FeignAutoConfiguration;
 
 import java.util.Scanner;
 
@@ -32,7 +34,8 @@ import java.util.Scanner;
 )
 
 @SpringBootApplication
-@EnableFeignClients(clients = {InstagramClient.class})
+@EnableFeignClients
+@ImportAutoConfiguration({FeignAutoConfiguration.class})
 public class PicmeJavaApplication {
 
     public static void main(String[] args) {

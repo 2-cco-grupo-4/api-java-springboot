@@ -1,17 +1,18 @@
 package com.example.picmejava.instagram;
 
+import feign.Headers;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Map;
 
 @FeignClient(name = "instagram-api", url = "https://api.instagram.com")
 public interface InstagramClient {
 
     @PostMapping("/oauth/access_token")
-    UsuarioInstagram getAcessToken(@RequestParam("client_id") String clientId,
-                                        @RequestParam("client_secret") String clientSecret,
-                                        @RequestParam("grant_type") String grantType,
-                                        @RequestParam("redirect_uri") String redirectUri,
-                                        @RequestParam("code") String code);
+    UsuarioInstagram getAcessToken(@RequestBody MultiValueMap<String, String> params);
 
 }

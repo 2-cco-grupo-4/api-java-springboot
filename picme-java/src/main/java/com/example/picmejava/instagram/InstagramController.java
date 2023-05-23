@@ -1,4 +1,4 @@
-package com.example.picmejava.controller;
+package com.example.picmejava.instagram;
 
 
 import com.example.picmejava.instagram.UsuarioInstagram;
@@ -22,8 +22,20 @@ public class InstagramController {
 
     @PostMapping
     public ResponseEntity<UsuarioInstagram> acessTokenUsuario(@RequestParam String codigo){
-        UsuarioInstagram usuarioInstagram = instagramService.postUsuarioInsta(codigo);
+        UsuarioInstagram usuarioInstagram = instagramService.postUsuarioInsta(codigo).block();
         return ResponseEntity.status(200).body(usuarioInstagram);
+    }
+
+    @GetMapping("/listaImagens")
+    public ResponseEntity<ListaImagensInstagram> getImagensUsuario(@RequestParam String accessToken) {
+        ListaImagensInstagram listaImagensInstagram = instagramService.getImagensInsta(accessToken).block();
+        return ResponseEntity.status(200).body(listaImagensInstagram);
+    }
+
+    @GetMapping("/imagem")
+    public ResponseEntity<MediaInstagram> getImagem(@RequestParam String idImagem, @RequestParam String accessToken) {
+        MediaInstagram mediaInstagram = instagramService.getImagem(idImagem, accessToken).block();
+        return ResponseEntity.status(200).body(mediaInstagram);
     }
 
 }
