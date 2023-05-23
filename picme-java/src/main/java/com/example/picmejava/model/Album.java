@@ -53,7 +53,6 @@ public class Album implements Identificavel{
     @JoinColumn(name = "FK_FOTOGRAFO")
     private Fotografo fotografo;
 
-    @OneToMany
-    @JoinColumn(name = "id")
+    @OneToMany(mappedBy = "idAlbum", cascade = CascadeType.ALL)
     private List<Imagem> imagems;
 }
