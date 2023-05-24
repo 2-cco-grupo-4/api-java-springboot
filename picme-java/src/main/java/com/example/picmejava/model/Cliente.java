@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 
 @Entity
-@NoArgsConstructor
+
 @DiscriminatorValue("cliente")
 public class Cliente extends Usuario{
 
