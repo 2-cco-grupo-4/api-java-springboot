@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ef51b8aa-1eef-41ff-92a2-fe581372663f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/celia/Fila.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/celia/Pilha.java" afterDir="false" />
+    <list default="true" id="ef51b8aa-1eef-41ff-92a2-fe581372663f" name="Changes" comment="feat() : pilha e fila">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/PicmeJavaApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/PicmeJavaApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/lista/Lista.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/celia/Lista.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/model/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/model/Usuario.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,10 +15,22 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="pilhaFila/feature" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
   </component>
   <component name="ProjectId" id="2N1g8cThLVdZgxz63cZSb4EjRHB" />
   <component name="ProjectViewState">
@@ -32,7 +42,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/pilha&quot;,
     &quot;ignore.preview.features.used&quot;: &quot;true&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/rafael/Documents/api-java-springboot&quot;,
@@ -44,10 +54,19 @@
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.uml&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.appearance&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RunManager">
+    <configuration name="PicmeJavaApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="picme-java" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.picmejava.PicmeJavaApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -67,6 +86,8 @@
       <workItem from="1684712508028" duration="290000" />
       <workItem from="1684713062287" duration="641000" />
       <workItem from="1684763288361" duration="287000" />
+      <workItem from="1684961269061" duration="921000" />
+      <workItem from="1684962262066" duration="1874000" />
     </task>
     <task id="LOCAL-00001" summary="adicionando a lista">
       <created>1682000005991</created>
@@ -82,7 +103,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682009555393</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="feat() : pilha e fila">
+      <created>1684961454322</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1684961454322</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -102,7 +130,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="adicionando a lista" />
     <MESSAGE value="trocando list por lista, adicionando método novo de toList" />
-    <option name="LAST_COMMIT_MESSAGE" value="trocando list por lista, adicionando método novo de toList" />
+    <MESSAGE value="feat() : pilha e fila" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat() : pilha e fila" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

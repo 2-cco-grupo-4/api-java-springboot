@@ -17,15 +17,5 @@ public abstract class Usuario implements Identificavel{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
-    private String email;
-    private String senha;
-    private String cpf;
-    private LocalDate dataNasc;
-    private String numCelular;
-    private Boolean autenticado;
-    @Column(name = "tipo_usuario", insertable = false, updatable = false)
-    private String tipoUsuario;
-    private String tokenSolicitacao;
-
     public abstract String getTipoUsuario();
 }
