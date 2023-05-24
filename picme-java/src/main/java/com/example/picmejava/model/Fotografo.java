@@ -27,4 +27,8 @@ public class Fotografo extends Usuario implements Identificavel{
     public void adicionar(Tema tema) {
         getTemas().add(tema);
     }
+
+    public void adicionarAlbum(Album album){
+        getAlbums().add(album);
+    }
 }

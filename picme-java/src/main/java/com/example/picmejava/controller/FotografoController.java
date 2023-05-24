@@ -39,12 +39,7 @@ public class FotografoController {
     @Operation(summary = "Listar fotógrafos", description = "Lista todos os fotógrafos cadastrados")
     @SecurityRequirement(name = "Bearer")
     @GetMapping ResponseEntity<List<RetornoFotografoDTO>> listar(){
-        return ResponseEntity.status(200).body(serviceFotografo.listar()
-                .stream()
-                .filter(Objects::nonNull)
-                .map(cliente -> fotografoMapper.toRetornoFotografoDTO(cliente))
-                .toList()
-        );
+        return ResponseEntity.status(200).body(serviceFotografo.listar());
     }
 
     @Operation(summary = "Atualizar dados fotógrafo", description = "Passando o ID do fotógrafo e seus novos dados, podemos atualizar suas informações")

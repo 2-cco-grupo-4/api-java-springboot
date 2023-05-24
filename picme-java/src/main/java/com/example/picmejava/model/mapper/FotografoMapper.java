@@ -11,7 +11,9 @@ public class FotografoMapper {
         RetornoFotografoDTO dto = new RetornoFotografoDTO();
 
         dto.setId(dados.getId());
-        dto.setAlbums(dados.getAlbums().stream().map((album) -> AlbumMapper.toAlbumDTO(album)).toList());
+        if (dados.getAlbums() != null){
+            dto.setAlbums(dados.getAlbums().stream().map((album) -> AlbumMapper.toAlbumDTO(album)).toList());
+        }
         dto.setAutenticado(dados.getAutenticado());
         dto.setNome(dados.getNome());
         dto.setTipoUsuario(dados.getTipoUsuario());

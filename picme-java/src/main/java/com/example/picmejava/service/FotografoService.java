@@ -5,12 +5,14 @@ import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
 import com.example.picmejava.model.dto.CadastroUsuarioDTO;
 import com.example.picmejava.model.dto.LoginUsuarioDTO;
+import com.example.picmejava.model.dto.RetornoFotografoDTO;
 import com.example.picmejava.model.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.model.mapper.FotografoMapper;
 import com.example.picmejava.repository.FotografoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,12 +26,11 @@ public class FotografoService {
         return fotografoRepository.save(fotografoMapper.toFotografo(novoFotografo));
     }
 
-    public Lista<Fotografo> listar() {
-        Lista<Fotografo> fotografos = new Lista();
-        for(Fotografo i :  fotografoRepository.findAll()){
-            fotografos.add(i);
-        }
-        return fotografos;
+    public List<RetornoFotografoDTO> listar() {
+        List<Fotografo> fotografos = fotografoRepository.findAll();
+        return fotografos.stream()
+                .map(fotografo -> fotografoMapper.toRetornoFotografoDTO(fotografo))
+                .toList();
     }
 
     public Fotografo atualizar(Integer idFotografo, AtualizarUsuarioDTO fotografoAtualizado){

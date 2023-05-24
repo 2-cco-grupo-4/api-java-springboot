@@ -39,6 +39,8 @@ public class AlbumService {
         Optional<Fotografo> fotografoOptional = fotografoRepository.findById(novoAlbum.getFotografo().getId());
         fotografoOptional.orElseThrow(() -> new EntidadeNaoEncontradaException("Fotografo não encontrado"));
 
+        fotografoOptional.get().adicionarAlbum(novoAlbum);
+
         return albumMapper.toRetornoAlbumDTO(albumRepository.save(novoAlbum));
     }
 
