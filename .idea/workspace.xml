@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ef51b8aa-1eef-41ff-92a2-fe581372663f" name="Changes" comment="" />
+    <list default="true" id="ef51b8aa-1eef-41ff-92a2-fe581372663f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/celia/Fila.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/celia/Pilha.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/PicmeJavaApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/PicmeJavaApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/lista/Lista.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/celia/Lista.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -29,11 +35,12 @@
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.preview.features.used&quot;: &quot;true&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/rafael/Documents/api-java-springboot/picme-java&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/rafael/Documents/api-java-springboot&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
@@ -57,6 +64,9 @@
       <workItem from="1681428164071" duration="28000" />
       <workItem from="1682298186924" duration="18000" />
       <workItem from="1682445326371" duration="50000" />
+      <workItem from="1684712508028" duration="290000" />
+      <workItem from="1684713062287" duration="641000" />
+      <workItem from="1684763288361" duration="287000" />
     </task>
     <task id="LOCAL-00001" summary="adicionando a lista">
       <created>1682000005991</created>
