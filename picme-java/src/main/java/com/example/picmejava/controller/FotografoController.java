@@ -39,6 +39,9 @@ public class FotografoController {
     @Operation(summary = "Listar fotógrafos", description = "Lista todos os fotógrafos cadastrados")
     @SecurityRequirement(name = "Bearer")
     @GetMapping ResponseEntity<List<RetornoFotografoDTO>> listar(){
+        if (serviceFotografo.listar().isEmpty()){
+            return ResponseEntity.status(200).build();
+        }
         return ResponseEntity.status(200).body(serviceFotografo.listar());
     }
 
