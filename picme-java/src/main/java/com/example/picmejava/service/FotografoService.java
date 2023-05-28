@@ -2,10 +2,7 @@ package com.example.picmejava.service;
 
 import com.example.picmejava.lista.Lista;
 import com.example.picmejava.model.Fotografo;
-import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
-import com.example.picmejava.model.dto.CadastroUsuarioDTO;
-import com.example.picmejava.model.dto.LoginUsuarioDTO;
-import com.example.picmejava.model.dto.RetornoFotografoDTO;
+import com.example.picmejava.model.dto.*;
 import com.example.picmejava.model.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.model.mapper.FotografoMapper;
 import com.example.picmejava.repository.FotografoRepository;
@@ -22,8 +19,9 @@ public class FotografoService {
     private FotografoRepository fotografoRepository;
     private FotografoMapper fotografoMapper = new FotografoMapper();
 
-    public Fotografo cadastrar(CadastroUsuarioDTO novoFotografo){
-        return fotografoRepository.save(fotografoMapper.toFotografo(novoFotografo));
+    public PerfilFotografoDTO cadastrar(CadastroUsuarioDTO novoFotografo){
+        Fotografo fotografo = fotografoRepository.save(fotografoMapper.toFotografo(novoFotografo));
+        return fotografoMapper.toPerfilFotogradoDTO(fotografo);
     }
 
     public List<RetornoFotografoDTO> listar() {
@@ -53,11 +51,11 @@ public class FotografoService {
         return fotografoRepository.save(fotografo);
     }
 
-
     public Fotografo validarFotografo(String email, String senha){
-        Optional<Fotografo> fotografoOptional = fotografoRepository.findByEmailAndSenha(email, senha);
-        fotografoOptional.orElseThrow(() -> new EntidadeNaoEncontradaException("Fotografo não existe"));
-        return fotografoRepository.findByEmail(email).get();
+        Fotografo fotografo = fotografoRepository.findByEmailAndSenha(email, senha).orElseThrow(
+                () -> new EntidadeNaoEncontradaException("Fotografo não existe")
+        );
 
+        return fotografo;
     }
 }

@@ -30,10 +30,7 @@ public class FotografoController {
     @Operation(summary = "Cadastrar um novo fotógrafo", description = "Passando os dados necessários, podemos cadastrar um novo fotógrafo")
     @PostMapping("/cadastrar")
     public ResponseEntity<PerfilFotografoDTO> cadastrar(@RequestBody @Valid CadastroUsuarioDTO novoCadastroFotografo){
-
-        return ResponseEntity.status(201).body(fotografoMapper.toPerfilFotogradoDTO(
-                serviceFotografo.cadastrar(novoCadastroFotografo)
-        ));
+        return ResponseEntity.status(201).body(serviceFotografo.cadastrar(novoCadastroFotografo));
     }
 
     @Operation(summary = "Listar fotógrafos", description = "Lista todos os fotógrafos cadastrados")
