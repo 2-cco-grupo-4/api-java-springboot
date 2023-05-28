@@ -35,7 +35,10 @@ public class TemaController {
     @Operation(summary = "Listar temas", description = "Lista todos os temas cadastrados")
     @SecurityRequirement(name = "Bearer")
     @GetMapping
-    public ResponseEntity<List<PerfilTemaDTO>> listar() throws Exception{
+    public ResponseEntity<List<PerfilTemaDTO>> listar(){
+        if (temaService.listar().isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
         return ResponseEntity.status(200).body(temaService.listar());
     }
 }

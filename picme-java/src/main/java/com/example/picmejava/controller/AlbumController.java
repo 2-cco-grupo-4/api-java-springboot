@@ -57,6 +57,9 @@ public class AlbumController {
 
     @GetMapping
     public ResponseEntity<List<RetornoAlbumDTO>> listar(){
+        if (albumService.listar().isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
         return ResponseEntity.status(200).body(albumService.listar());
     }
 

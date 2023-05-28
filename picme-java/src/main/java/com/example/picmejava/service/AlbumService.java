@@ -40,6 +40,7 @@ public class AlbumService {
         fotografoOptional.orElseThrow(() -> new EntidadeNaoEncontradaException("Fotografo não encontrado"));
 
         fotografoOptional.get().adicionarAlbum(novoAlbum);
+        fotografoRepository.save(fotografoOptional.get());
 
         return albumMapper.toRetornoAlbumDTO(albumRepository.save(novoAlbum));
     }
@@ -64,11 +65,6 @@ public class AlbumService {
 
     public List<RetornoAlbumDTO> listar() {
         List<Album> albums = albumRepository.findAll();
-
-        if (albums.isEmpty()){
-            throw new EntidadeNaoCadastradaException("Nenhum Album cadastrado");
-        }
-
         return albums.stream()
                 .map((album) -> albumMapper.toRetornoAlbumDTO(album))
                 .toList();

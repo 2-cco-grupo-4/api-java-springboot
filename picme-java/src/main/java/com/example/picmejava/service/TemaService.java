@@ -25,11 +25,6 @@ public class TemaService {
 
     public List<PerfilTemaDTO> listar(){
         List<Tema> temas = temaRepository.findAll();
-
-        if (temas.isEmpty()){
-            throw new EntidadeNaoCadastradaException("Nenhum tema cadastrado");
-        }
-
         return temas.stream().map(tema -> TemaMapper.toPerfilTemaDTO(tema)).toList();
 
     }
