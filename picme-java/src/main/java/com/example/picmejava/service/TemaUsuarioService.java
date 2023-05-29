@@ -54,6 +54,7 @@ public class TemaUsuarioService {
 
     public RetornoTemaClienteDTO cadastrarTemaCliente(CadastroTemaClienteDTO novoTemaCliente) {
 
+
         List<Tema> temas = novoTemaCliente.getTemas().stream()
                 .map(tema -> validarTema(tema))
                 .toList();
@@ -84,7 +85,7 @@ public class TemaUsuarioService {
 
         return optionalCliente.get();
     }
-    
+
     public Tema validarTema(Tema tema){
         Optional<Tema> temaOptional = temaRepository.findById(tema.getId());
         temaOptional.orElseThrow(() -> new EntidadeNaoEncontradaException("Tema não encontrado"));

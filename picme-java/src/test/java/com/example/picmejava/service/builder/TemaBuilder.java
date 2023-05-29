@@ -2,6 +2,7 @@ package com.example.picmejava.service.builder;
 
 import com.example.picmejava.model.Tema;
 import com.example.picmejava.model.Usuario;
+import com.example.picmejava.model.dto.PerfilTemaDTO;
 
 import java.util.List;
 
@@ -16,6 +17,14 @@ public class TemaBuilder {
         tema.setNome("Tema 01");
         tema.setUsuarios(List.of(FotografoBuilder.criarFotografo()));
         return tema;
+    }
+
+    public static PerfilTemaDTO criarPerfilTemaDto(){
+        PerfilTemaDTO perfilTemaDTO = new PerfilTemaDTO();
+
+        perfilTemaDTO.setId(1);
+        perfilTemaDTO.setNome("Tema 01");
+        return perfilTemaDTO;
     }
 
     public static List<Tema> criarTemas(){

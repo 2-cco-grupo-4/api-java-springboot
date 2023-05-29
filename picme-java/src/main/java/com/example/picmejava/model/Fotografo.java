@@ -26,6 +26,9 @@ public class Fotografo extends Usuario implements Identificavel{
 
     @Override
     public void adicionar(Tema tema) {
+        if (getTemas() == null){
+            setTemas(new ArrayList<>());
+        }
         getTemas().add(tema);
     }
 

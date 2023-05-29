@@ -4,6 +4,7 @@ import com.example.picmejava.model.Evento;
 import com.example.picmejava.model.dto.CadastroEventoDTO;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class EventoBuilder {
 
@@ -39,5 +40,13 @@ public class EventoBuilder {
         cadastroEventoDTO.setIdCliente(1);
 
         return cadastroEventoDTO;
+    }
+
+    public static List<Evento> criarListaEvento(){
+        return List.of(
+                criarEvento(),
+                criarEvento(),
+                criarEvento()
+        );
     }
 }

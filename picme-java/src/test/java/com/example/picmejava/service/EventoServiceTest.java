@@ -3,6 +3,7 @@ package com.example.picmejava.service;
 import com.example.picmejava.model.Evento;
 import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.dto.CadastroEventoDTO;
+import com.example.picmejava.model.dto.RetornoEventoDTO;
 import com.example.picmejava.model.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.repository.*;
 import com.example.picmejava.service.builder.EventoBuilder;
@@ -15,6 +16,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -54,6 +57,39 @@ class EventoServiceTest {
     }
 
     @Test
+    @DisplayName("Deve retornar excecao quando idFotografo invalido")
+    void deveRetornarExcecaoQuandoIdFotografoInvalido(){
+        CadastroEventoDTO cadastroEventoDTO = EventoBuilder.criarCadastroEvento();
+        Evento evento = EventoBuilder.criarEvento();
+
+        Mockito.when(fotografoRepository.findById(
+                Mockito.eq(cadastroEventoDTO.getIdFotografo()))).thenReturn(Optional.empty());
+
+        EntidadeNaoEncontradaException exception = assertThrows(EntidadeNaoEncontradaException.class, () -> {
+            eventoService.cadastrar(cadastroEventoDTO);
+        });
+
+        assertEquals("Fotografo não encontrado", exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("Deve retornar excecao quando idCliente invalido")
+    void deveRetornarExcecaoQuandoIdClienteInvalido(){
+        CadastroEventoDTO cadastroEventoDTO = EventoBuilder.criarCadastroEvento();
+        Evento evento = EventoBuilder.criarEvento();
+
+        Mockito.when(fotografoRepository.findById(
+                Mockito.eq(cadastroEventoDTO.getIdFotografo()))).thenReturn(Optional.of(evento.getFotografo()));
+        Mockito.when(clienteRepository.findById(Mockito.anyInt())).thenReturn(Optional.empty());
+
+        EntidadeNaoEncontradaException exception = assertThrows(EntidadeNaoEncontradaException.class, () -> {
+            eventoService.cadastrar(cadastroEventoDTO);
+        });
+
+        assertEquals("Cliente não encontrado", exception.getMessage());
+    }
+
+    @Test
     @DisplayName("Deve retornar excecao quando idTema invalido")
     void deveRetornarExcecaoQuandoIdTemaInvalido(){
         CadastroEventoDTO cadastroEventoDTO = EventoBuilder.criarCadastroEvento();
@@ -69,6 +105,52 @@ class EventoServiceTest {
         });
 
         assertEquals("Tema não encontrado", exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("Deve retornar excecao quando idEndereco invalido")
+    void deveRetornarExcecaoQuandoIdEnderecoInvalido(){
+        CadastroEventoDTO cadastroEventoDTO = EventoBuilder.criarCadastroEvento();
+        Evento evento = EventoBuilder.criarEvento();
+
+        Mockito.when(fotografoRepository.findById(
+                Mockito.eq(cadastroEventoDTO.getIdFotografo()))).thenReturn(Optional.of(evento.getFotografo()));
+        Mockito.when(clienteRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(evento.getCliente()));
+        Mockito.when(temaRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(evento.getTema()));
+        Mockito.when(enderecoRepository.findById(Mockito.anyInt())).thenReturn(Optional.empty());
+
+        EntidadeNaoEncontradaException exception = assertThrows(EntidadeNaoEncontradaException.class, () -> {
+            eventoService.cadastrar(cadastroEventoDTO);
+        });
+
+        assertEquals("Endereço não encontrado", exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("Deve retornar lista com tres itens quando tres itens cadastrados")
+    void deveRetornarTresItensQuandoTresItensCadastrados(){
+        int tamanhoEsperado = 3;
+        List<Evento> eventos = EventoBuilder.criarListaEvento();
+
+        Mockito.when(eventoRepository.findAll()).thenReturn(eventos);
+
+        List<RetornoEventoDTO> resultado = eventoService.listar();
+
+        assertNotNull(resultado);
+        assertEquals(tamanhoEsperado, resultado.size());
+    }
+
+    @Test
+    @DisplayName("Deve retornar lista vazia quando nenhum item cadastrado")
+    void deveRetornarListaVaziaQuandoNenhumItemCadastrado(){
+        int tamanhoEsperado = 0;
+
+        Mockito.when(eventoRepository.findAll()).thenReturn(new ArrayList<>());
+
+        List<RetornoEventoDTO> resultado = eventoService.listar();
+
+        assertTrue(resultado.isEmpty());
+        assertEquals(tamanhoEsperado, resultado.size());
     }
 
 }

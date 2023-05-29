@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -34,7 +35,10 @@ public class Tema implements Identificavel {
     private List<Usuario> usuarios;
 
     public void adicionar(Usuario usuario) {
-        usuarios.add(usuario);
+        if (getUsuarios() == null){
+            setUsuarios(new ArrayList<>());
+        }
+        getUsuarios().add(usuario);
     }
 
 

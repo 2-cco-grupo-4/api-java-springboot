@@ -4,6 +4,7 @@ import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
 import com.example.picmejava.model.dto.CadastroUsuarioDTO;
 import com.example.picmejava.model.dto.LoginUsuarioDTO;
+import com.example.picmejava.model.dto.PerfilFotografoDTO;
 import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
@@ -64,6 +65,16 @@ public class FotografoBuilder {
         loginUsuarioDTO.setSenha("senha");
 
         return loginUsuarioDTO;
+    }
+
+    public static PerfilFotografoDTO criarPerfilFotografoDto(){
+        PerfilFotografoDTO perfilFotografoDTO = new PerfilFotografoDTO();
+
+        perfilFotografoDTO.setId(1);
+        perfilFotografoDTO.setTemas(List.of(TemaBuilder.criarPerfilTemaDto()));
+        perfilFotografoDTO.setAutenticado(false);
+        perfilFotografoDTO.setTipoUsuario("fotografo");
+        return perfilFotografoDTO;
     }
 
     public static List<Fotografo> criarListaFotografo(){
