@@ -1,6 +1,7 @@
 package com.example.picmejava.service.builder;
 
 import com.example.picmejava.model.Evento;
+import com.example.picmejava.model.dto.CadastroEventoDTO;
 
 import java.time.LocalDate;
 
@@ -23,5 +24,20 @@ public class EventoBuilder {
         evento.setDataRealizacao(LocalDate.now());
 
         return evento;
+    }
+
+    public static CadastroEventoDTO criarCadastroEvento(){
+        CadastroEventoDTO cadastroEventoDTO = new CadastroEventoDTO();
+
+        cadastroEventoDTO.setAvaliacao(10);
+        cadastroEventoDTO.setStatusEvento("ativo");
+        cadastroEventoDTO.setValor(30.0);
+        cadastroEventoDTO.setDataRealizacao(LocalDate.now());
+        cadastroEventoDTO.setIdCliente(1);
+        cadastroEventoDTO.setIdTema(1);
+        cadastroEventoDTO.setIdEndereco(1);
+        cadastroEventoDTO.setIdCliente(1);
+
+        return cadastroEventoDTO;
     }
 }

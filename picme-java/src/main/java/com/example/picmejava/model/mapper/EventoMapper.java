@@ -1,9 +1,7 @@
 package com.example.picmejava.model.mapper;
 
-import com.example.picmejava.model.Cliente;
-import com.example.picmejava.model.Evento;
-import com.example.picmejava.model.Fotografo;
-import com.example.picmejava.model.Tema;
+import com.example.picmejava.model.*;
+import com.example.picmejava.model.dto.CadastroEventoDTO;
 import com.example.picmejava.model.dto.PerfilEnderecoDTO;
 import com.example.picmejava.model.dto.PerfilEventoDTO;
 import com.example.picmejava.model.dto.RetornoEventoDTO;
@@ -31,13 +29,20 @@ public class EventoMapper {
         return dto;
     }
 
-    public Evento toEvento(Fotografo fotografo, Cliente cliente, Tema tema, Evento novoEvento) {
+    public Evento toEvento(Fotografo fotografo, Cliente cliente, Tema tema,
+                           Endereco endereco, CadastroEventoDTO dadosEvento) {
+        Evento evento = new Evento();
 
-        novoEvento.setCliente(cliente);
-        novoEvento.setFotografo(fotografo);
-        novoEvento.setTema(tema);
+        evento.setCliente(cliente);
+        evento.setFotografo(fotografo);
+        evento.setTema(tema);
+        evento.setEndereco(endereco);
+        evento.setStatusEvento(dadosEvento.getStatusEvento());
+        evento.setAvaliacao(dadosEvento.getAvaliacao());
+        evento.setValor(dadosEvento.getValor());
+        evento.setDataRealizacao(dadosEvento.getDataRealizacao());
 
-        return novoEvento;
+        return evento;
     }
 
     public PerfilEventoDTO toPerfilEventoDTO(Evento evento){
@@ -54,5 +59,4 @@ public class EventoMapper {
 
         return dto;
     }
-
 }
