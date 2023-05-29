@@ -46,11 +46,10 @@ public class ImagemService {
 
     public List<RetornoImagemDTO> listar(){
         List<Imagem> imagems = imagemRepository.findAll();
-        List<RetornoImagemDTO> imagemDTO = imagems.stream()
+
+        return imagems.stream()
                 .map(imagem -> imagemMapper.toRetornoImagemDTO(imagem))
                 .toList();
-
-        return imagemDTO;
     }
 
 }

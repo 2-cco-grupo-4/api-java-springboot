@@ -55,4 +55,7 @@ public class Album implements Identificavel{
 
     @OneToMany(mappedBy = "idAlbum", cascade = CascadeType.ALL)
     private List<Imagem> imagems;
+
+
+
 }
