@@ -1,28 +1,13 @@
 package com.example.picmejava.service;
 
-import com.example.picmejava.configuration.security.jwt.GerenciadorTokenJwt;
-import com.example.picmejava.exceptionhandler.UsuarioNaoEncontradoException;
 import com.example.picmejava.lista.Lista;
-import com.example.picmejava.model.Cliente;
 import com.example.picmejava.model.Fotografo;
-import com.example.picmejava.model.Usuario;
-import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
-import com.example.picmejava.model.dto.CadastroUsuarioDTO;
-import com.example.picmejava.model.dto.LoginUsuarioDTO;
-import com.example.picmejava.model.dto.PerfilFotografoDTO;
+import com.example.picmejava.model.dto.*;
+import com.example.picmejava.model.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.model.mapper.FotografoMapper;
 import com.example.picmejava.repository.FotografoRepository;
-import com.example.picmejava.repository.UsuarioRepository;
-import com.example.picmejava.service.autenticacao.dto.UsuarioLoginDTO;
-import com.example.picmejava.service.autenticacao.dto.UsuarioTokenDTO;
-import jakarta.persistence.GeneratedValue;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,32 +16,24 @@ import java.util.Optional;
 public class FotografoService {
 
     @Autowired
-    private GerenciadorTokenJwt gerenciadorTokenJwt;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private UsuarioRepository usuarioRepository;
-    @Autowired
     private FotografoRepository fotografoRepository;
     private FotografoMapper fotografoMapper = new FotografoMapper();
 
-    public Fotografo cadastrar(CadastroUsuarioDTO novoFotografo){
-        return fotografoRepository.save(fotografoMapper.toFotografo(novoFotografo));
+    public PerfilFotografoDTO cadastrar(CadastroUsuarioDTO novoFotografo){
+        Fotografo fotografo = fotografoRepository.save(fotografoMapper.toFotografo(novoFotografo));
+        return fotografoMapper.toPerfilFotogradoDTO(fotografo);
     }
 
-    public Lista<Fotografo> listar() {
-        Lista<Fotografo> fotografos = new Lista();
-        for(Fotografo i :  fotografoRepository.findAll()){
-            fotografos.add(i);
-        }
-        return fotografos;
+    public List<RetornoFotografoDTO> listar() {
+        List<Fotografo> fotografos = fotografoRepository.findAll();
+        return fotografos.stream()
+                .map(fotografo -> fotografoMapper.toRetornoFotografoDTO(fotografo))
+                .toList();
     }
 
     public Fotografo atualizar(Integer idFotografo, AtualizarUsuarioDTO fotografoAtualizado){
         Optional<Fotografo> fotografoOptional = fotografoRepository.findById(idFotografo);
-        Fotografo fotografo = fotografoOptional.orElseThrow(() -> new UsuarioNaoEncontradoException(
+        Fotografo fotografo = fotografoOptional.orElseThrow(() -> new EntidadeNaoEncontradaException(
                 "Fotografo não existe")
         );
         return fotografoRepository.save(fotografoMapper.toFotografoAtualizado(fotografo, fotografoAtualizado));
@@ -74,31 +51,11 @@ public class FotografoService {
         return fotografoRepository.save(fotografo);
     }
 
-
     public Fotografo validarFotografo(String email, String senha){
-        Optional<Fotografo> fotografoOptional = fotografoRepository.findByEmailAndSenha(email, senha);
-        fotografoOptional.orElseThrow(() -> new UsuarioNaoEncontradoException("Fotografo não existe"));
-        return fotografoRepository.findByEmail(email).get();
+        Fotografo fotografo = fotografoRepository.findByEmailAndSenha(email, senha).orElseThrow(
+                () -> new EntidadeNaoEncontradaException("Fotografo não existe")
+        );
 
-    }
-
-    public UsuarioTokenDTO autenticar(UsuarioLoginDTO usuarioLoginDto) {
-
-        final UsernamePasswordAuthenticationToken credentials = new UsernamePasswordAuthenticationToken(
-                usuarioLoginDto.getEmail(), usuarioLoginDto.getSenha());
-
-        final Authentication authentication = this.authenticationManager.authenticate(credentials);
-
-        Usuario usuarioAutenticado =
-                fotografoRepository.findByEmail(usuarioLoginDto.getEmail())
-                        .orElseThrow(
-                                () -> new ResponseStatusException(404, "Email do usuário não cadastrado", null)
-                        );
-
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        final String token = gerenciadorTokenJwt.generateToken(authentication);
-
-        return FotografoMapper.of(usuarioAutenticado, token);
+        return fotografo;
     }
 }

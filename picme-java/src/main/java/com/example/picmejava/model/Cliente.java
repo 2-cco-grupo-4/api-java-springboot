@@ -6,12 +6,17 @@ import lombok.NoArgsConstructor;
 
 
 @Entity
-@NoArgsConstructor
+
 @DiscriminatorValue("cliente")
 public class Cliente extends Usuario{
 
     @Override
     public String getTipoUsuario() {
         return "Cliente";
+    }
+
+    @Override
+    public void adicionar(Tema tema) {
+        getTemas().add(tema);
     }
 }

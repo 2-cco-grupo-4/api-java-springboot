@@ -1,10 +1,7 @@
 package com.example.picmejava.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,6 +22,7 @@ public class Imagem implements Identificavel {
             description = "Caminho para a imagem",
             example = "https://scontent-iad3-2.cdninstagram.com/v/t51.29350-15/342519547_715840500544965_8565762847588876392_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=8ae9d6&_nc_ohc=89Vs1o0LN_sAX92eU9A&_nc_ht=scontent-iad3-2.cdninstagram.com&edm=ANQ71j8EAAAA&oh=00_AfCjl80cpqI5AxCFJgTGWsLoKOzwyBtmnomfpH3mrBBf5A&oe=6449E5FB"
     )
+    @Column(name = "CAMINHO")
     private String path;
 
     @Schema(
@@ -43,9 +41,8 @@ public class Imagem implements Identificavel {
             description = "ID do albúm que a imagem pertence",
             example = "1"
     )
-    private Integer idAlbum;
+    @ManyToOne
+    @JoinColumn(name = "FK_ALBUM")
+    private Album idAlbum;
 
-    public Integer getId() {
-        return id;
-    }
 }

@@ -1,13 +1,21 @@
 package com.example.picmejava.service;
 
 import com.example.picmejava.model.Album;
+import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.Tema;
+import com.example.picmejava.model.dto.AtualizarAlbumDTO;
+import com.example.picmejava.model.dto.RetornoAlbumDTO;
+import com.example.picmejava.model.exception.EntidadeNaoCadastradaException;
+import com.example.picmejava.model.exception.EntidadeNaoEncontradaException;
+import com.example.picmejava.model.mapper.AlbumMapper;
 import com.example.picmejava.repository.AlbumRepository;
+import com.example.picmejava.repository.FotografoRepository;
 import com.example.picmejava.repository.TemaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.picmejava.lista.Lista;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,38 +27,53 @@ public class AlbumService {
     @Autowired
     private TemaRepository temaRepository;
 
-    public Album cadastrar(Integer idFotografo, Album novoAlbum) throws Exception{
-        Optional<Tema> temaOptional = temaRepository.findById(novoAlbum.getTipo().getId());
-        temaOptional.orElseThrow(() -> new Exception("Tema não encontrado"));
-        novoAlbum.setTipo(temaOptional.get());
-        novoAlbum.setIdFotografo(idFotografo);
-        return albumRepository.save(novoAlbum);
+    @Autowired
+    private FotografoRepository fotografoRepository;
+
+    private AlbumMapper albumMapper = new AlbumMapper();
+
+    public RetornoAlbumDTO cadastrar(Album novoAlbum){
+        Optional<Tema> temaOptional = temaRepository.findById(novoAlbum.getTema().getId());
+        temaOptional.orElseThrow(() -> new EntidadeNaoEncontradaException("Tema não existe"));
+
+        Optional<Fotografo> fotografoOptional = fotografoRepository.findById(novoAlbum.getFotografo().getId());
+        fotografoOptional.orElseThrow(() -> new EntidadeNaoEncontradaException("Fotografo não encontrado"));
+
+        fotografoOptional.get().adicionarAlbum(novoAlbum);
+        fotografoRepository.save(fotografoOptional.get());
+
+        return albumMapper.toRetornoAlbumDTO(albumRepository.save(novoAlbum));
     }
 
-    public Album atualizar(Integer idAlbum, Album albumAtualizado) throws Exception {
+    public RetornoAlbumDTO atualizar(Integer idAlbum, AtualizarAlbumDTO albumAtualizado){
+        Album albumDesatualizado = buscarPorId(idAlbum);
+
+        Optional<Tema> temaOptional = temaRepository.findById(albumAtualizado.getIdTema());
+        temaOptional.orElseThrow(() -> new EntidadeNaoEncontradaException("Tema não encontrado"));
+
+        Album album = albumRepository.save(albumMapper.toAlbum(albumDesatualizado, albumAtualizado, temaOptional.get()));
+
+        return albumMapper.toRetornoAlbumDTO(album);
+    }
+
+    public Album deletar(Integer idAlbum){
         Album album = buscarPorId(idAlbum);
-        albumAtualizado.setId(album.getId());
-        return albumRepository.save(albumAtualizado);
-    }
 
-    public Album buscarPorId(Integer idAlbum) throws Exception {
-        Optional<Album> albumOptional = albumRepository.findById(idAlbum);
-        Album album = albumOptional.orElseThrow(() -> new Exception("Album não encontrado"));
-        return album;
-    }
-
-    public Album deletar(Integer idAlbum) throws Exception{
-        Album album = buscarPorId(idAlbum);
         albumRepository.deleteById(idAlbum);
         return album;
     }
 
-    public Lista<Album> listar(Integer idFotografo) {
-        Lista<Album> albumsDoFotografo = new Lista();
-        for(Album i :  albumRepository.findAllByIdFotografo(idFotografo)){
-            albumsDoFotografo.add(i);
-        }
-        return albumsDoFotografo;
+    public List<RetornoAlbumDTO> listar() {
+        List<Album> albums = albumRepository.findAll();
+        return albums.stream()
+                .map((album) -> albumMapper.toRetornoAlbumDTO(album))
+                .toList();
+    }
+
+    public Album buscarPorId(Integer idAlbum){
+        Optional<Album> albumOptional = albumRepository.findById(idAlbum);
+        Album album = albumOptional.orElseThrow(() -> new EntidadeNaoEncontradaException("Album não encontrado"));
+        return album;
     }
 
 }

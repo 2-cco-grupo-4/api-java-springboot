@@ -1,25 +1,13 @@
 package com.example.picmejava.model.mapper;
 
 import com.example.picmejava.model.Cliente;
-import com.example.picmejava.model.Fotografo;
-import com.example.picmejava.model.Usuario;
 import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
 import com.example.picmejava.model.dto.CadastroUsuarioDTO;
 import com.example.picmejava.model.dto.PerfilClienteDTO;
-import com.example.picmejava.service.autenticacao.dto.UsuarioTokenDTO;
+
+import java.time.LocalDate;
 
 public class ClienteMapper {
-
-    public static UsuarioTokenDTO of(Usuario usuario, String token) {
-        UsuarioTokenDTO usuarioTokenDto = new UsuarioTokenDTO();
-
-        usuarioTokenDto.setId(usuario.getId());
-        usuarioTokenDto.setEmail(usuario.getEmail());
-        usuarioTokenDto.setNome(usuario.getNome());
-        usuarioTokenDto.setToken(token);
-
-        return usuarioTokenDto;
-    }
 
     public PerfilClienteDTO toPerfilClienteDTO(Cliente cliente){
         PerfilClienteDTO dto = new PerfilClienteDTO();
@@ -28,6 +16,10 @@ public class ClienteMapper {
         dto.setNome(cliente.getNome());
         dto.setAutenticado(cliente.getAutenticado());
         dto.setTipoUsuario(cliente.getTipoUsuario());
+        if (cliente.getTemas() != null){
+            dto.setTemas(cliente.getTemas().stream().map(tema -> TemaMapper.toPerfilTemaDTO(tema)).toList());
+
+        }
 
         return dto;
     }
@@ -40,6 +32,7 @@ public class ClienteMapper {
         cliente.setDataNasc(dados.getDataNasc());
         cliente.setEmail(dados.getEmail());
         cliente.setSenha(dados.getSenha());
+        cliente.setDataCadastro(LocalDate.now());
         cliente.setNumCelular(dados.getNumCelular());
         cliente.setAutenticado(false);
 
