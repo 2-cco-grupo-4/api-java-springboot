@@ -9,8 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class FaixaEtariaClienteDto {
+public class TemaContatosClienteDto {
 
-    private String faixa;
-    private Long quantidade;
+    private String tema;
+    private Long contatos;
 }

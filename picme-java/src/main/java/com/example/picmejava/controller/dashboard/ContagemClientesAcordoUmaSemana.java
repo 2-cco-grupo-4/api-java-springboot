@@ -9,8 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class FaixaEtariaClienteDto {
+public class ContagemClientesAcordoUmaSemana {
 
-    private String faixa;
-    private Long quantidade;
+    private Long clienteContato;
+    private Long totalCliente;
 }
