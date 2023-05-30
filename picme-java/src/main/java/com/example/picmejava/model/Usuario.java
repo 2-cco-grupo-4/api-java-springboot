@@ -17,15 +17,31 @@ public abstract class Usuario implements Identificavel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Schema(description = "Nome do usuário", example = "João Silva")
     private String nome;
+
+    @Schema(description = "Email do usuário", example = "joao.silva@example.com")
     private String email;
+
+    @Schema(description = "Senha do usuário", example = "********")
     private String senha;
+
+    @Schema(description = "CPF do usuário", example = "123.456.789-00")
     private String cpf;
+
     @Column(name = "data_nascimento")
+    @Schema(description = "Data de nascimento do usuário", example = "1990-01-01")
     private LocalDate dataNasc;
+
+    @Schema(description = "Data de cadastro do usuário", example = "2023-05-30")
     private LocalDate dataCadastro;
+
     @Column(name = "celular")
+    @Schema(description = "Número de celular do usuário", example = "+55 11 98765-4321")
     private String numCelular;
+
+    @Schema(description = "Indicador se o usuário está autenticado", example = "true")
     private Boolean autenticado;
     @Column(name = "tipo_usuario", insertable = false, updatable = false)
     private String tipoUsuario;

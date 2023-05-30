@@ -16,6 +16,10 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/admin")
+@Tag(
+        name = "Dashboard Admin Controller",
+        description = "Controller responsável pelas consultas do painel administrativo"
+)
 public class ConsultasDashboardAdmin {
 
     @Autowired
@@ -27,6 +31,7 @@ public class ConsultasDashboardAdmin {
     @Autowired
     private EntityManager entityManager;
 
+    @Operation(summary = "Obter faixa etária dos clientes", description = "Obtém a faixa etária dos clientes registrados")
     @GetMapping("/clientes-acordo-semana")
     public List<FaixaEtariaClienteDto> trazerFaixaEtariaCliente(){
         Query query = entityManager.createNativeQuery("SELECT * FROM vw_faixa_etaria_cliente");
@@ -45,6 +50,7 @@ public class ConsultasDashboardAdmin {
         return faixaEtariaClienteDtos;
     }
 
+    @Operation(summary = "Obter contagem de contatos por tema", description = "Obtém a contagem de contatos por tema")
     @GetMapping("/contagem-tema-contato")
     public List<TemaContatosClienteDto> trazerContagemTemaContato() {
         Query query = entityManager.createNativeQuery("SELECT tema, contatos FROM vw_contagem_tema_contato");
@@ -63,6 +69,7 @@ public class ConsultasDashboardAdmin {
         return temaContatosClienteDtos;
     }
 
+    @Operation(summary = "Obter contagem de clientes na última semana", description = "Obtém a contagem de clientes que entraram em contato na última semana")
     @GetMapping("/contagem-clientes-semana")
     public List<ContagemClientesAcordoUmaSemana> trazerContagemClientesAcordoUmaSemana() {
         Query query = entityManager.createNativeQuery("SELECT * FROM vw_clientes_acordo_1semana");

@@ -9,11 +9,14 @@ import com.example.picmejava.model.mapper.EventoMapper;
 import com.example.picmejava.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Tag(name = "Evento Service", description = "APIs relacionadas a operações de eventos")
 public class EventoService {
 
     @Autowired
@@ -33,6 +36,7 @@ public class EventoService {
 
     EventoMapper eventoMapper = new EventoMapper();
 
+    @Operation(summary = "Cadastrar um novo evento")
     public RetornoEventoDTO cadastrar(CadastroEventoDTO novoEvento) {
         Fotografo fotografo = fotografoRepository.findById(novoEvento.getIdFotografo())
                 .orElseThrow(() -> new EntidadeNaoEncontradaException("Fotografo não encontrado"));
@@ -52,6 +56,7 @@ public class EventoService {
         return eventoMapper.toRetornoEventoDTO(evento);
     }
 
+    @Operation(summary = "Listar todos os eventos")
     public List<RetornoEventoDTO> listar() {
         List<Evento> eventos = eventoRepository.findAll();
         return eventos.stream()

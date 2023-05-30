@@ -1,13 +1,13 @@
-package com.example.picmejava.instagram;
+    package com.example.picmejava.instagram;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import lombok.NoArgsConstructor;
+    import com.fasterxml.jackson.annotation.JsonAutoDetect;
+    import lombok.NoArgsConstructor;
 
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-@NoArgsConstructor
-public class CursorsInstagram {
+    @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+    @NoArgsConstructor
+    public class CursorsInstagram {
 
-    private String before;
-    private String after;
+        private String before;
+        private String after;
 
-}
+    }
