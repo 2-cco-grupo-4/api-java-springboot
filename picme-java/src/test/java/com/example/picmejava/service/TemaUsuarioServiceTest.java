@@ -18,6 +18,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -41,22 +42,32 @@ class TemaUsuarioServiceTest {
 //    @DisplayName("Deve retornar temaUsuario quando cadastrar temaFotografo com dados validos")
 //    void deveRetornarTemaUsuarioQuandoCadastrarTemaFotografoComDadosValidos(){
 //        int idFotografo = 1;
-//        Tema tema = TemaBuilder.criarTema();
-//        Fotografo fotografo = FotografoBuilder.criarFotografo();
-//        CadastroTemaFotografoDTO cadastroTemaFotografo = TemaUsuarioBuilder.criarCadastroTemaFotografo();
-//        RetornoTemaFotografoDTO retornoTemaFotografoDTO = TemaUsuarioBuilder.criarRetornoTemaFotografo();
+//        Tema tema = new Tema();
+//        tema.setId(1);
+//
+//        Fotografo fotografo = new Fotografo();
+//        fotografo.setId(1);
+//
+//        CadastroTemaFotografoDTO cadastroTemaFotografoDTO = new CadastroTemaFotografoDTO();
+//        cadastroTemaFotografoDTO.setFotografo(fotografo);
+//        cadastroTemaFotografoDTO.setTemas(List.of(TemaBuilder.criarTema()));
+//
+//        RetornoTemaFotografoDTO retornoTemaFotografoDTO = new RetornoTemaFotografoDTO();
+//        retornoTemaFotografoDTO.setFotografo(FotografoBuilder.criarPerfilFotografoDto());
+//        retornoTemaFotografoDTO.setTemas(List.of(TemaBuilder.criarPerfilTemaDto()));
+//
 //
 //        Mockito.when(fotografoRepository.findById(idFotografo))
-//                .thenReturn(Optional.of(cadastroTemaFotografo.getFotografo()));
-//        Mockito.when(temaRepository.findById(tema.getId()))
+//                .thenReturn(Optional.of(cadastroTemaFotografoDTO.getFotografo()));
+//        Mockito.when(temaRepository.findById(Mockito.anyInt()))
 //                .thenReturn(Optional.of(tema));
 //        Mockito.when(fotografoRepository.save(Mockito.any(Fotografo.class))).thenReturn(fotografo);
 //        Mockito.when(temaRepository.save(Mockito.any(Tema.class))).thenReturn(tema);
 //
-//        RetornoTemaFotografoDTO resultado = temaUsuarioService.cadastrarTemaFotografo(cadastroTemaFotografo);
+//        RetornoTemaFotografoDTO resultado = temaUsuarioService.cadastrarTemaFotografo(cadastroTemaFotografoDTO);
 //
 //        assertNotNull(resultado);
-//        assertEquals(retornoTemaFotografoDTO, resultado);
+//        assertEquals(retornoTemaFotografoDTO.getTemas(), resultado.getTemas());
 //    }
 
 }
