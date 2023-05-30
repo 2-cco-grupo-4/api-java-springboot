@@ -4,6 +4,7 @@ import com.example.picmejava.model.Imagem;
 import com.example.picmejava.model.dto.RetornoImagemDTO;
 import com.example.picmejava.repository.AlbumRepository;
 import com.example.picmejava.repository.ImagemRepository;
+import com.example.picmejava.service.builder.AlbumBuilder;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -92,9 +93,9 @@ public class ImagemServiceTest {
     void listarTodasImagens() {
 
         List<Imagem> imagensExistentes = new ArrayList<>();
-        imagensExistentes.add(new Imagem());
-        imagensExistentes.add(new Imagem());
-        imagensExistentes.add(new Imagem());
+        Imagem imagem = new Imagem();
+        imagem.setIdAlbum(AlbumBuilder.criarAlbum());
+        imagensExistentes.add(imagem);
         Mockito.when(imagemRepository.findAll()).thenReturn(imagensExistentes);
 
 

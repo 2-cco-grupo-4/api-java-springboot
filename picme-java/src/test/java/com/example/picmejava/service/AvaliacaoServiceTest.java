@@ -41,12 +41,13 @@ public class AvaliacaoServiceTest {
     @DisplayName("Deve retornar a lista de avaliações da pilha")
     void retornarListaDeAvaliacoesDaPilha() {
         List<Avaliacao> avaliacoesExistentes = new ArrayList<>();
-        avaliacoesExistentes.add(new Avaliacao());
-        avaliacoesExistentes.add(new Avaliacao());
-        avaliacoesExistentes.add(new Avaliacao());
-        for (Avaliacao avaliacao : avaliacoesExistentes) {
-            avaliacaoService.avaliar(avaliacao);
-        }
+        Avaliacao avaliacao = new Avaliacao() ;
+        avaliacao.setId(1L);
+        avaliacao.setDescricao("òtima avaliação");
+        avaliacao.setValor(10.00);
+        avaliacoesExistentes.add(avaliacao);
+
+        avaliacaoService.avaliar(avaliacao);
         List<Avaliacao> resultado = avaliacaoService.exibir();
         assertNotNull(resultado);
         assertEquals(avaliacoesExistentes.size(), resultado.size());

@@ -18,6 +18,8 @@ public class Pilha<T> {
         return tamanho == 0;
     }
 
+
+
     public boolean isFull() {
         return topo == pilha.length - 1;
     }
@@ -62,6 +64,10 @@ public class Pilha<T> {
             lista.add((T) pilha[i]);
         }
         return lista;
+    }
+
+    public int size() {
+        return tamanho;
     }
 
 }

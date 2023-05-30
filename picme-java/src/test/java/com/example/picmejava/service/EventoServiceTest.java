@@ -18,7 +18,13 @@ import com.example.picmejava.model.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.repository.*;
 import com.example.picmejava.service.builder.EventoBuilder;
 import com.example.picmejava.service.builder.FotografoBuilder;
-
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 
 import java.util.ArrayList;
@@ -30,19 +36,26 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 public class EventoServiceTest {
     @Mock
-    private FotografoRepository fotografoRepository ;
+    private EnderecoRepository enderecoRepository;
+
     @Mock
-    private ClienteRepository clienteRepository ;
+    private FotografoRepository fotografoRepository;
+
     @Mock
-    private TemaRepository temaRepository ;
+    private ClienteRepository clienteRepository;
+
     @Mock
-    private EventoRepository eventoRepository ;
+    private EventoRepository eventoRepository;
+
+    @Mock
+    private TemaRepository temaRepository;
+
     @InjectMocks
     private EventoService eventoService;
     @Test
     @DisplayName("Deve cadastrar um evento corretamente")
     void cadastrar_Evento() {
-        Evento novoEvento = new Evento();
+        CadastroEventoDTO novoEvento = new CadastroEventoDTO();
 
         Fotografo fotografoExistente = new Fotografo();
         fotografoExistente.setId(1);
@@ -89,7 +102,7 @@ public class EventoServiceTest {
     @Test
     @DisplayName("Deve lançar exceção ao cadastrar evento com fotógrafo inexistente")
     void lancarExcecao_AoCadastrarEventoComFotografoInexistente() {
-        Evento novoEvento = new Evento();
+        CadastroEventoDTO novoEvento = new CadastroEventoDTO();
         Fotografo fotografoInexistente = new Fotografo();
         Mockito.when(fotografoRepository.findById(fotografoInexistente.getId())).thenReturn(Optional.empty());
 
@@ -106,7 +119,7 @@ public class EventoServiceTest {
     @Test
     @DisplayName("Deve lançar exceção ao cadastrar evento com cliente inexistente")
     void lancarExcecao_AoCadastrarEventoComClienteInexistente() {
-        Evento novoEvento = new Evento();
+        CadastroEventoDTO novoEvento = new CadastroEventoDTO();
         Cliente clienteInexistente = new Cliente();
         Mockito.when(clienteRepository.findById(clienteInexistente.getId())).thenReturn(Optional.empty());
 
@@ -132,35 +145,6 @@ public class EventoServiceTest {
 
         Mockito.verify(eventoRepository).findAll();
     }
-
-
-
-}
-=======
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-@ExtendWith(MockitoExtension.class)
-class EventoServiceTest {
-
-    @Mock
-    private EnderecoRepository enderecoRepository;
-
-    @Mock
-    private FotografoRepository fotografoRepository;
-
-    @Mock
-    private ClienteRepository clienteRepository;
-
-    @Mock
-    private EventoRepository eventoRepository;
-
-    @Mock
-    private TemaRepository temaRepository;
-
-    @InjectMocks
-    private EventoService eventoService;
 
     @Test
     @DisplayName("Deve retornar evento quando cadastrar com dados validos")
@@ -193,5 +177,13 @@ class EventoServiceTest {
         assertEquals("Tema não encontrado", exception.getMessage());
     }
 
+
 }
+
+
+
+
+
+
+
 

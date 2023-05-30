@@ -1,6 +1,7 @@
 package com.example.picmejava.controller;
 
 
+import com.example.picmejava.celia.Fila;
 import com.example.picmejava.celia.Pilha;
 import com.example.picmejava.model.Avaliacao;
 import com.example.picmejava.service.AvaliacaoService;
@@ -33,6 +34,13 @@ public class AvaliacaoController {
     public ResponseEntity<List<Avaliacao>> exibir() {
         return  ResponseEntity.ok(avaliacaoService.exibir());
     }
+
+
+    @GetMapping("/ver-em-fila")
+    public ResponseEntity<List<Avaliacao>> verEmFila() {
+        return ResponseEntity.status(200).body(avaliacaoService.enfileirarAvaliacoes().toList());
+    }
+
 
     @DeleteMapping("/desfazer")
     public ResponseEntity<Avaliacao> desfazer() {

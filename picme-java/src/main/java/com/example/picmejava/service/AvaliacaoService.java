@@ -1,5 +1,6 @@
 package com.example.picmejava.service;
 
+import com.example.picmejava.celia.Fila;
 import com.example.picmejava.celia.Pilha;
 import com.example.picmejava.model.Avaliacao;
 
@@ -24,5 +25,18 @@ public class AvaliacaoService {
     public List<Avaliacao> exibir() {
         return pilha.toList();
     }
+
+    public Fila<Avaliacao> enfileirarAvaliacoes() {
+        List<Avaliacao> avaliacoes = exibir();
+        Fila<Avaliacao> fila = new Fila<>(avaliacoes.size());
+
+        for (Avaliacao avaliacao : avaliacoes) {
+            fila.push(avaliacao);
+        }
+
+        return fila;
+    }
+
+
 
 }

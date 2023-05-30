@@ -1,5 +1,8 @@
 package com.example.picmejava.celia;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Fila<T> {
     private Object[] fila;
     private int tamanho;
@@ -58,4 +61,14 @@ public class Fila<T> {
             }
         }
     }
+
+    public List<T> toList() {
+        List<T> lista = new ArrayList<>();
+        for (int i = frente; i <= tras; i++) {
+            lista.add((T) fila[i]);
+        }
+        return lista;
+    }
+
+
 }
