@@ -189,6 +189,8 @@ class AlbumServiceTest {
 
         assertTrue(resultado.isEmpty());
         assertEquals(tamanhoEsperado, resultado.size());
+
+        Mockito.verify(albumRepository, Mockito.times(1)).findAll();
     }
 
     @Test
@@ -202,6 +204,8 @@ class AlbumServiceTest {
 
         assertNotNull(resultado);
         assertEquals(album, resultado);
+
+        Mockito.verify(albumRepository, Mockito.times(1)).findById(Mockito.eq(album.getId()));
     }
 
     @Test
