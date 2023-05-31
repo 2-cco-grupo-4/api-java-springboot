@@ -30,6 +30,10 @@ public abstract class Usuario implements Identificavel{
     @Column(name = "tipo_usuario", insertable = false, updatable = false)
     private String tipoUsuario;
     private String tokenSolicitacao;
-
+    @ManyToMany
+    @JoinColumn(name = "tema_usuarios")
+    private List<Tema> temas;
     public abstract String getTipoUsuario();
+
+    public abstract void adicionar(Tema tema);
 }

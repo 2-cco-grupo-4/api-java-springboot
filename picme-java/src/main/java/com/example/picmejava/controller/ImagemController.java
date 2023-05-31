@@ -2,6 +2,9 @@ package com.example.picmejava.controller;
 
 import com.example.picmejava.lista.Lista;
 import com.example.picmejava.model.Imagem;
+import com.example.picmejava.model.dto.PerfilImagemDTO;
+import com.example.picmejava.model.dto.RetornoAlbumDTO;
+import com.example.picmejava.model.dto.RetornoImagemDTO;
 import com.example.picmejava.service.ImagemService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -27,23 +30,22 @@ public class ImagemController {
     @Operation(summary = "Cadastrar uma nova imagem", description = "Passando os dados necessário, podemos cadastrar uma nova imagem")
     @SecurityRequirement(name = "Bearer")
     @PostMapping("/{idAlbum}")
-    public ResponseEntity<Imagem> cadastrar(@PathVariable Integer idAlbum, @RequestBody Imagem novaImagem){
-        imagemService.cadastrar(idAlbum, novaImagem);
-        return ResponseEntity.status(201).body(novaImagem);
+    public ResponseEntity<RetornoImagemDTO> cadastrar(@PathVariable Integer idAlbum, @RequestBody Imagem novaImagem){
+        return ResponseEntity.status(201).body(imagemService.cadastrar(idAlbum, novaImagem));
     }
 
     @Operation(summary = "Listar imagens", description = "Passando o ID do album, podemos listar todas as imagens de determinado album")
     @SecurityRequirement(name = "Bearer")
-    @GetMapping("/{id}")
-    public ResponseEntity<Lista<Imagem>> listar(@PathVariable Integer id){
-        return ResponseEntity.status(200).body(imagemService.listar(id));
+    @GetMapping
+    public ResponseEntity<List<RetornoImagemDTO>> listar(){
+        return ResponseEntity.status(200).body(imagemService.listar());
     }
 
     @Operation(summary = "Remover uma imagem", description = "Passando o ID da imagem, podemos excluir determinada imagem")
     @SecurityRequirement(name = "Bearer")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Imagem> deletar(@PathVariable int idImagem) throws Exception {
-        imagemService.deletar(idImagem);
+    public ResponseEntity<Void> deletar(@PathVariable int id){
+        imagemService.deletar(id);
         return ResponseEntity.status(204).build();
     }
 

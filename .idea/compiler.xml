@@ -4,5 +4,11 @@
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
     </annotationProcessing>
+<<<<<<< HEAD
+=======
+    <bytecodeTargetLevel>
+      <module name="picme-java" target="17" />
+    </bytecodeTargetLevel>
+>>>>>>> 4277ebc53ee897c684e2841052c9721cd9bbc4fd
   </component>
 </project>

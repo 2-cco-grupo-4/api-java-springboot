@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -27,6 +29,13 @@ public class Tema implements Identificavel {
             example = "Casamento"
     )
     private String nome;
+
+    @ManyToMany(mappedBy = "temas")
+    private List<Usuario> usuarios;
+
+    public void adicionar(Usuario usuario) {
+        usuarios.add(usuario);
+    }
 
 
 }

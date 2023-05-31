@@ -4,11 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="ef51b8aa-1eef-41ff-92a2-fe581372663f" name="Changes" comment="trocando list por lista, adicionando método novo de toList" />
+=======
+    <list default="true" id="ef51b8aa-1eef-41ff-92a2-fe581372663f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/celia/Fila.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/controller/AvaliacaoController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/service/AvaliacaoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+>>>>>>> 4277ebc53ee897c684e2841052c9721cd9bbc4fd
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -25,11 +42,20 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+<<<<<<< HEAD
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
     "ignore.preview.features.used": "true",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/rafael/Pictures/api-java-springboot",
+=======
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "feature/avaliacao",
+    "ignore.preview.features.used": "true",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/rafael/Documents/api-java-springboot/picme-java",
+>>>>>>> 4277ebc53ee897c684e2841052c9721cd9bbc4fd
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -58,7 +84,11 @@
       <workItem from="1682298186924" duration="18000" />
       <workItem from="1682445326371" duration="50000" />
       <workItem from="1684683600785" duration="2000" />
+<<<<<<< HEAD
       <workItem from="1685481534763" duration="196000" />
+=======
+      <workItem from="1684961294383" duration="8000" />
+>>>>>>> 4277ebc53ee897c684e2841052c9721cd9bbc4fd
     </task>
     <task id="LOCAL-00001" summary="adicionando a lista">
       <created>1682000005991</created>

@@ -1,9 +1,6 @@
 package com.example.picmejava.controller;
 
-import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
-import com.example.picmejava.model.dto.CadastroUsuarioDTO;
-import com.example.picmejava.model.dto.LoginUsuarioDTO;
-import com.example.picmejava.model.dto.PerfilFotografoDTO;
+import com.example.picmejava.model.dto.*;
 import com.example.picmejava.model.mapper.FotografoMapper;
 import com.example.picmejava.service.FotografoService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,21 +30,16 @@ public class FotografoController {
     @Operation(summary = "Cadastrar um novo fotógrafo", description = "Passando os dados necessários, podemos cadastrar um novo fotógrafo")
     @PostMapping("/cadastrar")
     public ResponseEntity<PerfilFotografoDTO> cadastrar(@RequestBody @Valid CadastroUsuarioDTO novoCadastroFotografo){
-
-        return ResponseEntity.status(201).body(fotografoMapper.toPerfilFotogradoDTO(
-                serviceFotografo.cadastrar(novoCadastroFotografo)
-        ));
+        return ResponseEntity.status(201).body(serviceFotografo.cadastrar(novoCadastroFotografo));
     }
 
     @Operation(summary = "Listar fotógrafos", description = "Lista todos os fotógrafos cadastrados")
     @SecurityRequirement(name = "Bearer")
-    @GetMapping ResponseEntity<List<PerfilFotografoDTO>> listar(){
-        return ResponseEntity.status(200).body(serviceFotografo.listar()
-                .stream()
-                .filter(Objects::nonNull)
-                .map(cliente -> fotografoMapper.toPerfilFotogradoDTO(cliente))
-                .toList()
-        );
+    @GetMapping ResponseEntity<List<RetornoFotografoDTO>> listar(){
+        if (serviceFotografo.listar().isEmpty()){
+            return ResponseEntity.status(200).build();
+        }
+        return ResponseEntity.status(200).body(serviceFotografo.listar());
     }
 
     @Operation(summary = "Atualizar dados fotógrafo", description = "Passando o ID do fotógrafo e seus novos dados, podemos atualizar suas informações")
@@ -63,9 +55,9 @@ public class FotografoController {
 
     @Operation(summary = "Login fotógrafo", description = "Passando as credenciais válidas de um fotógrafo, é realizado o login na API")
     @PatchMapping("/entrar")
-    public ResponseEntity<PerfilFotografoDTO> login(@RequestBody LoginUsuarioDTO usuarioLoginDTO){
+    public ResponseEntity<RetornoFotografoDTO> login(@RequestBody LoginUsuarioDTO usuarioLoginDTO){
         return ResponseEntity.status(200).body(
-                fotografoMapper.toPerfilFotogradoDTO(serviceFotografo.login(usuarioLoginDTO))
+                fotografoMapper.toRetornoFotografoDTO(serviceFotografo.login(usuarioLoginDTO))
         );
     }
 
@@ -77,4 +69,6 @@ public class FotografoController {
                 serviceFotografo.logoff(buscarFotografo)
         ));
     }
+
+
 }

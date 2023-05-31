@@ -1,13 +1,25 @@
 package com.example.picmejava.model.mapper;
 
 import com.example.picmejava.model.Fotografo;
-import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
-import com.example.picmejava.model.dto.CadastroUsuarioDTO;
-import com.example.picmejava.model.dto.PerfilFotografoDTO;
+import com.example.picmejava.model.dto.*;
 
 import java.time.LocalDate;
 
 public class FotografoMapper {
+
+    public RetornoFotografoDTO toRetornoFotografoDTO(Fotografo dados){
+        RetornoFotografoDTO dto = new RetornoFotografoDTO();
+
+        dto.setId(dados.getId());
+        if (dados.getAlbums() != null){
+            dto.setAlbums(dados.getAlbums().stream().map((album) -> AlbumMapper.toAlbumDTO(album)).toList());
+        }
+        dto.setAutenticado(dados.getAutenticado());
+        dto.setNome(dados.getNome());
+        dto.setTipoUsuario(dados.getTipoUsuario());
+
+        return dto;
+    }
 
     public PerfilFotografoDTO toPerfilFotogradoDTO(Fotografo fotografo){
         PerfilFotografoDTO dto = new PerfilFotografoDTO();
@@ -16,7 +28,9 @@ public class FotografoMapper {
         dto.setNome(fotografo.getNome());
         dto.setAutenticado(fotografo.getAutenticado());
         dto.setTipoUsuario(fotografo.getTipoUsuario());
-        dto.setTokenSolicitacao(fotografo.getTokenSolicitacao());
+        if (fotografo.getTemas() != null){
+            dto.setTemas(fotografo.getTemas().stream().map(tema -> TemaMapper.toPerfilTemaDTO(tema)).toList());
+        }
 
         return dto;
     }

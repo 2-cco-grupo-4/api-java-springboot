@@ -16,6 +16,10 @@ public class ClienteMapper {
         dto.setNome(cliente.getNome());
         dto.setAutenticado(cliente.getAutenticado());
         dto.setTipoUsuario(cliente.getTipoUsuario());
+        if (cliente.getTemas() != null){
+            dto.setTemas(cliente.getTemas().stream().map(tema -> TemaMapper.toPerfilTemaDTO(tema)).toList());
+
+        }
 
         return dto;
     }

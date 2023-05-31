@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 
 @Entity
 @Getter
@@ -34,6 +36,7 @@ public class Album implements Identificavel{
             example = "CASAMENTO"
     )
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "FK_TEMA")
     private Tema tema;
 
     @Schema(
@@ -47,5 +50,12 @@ public class Album implements Identificavel{
             example = "1"
     )
     @ManyToOne
+    @JoinColumn(name = "FK_FOTOGRAFO")
     private Fotografo fotografo;
+
+    @OneToMany(mappedBy = "idAlbum", cascade = CascadeType.ALL)
+    private List<Imagem> imagems;
+
+
+
 }

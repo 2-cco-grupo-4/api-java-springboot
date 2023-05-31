@@ -3,6 +3,8 @@ package com.example.picmejava.model.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class PerfilFotografoDTO {
@@ -10,5 +12,5 @@ public class PerfilFotografoDTO {
     private String nome;
     private Boolean autenticado;
     private String tipoUsuario;
-    private String tokenSolicitacao;
+    private List<PerfilTemaDTO> temas;
 }
