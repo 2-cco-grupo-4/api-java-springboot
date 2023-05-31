@@ -16,38 +16,11 @@ public class TemaUsuarioBuilder {
     public static CadastroTemaFotografoDTO criarCadastroTemaFotografo(){
         CadastroTemaFotografoDTO cadastroTemaFotografoDTO = new CadastroTemaFotografoDTO();
 
-        cadastroTemaFotografoDTO.setFotografo(FotografoBuilder.criarFotografo());
+        cadastroTemaFotografoDTO.setIdFotografo(1);
         cadastroTemaFotografoDTO.setTemas(List.of(
                 TemaBuilder.criarTema()
         ));
 
         return cadastroTemaFotografoDTO;
-    }
-
-    public static CadastroTemaClienteDTO criarCadastroTemaCliente(){
-        CadastroTemaClienteDTO cadastroTemaClienteDTO = new CadastroTemaClienteDTO();
-
-        cadastroTemaClienteDTO.setCliente(ClienteBuilder.criarCliente());
-        cadastroTemaClienteDTO.setTemas(List.of(
-                TemaBuilder.criarTema()
-        ));
-
-        return cadastroTemaClienteDTO;
-    }
-
-    public static RetornoTemaFotografoDTO criarRetornoTemaFotografo(){
-        RetornoTemaFotografoDTO retornoTemaFotografoDTO = new RetornoTemaFotografoDTO();
-
-        retornoTemaFotografoDTO.setFotografo(FotografoBuilder.criarPerfilFotografoDto());
-        retornoTemaFotografoDTO.setTemas(List.of(TemaBuilder.criarPerfilTemaDto()));
-        return retornoTemaFotografoDTO;
-    }
-
-    public static RetornoTemaClienteDTO criarRetornoTemaCliente(){
-        RetornoTemaClienteDTO retornoTemaClienteDTO = new RetornoTemaClienteDTO();
-
-        retornoTemaClienteDTO.setCliente(ClienteBuilder.criarPerfilClienteDto());
-        retornoTemaClienteDTO.setTemas(List.of(TemaBuilder.criarPerfilTemaDto()));
-        return retornoTemaClienteDTO;
     }
 }

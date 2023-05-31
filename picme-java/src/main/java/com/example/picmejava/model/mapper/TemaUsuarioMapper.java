@@ -13,7 +13,7 @@ public class TemaUsuarioMapper {
     public RetornoTemaFotografoDTO toRetornoTemaUsuarioDTO(List<Tema> temas, Fotografo fotografo){
         RetornoTemaFotografoDTO dto = new RetornoTemaFotografoDTO();
 
-        dto.setTemas(temas.stream().map(tema -> TemaMapper.toPerfilTemaDTO(tema)).toList());
+        dto.setTemas(temas.stream().map(TemaMapper::toPerfilTemaDTO).toList());
         dto.setFotografo(UsuarioMapper.toPerfilFotografoDTO(fotografo));
 
         return dto;
@@ -22,7 +22,7 @@ public class TemaUsuarioMapper {
     public RetornoTemaClienteDTO toRetornoTemaUsuarioDTO(List<Tema> temas, Cliente cliente){
         RetornoTemaClienteDTO dto = new RetornoTemaClienteDTO();
 
-        dto.setTemas(temas.stream().map(tema -> TemaMapper.toPerfilTemaDTO(tema)).toList());
+        dto.setTemas(temas.stream().map(TemaMapper::toPerfilTemaDTO).toList());
         dto.setCliente(UsuarioMapper.toPerfilClienteDTO(cliente));
 
         return dto;

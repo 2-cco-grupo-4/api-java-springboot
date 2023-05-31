@@ -32,14 +32,6 @@ public class Tema implements Identificavel {
     private String nome;
 
     @ManyToMany(mappedBy = "temas")
-    private List<Usuario> usuarios;
-
-    public void adicionar(Usuario usuario) {
-        if (getUsuarios() == null){
-            setUsuarios(new ArrayList<>());
-        }
-        getUsuarios().add(usuario);
-    }
-
-
+    List<Usuario> usuarios;
 }
+

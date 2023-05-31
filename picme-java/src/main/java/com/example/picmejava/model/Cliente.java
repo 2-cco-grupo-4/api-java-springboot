@@ -16,12 +16,4 @@ public class Cliente extends Usuario{
     public String getTipoUsuario() {
         return "Cliente";
     }
-
-    @Override
-    public void adicionar(Tema tema) {
-        if (getTemas() == null){
-            setTemas(new ArrayList<>());
-        }
-        getTemas().add(tema);
-    }
 }

@@ -33,16 +33,18 @@ public class AlbumService {
     private AlbumMapper albumMapper = new AlbumMapper();
 
     public RetornoAlbumDTO cadastrar(Album novoAlbum){
-        Optional<Tema> temaOptional = temaRepository.findById(novoAlbum.getTema().getId());
-        temaOptional.orElseThrow(() -> new EntidadeNaoEncontradaException("Tema não existe"));
+        Tema tema = temaRepository.findById(novoAlbum.getTema().getId())
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Tema não existe"));
 
-        Optional<Fotografo> fotografoOptional = fotografoRepository.findById(novoAlbum.getFotografo().getId());
-        fotografoOptional.orElseThrow(() -> new EntidadeNaoEncontradaException("Fotografo não encontrado"));
+        Fotografo fotografo = fotografoRepository.findById(novoAlbum.getFotografo().getId())
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Fotografo não encontrado"));
 
-        fotografoOptional.get().adicionarAlbum(novoAlbum);
-        fotografoRepository.save(fotografoOptional.get());
+        novoAlbum.setTema(tema);
+        albumRepository.save(novoAlbum);
+        fotografo.getAlbums().add(novoAlbum);
+        fotografoRepository.save(fotografo);
 
-        return albumMapper.toRetornoAlbumDTO(albumRepository.save(novoAlbum));
+        return albumMapper.toRetornoAlbumDTO(novoAlbum);
     }
 
     public RetornoAlbumDTO atualizar(Integer idAlbum, AtualizarAlbumDTO albumAtualizado){

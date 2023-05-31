@@ -23,19 +23,4 @@ public class Fotografo extends Usuario implements Identificavel{
     public String getTipoUsuario() {
         return String.format("Fotografo");
     }
-
-    @Override
-    public void adicionar(Tema tema) {
-        if (getTemas() == null){
-            setTemas(new ArrayList<>());
-        }
-        getTemas().add(tema);
-    }
-
-    public void adicionarAlbum(Album album){
-        if (getAlbums() == null){
-            setAlbums(new ArrayList<>());
-        }
-        getAlbums().add(album);
-    }
 }

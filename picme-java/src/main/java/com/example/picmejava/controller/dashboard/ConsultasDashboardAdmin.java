@@ -19,12 +19,6 @@ import java.util.Map;
 public class ConsultasDashboardAdmin {
 
     @Autowired
-    private ClienteRepository clienteRepository;
-
-    @Autowired
-    private EventoRepository eventoRepository;
-
-    @Autowired
     private EntityManager entityManager;
 
     @GetMapping("/clientes-acordo-semana")
@@ -55,6 +49,7 @@ public class ConsultasDashboardAdmin {
         for (Object[] linha : resultado) {
             String tema = (String) linha[0];
             Long contatos = (Long) linha[1];
+
 
             TemaContatosClienteDto temaContatosClienteDto = new TemaContatosClienteDto(tema, contatos);
             temaContatosClienteDtos.add(temaContatosClienteDto);

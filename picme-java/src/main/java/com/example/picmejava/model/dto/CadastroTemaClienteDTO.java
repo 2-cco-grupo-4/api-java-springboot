@@ -12,5 +12,5 @@ import java.util.List;
 public class CadastroTemaClienteDTO {
 
     private List<Tema> temas;
-    private Cliente cliente;
+    private Integer idCliente;
 }

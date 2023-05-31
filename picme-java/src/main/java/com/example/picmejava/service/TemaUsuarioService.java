@@ -16,8 +16,10 @@ import com.example.picmejava.repository.TemaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TemaUsuarioService {
@@ -31,22 +33,22 @@ public class TemaUsuarioService {
     @Autowired
     private ClienteRepository clienteRepository;
 
-    private TemaUsuarioMapper temaUsuarioMapper = new TemaUsuarioMapper();
+    private final TemaUsuarioMapper temaUsuarioMapper = new TemaUsuarioMapper();
     
     public RetornoTemaFotografoDTO cadastrarTemaFotografo(CadastroTemaFotografoDTO novoTemaFotografo) {
 
         List<Tema> temas = novoTemaFotografo.getTemas().stream()
-                .map(tema -> validarTema(tema))
-                .toList();
+                .map(tema -> temaRepository.findById(tema.getId())
+                        .orElseThrow(() -> new EntidadeNaoEncontradaException("Tema não encontrado")))
+                .collect(Collectors.toList());
 
-        Fotografo fotografo = validarFotografo(novoTemaFotografo.getFotografo());
-        for (Tema tema : temas) {
-            tema.adicionar(fotografo);
-            fotografo.adicionar(tema);
-        }
+        Fotografo fotografo = fotografoRepository.findById(novoTemaFotografo.getIdFotografo())
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Fotografo não encontrado"));
+
+
+        temas.forEach(tema -> fotografo.getTemas().add(tema));
 
         fotografoRepository.save(fotografo);
-        temas.stream().map(tema -> temaRepository.save(tema));
 
         return temaUsuarioMapper.toRetornoTemaUsuarioDTO(temas, fotografo);
 
@@ -54,42 +56,15 @@ public class TemaUsuarioService {
 
     public RetornoTemaClienteDTO cadastrarTemaCliente(CadastroTemaClienteDTO novoTemaCliente) {
 
+        List<Tema> temas = new ArrayList<>();
+        novoTemaCliente.getTemas().forEach(tema -> temas.add(temaRepository.findById(tema.getId()).get()));
 
-        List<Tema> temas = novoTemaCliente.getTemas().stream()
-                .map(tema -> validarTema(tema))
-                .toList();
+        Cliente cliente = clienteRepository.findById(novoTemaCliente.getIdCliente())
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Cliente não encontrado"));
 
-        Cliente cliente = validarCliente(novoTemaCliente.getCliente());
-        for (Tema tema : temas) {
-            tema.adicionar(cliente);
-            cliente.adicionar(tema);
-        }
-
+        cliente.setTemas(temas);
         clienteRepository.save(cliente);
-        temas.stream().map(tema -> temaRepository.save(tema));
 
         return temaUsuarioMapper.toRetornoTemaUsuarioDTO(temas, cliente);
-
-    }
-
-    public Fotografo validarFotografo(Fotografo fotografo){
-        Optional<Fotografo> optionalFotografo = fotografoRepository.findById(fotografo.getId());
-        optionalFotografo.orElseThrow(() -> new EntidadeNaoEncontradaException("Fotografo não existe"));
-
-        return optionalFotografo.get();
-    }
-
-    public Cliente validarCliente(Cliente cliente){
-        Optional<Cliente> optionalCliente = clienteRepository.findById(cliente.getId());
-        optionalCliente.orElseThrow(() -> new EntidadeNaoEncontradaException("Cliente não existe"));
-
-        return optionalCliente.get();
-    }
-
-    public Tema validarTema(Tema tema){
-        Optional<Tema> temaOptional = temaRepository.findById(tema.getId());
-        temaOptional.orElseThrow(() -> new EntidadeNaoEncontradaException("Tema não encontrado"));
-
-        return temaOptional.get();
     }
 }
