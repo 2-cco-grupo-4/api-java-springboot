@@ -37,17 +37,14 @@ public class TemaUsuarioService {
     
     public RetornoTemaFotografoDTO cadastrarTemaFotografo(CadastroTemaFotografoDTO novoTemaFotografo) {
 
-        List<Tema> temas = novoTemaFotografo.getTemas().stream()
-                .map(tema -> temaRepository.findById(tema.getId())
-                        .orElseThrow(() -> new EntidadeNaoEncontradaException("Tema não encontrado")))
-                .collect(Collectors.toList());
+        List<Tema> temas = new ArrayList<>();
+        novoTemaFotografo.getTemas().forEach(tema -> temas.add(temaRepository.findById(tema.getId()).get()));
 
         Fotografo fotografo = fotografoRepository.findById(novoTemaFotografo.getIdFotografo())
                 .orElseThrow(() -> new EntidadeNaoEncontradaException("Fotografo não encontrado"));
 
 
-        temas.forEach(tema -> fotografo.getTemas().add(tema));
-
+        fotografo.setTemas(temas);
         fotografoRepository.save(fotografo);
 
         return temaUsuarioMapper.toRetornoTemaUsuarioDTO(temas, fotografo);
