@@ -5,9 +5,7 @@ import com.example.picmejava.repository.EventoRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,12 +14,13 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/admin")
+@CrossOrigin("http://localhost:3000")
 public class ConsultasDashboardAdmin {
 
     @Autowired
     private EntityManager entityManager;
 
-    @GetMapping("/clientes-acordo-semana")
+    @GetMapping("/faixa-etaria-clientes")
     public List<FaixaEtariaClienteDto> trazerFaixaEtariaCliente(){
         Query query = entityManager.createNativeQuery("SELECT * FROM vw_faixa_etaria_cliente");
         List<Object[]> resultado = query.getResultList();
@@ -39,9 +38,28 @@ public class ConsultasDashboardAdmin {
         return faixaEtariaClienteDtos;
     }
 
+    @GetMapping("/faixa-etaria-clientes-tema/{tema}")
+    public List<FaixaEtariaClienteDto> trazerFaixaEtariaClienteTema(@PathVariable String tema){
+        Query query = entityManager.createNativeQuery("CALL proc_faixa_etaria_cliente_tema(:tema)");
+        query.setParameter("tema", tema);
+        List<Object[]> resultado = query.getResultList();
+
+        List<FaixaEtariaClienteDto> faixaEtariaClienteDtos = new ArrayList<>();
+
+        for (Object[] linha : resultado) {
+            String faixa = (String) linha[0];
+            Long quantidade = (Long) linha[1];
+
+            FaixaEtariaClienteDto faixaEtariaClienteDto = new FaixaEtariaClienteDto(faixa, quantidade);
+            faixaEtariaClienteDtos.add(faixaEtariaClienteDto);
+        }
+
+        return faixaEtariaClienteDtos;
+    }
+
     @GetMapping("/contagem-tema-contato")
     public List<TemaContatosClienteDto> trazerContagemTemaContato() {
-        Query query = entityManager.createNativeQuery("SELECT tema, contatos FROM vw_contagem_tema_contato");
+        Query query = entityManager.createNativeQuery("SELECT * FROM vw_contagem_tema_contato");
         List<Object[]> resultado = query.getResultList();
 
         List<TemaContatosClienteDto> temaContatosClienteDtos = new ArrayList<>();
@@ -66,14 +84,32 @@ public class ConsultasDashboardAdmin {
         List<ContagemClientesAcordoUmaSemana> listaContagem = new ArrayList<>();
 
         for (Object[] linha : resultado) {
-            Long clienteContato = (Long) linha[0];
-            Long totalCliente = (Long) linha[1];
+            String label = (String) linha[0];
+            Long quantidade = (Long) linha[1];
 
-            ContagemClientesAcordoUmaSemana contagem = new ContagemClientesAcordoUmaSemana(clienteContato, totalCliente);
+            ContagemClientesAcordoUmaSemana contagem = new ContagemClientesAcordoUmaSemana(label, quantidade);
             listaContagem.add(contagem);
         }
 
         return listaContagem;
+    }
+
+    @GetMapping("/total-clientes-fotografos")
+    public List<FaixaEtariaClienteDto> totalClientesFotografos(){
+        Query query = entityManager.createNativeQuery("SELECT * FROM vw_total_clientes_fotografos");
+        List<Object[]> resultado = query.getResultList();
+
+        List<FaixaEtariaClienteDto> faixaEtariaClienteDtos = new ArrayList<>();
+
+        for (Object[] linha : resultado) {
+            String faixa = (String) linha[0];
+            Long quantidade = (Long) linha[1];
+
+            FaixaEtariaClienteDto faixaEtariaClienteDto = new FaixaEtariaClienteDto(faixa, quantidade);
+            faixaEtariaClienteDtos.add(faixaEtariaClienteDto);
+        }
+
+        return faixaEtariaClienteDtos;
     }
 
 }
