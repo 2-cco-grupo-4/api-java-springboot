@@ -1,14 +1,14 @@
 package com.example.picmejava.service;
 
+import com.example.picmejava.model.Cliente;
 import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.Tema;
-import com.example.picmejava.model.dto.CadastroTemaFotografoDTO;
-import com.example.picmejava.model.dto.PerfilTemaDTO;
-import com.example.picmejava.model.dto.RetornoTemaFotografoDTO;
+import com.example.picmejava.model.dto.*;
 import com.example.picmejava.model.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.repository.ClienteRepository;
 import com.example.picmejava.repository.FotografoRepository;
 import com.example.picmejava.repository.TemaRepository;
+import com.example.picmejava.service.builder.ClienteBuilder;
 import com.example.picmejava.service.builder.FotografoBuilder;
 import com.example.picmejava.service.builder.TemaBuilder;
 import com.example.picmejava.service.builder.TemaUsuarioBuilder;
@@ -80,6 +80,51 @@ class TemaUsuarioServiceTest {
         RetornoTemaFotografoDTO resultado = temaUsuarioService.cadastrarTemaFotografo(cadastro);
 
         assertNotNull(resultado);
+        assertEquals(cadastro.getIdFotografo(), resultado.getFotografo().getId());
+        assertEquals(cadastro.getTemas().get(0).getId(), resultado.getTemas().get(0).getId());
+    }
+
+    @Test
+    @DisplayName("Deve retornar exception quando cadastrar TemaCliente e idTema invalido")
+    void deveRetornarExceptionQuandoCadastrarTemaClienteEIdTemaInvalido(){
+        CadastroTemaClienteDTO cadastro = TemaUsuarioBuilder.criarCadastroTemaCliente();
+        EntidadeNaoEncontradaException exception = assertThrows(EntidadeNaoEncontradaException.class, () -> {
+            temaUsuarioService.cadastrarTemaCliente(cadastro);
+        });
+
+        assertEquals("Tema não encontrado", exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("Deve retornar exception quando cadastrar TemaCliente e idFotografo invalido")
+    void deveRetornarExceptionQuandoCadastrarTemaClienteEIdClienteInvalido(){
+        CadastroTemaClienteDTO cadastro = TemaUsuarioBuilder.criarCadastroTemaCliente();
+        Tema tema = TemaBuilder.criarTema();
+
+        Mockito.when(temaRepository.findById(Mockito.eq(tema.getId()))).thenReturn(Optional.of(tema));
+
+        EntidadeNaoEncontradaException exception = assertThrows(EntidadeNaoEncontradaException.class, () -> {
+            temaUsuarioService.cadastrarTemaCliente(cadastro);
+        });
+
+        assertEquals("Cliente não encontrado", exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("Deve retornar TemaCliente quando cadastrar TemaFotografo e dados validos")
+    void deveRetornarTemaClienteQuandoCadastrarTemaClienteEDadosValidos(){
+        CadastroTemaClienteDTO cadastro = TemaUsuarioBuilder.criarCadastroTemaCliente();
+        Tema tema = TemaBuilder.criarTema();
+        Cliente cliente = ClienteBuilder.criarCliente();
+
+        Mockito.when(temaRepository.findById(Mockito.eq(tema.getId()))).thenReturn(Optional.of(tema));
+        Mockito.when(clienteRepository.findById(Mockito.eq(cliente.getId()))).thenReturn(Optional.of(cliente));
+
+        RetornoTemaClienteDTO resultado = temaUsuarioService.cadastrarTemaCliente(cadastro);
+
+        assertNotNull(resultado);
+        assertEquals(cadastro.getIdCliente(), resultado.getCliente().getId());
+        assertEquals(cadastro.getTemas().get(0).getId(), resultado.getTemas().get(0).getId());
     }
 
 }

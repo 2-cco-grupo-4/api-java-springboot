@@ -23,4 +23,14 @@ public class TemaUsuarioBuilder {
 
         return cadastroTemaFotografoDTO;
     }
+
+    public static CadastroTemaClienteDTO criarCadastroTemaCliente() {
+        CadastroTemaClienteDTO cadastro = new CadastroTemaClienteDTO();
+
+        cadastro.setIdCliente(1);
+        cadastro.setTemas(List.of(
+                TemaBuilder.criarTema()
+        ));
+        return cadastro;
+    }
 }

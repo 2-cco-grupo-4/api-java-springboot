@@ -59,7 +59,7 @@ class AlbumServiceTest {
 
         assertNotNull(resultado);
         assertEquals(album.getId(),resultado.getId());
-        assertEquals(album.getTema(), resultado.getTema());
+        assertEquals(album.getTema().getId(), resultado.getTema().getId());
         assertEquals(album.getTitulo(), resultado.getTitulo());
         assertEquals(album.getImagems(), resultado.getImagems());
     }
@@ -80,13 +80,15 @@ class AlbumServiceTest {
     @Test
     @DisplayName("Deve retornar excecao quando cadastrar album e Fotografo invalido")
     void deveRetornarExcecaoQuandoCadastrarAlbumEFotografoInvalido(){
-        Tema tema = TemaBuilder.criarTema();
         CadastroAlbumDTO cadastroAlbumDTO = AlbumBuilder.criarCadastroAlbum();
+        Tema tema = TemaBuilder.criarTema();
+        Fotografo fotografo = FotografoBuilder.criarFotografo();
 
-        Mockito.when(temaRepository.findById(Mockito.eq(tema.getId()))).thenReturn(Optional.of(tema));
+        Mockito.when(temaRepository.findById(Mockito.eq(cadastroAlbumDTO.getIdTema()))).thenReturn(Optional.of(tema));
+        Mockito.when(fotografoRepository.findById(Mockito.eq(fotografo.getId()))).thenReturn(Optional.empty());
 
         EntidadeNaoEncontradaException exception = assertThrows(EntidadeNaoEncontradaException.class, () -> {
-            RetornoAlbumDTO resultado = albumService.cadastrar(cadastroAlbumDTO);
+            albumService.cadastrar(cadastroAlbumDTO);
         });
 
         assertEquals("Fotografo não encontrado", exception.getMessage());
