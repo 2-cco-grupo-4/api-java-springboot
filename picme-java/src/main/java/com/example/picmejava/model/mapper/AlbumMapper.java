@@ -1,7 +1,9 @@
 package com.example.picmejava.model.mapper;
 
 import com.example.picmejava.model.Album;
+import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.Tema;
+import com.example.picmejava.model.dto.CadastroAlbumDTO;
 import com.example.picmejava.model.dto.PerfilAlbumDTO;
 import com.example.picmejava.model.dto.AtualizarAlbumDTO;
 import com.example.picmejava.model.dto.RetornoAlbumDTO;
@@ -45,5 +47,16 @@ public class AlbumMapper {
         }
 
         return dto;
+    }
+
+    public Album toAlbum(CadastroAlbumDTO dados, Fotografo fotografo, Tema tema) {
+        Album album = new Album();
+
+        album.setFotografo(fotografo);
+        album.setDescricao(dados.getDescricao());
+        album.setTitulo(dados.getTitulo());
+        album.setTema(tema);
+
+        return album;
     }
 }

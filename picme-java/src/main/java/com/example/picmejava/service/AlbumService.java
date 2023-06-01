@@ -4,6 +4,7 @@ import com.example.picmejava.model.Album;
 import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.Tema;
 import com.example.picmejava.model.dto.AtualizarAlbumDTO;
+import com.example.picmejava.model.dto.CadastroAlbumDTO;
 import com.example.picmejava.model.dto.RetornoAlbumDTO;
 import com.example.picmejava.model.exception.EntidadeNaoCadastradaException;
 import com.example.picmejava.model.exception.EntidadeNaoEncontradaException;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.picmejava.lista.Lista;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,19 +34,18 @@ public class AlbumService {
 
     private AlbumMapper albumMapper = new AlbumMapper();
 
-    public RetornoAlbumDTO cadastrar(Album novoAlbum){
-        Tema tema = temaRepository.findById(novoAlbum.getTema().getId())
+    public RetornoAlbumDTO cadastrar(CadastroAlbumDTO novoAlbum){
+        Tema tema = temaRepository.findById(novoAlbum.getIdTema())
                 .orElseThrow(() -> new EntidadeNaoEncontradaException("Tema não existe"));
 
-        Fotografo fotografo = fotografoRepository.findById(novoAlbum.getFotografo().getId())
+        Fotografo fotografo = fotografoRepository.findById(novoAlbum.getIdFotografo())
                 .orElseThrow(() -> new EntidadeNaoEncontradaException("Fotografo não encontrado"));
 
-        novoAlbum.setTema(tema);
-        albumRepository.save(novoAlbum);
-        fotografo.getAlbums().add(novoAlbum);
-        fotografoRepository.save(fotografo);
+        Album album = albumMapper.toAlbum(novoAlbum, fotografo, tema);
 
-        return albumMapper.toRetornoAlbumDTO(novoAlbum);
+        albumRepository.save(album);
+
+        return albumMapper.toRetornoAlbumDTO(album);
     }
 
     public RetornoAlbumDTO atualizar(Integer idAlbum, AtualizarAlbumDTO albumAtualizado){

@@ -16,6 +16,7 @@ public abstract class Usuario implements Identificavel{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_USUARIO")
     private Integer id;
     private String nome;
     private String email;
@@ -31,7 +32,11 @@ public abstract class Usuario implements Identificavel{
     private String tipoUsuario;
     private String tokenSolicitacao;
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "tema_usuarios")
+    @JoinTable(
+            name = "usuario_tema",
+            joinColumns = @JoinColumn(name = "ID_USUARIO"),
+            inverseJoinColumns = @JoinColumn(name = "ID_TEMA")
+    )
     private List<Tema> temas;
     public abstract String getTipoUsuario();
 }

@@ -16,6 +16,7 @@ public class Imagem implements Identificavel {
     )
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_IMAGEM")
     private Integer id;
 
     @Schema(
@@ -42,7 +43,7 @@ public class Imagem implements Identificavel {
             example = "1"
     )
     @ManyToOne
-    @JoinColumn(name = "FK_ALBUM")
+    @JoinColumn(name = "FK_ALBUM", referencedColumnName = "ID_ALBUM")
     private Album idAlbum;
 
 }

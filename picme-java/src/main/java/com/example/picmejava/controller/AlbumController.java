@@ -3,6 +3,7 @@ package com.example.picmejava.controller;
 import com.example.picmejava.model.Album;
 import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.dto.AtualizarAlbumDTO;
+import com.example.picmejava.model.dto.CadastroAlbumDTO;
 import com.example.picmejava.model.dto.RetornoAlbumDTO;
 import com.example.picmejava.service.AlbumService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -31,7 +32,7 @@ public class AlbumController {
     @SecurityRequirement(name = "Bearer")
 
     @PostMapping
-    public ResponseEntity<RetornoAlbumDTO> cadastrar(@RequestBody Album novoAlbum){
+    public ResponseEntity<RetornoAlbumDTO> cadastrar(@RequestBody @Valid CadastroAlbumDTO novoAlbum){
         return ResponseEntity.status(201).body(albumService.cadastrar(novoAlbum));
     }
 

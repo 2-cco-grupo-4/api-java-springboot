@@ -1,5 +1,6 @@
 package com.example.picmejava.service.builder;
 
+import com.example.picmejava.model.Album;
 import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
 import com.example.picmejava.model.dto.CadastroUsuarioDTO;
@@ -30,6 +31,9 @@ public class FotografoBuilder {
         fotografo.setDataNasc(LocalDate.ofYearDay(1999, 12));
         fotografo.setNumCelular("(11)123412345");
         fotografo.setTipoUsuario("fotografo");
+        fotografo.setAlbums(List.of(
+                new Album()
+        ));
 
         return fotografo;
     }

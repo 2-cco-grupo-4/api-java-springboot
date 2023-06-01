@@ -13,6 +13,7 @@ public class Endereco {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_ENDERECO")
     private Integer id;
     private String estado;
     private String cidade;

@@ -4,6 +4,7 @@ import com.example.picmejava.model.Album;
 import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.Tema;
 import com.example.picmejava.model.dto.AtualizarAlbumDTO;
+import com.example.picmejava.model.dto.CadastroAlbumDTO;
 import com.example.picmejava.model.dto.RetornoAlbumDTO;
 import com.example.picmejava.model.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.repository.AlbumRepository;
@@ -46,14 +47,15 @@ class AlbumServiceTest {
     @DisplayName("Deve retornar Album quando cadastrar com dados validos")
     void deveRetornarAlbumQuandoCadastrarComDadosValidos(){
         Album album = AlbumBuilder.criarAlbum();
+        CadastroAlbumDTO cadastroAlbumDTO = AlbumBuilder.criarCadastroAlbum();
         Tema tema = TemaBuilder.criarTema();
         Fotografo fotografo = FotografoBuilder.criarFotografo();
 
         Mockito.when(albumRepository.save(Mockito.any(Album.class))).thenReturn(album);
-        Mockito.when(temaRepository.findById(Mockito.eq(tema.getId()))).thenReturn(Optional.of(tema));
+        Mockito.when(temaRepository.findById(Mockito.eq(cadastroAlbumDTO.getIdTema()))).thenReturn(Optional.of(tema));
         Mockito.when(fotografoRepository.findById(Mockito.eq(fotografo.getId()))).thenReturn(Optional.of(fotografo));
 
-        RetornoAlbumDTO resultado = albumService.cadastrar(album);
+        RetornoAlbumDTO resultado = albumService.cadastrar(cadastroAlbumDTO);
 
         assertNotNull(resultado);
         assertEquals(album.getId(),resultado.getId());
@@ -65,10 +67,10 @@ class AlbumServiceTest {
     @Test
     @DisplayName("Deve retornar excecao quando cadastrar album e Tema invalido")
     void deveRetornarExcecaoQuandoCadastrarAlbumETemaInvalido(){
-        Album album = AlbumBuilder.criarAlbum();
+        CadastroAlbumDTO cadastroAlbumDTO = AlbumBuilder.criarCadastroAlbum();
 
         EntidadeNaoEncontradaException exception = assertThrows(EntidadeNaoEncontradaException.class, () -> {
-            RetornoAlbumDTO resultado = albumService.cadastrar(album);
+            RetornoAlbumDTO resultado = albumService.cadastrar(cadastroAlbumDTO);
         });
 
         assertEquals("Tema não existe", exception.getMessage());
@@ -79,12 +81,12 @@ class AlbumServiceTest {
     @DisplayName("Deve retornar excecao quando cadastrar album e Fotografo invalido")
     void deveRetornarExcecaoQuandoCadastrarAlbumEFotografoInvalido(){
         Tema tema = TemaBuilder.criarTema();
-        Album album = AlbumBuilder.criarAlbum();
+        CadastroAlbumDTO cadastroAlbumDTO = AlbumBuilder.criarCadastroAlbum();
 
         Mockito.when(temaRepository.findById(Mockito.eq(tema.getId()))).thenReturn(Optional.of(tema));
 
         EntidadeNaoEncontradaException exception = assertThrows(EntidadeNaoEncontradaException.class, () -> {
-            RetornoAlbumDTO resultado = albumService.cadastrar(album);
+            RetornoAlbumDTO resultado = albumService.cadastrar(cadastroAlbumDTO);
         });
 
         assertEquals("Fotografo não encontrado", exception.getMessage());

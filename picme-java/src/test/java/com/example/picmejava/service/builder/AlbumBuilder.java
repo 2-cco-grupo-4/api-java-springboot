@@ -2,6 +2,7 @@ package com.example.picmejava.service.builder;
 
 import com.example.picmejava.model.Album;
 import com.example.picmejava.model.dto.AtualizarAlbumDTO;
+import com.example.picmejava.model.dto.CadastroAlbumDTO;
 
 import java.util.List;
 
@@ -29,6 +30,17 @@ public class AlbumBuilder {
         atualizarAlbum.setTitulo("Album 01");
 
         return atualizarAlbum;
+    }
+
+    public static CadastroAlbumDTO criarCadastroAlbum(){
+        CadastroAlbumDTO dto = new CadastroAlbumDTO();
+
+        dto.setDescricao("Descrição do album 01");
+        dto.setTitulo("Album 01");
+        dto.setIdFotografo(1);
+        dto.setIdTema(1);
+
+        return dto;
     }
 
     public static List<Album> criarListaAlbum(){

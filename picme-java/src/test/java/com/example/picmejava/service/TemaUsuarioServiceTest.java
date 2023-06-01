@@ -64,7 +64,7 @@ class TemaUsuarioServiceTest {
             temaUsuarioService.cadastrarTemaFotografo(cadastro);
         });
 
-        assertEquals("Fotografo não existe", exception.getMessage());
+        assertEquals("Fotografo não encontrado", exception.getMessage());
     }
 
     @Test

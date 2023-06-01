@@ -16,7 +16,7 @@ public class Fotografo extends Usuario implements Identificavel{
     private String tokenSolicitacao;
 
     @OneToMany
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "FK_FOTOGRAFO")
     private List<Album> albums;
 
     @Override

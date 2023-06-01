@@ -13,6 +13,7 @@ public class Evento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_EVENTO")
     private Integer id;
     private LocalDate dataRealizacao;
     private String statusEvento;

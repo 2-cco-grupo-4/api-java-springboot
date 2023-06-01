@@ -23,6 +23,7 @@ public class Tema implements Identificavel {
     )
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_TEMA")
     private Integer id;
 
     @Schema(

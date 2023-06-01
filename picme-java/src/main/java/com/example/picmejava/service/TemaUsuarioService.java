@@ -38,7 +38,14 @@ public class TemaUsuarioService {
     public RetornoTemaFotografoDTO cadastrarTemaFotografo(CadastroTemaFotografoDTO novoTemaFotografo) {
 
         List<Tema> temas = new ArrayList<>();
-        novoTemaFotografo.getTemas().forEach(tema -> temas.add(temaRepository.findById(tema.getId()).get()));
+        novoTemaFotografo
+                .getTemas()
+                .forEach(tema -> {
+                    temaRepository.findById(tema.getId()).orElseThrow(
+                            () -> new EntidadeNaoEncontradaException("Tema não encontrado")
+                    );
+                    temas.add(tema);
+                });
 
         Fotografo fotografo = fotografoRepository.findById(novoTemaFotografo.getIdFotografo())
                 .orElseThrow(() -> new EntidadeNaoEncontradaException("Fotografo não encontrado"));
@@ -54,7 +61,13 @@ public class TemaUsuarioService {
     public RetornoTemaClienteDTO cadastrarTemaCliente(CadastroTemaClienteDTO novoTemaCliente) {
 
         List<Tema> temas = new ArrayList<>();
-        novoTemaCliente.getTemas().forEach(tema -> temas.add(temaRepository.findById(tema.getId()).get()));
+        novoTemaCliente.getTemas()
+                .forEach(tema -> {
+                    temaRepository.findById(tema.getId()).orElseThrow(
+                            () -> new EntidadeNaoEncontradaException("Tema não encontrado")
+                    );
+                    temas.add(tema);
+                });
 
         Cliente cliente = clienteRepository.findById(novoTemaCliente.getIdCliente())
                 .orElseThrow(() -> new EntidadeNaoEncontradaException("Cliente não encontrado"));
