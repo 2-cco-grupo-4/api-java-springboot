@@ -34,3 +34,4 @@ public class PicmeJavaApplication {
 
     public static void main(String[] args) {SpringApplication.run(PicmeJavaApplication.class, args);}
 }
+

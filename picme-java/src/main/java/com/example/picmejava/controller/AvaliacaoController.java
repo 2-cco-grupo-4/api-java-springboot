@@ -5,17 +5,17 @@ import com.example.picmejava.celia.Fila;
 import com.example.picmejava.celia.Pilha;
 import com.example.picmejava.model.Avaliacao;
 import com.example.picmejava.service.AvaliacaoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/avaliacoes")
 public class AvaliacaoController {
+
+    @Autowired
 
     private AvaliacaoService avaliacaoService;
 
@@ -24,8 +24,8 @@ public class AvaliacaoController {
     }
 
 
-    @GetMapping("/avaliar")
-    public ResponseEntity<Avaliacao> avaliar(Avaliacao avaliacao) {
+    @PostMapping("/avaliar")
+    public ResponseEntity<Avaliacao> avaliar(@RequestBody  Avaliacao avaliacao) {
         avaliacaoService.avaliar(avaliacao);
         return ResponseEntity.status(201).body(avaliacao);
     }
@@ -36,9 +36,9 @@ public class AvaliacaoController {
     }
 
 
-    @GetMapping("/ver-em-fila")
-    public ResponseEntity<List<Avaliacao>> verEmFila() {
-        return ResponseEntity.status(200).body(avaliacaoService.enfileirarAvaliacoes().toList());
+    @GetMapping("/enfileirar")
+    public ResponseEntity<Fila<Avaliacao>> verEmFila() {
+        return ResponseEntity.status(200).body(avaliacaoService.enfileirarAvaliacoes());
     }
 
 
