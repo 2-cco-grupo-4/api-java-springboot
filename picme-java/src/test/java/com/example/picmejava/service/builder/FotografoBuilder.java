@@ -2,15 +2,13 @@ package com.example.picmejava.service.builder;
 
 import com.example.picmejava.model.Album;
 import com.example.picmejava.model.Fotografo;
-import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
-import com.example.picmejava.model.dto.CadastroUsuarioDTO;
-import com.example.picmejava.model.dto.LoginUsuarioDTO;
-import com.example.picmejava.model.dto.PerfilFotografoDTO;
-import org.springframework.cglib.core.Local;
+import com.example.picmejava.service.usuario.dto.AtualizarUsuarioDTO;
+import com.example.picmejava.service.usuario.dto.CadastroUsuarioDTO;
+import com.example.picmejava.service.usuario.dto.LoginUsuarioDTO;
+import com.example.picmejava.service.usuario.dto.PerfilFotografoDTO;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.zip.GZIPOutputStream;
 
 public class FotografoBuilder {
 

@@ -1,7 +1,10 @@
 package com.example.picmejava.model.mapper;
 
 import com.example.picmejava.model.Fotografo;
-import com.example.picmejava.model.dto.*;
+import com.example.picmejava.service.usuario.dto.AtualizarUsuarioDTO;
+import com.example.picmejava.service.usuario.dto.CadastroUsuarioDTO;
+import com.example.picmejava.service.usuario.dto.PerfilFotografoDTO;
+import com.example.picmejava.service.usuario.dto.RetornoFotografoDTO;
 
 import java.time.LocalDate;
 import java.util.stream.Collectors;

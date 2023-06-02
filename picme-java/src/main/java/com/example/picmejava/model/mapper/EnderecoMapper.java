@@ -2,9 +2,9 @@ package com.example.picmejava.model.mapper;
 
 import com.example.picmejava.model.Endereco;
 import com.example.picmejava.model.Evento;
-import com.example.picmejava.model.dto.CadastroEnderecoDTO;
-import com.example.picmejava.model.dto.PerfilEnderecoDTO;
-import com.example.picmejava.model.dto.RetornoEnderecoDTO;
+import com.example.picmejava.service.endereco.dto.CadastroEnderecoDTO;
+import com.example.picmejava.service.endereco.dto.PerfilEnderecoDTO;
+import com.example.picmejava.service.endereco.dto.RetornoEnderecoDTO;
 
 public class EnderecoMapper {
 

@@ -1,9 +1,8 @@
 package com.example.picmejava.controller;
 
-import com.example.picmejava.model.Endereco;
-import com.example.picmejava.model.dto.CadastroEnderecoDTO;
-import com.example.picmejava.model.dto.RetornoEnderecoDTO;
-import com.example.picmejava.service.EnderecoService;
+import com.example.picmejava.service.endereco.dto.CadastroEnderecoDTO;
+import com.example.picmejava.service.endereco.dto.RetornoEnderecoDTO;
+import com.example.picmejava.service.endereco.EnderecoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -1,8 +1,7 @@
 package com.example.picmejava.service.builder;
 
 import com.example.picmejava.model.Cliente;
-import com.example.picmejava.model.dto.PerfilClienteDTO;
-import com.example.picmejava.model.dto.RetornoTemaClienteDTO;
+import com.example.picmejava.service.usuario.dto.PerfilClienteDTO;
 
 import java.time.LocalDate;
 import java.util.List;

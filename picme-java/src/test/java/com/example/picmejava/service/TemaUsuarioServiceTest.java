@@ -3,7 +3,6 @@ package com.example.picmejava.service;
 import com.example.picmejava.model.Cliente;
 import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.Tema;
-import com.example.picmejava.model.dto.*;
 import com.example.picmejava.model.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.repository.ClienteRepository;
 import com.example.picmejava.repository.FotografoRepository;
@@ -12,6 +11,11 @@ import com.example.picmejava.service.builder.ClienteBuilder;
 import com.example.picmejava.service.builder.FotografoBuilder;
 import com.example.picmejava.service.builder.TemaBuilder;
 import com.example.picmejava.service.builder.TemaUsuarioBuilder;
+import com.example.picmejava.service.temaUsuario.TemaUsuarioService;
+import com.example.picmejava.service.temaUsuario.dto.CadastroTemaClienteDTO;
+import com.example.picmejava.service.temaUsuario.dto.CadastroTemaFotografoDTO;
+import com.example.picmejava.service.temaUsuario.dto.RetornoTemaClienteDTO;
+import com.example.picmejava.service.temaUsuario.dto.RetornoTemaFotografoDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,8 +24,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;

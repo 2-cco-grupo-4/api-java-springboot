@@ -1,8 +1,8 @@
 package com.example.picmejava.controller;
 
-import com.example.picmejava.model.dto.*;
 import com.example.picmejava.model.mapper.FotografoMapper;
-import com.example.picmejava.service.FotografoService;
+import com.example.picmejava.service.usuario.FotografoService;
+import com.example.picmejava.service.usuario.dto.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
 
 @Tag(
         name = "Fotografo Controller",

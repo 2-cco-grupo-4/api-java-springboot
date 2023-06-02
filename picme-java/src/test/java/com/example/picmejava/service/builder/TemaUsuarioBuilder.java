@@ -1,9 +1,7 @@
 package com.example.picmejava.service.builder;
 
-import com.example.picmejava.model.dto.CadastroTemaClienteDTO;
-import com.example.picmejava.model.dto.CadastroTemaFotografoDTO;
-import com.example.picmejava.model.dto.RetornoTemaClienteDTO;
-import com.example.picmejava.model.dto.RetornoTemaFotografoDTO;
+import com.example.picmejava.service.temaUsuario.dto.CadastroTemaClienteDTO;
+import com.example.picmejava.service.temaUsuario.dto.CadastroTemaFotografoDTO;
 
 import java.util.List;
 

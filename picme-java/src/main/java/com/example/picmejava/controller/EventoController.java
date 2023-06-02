@@ -1,9 +1,8 @@
 package com.example.picmejava.controller;
 
-import com.example.picmejava.model.Evento;
-import com.example.picmejava.model.dto.CadastroEventoDTO;
-import com.example.picmejava.model.dto.RetornoEventoDTO;
-import com.example.picmejava.service.EventoService;
+import com.example.picmejava.service.evento.dto.CadastroEventoDTO;
+import com.example.picmejava.service.evento.dto.RetornoEventoDTO;
+import com.example.picmejava.service.evento.EventoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

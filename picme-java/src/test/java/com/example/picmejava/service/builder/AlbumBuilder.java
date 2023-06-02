@@ -1,8 +1,8 @@
 package com.example.picmejava.service.builder;
 
 import com.example.picmejava.model.Album;
-import com.example.picmejava.model.dto.AtualizarAlbumDTO;
-import com.example.picmejava.model.dto.CadastroAlbumDTO;
+import com.example.picmejava.service.album.dto.AtualizarAlbumDTO;
+import com.example.picmejava.service.album.dto.CadastroAlbumDTO;
 
 import java.util.List;
 

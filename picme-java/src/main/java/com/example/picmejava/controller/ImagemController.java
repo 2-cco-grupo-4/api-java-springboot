@@ -1,11 +1,8 @@
 package com.example.picmejava.controller;
 
-import com.example.picmejava.lista.Lista;
 import com.example.picmejava.model.Imagem;
-import com.example.picmejava.model.dto.PerfilImagemDTO;
-import com.example.picmejava.model.dto.RetornoAlbumDTO;
-import com.example.picmejava.model.dto.RetornoImagemDTO;
-import com.example.picmejava.service.ImagemService;
+import com.example.picmejava.service.imagem.dto.RetornoImagemDTO;
+import com.example.picmejava.service.imagem.ImagemService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;

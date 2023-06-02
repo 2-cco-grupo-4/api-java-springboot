@@ -1,10 +1,10 @@
 package com.example.picmejava.controller;
 
-import com.example.picmejava.model.dto.CadastroTemaClienteDTO;
-import com.example.picmejava.model.dto.CadastroTemaFotografoDTO;
-import com.example.picmejava.model.dto.RetornoTemaClienteDTO;
-import com.example.picmejava.model.dto.RetornoTemaFotografoDTO;
-import com.example.picmejava.service.TemaUsuarioService;
+import com.example.picmejava.service.temaUsuario.dto.CadastroTemaClienteDTO;
+import com.example.picmejava.service.temaUsuario.dto.CadastroTemaFotografoDTO;
+import com.example.picmejava.service.temaUsuario.dto.RetornoTemaClienteDTO;
+import com.example.picmejava.service.temaUsuario.dto.RetornoTemaFotografoDTO;
+import com.example.picmejava.service.temaUsuario.TemaUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,10 +1,9 @@
 package com.example.picmejava.model.mapper;
 
 import com.example.picmejava.model.*;
-import com.example.picmejava.model.dto.CadastroEventoDTO;
-import com.example.picmejava.model.dto.PerfilEnderecoDTO;
-import com.example.picmejava.model.dto.PerfilEventoDTO;
-import com.example.picmejava.model.dto.RetornoEventoDTO;
+import com.example.picmejava.service.evento.dto.CadastroEventoDTO;
+import com.example.picmejava.service.evento.dto.PerfilEventoDTO;
+import com.example.picmejava.service.evento.dto.RetornoEventoDTO;
 
 public class EventoMapper {
 

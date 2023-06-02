@@ -1,11 +1,10 @@
 package com.example.picmejava.controller;
 
 import com.example.picmejava.model.Album;
-import com.example.picmejava.model.Fotografo;
-import com.example.picmejava.model.dto.AtualizarAlbumDTO;
-import com.example.picmejava.model.dto.CadastroAlbumDTO;
-import com.example.picmejava.model.dto.RetornoAlbumDTO;
-import com.example.picmejava.service.AlbumService;
+import com.example.picmejava.service.album.dto.AtualizarAlbumDTO;
+import com.example.picmejava.service.album.dto.CadastroAlbumDTO;
+import com.example.picmejava.service.album.dto.RetornoAlbumDTO;
+import com.example.picmejava.service.album.AlbumService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;

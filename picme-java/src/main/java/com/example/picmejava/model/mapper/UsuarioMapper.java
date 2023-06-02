@@ -3,9 +3,9 @@ package com.example.picmejava.model.mapper;
 import com.example.picmejava.model.Cliente;
 import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.Usuario;
-import com.example.picmejava.model.dto.PerfilClienteDTO;
-import com.example.picmejava.model.dto.PerfilFotografoDTO;
-import com.example.picmejava.model.dto.PerfilUsuarioDTO;
+import com.example.picmejava.service.usuario.dto.PerfilClienteDTO;
+import com.example.picmejava.service.usuario.dto.PerfilFotografoDTO;
+import com.example.picmejava.service.usuario.dto.PerfilUsuarioDTO;
 
 public class UsuarioMapper {
 

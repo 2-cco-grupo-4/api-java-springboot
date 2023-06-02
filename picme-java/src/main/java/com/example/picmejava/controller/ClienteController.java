@@ -1,12 +1,11 @@
 package com.example.picmejava.controller;
 
-import com.example.picmejava.model.Tema;
-import com.example.picmejava.model.dto.AtualizarUsuarioDTO;
-import com.example.picmejava.model.dto.CadastroUsuarioDTO;
-import com.example.picmejava.model.dto.LoginUsuarioDTO;
-import com.example.picmejava.model.dto.PerfilClienteDTO;
+import com.example.picmejava.service.usuario.dto.AtualizarUsuarioDTO;
+import com.example.picmejava.service.usuario.dto.CadastroUsuarioDTO;
+import com.example.picmejava.service.usuario.dto.LoginUsuarioDTO;
+import com.example.picmejava.service.usuario.dto.PerfilClienteDTO;
 import com.example.picmejava.model.mapper.ClienteMapper;
-import com.example.picmejava.service.ClienteService;
+import com.example.picmejava.service.usuario.ClienteService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;

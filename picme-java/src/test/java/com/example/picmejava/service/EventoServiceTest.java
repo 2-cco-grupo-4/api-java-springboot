@@ -1,13 +1,12 @@
 package com.example.picmejava.service;
 
 import com.example.picmejava.model.Evento;
-import com.example.picmejava.model.Fotografo;
-import com.example.picmejava.model.dto.CadastroEventoDTO;
-import com.example.picmejava.model.dto.RetornoEventoDTO;
+import com.example.picmejava.service.evento.dto.CadastroEventoDTO;
+import com.example.picmejava.service.evento.dto.RetornoEventoDTO;
 import com.example.picmejava.model.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.repository.*;
 import com.example.picmejava.service.builder.EventoBuilder;
-import com.example.picmejava.service.builder.FotografoBuilder;
+import com.example.picmejava.service.evento.EventoService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

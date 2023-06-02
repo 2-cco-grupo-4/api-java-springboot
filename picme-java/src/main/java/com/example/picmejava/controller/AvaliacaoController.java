@@ -1,9 +1,8 @@
 package com.example.picmejava.controller;
 
 
-import com.example.picmejava.celia.Pilha;
 import com.example.picmejava.model.Avaliacao;
-import com.example.picmejava.service.AvaliacaoService;
+import com.example.picmejava.service.avaliacao.AvaliacaoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

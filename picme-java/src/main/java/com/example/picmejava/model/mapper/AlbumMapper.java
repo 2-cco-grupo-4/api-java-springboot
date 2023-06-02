@@ -3,10 +3,10 @@ package com.example.picmejava.model.mapper;
 import com.example.picmejava.model.Album;
 import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.Tema;
-import com.example.picmejava.model.dto.CadastroAlbumDTO;
-import com.example.picmejava.model.dto.PerfilAlbumDTO;
-import com.example.picmejava.model.dto.AtualizarAlbumDTO;
-import com.example.picmejava.model.dto.RetornoAlbumDTO;
+import com.example.picmejava.service.album.dto.CadastroAlbumDTO;
+import com.example.picmejava.service.album.dto.PerfilAlbumDTO;
+import com.example.picmejava.service.album.dto.AtualizarAlbumDTO;
+import com.example.picmejava.service.album.dto.RetornoAlbumDTO;
 
 public class AlbumMapper {
 

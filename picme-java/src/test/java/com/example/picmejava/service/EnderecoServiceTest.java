@@ -1,19 +1,19 @@
 package com.example.picmejava.service;
 
 import com.example.picmejava.model.Endereco;
-import com.example.picmejava.model.dto.CadastroEnderecoDTO;
-import com.example.picmejava.model.dto.RetornoEnderecoDTO;
+import com.example.picmejava.service.endereco.dto.CadastroEnderecoDTO;
+import com.example.picmejava.service.endereco.dto.RetornoEnderecoDTO;
 import com.example.picmejava.model.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.repository.EnderecoRepository;
 import com.example.picmejava.repository.EventoRepository;
 import com.example.picmejava.service.builder.EnderecoBuilder;
+import com.example.picmejava.service.endereco.EnderecoService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoTestRule;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;

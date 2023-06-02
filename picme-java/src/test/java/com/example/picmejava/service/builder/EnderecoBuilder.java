@@ -1,9 +1,8 @@
 package com.example.picmejava.service.builder;
 
 import com.example.picmejava.model.Endereco;
-import com.example.picmejava.model.Evento;
-import com.example.picmejava.model.dto.CadastroEnderecoDTO;
-import com.example.picmejava.model.dto.PerfilEnderecoDTO;
+import com.example.picmejava.service.endereco.dto.CadastroEnderecoDTO;
+import com.example.picmejava.service.endereco.dto.PerfilEnderecoDTO;
 
 import java.util.List;
 
