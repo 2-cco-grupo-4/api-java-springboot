@@ -46,7 +46,7 @@ public class FotografoController {
     @SecurityRequirement(name = "Bearer")
     @PutMapping("/atualizar/{idFotografo}")
     public ResponseEntity<PerfilFotografoDTO> atualizar(
-            @PathVariable Integer idFotografo, @RequestBody @Valid AtualizarUsuarioDTO fotografoAtualizado
+            @PathVariable Long idFotografo, @RequestBody @Valid AtualizarUsuarioDTO fotografoAtualizado
     ){
         return ResponseEntity.status(200).body(fotografoMapper.toPerfilFotogradoDTO(
                 serviceFotografo.atualizar(idFotografo, fotografoAtualizado)

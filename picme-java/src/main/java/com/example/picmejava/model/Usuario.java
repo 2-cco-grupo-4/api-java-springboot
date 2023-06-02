@@ -17,7 +17,7 @@ public abstract class Usuario implements Identificavel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_USUARIO")
-    private Integer id;
+    private Long id;
     private String nome;
     private String email;
     private String senha;

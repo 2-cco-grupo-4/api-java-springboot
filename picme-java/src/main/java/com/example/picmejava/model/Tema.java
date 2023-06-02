@@ -24,7 +24,7 @@ public class Tema implements Identificavel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_TEMA")
-    private Integer id;
+    private Long id;
 
     @Schema(
             description = "Nome do tema",

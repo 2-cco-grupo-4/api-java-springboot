@@ -30,7 +30,8 @@ public class AlbumMapper {
 
         dto.setId(dados.getId());
         dto.setTitulo(dados.getTitulo());
-        dto.setTema(dados.getTema());
+        TemaMapper.toPerfilTemaDTO(dados.getTema());
+        dto.setTema(TemaMapper.toPerfilTemaDTO(dados.getTema()));
 
         return dto;
     }
@@ -39,7 +40,7 @@ public class AlbumMapper {
         RetornoAlbumDTO dto = new RetornoAlbumDTO();
 
         dto.setId(dados.getId());
-        dto.setTema(dados.getTema());
+        dto.setTema(TemaMapper.toPerfilTemaDTO(dados.getTema()));
         dto.setTitulo(dados.getTitulo());
         dto.setFotografo(fotografoMapper.toPerfilFotogradoDTO(dados.getFotografo()));
         if (dados.getImagems() != null){

@@ -40,7 +40,7 @@ public class AlbumController {
     @SecurityRequirement(name = "Bearer")
 
     @PutMapping("/{id}")
-    public ResponseEntity<RetornoAlbumDTO> atualizar(@PathVariable Integer id, @RequestBody @Valid AtualizarAlbumDTO albumAtualizado){
+    public ResponseEntity<RetornoAlbumDTO> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizarAlbumDTO albumAtualizado){
         return ResponseEntity.status(200).body(albumService.atualizar(id, albumAtualizado));
     }
 
@@ -48,7 +48,7 @@ public class AlbumController {
     @SecurityRequirement(name = "Bearer")
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Album> deletar(@PathVariable int id){
+    public ResponseEntity<Album> deletar(@PathVariable long id){
         albumService.deletar(id);
         return ResponseEntity.status(204).build();
     }

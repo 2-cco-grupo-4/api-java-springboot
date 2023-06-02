@@ -3,6 +3,7 @@ package com.example.picmejava.service;
 import com.example.picmejava.lista.Lista;
 import com.example.picmejava.model.Cliente;
 import com.example.picmejava.model.Tema;
+import com.example.picmejava.model.dto.CadastroTemaDto;
 import com.example.picmejava.model.dto.PerfilTemaDTO;
 import com.example.picmejava.model.exception.EntidadeNaoCadastradaException;
 import com.example.picmejava.model.mapper.TemaMapper;
@@ -18,14 +19,15 @@ public class TemaService {
     @Autowired
     private TemaRepository temaRepository;
 
-    public Tema cadastrar(Tema novoTema){
-        Tema tema = temaRepository.save(novoTema);
-        return tema;
+    public PerfilTemaDTO cadastrar(CadastroTemaDto novoTema){
+        Tema tema = TemaMapper.toTema(novoTema);
+
+        return TemaMapper.toPerfilTemaDTO(temaRepository.save(tema));
     }
 
     public List<PerfilTemaDTO> listar(){
-        List<Tema> temas = temaRepository.findAll();
-        return temas.stream().map(tema -> TemaMapper.toPerfilTemaDTO(tema)).toList();
+        List<PerfilTemaDTO> perfilTemaDTOS = temaRepository.findAll().stream().map(TemaMapper::toPerfilTemaDTO).toList();
+        return perfilTemaDTOS;
 
     }
 

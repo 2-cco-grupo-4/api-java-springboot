@@ -31,7 +31,7 @@ public class FotografoService {
                 .toList();
     }
 
-    public Fotografo atualizar(Integer idFotografo, AtualizarUsuarioDTO fotografoAtualizado){
+    public Fotografo atualizar(Long idFotografo, AtualizarUsuarioDTO fotografoAtualizado){
         Optional<Fotografo> fotografoOptional = fotografoRepository.findById(idFotografo);
         Fotografo fotografo = fotografoOptional.orElseThrow(() -> new EntidadeNaoEncontradaException(
                 "Fotografo não existe")

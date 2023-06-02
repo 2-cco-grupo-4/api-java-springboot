@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 public class PerfilAlbumDTO {
 
-    private Integer id;
+    private Long id;
     private String titulo;
-    private Tema tema;
+    private PerfilTemaDTO tema;
 }

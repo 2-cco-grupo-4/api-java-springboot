@@ -18,9 +18,8 @@ public class EventoBuilder {
         evento.setTema(TemaBuilder.criarTema());
         evento.setFotografo(FotografoBuilder.criarFotografo());
         evento.setStatusEvento("ativo");
-        evento.setId(1);
+        evento.setId(1L);
         evento.setCliente(ClienteBuilder.criarCliente());
-        evento.setAvaliacao(10);
         evento.setValor(2000.0);
         evento.setDataRealizacao(LocalDate.now());
 
@@ -30,14 +29,13 @@ public class EventoBuilder {
     public static CadastroEventoDTO criarCadastroEvento(){
         CadastroEventoDTO cadastroEventoDTO = new CadastroEventoDTO();
 
-        cadastroEventoDTO.setAvaliacao(10);
         cadastroEventoDTO.setStatusEvento("ativo");
         cadastroEventoDTO.setValor(30.0);
         cadastroEventoDTO.setDataRealizacao(LocalDate.now());
-        cadastroEventoDTO.setIdCliente(1);
-        cadastroEventoDTO.setIdTema(1);
-        cadastroEventoDTO.setIdEndereco(1);
-        cadastroEventoDTO.setIdCliente(1);
+        cadastroEventoDTO.setIdCliente(1L);
+        cadastroEventoDTO.setIdTema(1L);
+        cadastroEventoDTO.setIdEndereco(1L);
+        cadastroEventoDTO.setIdCliente(1L);
 
         return cadastroEventoDTO;
     }

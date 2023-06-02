@@ -21,7 +21,7 @@ public class FotografoBuilder {
     public static Fotografo criarFotografo(){
         Fotografo fotografo = new Fotografo();
 
-        fotografo.setId(1);
+        fotografo.setId(1L);
         fotografo.setAutenticado(false);
         fotografo.setSenha("senha");
         fotografo.setCpf("12345678912");
@@ -74,7 +74,7 @@ public class FotografoBuilder {
     public static PerfilFotografoDTO criarPerfilFotografoDto(){
         PerfilFotografoDTO perfilFotografoDTO = new PerfilFotografoDTO();
 
-        perfilFotografoDTO.setId(1);
+        perfilFotografoDTO.setId(1L);
         perfilFotografoDTO.setTemas(List.of(TemaBuilder.criarPerfilTemaDto()));
         perfilFotografoDTO.setAutenticado(false);
         perfilFotografoDTO.setTipoUsuario("fotografo");

@@ -16,7 +16,7 @@ public class ClienteBuilder {
     public static Cliente criarCliente(){
         Cliente cliente = new Cliente();
 
-        cliente.setId(1);
+        cliente.setId(1L);
         cliente.setAutenticado(false);
         cliente.setSenha("senha");
         cliente.setCpf("12345678912");
@@ -33,7 +33,7 @@ public class ClienteBuilder {
     public static PerfilClienteDTO criarPerfilClienteDto(){
         PerfilClienteDTO perfilClienteDTO = new PerfilClienteDTO();
 
-        perfilClienteDTO.setId(1);
+        perfilClienteDTO.setId(1L);
         perfilClienteDTO.setNome("Cliente 01");
         perfilClienteDTO.setAutenticado(false);
         perfilClienteDTO.setTipoUsuario("cliente");

@@ -10,9 +10,9 @@ import java.util.List;
 @Setter
 public class RetornoAlbumDTO {
 
-    private Integer id;
+    private Long id;
     private String titulo;
-    private Tema tema;
+    private PerfilTemaDTO tema;
     private PerfilFotografoDTO fotografo;
     private List<PerfilImagemDTO> imagems;
 

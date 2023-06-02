@@ -8,7 +8,7 @@ import java.util.List;
 @Getter
 @Setter
 public class PerfilFotografoDTO {
-    private Integer id;
+    private Long id;
     private String nome;
     private Boolean autenticado;
     private String tipoUsuario;

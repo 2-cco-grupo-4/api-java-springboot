@@ -25,7 +25,7 @@ public class ImagemService {
 
     ImagemMapper imagemMapper = new ImagemMapper();
 
-    public RetornoImagemDTO cadastrar(Integer idAlbum, Imagem novaImagem){
+    public RetornoImagemDTO cadastrar(Long idAlbum, Imagem novaImagem){
         Optional<Album> albumOptional = albumRepository.findById(idAlbum);
         albumOptional.orElseThrow(() -> new EntidadeNaoEncontradaException("Album não encontrado"));
 
@@ -33,13 +33,13 @@ public class ImagemService {
         return imagemMapper.toRetornoImagemDTO(imagemRepository.save(novaImagem));
     }
 
-    public Imagem buscarPorId(Integer idImagem){
+    public Imagem buscarPorId(Long idImagem){
         Optional<Imagem> imagemOptional = imagemRepository.findById(idImagem);
         Imagem imagem = imagemOptional.orElseThrow(() -> new EntidadeNaoEncontradaException("Imagem não encontrada"));
         return imagem;
     }
 
-    public void deletar(int idImagem){
+    public void deletar(Long idImagem){
         buscarPorId(idImagem);
         imagemRepository.deleteById(idImagem);
     }

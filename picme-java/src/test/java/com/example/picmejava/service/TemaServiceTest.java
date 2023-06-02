@@ -1,6 +1,7 @@
 package com.example.picmejava.service;
 
 import com.example.picmejava.model.Tema;
+import com.example.picmejava.model.dto.CadastroTemaDto;
 import com.example.picmejava.model.dto.PerfilTemaDTO;
 import com.example.picmejava.repository.TemaRepository;
 import com.example.picmejava.service.builder.TemaBuilder;
@@ -30,13 +31,15 @@ class TemaServiceTest {
     @DisplayName("Deve retornar Tema quando cadastrar com dados validos")
     void deveRetornarTemaQuandoCadastrarComDadosValidos(){
         Tema tema = TemaBuilder.criarTema();
+        CadastroTemaDto cadastroTema = TemaBuilder.criarCadastroTemaDto();
 
         Mockito.when(temaRepository.save(Mockito.any(Tema.class))).thenReturn(tema);
 
-        Tema resultado = temaService.cadastrar(tema);
+        PerfilTemaDTO resultado = temaService.cadastrar(cadastroTema);
 
         assertNotNull(resultado);
-        assertEquals(tema, resultado);
+        assertEquals(tema.getId(), resultado.getId());
+        assertEquals(tema.getNome(), resultado.getNome());
     }
 
     @Test

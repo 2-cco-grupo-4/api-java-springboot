@@ -1,22 +1,20 @@
 package com.example.picmejava.model.dto;
 
 import com.example.picmejava.model.Evento;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class RetornoEnderecoDTO {
-
-    private Long id;
+public class CadastroEnderecoDTO {
     private String estado;
     private String cidade;
     private String cep;
     private String bairro;
-    private String rua;
+    private String logradouro;
     private Integer numero;
     private String complemento;
-    private RetornoEventoDTO evento;
+    private Long idEvento;
+
 }

@@ -60,7 +60,7 @@ public class ClienteController {
 
     @PutMapping("/atualizar/{idCliente}")
     public ResponseEntity<PerfilClienteDTO> atualizar(
-            @PathVariable Integer idCliente, @RequestBody @Valid AtualizarUsuarioDTO clienteAtualizado
+            @PathVariable Long idCliente, @RequestBody @Valid AtualizarUsuarioDTO clienteAtualizado
     ){
         return ResponseEntity.status(200).body(clienteMapper.toPerfilClienteDTO(
                 serviceCliente.atualizar(idCliente, clienteAtualizado)

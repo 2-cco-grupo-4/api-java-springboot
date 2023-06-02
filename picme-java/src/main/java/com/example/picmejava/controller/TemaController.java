@@ -2,11 +2,13 @@ package com.example.picmejava.controller;
 
 import com.example.picmejava.lista.Lista;
 import com.example.picmejava.model.Tema;
+import com.example.picmejava.model.dto.CadastroTemaDto;
 import com.example.picmejava.model.dto.PerfilTemaDTO;
 import com.example.picmejava.service.TemaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +30,7 @@ public class TemaController {
     @Operation(summary = "Cadastrar um novo tema", description = "Passando os dados necessários, podemos cadastrar um novo tema")
     @SecurityRequirement(name = "Bearer")
     @PostMapping
-    public ResponseEntity<Tema> cadastrar(@RequestBody Tema novoTema){
+    public ResponseEntity<PerfilTemaDTO> cadastrar(@RequestBody @Valid CadastroTemaDto novoTema){
         return ResponseEntity.status(200).body(temaService.cadastrar(novoTema));
     }
 

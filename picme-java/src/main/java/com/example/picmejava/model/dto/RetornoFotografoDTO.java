@@ -9,9 +9,10 @@ import java.util.List;
 @Setter
 public class RetornoFotografoDTO {
 
-    private Integer id;
+    private Long id;
     private String nome;
     private Boolean autenticado;
     private String tipoUsuario;
     private List<PerfilAlbumDTO> albums;
+    private List<PerfilTemaDTO> temas;
 }

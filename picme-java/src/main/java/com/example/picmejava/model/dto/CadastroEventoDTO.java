@@ -19,9 +19,8 @@ public class CadastroEventoDTO {
     private LocalDate dataRealizacao;
     private String statusEvento;
     private Double valor;
-    private Integer avaliacao;
-    private Integer idFotografo;
-    private Integer idTema;
-    private Integer idCliente;
-    private Integer idEndereco;
+    private Long idFotografo;
+    private Long idTema;
+    private Long idCliente;
+    private Long idEndereco;
 }

@@ -1,40 +1,19 @@
 package com.example.picmejava.model.exception;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class MensagemExceptionHandler {
 
     private LocalDateTime timestemp;
     private Integer status;
     private String message;
-
-    public MensagemExceptionHandler(LocalDateTime timestemp, Integer status, String message) {
-        this.timestemp = timestemp;
-        this.status = status;
-        this.message = message;
-    }
-
-    public LocalDateTime getTimestemp() {
-        return timestemp;
-    }
-
-    public void setTimestemp(LocalDateTime timestemp) {
-        this.timestemp = timestemp;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 }

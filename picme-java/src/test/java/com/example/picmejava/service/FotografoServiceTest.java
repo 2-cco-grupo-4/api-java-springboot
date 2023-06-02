@@ -92,7 +92,7 @@ class FotografoServiceTest {
     @Test
     @DisplayName("Deve retornar excecao quando atualizar fotografo e Id não encontrado")
     void deveRetornarExcecaoQuandoAtualizarFotografoEIdNaoEncontrado(){
-        int id = 1;
+        Long id = 1L;
         AtualizarUsuarioDTO atualizarDto = FotografoBuilder.criarAtualizazrUsuarioDTO();
 
         Mockito.lenient().when(fotografoRepository.existsById(id)).thenReturn(false);

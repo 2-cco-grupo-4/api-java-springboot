@@ -18,6 +18,9 @@ public class FotografoMapper {
         dto.setAutenticado(dados.getAutenticado());
         dto.setNome(dados.getNome());
         dto.setTipoUsuario(dados.getTipoUsuario());
+        if (dados.getTemas() != null){
+            dto.setTemas(dados.getTemas().stream().map(TemaMapper::toPerfilTemaDTO).toList());
+        }
 
         return dto;
     }

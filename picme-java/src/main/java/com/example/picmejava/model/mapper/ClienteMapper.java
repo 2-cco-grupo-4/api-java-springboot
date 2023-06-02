@@ -17,7 +17,7 @@ public class ClienteMapper {
         dto.setAutenticado(cliente.getAutenticado());
         dto.setTipoUsuario(cliente.getTipoUsuario());
         if (cliente.getTemas() != null){
-            dto.setTemas(cliente.getTemas().stream().map(tema -> TemaMapper.toPerfilTemaDTO(tema)).toList());
+            dto.setTemas(cliente.getTemas().stream().map(TemaMapper::toPerfilTemaDTO).toList());
 
         }
 

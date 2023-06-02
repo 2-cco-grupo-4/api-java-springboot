@@ -48,7 +48,7 @@ public class AlbumService {
         return albumMapper.toRetornoAlbumDTO(album);
     }
 
-    public RetornoAlbumDTO atualizar(Integer idAlbum, AtualizarAlbumDTO albumAtualizado){
+    public RetornoAlbumDTO atualizar(Long idAlbum, AtualizarAlbumDTO albumAtualizado){
         Album albumDesatualizado = buscarPorId(idAlbum);
 
         Optional<Tema> temaOptional = temaRepository.findById(albumAtualizado.getIdTema());
@@ -59,7 +59,7 @@ public class AlbumService {
         return albumMapper.toRetornoAlbumDTO(album);
     }
 
-    public Album deletar(Integer idAlbum){
+    public Album deletar(Long idAlbum){
         Album album = buscarPorId(idAlbum);
 
         albumRepository.deleteById(idAlbum);
@@ -73,7 +73,7 @@ public class AlbumService {
                 .toList();
     }
 
-    public Album buscarPorId(Integer idAlbum){
+    public Album buscarPorId(Long idAlbum){
         Optional<Album> albumOptional = albumRepository.findById(idAlbum);
         Album album = albumOptional.orElseThrow(() -> new EntidadeNaoEncontradaException("Album não encontrado"));
         return album;

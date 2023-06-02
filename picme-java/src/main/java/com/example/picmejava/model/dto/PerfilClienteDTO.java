@@ -10,7 +10,7 @@ import java.util.List;
 @Setter
 public class PerfilClienteDTO {
 
-    private Integer id;
+    private Long id;
     private String nome;
     private Boolean autenticado;
     private String tipoUsuario;

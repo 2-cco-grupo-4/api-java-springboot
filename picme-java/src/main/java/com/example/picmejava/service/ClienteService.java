@@ -34,7 +34,7 @@ public class ClienteService {
         return clientes;
     }
 
-    public Cliente atualizar(Integer idCliente, AtualizarUsuarioDTO dadosAtualizados){
+    public Cliente atualizar(Long idCliente, AtualizarUsuarioDTO dadosAtualizados){
         Optional<Cliente> clienteOptional = clienteRepository.findById(idCliente);
         Cliente cliente = clienteOptional.orElseThrow(() -> new EntidadeNaoEncontradaException("Cliente não encontrado"));
         return clienteRepository.save(clienteMapper.toClienteAtualizado(cliente, dadosAtualizados));

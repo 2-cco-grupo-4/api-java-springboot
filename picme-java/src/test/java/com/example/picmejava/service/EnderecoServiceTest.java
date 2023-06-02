@@ -1,6 +1,7 @@
 package com.example.picmejava.service;
 
 import com.example.picmejava.model.Endereco;
+import com.example.picmejava.model.dto.CadastroEnderecoDTO;
 import com.example.picmejava.model.dto.RetornoEnderecoDTO;
 import com.example.picmejava.model.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.repository.EnderecoRepository;
@@ -37,13 +38,14 @@ class EnderecoServiceTest {
     @DisplayName("Deve retornar Endereco quanda cadastrar endereço e dados validos")
     void deveRetornarEnderecoQuandoCadastrarEDadosValidos(){
         Endereco endereco = EnderecoBuilder.criarEndereco();
+        CadastroEnderecoDTO cadastroEndereco = EnderecoBuilder.criarCadastroEndereco();
 
         Mockito.when(eventoRepository.findById(endereco.getEvento().getId())).thenReturn(
                 Optional.of(endereco.getEvento())
         );
         Mockito.when(enderecoRepository.save(Mockito.any(Endereco.class))).thenReturn(endereco);
 
-        RetornoEnderecoDTO resultado = enderecoService.cadastrar(endereco);
+        RetornoEnderecoDTO resultado = enderecoService.cadastrar(cadastroEndereco);
 
         assertNotNull(resultado);
         assertEquals(endereco.getId(), resultado.getId());
@@ -63,11 +65,12 @@ class EnderecoServiceTest {
     @DisplayName("Deve retornar excecao quando cadastrar endereço e idEvento invalido")
     void deveRetornarExcecaoQuandoCadastrarEnderecoEIdEventoInvalido(){
         Endereco endereco = EnderecoBuilder.criarEndereco();
+        CadastroEnderecoDTO cadastroEndereco = EnderecoBuilder.criarCadastroEndereco();
 
-        Mockito.when(eventoRepository.findById(Mockito.anyInt())).thenReturn(Optional.empty());
+        Mockito.when(eventoRepository.findById(Mockito.anyLong())).thenReturn(Optional.empty());
 
         EntidadeNaoEncontradaException exception = assertThrows(EntidadeNaoEncontradaException.class, () -> {
-            enderecoService.cadastrar(endereco);
+            enderecoService.cadastrar(cadastroEndereco);
         });
 
         assertEquals("Evento não encontrado", exception.getMessage());

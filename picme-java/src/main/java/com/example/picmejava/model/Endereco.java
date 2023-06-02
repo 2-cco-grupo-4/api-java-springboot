@@ -14,7 +14,7 @@ public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_ENDERECO")
-    private Integer id;
+    private Long id;
     private String estado;
     private String cidade;
     private String cep;

@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PerfilImagemDTO {
-    private Integer id;
+    private Long id;
     private String path;
     private String tipo;
     private String descricao;

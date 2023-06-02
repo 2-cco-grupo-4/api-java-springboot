@@ -13,5 +13,5 @@ import java.util.List;
 public class CadastroTemaFotografoDTO {
 
     private List<Tema> temas;
-    private Integer idFotografo;
+    private Long idFotografo;
 }

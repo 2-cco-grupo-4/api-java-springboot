@@ -43,10 +43,7 @@ public class EventoService {
         Tema tema = temaRepository.findById(novoEvento.getIdTema())
                 .orElseThrow(() -> new EntidadeNaoEncontradaException("Tema não encontrado"));
 
-        Endereco endereco = enderecoRepository.findById(novoEvento.getIdEndereco())
-                .orElseThrow(() -> new EntidadeNaoEncontradaException("Endereço não encontrado"));
-
-        Evento evento = eventoMapper.toEvento(fotografo, cliente, tema, endereco, novoEvento);
+        Evento evento = eventoMapper.toEvento(fotografo, cliente, tema, novoEvento);
         eventoRepository.save(evento);
 
         return eventoMapper.toRetornoEventoDTO(evento);

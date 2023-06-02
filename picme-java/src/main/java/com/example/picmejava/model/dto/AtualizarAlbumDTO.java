@@ -9,6 +9,6 @@ import lombok.Setter;
 public class AtualizarAlbumDTO {
 
     private String titulo;
-    private Integer idTema;
+    private Long idTema;
 
 }

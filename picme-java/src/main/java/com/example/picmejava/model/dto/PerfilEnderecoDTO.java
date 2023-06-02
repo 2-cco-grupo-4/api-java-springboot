@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Setter
 public class PerfilEnderecoDTO {
 
-    private Integer id;
+    private Long id;
     private String estado;
     private String cidade;
     private String cep;

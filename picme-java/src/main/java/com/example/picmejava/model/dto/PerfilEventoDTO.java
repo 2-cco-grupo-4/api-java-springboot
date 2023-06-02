@@ -10,11 +10,10 @@ import java.time.LocalDate;
 @Setter
 public class PerfilEventoDTO {
 
-    private Integer id;
+    private Long id;
     private LocalDate dataRealizacao;
     private String statusEvento;
     private Double valor;
-    private Integer avaliacao;
     private PerfilFotografoDTO fotografo;
     private Tema tema;
     private PerfilClienteDTO cliente;

@@ -17,7 +17,7 @@ public class Imagem implements Identificavel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_IMAGEM")
-    private Integer id;
+    private Long id;
 
     @Schema(
             description = "Caminho para a imagem",

@@ -110,7 +110,7 @@ class AlbumServiceTest {
 
         assertNotNull(resultado);
         assertEquals(album.getId(), resultado.getId());
-        assertEquals(album.getTema(), resultado.getTema());
+        assertEquals(album.getTema().getId(), resultado.getTema().getId());
         assertEquals(album.getTitulo(), resultado.getTitulo());
     }
 
@@ -215,7 +215,7 @@ class AlbumServiceTest {
     @Test
     @DisplayName("Deve retornar excecao quando buscar por id e id nao encontrado")
     void deveRetornarExcecaoQuandoBuscarPorIdEIdInvalido(){
-        int idAlbum = 1;
+        Long idAlbum = 1L;
 
         EntidadeNaoEncontradaException exception = assertThrows(EntidadeNaoEncontradaException.class, () -> {
             albumService.buscarPorId(idAlbum);

@@ -26,7 +26,7 @@ public class AlbumBuilder {
     public static AtualizarAlbumDTO criarAtualizarAlbum(){
         AtualizarAlbumDTO atualizarAlbum = new AtualizarAlbumDTO();
 
-        atualizarAlbum.setIdTema(1);
+        atualizarAlbum.setIdTema(1L);
         atualizarAlbum.setTitulo("Album 01");
 
         return atualizarAlbum;
@@ -37,19 +37,19 @@ public class AlbumBuilder {
 
         dto.setDescricao("Descrição do album 01");
         dto.setTitulo("Album 01");
-        dto.setIdFotografo(1);
-        dto.setIdTema(1);
+        dto.setIdFotografo(1L);
+        dto.setIdTema(1L);
 
         return dto;
     }
 
     public static List<Album> criarListaAlbum(){
         return List.of(
-                new Album(1, "Album 01", TemaBuilder.criarTema(),
+                new Album(1L, "Album 01", TemaBuilder.criarTema(),
                         "Descrição album 01", FotografoBuilder.criarFotografo(),null ),
-                new Album(1, "Album 02", TemaBuilder.criarTema(),
+                new Album(1L, "Album 02", TemaBuilder.criarTema(),
                         "Descrição album 02", FotografoBuilder.criarFotografo(),null ),
-                new Album(1, "Album 03", TemaBuilder.criarTema(),
+                new Album(1L, "Album 03", TemaBuilder.criarTema(),
                         "Descrição album 03", FotografoBuilder.criarFotografo(),null )
         );
     }

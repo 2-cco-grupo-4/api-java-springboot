@@ -16,7 +16,7 @@ public class TemaUsuarioBuilder {
     public static CadastroTemaFotografoDTO criarCadastroTemaFotografo(){
         CadastroTemaFotografoDTO cadastroTemaFotografoDTO = new CadastroTemaFotografoDTO();
 
-        cadastroTemaFotografoDTO.setIdFotografo(1);
+        cadastroTemaFotografoDTO.setIdFotografo(1L);
         cadastroTemaFotografoDTO.setTemas(List.of(
                 TemaBuilder.criarTema()
         ));
@@ -27,7 +27,7 @@ public class TemaUsuarioBuilder {
     public static CadastroTemaClienteDTO criarCadastroTemaCliente() {
         CadastroTemaClienteDTO cadastro = new CadastroTemaClienteDTO();
 
-        cadastro.setIdCliente(1);
+        cadastro.setIdCliente(1L);
         cadastro.setTemas(List.of(
                 TemaBuilder.criarTema()
         ));

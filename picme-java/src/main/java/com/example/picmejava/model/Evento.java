@@ -14,11 +14,10 @@ public class Evento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_EVENTO")
-    private Integer id;
+    private Long id;
     private LocalDate dataRealizacao;
     private String statusEvento;
     private Double valor;
-    private Integer avaliacao;
     @ManyToOne
     @JoinColumn(name = "FK_FOTOGRAFO")
     private Fotografo fotografo;

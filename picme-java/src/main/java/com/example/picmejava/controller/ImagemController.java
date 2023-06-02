@@ -30,7 +30,7 @@ public class ImagemController {
     @Operation(summary = "Cadastrar uma nova imagem", description = "Passando os dados necessário, podemos cadastrar uma nova imagem")
     @SecurityRequirement(name = "Bearer")
     @PostMapping("/{idAlbum}")
-    public ResponseEntity<RetornoImagemDTO> cadastrar(@PathVariable Integer idAlbum, @RequestBody Imagem novaImagem){
+    public ResponseEntity<RetornoImagemDTO> cadastrar(@PathVariable Long idAlbum, @RequestBody Imagem novaImagem){
         return ResponseEntity.status(201).body(imagemService.cadastrar(idAlbum, novaImagem));
     }
 
@@ -44,7 +44,7 @@ public class ImagemController {
     @Operation(summary = "Remover uma imagem", description = "Passando o ID da imagem, podemos excluir determinada imagem")
     @SecurityRequirement(name = "Bearer")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable int id){
+    public ResponseEntity<Void> deletar(@PathVariable Long id){
         imagemService.deletar(id);
         return ResponseEntity.status(204).build();
     }

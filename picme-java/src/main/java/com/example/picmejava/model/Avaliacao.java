@@ -15,7 +15,7 @@ public class Avaliacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Schema(
             description = "Descrição da avaliação, texto que o usuário insere",

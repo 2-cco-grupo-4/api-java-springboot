@@ -13,13 +13,12 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class RetornoEventoDTO {
-    private Integer id;
+    private Long id;
     private LocalDate dataRealizacao;
     private String statusEvento;
     private Double valor;
-    private Integer avaliacao;
     private PerfilFotografoDTO fotografo;
-    private Tema tema;
+    private PerfilTemaDTO tema;
     private PerfilClienteDTO cliente;
     private PerfilEnderecoDTO endereco;
 }

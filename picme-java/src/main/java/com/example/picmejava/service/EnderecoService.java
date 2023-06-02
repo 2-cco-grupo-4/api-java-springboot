@@ -2,9 +2,11 @@ package com.example.picmejava.service;
 
 import com.example.picmejava.model.Endereco;
 import com.example.picmejava.model.Evento;
+import com.example.picmejava.model.dto.CadastroEnderecoDTO;
 import com.example.picmejava.model.dto.RetornoEnderecoDTO;
 import com.example.picmejava.model.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.model.mapper.EnderecoMapper;
+import com.example.picmejava.model.mapper.EventoMapper;
 import com.example.picmejava.repository.EnderecoRepository;
 import com.example.picmejava.repository.EventoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +25,12 @@ public class EnderecoService {
 
     EnderecoMapper enderecoMapper = new EnderecoMapper();
 
-    public RetornoEnderecoDTO cadastrar(Endereco novoEndereco){
-        Evento evento = eventoRepository.findById(novoEndereco.getEvento().getId()).orElseThrow(
+    public RetornoEnderecoDTO cadastrar(CadastroEnderecoDTO novoEndereco){
+        Evento evento = eventoRepository.findById(novoEndereco.getIdEvento()).orElseThrow(
                 () -> new EntidadeNaoEncontradaException("Evento não encontrado")
         );
-        novoEndereco.setEvento(evento);
-        return enderecoMapper.toRetornoEnderecoDTO(enderecoRepository.save(novoEndereco));
+        Endereco endereco = EnderecoMapper.toEndereco(novoEndereco, evento);
+        return enderecoMapper.toRetornoEnderecoDTO(enderecoRepository.save(endereco));
     }
 
     public List<RetornoEnderecoDTO> listar() {
