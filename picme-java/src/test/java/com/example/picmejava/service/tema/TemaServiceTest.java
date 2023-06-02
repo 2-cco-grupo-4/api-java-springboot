@@ -1,11 +1,10 @@
-package com.example.picmejava.service;
+package com.example.picmejava.service.tema;
 
 import com.example.picmejava.model.Tema;
+import com.example.picmejava.service.tema.builder.TemaBuilder;
 import com.example.picmejava.service.tema.dto.CadastroTemaDto;
 import com.example.picmejava.service.tema.dto.PerfilTemaDTO;
 import com.example.picmejava.repository.TemaRepository;
-import com.example.picmejava.service.builder.TemaBuilder;
-import com.example.picmejava.service.tema.TemaService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

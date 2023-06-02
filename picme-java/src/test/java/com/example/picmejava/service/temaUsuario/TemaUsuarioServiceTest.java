@@ -1,4 +1,4 @@
-package com.example.picmejava.service;
+package com.example.picmejava.service.temaUsuario;
 
 import com.example.picmejava.model.Cliente;
 import com.example.picmejava.model.Fotografo;
@@ -7,11 +7,10 @@ import com.example.picmejava.model.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.repository.ClienteRepository;
 import com.example.picmejava.repository.FotografoRepository;
 import com.example.picmejava.repository.TemaRepository;
-import com.example.picmejava.service.builder.ClienteBuilder;
-import com.example.picmejava.service.builder.FotografoBuilder;
-import com.example.picmejava.service.builder.TemaBuilder;
-import com.example.picmejava.service.builder.TemaUsuarioBuilder;
-import com.example.picmejava.service.temaUsuario.TemaUsuarioService;
+import com.example.picmejava.service.usuario.builder.ClienteBuilder;
+import com.example.picmejava.service.usuario.builder.FotografoBuilder;
+import com.example.picmejava.service.tema.builder.TemaBuilder;
+import com.example.picmejava.service.temaUsuario.builder.TemaUsuarioBuilder;
 import com.example.picmejava.service.temaUsuario.dto.CadastroTemaClienteDTO;
 import com.example.picmejava.service.temaUsuario.dto.CadastroTemaFotografoDTO;
 import com.example.picmejava.service.temaUsuario.dto.RetornoTemaClienteDTO;

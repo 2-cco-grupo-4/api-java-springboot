@@ -16,6 +16,7 @@ public class UsuarioMapper {
         dto.setTipoUsuario(dados.getTipoUsuario());
         dto.setNome(dados.getNome());
         dto.setAutenticado(dados.getAutenticado());
+        dto.setTemas(dados.getTemas().stream().map(TemaMapper::toPerfilTemaDTO).toList());
 
         return dto;
     }

@@ -34,5 +34,7 @@ public class Tema implements Identificavel {
 
     @ManyToMany(mappedBy = "temas")
     List<Usuario> usuarios;
+
+
 }
 

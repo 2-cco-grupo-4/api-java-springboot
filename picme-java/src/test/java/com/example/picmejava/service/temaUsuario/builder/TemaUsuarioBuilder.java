@@ -1,5 +1,6 @@
-package com.example.picmejava.service.builder;
+package com.example.picmejava.service.temaUsuario.builder;
 
+import com.example.picmejava.service.tema.builder.TemaBuilder;
 import com.example.picmejava.service.temaUsuario.dto.CadastroTemaClienteDTO;
 import com.example.picmejava.service.temaUsuario.dto.CadastroTemaFotografoDTO;
 

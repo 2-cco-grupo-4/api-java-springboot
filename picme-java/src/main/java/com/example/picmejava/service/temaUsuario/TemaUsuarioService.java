@@ -38,10 +38,10 @@ public class TemaUsuarioService {
         novoTemaFotografo
                 .getTemas()
                 .forEach(tema -> {
-                    temaRepository.findById(tema.getId()).orElseThrow(
+                    Tema tema1 = temaRepository.findById(tema.getId()).orElseThrow(
                             () -> new EntidadeNaoEncontradaException("Tema não encontrado")
                     );
-                    temas.add(tema);
+                    temas.add(tema1);
                 });
 
         Fotografo fotografo = fotografoRepository.findById(novoTemaFotografo.getIdFotografo())
@@ -60,10 +60,10 @@ public class TemaUsuarioService {
         List<Tema> temas = new ArrayList<>();
         novoTemaCliente.getTemas()
                 .forEach(tema -> {
-                    temaRepository.findById(tema.getId()).orElseThrow(
+                    Tema tema1 = temaRepository.findById(tema.getId()).orElseThrow(
                             () -> new EntidadeNaoEncontradaException("Tema não encontrado")
                     );
-                    temas.add(tema);
+                    temas.add(tema1);
                 });
 
         Cliente cliente = clienteRepository.findById(novoTemaCliente.getIdCliente())

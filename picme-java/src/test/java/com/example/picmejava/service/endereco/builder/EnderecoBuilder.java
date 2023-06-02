@@ -1,6 +1,7 @@
-package com.example.picmejava.service.builder;
+package com.example.picmejava.service.endereco.builder;
 
 import com.example.picmejava.model.Endereco;
+import com.example.picmejava.service.evento.builder.EventoBuilder;
 import com.example.picmejava.service.endereco.dto.CadastroEnderecoDTO;
 import com.example.picmejava.service.endereco.dto.PerfilEnderecoDTO;
 

@@ -1,7 +1,10 @@
-package com.example.picmejava.service.builder;
+package com.example.picmejava.service.evento.builder;
 
 import com.example.picmejava.model.Evento;
+import com.example.picmejava.service.usuario.builder.FotografoBuilder;
+import com.example.picmejava.service.tema.builder.TemaBuilder;
 import com.example.picmejava.service.evento.dto.CadastroEventoDTO;
+import com.example.picmejava.service.usuario.builder.ClienteBuilder;
 
 import java.time.LocalDate;
 import java.util.List;

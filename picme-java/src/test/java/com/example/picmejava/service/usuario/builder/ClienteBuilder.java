@@ -1,6 +1,7 @@
-package com.example.picmejava.service.builder;
+package com.example.picmejava.service.usuario.builder;
 
 import com.example.picmejava.model.Cliente;
+import com.example.picmejava.service.tema.builder.TemaBuilder;
 import com.example.picmejava.service.usuario.dto.PerfilClienteDTO;
 
 import java.time.LocalDate;
@@ -24,7 +25,7 @@ public class ClienteBuilder {
         cliente.setDataCadastro(LocalDate.now());
         cliente.setDataNasc(LocalDate.ofYearDay(1999, 12));
         cliente.setNumCelular("(11)123412345");
-        cliente.setTipoUsuario("fotografo");
+        cliente.setTipoUsuario(1);
 
         return cliente;
     }
@@ -35,7 +36,7 @@ public class ClienteBuilder {
         perfilClienteDTO.setId(1L);
         perfilClienteDTO.setNome("Cliente 01");
         perfilClienteDTO.setAutenticado(false);
-        perfilClienteDTO.setTipoUsuario("cliente");
+        perfilClienteDTO.setTipoUsuario(1);
         perfilClienteDTO.setTemas(List.of(TemaBuilder.criarPerfilTemaDto()));
         return perfilClienteDTO;
     }

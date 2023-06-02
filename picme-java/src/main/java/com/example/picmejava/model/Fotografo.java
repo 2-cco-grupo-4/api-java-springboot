@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@DiscriminatorValue("fotografo")
+@DiscriminatorValue("2")
 public class Fotografo extends Usuario implements Identificavel{
     private String tokenSolicitacao;
 
@@ -20,7 +20,7 @@ public class Fotografo extends Usuario implements Identificavel{
     private List<Album> albums;
 
     @Override
-    public String getTipoUsuario() {
-        return String.format("Fotografo");
+    public int getTipoUsuario() {
+        return 2;
     }
 }

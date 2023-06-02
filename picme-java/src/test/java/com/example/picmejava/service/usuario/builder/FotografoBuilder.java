@@ -1,7 +1,8 @@
-package com.example.picmejava.service.builder;
+package com.example.picmejava.service.usuario.builder;
 
 import com.example.picmejava.model.Album;
 import com.example.picmejava.model.Fotografo;
+import com.example.picmejava.service.tema.builder.TemaBuilder;
 import com.example.picmejava.service.usuario.dto.AtualizarUsuarioDTO;
 import com.example.picmejava.service.usuario.dto.CadastroUsuarioDTO;
 import com.example.picmejava.service.usuario.dto.LoginUsuarioDTO;
@@ -28,7 +29,7 @@ public class FotografoBuilder {
         fotografo.setDataCadastro(LocalDate.now());
         fotografo.setDataNasc(LocalDate.ofYearDay(1999, 12));
         fotografo.setNumCelular("(11)123412345");
-        fotografo.setTipoUsuario("fotografo");
+        fotografo.setTipoUsuario(2);
         fotografo.setAlbums(List.of(
                 new Album()
         ));
@@ -75,7 +76,7 @@ public class FotografoBuilder {
         perfilFotografoDTO.setId(1L);
         perfilFotografoDTO.setTemas(List.of(TemaBuilder.criarPerfilTemaDto()));
         perfilFotografoDTO.setAutenticado(false);
-        perfilFotografoDTO.setTipoUsuario("fotografo");
+        perfilFotografoDTO.setTipoUsuario(2);
         return perfilFotografoDTO;
     }
 

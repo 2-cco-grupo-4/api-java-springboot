@@ -14,7 +14,7 @@ public class RetornoFotografoDTO {
     private Long id;
     private String nome;
     private Boolean autenticado;
-    private String tipoUsuario;
+    private int tipoUsuario;
     private List<PerfilAlbumDTO> albums;
     private List<PerfilTemaDTO> temas;
 }

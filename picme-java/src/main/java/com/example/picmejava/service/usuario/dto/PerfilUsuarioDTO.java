@@ -9,5 +9,5 @@ public class PerfilUsuarioDTO {
     private Long id;
     private String nome;
     private Boolean autenticado;
-    private String tipoUsuario;
+    private int tipoUsuario;
 }

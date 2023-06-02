@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @Table(name = "USUARIO")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "tipo_usuario", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "tipo_usuario", discriminatorType = DiscriminatorType.INTEGER)
 public abstract class Usuario implements Identificavel{
 
     @Id
@@ -29,7 +29,7 @@ public abstract class Usuario implements Identificavel{
     private String numCelular;
     private Boolean autenticado;
     @Column(name = "tipo_usuario", insertable = false, updatable = false)
-    private String tipoUsuario;
+    private int tipoUsuario;
     private String tokenSolicitacao;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -38,5 +38,5 @@ public abstract class Usuario implements Identificavel{
             inverseJoinColumns = @JoinColumn(name = "ID_TEMA")
     )
     private List<Tema> temas;
-    public abstract String getTipoUsuario();
+    public abstract int getTipoUsuario();
 }

@@ -1,4 +1,4 @@
-package com.example.picmejava.service;
+package com.example.picmejava.service.album;
 
 import com.example.picmejava.model.Album;
 import com.example.picmejava.model.Fotografo;
@@ -10,10 +10,9 @@ import com.example.picmejava.model.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.repository.AlbumRepository;
 import com.example.picmejava.repository.FotografoRepository;
 import com.example.picmejava.repository.TemaRepository;
-import com.example.picmejava.service.album.AlbumService;
-import com.example.picmejava.service.builder.AlbumBuilder;
-import com.example.picmejava.service.builder.FotografoBuilder;
-import com.example.picmejava.service.builder.TemaBuilder;
+import com.example.picmejava.service.album.builder.AlbumBuilder;
+import com.example.picmejava.service.usuario.builder.FotografoBuilder;
+import com.example.picmejava.service.tema.builder.TemaBuilder;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
