@@ -33,6 +33,7 @@ public class EnderecoMapper {
         endereco.setEstado(novoEndereco.getEstado());
         endereco.setComplemento(novoEndereco.getComplemento());
         endereco.setEvento(evento);
+        endereco.setBairro(novoEndereco.getBairro());
         endereco.setNumero(novoEndereco.getNumero());
 
         return endereco;

@@ -35,7 +35,6 @@ public class EnderecoService {
 
     public List<RetornoEnderecoDTO> listar() {
         List<Endereco> enderecos = enderecoRepository.findAll();
-
         return enderecos.stream().map(endereco -> enderecoMapper.toRetornoEnderecoDTO(endereco)).toList();
     }
 }

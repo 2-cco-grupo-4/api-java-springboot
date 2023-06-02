@@ -62,7 +62,8 @@ public class AlbumService {
     public Album deletar(Long idAlbum){
         Album album = buscarPorId(idAlbum);
 
-        albumRepository.deleteById(idAlbum);
+        album.setTema(null);
+        albumRepository.deleteById(album.getId());
         return album;
     }
 

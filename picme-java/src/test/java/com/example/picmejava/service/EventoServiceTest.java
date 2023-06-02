@@ -107,25 +107,6 @@ class EventoServiceTest {
         assertEquals("Tema não encontrado", exception.getMessage());
     }
 
-//    @Test
-//    @DisplayName("Deve retornar excecao quando idEndereco invalido")
-//    void deveRetornarExcecaoQuandoIdEnderecoInvalido(){
-//        CadastroEventoDTO cadastroEventoDTO = EventoBuilder.criarCadastroEvento();
-//        Evento evento = EventoBuilder.criarEvento();
-//
-//        Mockito.when(fotografoRepository.findById(
-//                Mockito.eq(cadastroEventoDTO.getIdFotografo()))).thenReturn(Optional.of(evento.getFotografo()));
-//        Mockito.when(clienteRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(evento.getCliente()));
-//        Mockito.when(temaRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(evento.getTema()));
-//        Mockito.when(enderecoRepository.findById(Mockito.anyLong())).thenReturn(Optional.empty());
-//
-//        EntidadeNaoEncontradaException exception = assertThrows(EntidadeNaoEncontradaException.class, () -> {
-//            eventoService.cadastrar(cadastroEventoDTO);
-//        });
-//
-//        assertEquals("Endereço não encontrado", exception.getMessage());
-//    }
-
     @Test
     @DisplayName("Deve retornar lista com tres itens quando tres itens cadastrados")
     void deveRetornarTresItensQuandoTresItensCadastrados(){
