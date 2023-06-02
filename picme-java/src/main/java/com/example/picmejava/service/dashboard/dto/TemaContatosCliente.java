@@ -1,4 +1,4 @@
-package com.example.picmejava.controller.dashboard;
+package com.example.picmejava.service.dashboard.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ContagemClientesAcordoUmaSemana {
+public class TemaContatosCliente {
 
-    private Long clienteContato;
-    private Long totalCliente;
+    private String tema;
+    private Long contatos;
 }

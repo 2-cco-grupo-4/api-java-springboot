@@ -1,4 +1,4 @@
-package com.example.picmejava.controller.dashboard;
+package com.example.picmejava.service.dashboard.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class FaixaEtariaClienteDto {
+public class FaixaEtariaCliente {
 
     private String faixa;
     private Long quantidade;

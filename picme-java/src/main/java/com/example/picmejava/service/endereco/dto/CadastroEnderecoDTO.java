@@ -1,7 +1,5 @@
 package com.example.picmejava.service.endereco.dto;
 
-import com.example.picmejava.model.Evento;
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 

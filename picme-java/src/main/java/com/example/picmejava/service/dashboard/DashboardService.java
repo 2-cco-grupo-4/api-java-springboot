@@ -1,64 +1,56 @@
-package com.example.picmejava.controller.dashboard;
+package com.example.picmejava.service.dashboard;
 
-import com.example.picmejava.repository.ClienteRepository;
-import com.example.picmejava.repository.EventoRepository;
+import com.example.picmejava.service.dashboard.dto.ContagemClientesAcordoUmaSemana;
+import com.example.picmejava.service.dashboard.dto.FaixaEtariaCliente;
+import com.example.picmejava.service.dashboard.dto.TemaContatosCliente;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-@RestController
-@RequestMapping("/admin")
-public class ConsultasDashboardAdmin {
+@Service
+public class DashboardService {
 
     @Autowired
     private EntityManager entityManager;
 
-    @GetMapping("/clientes-acordo-semana")
-    public List<FaixaEtariaClienteDto> trazerFaixaEtariaCliente(){
+    public List<FaixaEtariaCliente> trazerFaixaEtariaCliente(){
         Query query = entityManager.createNativeQuery("SELECT * FROM vw_faixa_etaria_cliente");
         List<Object[]> resultado = query.getResultList();
 
-        List<FaixaEtariaClienteDto> faixaEtariaClienteDtos = new ArrayList<>();
+        List<FaixaEtariaCliente> faixaEtariaClientes = new ArrayList<>();
 
         for (Object[] linha : resultado) {
             String faixa = (String) linha[0];
             Long quantidade = (Long) linha[1];
 
-            FaixaEtariaClienteDto faixaEtariaClienteDto = new FaixaEtariaClienteDto(faixa, quantidade);
-            faixaEtariaClienteDtos.add(faixaEtariaClienteDto);
+            FaixaEtariaCliente faixaEtariaCliente = new FaixaEtariaCliente(faixa, quantidade);
+            faixaEtariaClientes.add(faixaEtariaCliente);
         }
 
-        return faixaEtariaClienteDtos;
+        return faixaEtariaClientes;
     }
 
-    @GetMapping("/contagem-tema-contato")
-    public List<TemaContatosClienteDto> trazerContagemTemaContato() {
+    public List<TemaContatosCliente> trazerContagemTemaContato(){
         Query query = entityManager.createNativeQuery("SELECT tema, contatos FROM vw_contagem_tema_contato");
         List<Object[]> resultado = query.getResultList();
 
-        List<TemaContatosClienteDto> temaContatosClienteDtos = new ArrayList<>();
+        List<TemaContatosCliente> temaContatosClientes = new ArrayList<>();
 
         for (Object[] linha : resultado) {
             String tema = (String) linha[0];
             Long contatos = (Long) linha[1];
 
 
-            TemaContatosClienteDto temaContatosClienteDto = new TemaContatosClienteDto(tema, contatos);
-            temaContatosClienteDtos.add(temaContatosClienteDto);
+            TemaContatosCliente temaContatosCliente = new TemaContatosCliente(tema, contatos);
+            temaContatosClientes.add(temaContatosCliente);
         }
-
-        return temaContatosClienteDtos;
+        return temaContatosClientes;
     }
 
-    @GetMapping("/contagem-clientes-semana")
     public List<ContagemClientesAcordoUmaSemana> trazerContagemClientesAcordoUmaSemana() {
         Query query = entityManager.createNativeQuery("SELECT * FROM vw_clientes_acordo_1semana");
         List<Object[]> resultado = query.getResultList();
@@ -75,5 +67,4 @@ public class ConsultasDashboardAdmin {
 
         return listaContagem;
     }
-
 }
