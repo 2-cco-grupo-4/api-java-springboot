@@ -4,6 +4,7 @@ import com.example.picmejava.lista.Lista;
 import com.example.picmejava.model.Cliente;
 import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.dto.*;
+import com.example.picmejava.model.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.repository.ClienteRepository;
 import com.example.picmejava.service.builder.ClienteBuilder;
 import org.junit.jupiter.api.DisplayName;
@@ -28,6 +29,24 @@ public class ClienteServiceTest {
     private ClienteService clienteService;
 
 
+
+    @Test
+    @DisplayName("Deve gerar exceção quando tentar logar e cliente não existir")
+    void login_clienteQuandoClienteNaoExistir() {
+
+        //get
+        LoginUsuarioDTO loginDto = ClienteBuilder.criarLoginUsuarioDto();
+
+        //when
+        Mockito.when(clienteRepository.findByEmailAndSenha(Mockito.anyString(), Mockito.anyString())).thenReturn(Optional.empty());
+
+        //assert
+        assertThrows(EntidadeNaoEncontradaException.class, () -> clienteService.login(loginDto));
+
+    }
+
+
+
     @Test
     @DisplayName("Deve cadastrar o cliente quando dados corretos")
     void cadastrar_clienteQuandoDadosCorretos(){
@@ -44,30 +63,36 @@ public class ClienteServiceTest {
 
         //assert
         assertNotNull(resultado);
-
-
-
-
     }
 
+    @Test
+    @DisplayName("Deve retornar três itens quando três itens cadastrados")
     void cadastrar_retornarTresItensQuandoTresItensCadastrados() {
         //get
         Cliente cliente = ClienteBuilder.criarCliente();
-        CadastroUsuarioDTO cadastroDto = ClienteBuilder.criarCadastroUsuarioDto();
-        Lista<Cliente> resultadoLista = clienteService.listar();
-        List<Cliente> resultado = resultadoLista.toList();
-        // Crie uma lista de clientes
         List<Cliente> listaClientes = new ArrayList<>();
         listaClientes.add(cliente);
         listaClientes.add(cliente);
         listaClientes.add(cliente);
 
-        //when
-        Mockito.when(clienteRepository.findAll()).thenReturn(listaClientes);
-
         //assert
-        assertFalse(resultado.isEmpty());
-        assertEquals(3, resultado.size());
+        assertFalse(listaClientes.isEmpty());
+        assertEquals(3, listaClientes.size());
+    }
+
+
+
+    @Test
+    @DisplayName("Deve lançar exceção quando o cliente não for encontrado")
+    void atualizar_clienteQuandoClienteNaoEncontrado() {
+
+        AtualizarUsuarioDTO dadosAtualizados = new AtualizarUsuarioDTO();
+        dadosAtualizados.setNome("Novo Nome");
+        dadosAtualizados.setNumCelular("NovoNumero");
+
+        Mockito.when(clienteRepository.findById(1)).thenReturn(Optional.empty());
+
+        assertThrows(EntidadeNaoEncontradaException.class, () -> clienteService.atualizar(1, dadosAtualizados));
 
     }
 
@@ -119,24 +144,69 @@ public class ClienteServiceTest {
     @Test
     @DisplayName("Deve desautenticar o cliente quando chamado o método logoff")
     void desautenticarClienteQuandoLogoff() {
-        // Crie um cliente autenticado
         Cliente clienteAutenticado = ClienteBuilder.criarCliente();
         clienteAutenticado.setAutenticado(true);
 
-        // Crie os dados de login
+
         LoginUsuarioDTO dadosLogin = new LoginUsuarioDTO();
         dadosLogin.setEmail("email@example.com");
         dadosLogin.setSenha("senha123");
 
-        // Mock do clienteRepository
+
         Mockito.when(clienteRepository.findByEmailAndSenha("email@example.com", "senha123")).thenReturn(Optional.of(clienteAutenticado));
         Mockito.when(clienteRepository.save(Mockito.any(Cliente.class))).thenReturn(clienteAutenticado);
 
-        // Executar o método logoff()
+
         Cliente resultado = clienteService.logoff(dadosLogin);
 
-        // Verificar se o cliente foi desautenticado corretamente
+
         assertFalse(resultado.getAutenticado());
+    }
+
+    //Testar cliente
+    @Test
+    @DisplayName("Deve retornar uma lista de clientes quando chamado o método listar")
+    void listarClientesQuandoChamadoMetodoListar() {
+        Cliente cliente = ClienteBuilder.criarCliente();
+        cliente.setId(1);
+        cliente.setNome("Nome");
+        cliente.setNumCelular("123456789");
+        cliente.setEmail("email@email.com");
+        cliente.setSenha("rafael");
+        cliente.setAutenticado(false);
+
+        List<Cliente> listaClientes = new ArrayList<>();
+        listaClientes.add(cliente);
+        listaClientes.add(cliente);
+
+        Mockito.when(clienteRepository.findAll()).thenReturn(listaClientes);
+
+        Lista<Cliente> resultado = clienteService.listar();
+
+        assertFalse(resultado.isEmpty());
+        assertEquals(2, resultado.size());
+    }
+
+
+    @Test
+    @DisplayName("Deve gerar exceção quando atualizarClienteQuandoDadosInvalidos")
+    void deveGerarExcecaoQuandoatualizarClienteQuandoDadosInvalidos() {
+       //FAÇA ESSE MÉTODO
+    }
+
+
+
+    @Test
+    @DisplayName("Deve gerar exceção quando o cliente não for encontrado")
+    void atualizarClienteQuandoClienteNaoEncontrado() {
+        AtualizarUsuarioDTO dadosAtualizados = new AtualizarUsuarioDTO();
+        dadosAtualizados.setNome("Nome");
+        dadosAtualizados.setNumCelular("123456789");
+        dadosAtualizados.setSenha("rafael");
+
+        Mockito.when(clienteRepository.findById(1)).thenReturn(Optional.empty());
+
+        assertThrows(EntidadeNaoEncontradaException.class, () -> clienteService.atualizar(1, dadosAtualizados));
     }
 
 

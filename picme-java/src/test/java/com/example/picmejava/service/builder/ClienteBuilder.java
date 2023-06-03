@@ -3,7 +3,7 @@ package com.example.picmejava.service.builder;
 
 import com.example.picmejava.model.Cliente;
 import com.example.picmejava.model.dto.CadastroUsuarioDTO;
-
+import com.example.picmejava.model.dto.LoginUsuarioDTO;
 
 
 import java.time.LocalDate;
@@ -55,6 +55,16 @@ public class ClienteBuilder {
         cadastroDto.setEmail("cliente@email");
 
         return cadastroDto;
+    }
+
+    public static LoginUsuarioDTO criarLoginUsuarioDto() {
+        LoginUsuarioDTO loginDto = new LoginUsuarioDTO();
+
+        loginDto.setEmail("email@email.com");
+        loginDto.setSenha("senha");
+
+        return loginDto;
+
     }
 
 }

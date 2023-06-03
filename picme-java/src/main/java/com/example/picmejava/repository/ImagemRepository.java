@@ -8,4 +8,8 @@ import java.util.List;
 
 public interface ImagemRepository extends JpaRepository<Imagem, Integer> {
     Lista<Imagem> findAllByIdAlbum(Integer idAlbum);
+
+    List<Imagem> findByIdAlbum(Integer idAlbum);
+
+
 }

@@ -2,8 +2,12 @@ package com.example.picmejava.service;
 
 import com.example.picmejava.model.Avaliacao;
 import com.example.picmejava.celia.Pilha;
+import com.example.picmejava.repository.AvaliacaoRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +16,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class AvaliacaoServiceTest {
 
+    @Mock
+    private AvaliacaoRepository avaliacaoRepository ;
+    @InjectMocks
     private AvaliacaoService avaliacaoService = new AvaliacaoService();
+    public AvaliacaoServiceTest() {
+        MockitoAnnotations.openMocks(this);
+    }
 
     @Test
     @DisplayName("Deve adicionar uma avaliação à pilha")
@@ -42,7 +52,7 @@ public class AvaliacaoServiceTest {
     void retornarListaDeAvaliacoesDaPilha() {
         List<Avaliacao> avaliacoesExistentes = new ArrayList<>();
         Avaliacao avaliacao = new Avaliacao() ;
-        avaliacao.setId(1L);
+        avaliacao.setId(1);
         avaliacao.setDescricao("òtima avaliação");
         avaliacao.setValor(10.00);
         avaliacoesExistentes.add(avaliacao);
@@ -53,4 +63,28 @@ public class AvaliacaoServiceTest {
         assertEquals(avaliacoesExistentes.size(), resultado.size());
         assertEquals(avaliacoesExistentes, resultado);
     }
+
+    @Test
+    @DisplayName("Deve retornar a lista de avaliações da pilha")
+    void retornarListaDeAvaliacoesDaPilha2() {
+        List<Avaliacao> avaliacoesExistentes = new ArrayList<>();
+        Avaliacao avaliacao = new Avaliacao() ;
+        avaliacao.setId(1);
+        avaliacao.setDescricao("òtima avaliação");
+        avaliacao.setValor(10.00);
+        avaliacoesExistentes.add(avaliacao);
+
+        avaliacaoService.avaliar(avaliacao);
+        List<Avaliacao> resultado = avaliacaoService.exibir();
+        assertNotNull(resultado);
+        assertEquals(avaliacoesExistentes.size(), resultado.size());
+        assertEquals(avaliacoesExistentes, resultado);
+    }
+
+    @Test
+    @DisplayName("Deve retornar exceção caso a última avaliação não seja adicionada a pilha")
+    void retornarExcecaoCasoUltimaAvaliacaoNaoSejaAdicionadaAPilha() {
+        assertThrows(IllegalStateException.class, () -> avaliacaoService.desfazer());
+    }
+
 }

@@ -52,4 +52,12 @@ public class ImagemService {
                 .toList();
     }
 
+    public List<RetornoImagemDTO> listarPorAlbum(Integer idAlbum){
+        List<Imagem> imagems = imagemRepository.findByIdAlbum(idAlbum);
+
+        return imagems.stream()
+                .map(imagem -> imagemMapper.toRetornoImagemDTO(imagem))
+                .toList();
+    }
+
 }

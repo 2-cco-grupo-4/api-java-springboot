@@ -35,7 +35,7 @@ public class EventoService {
 
     public RetornoEventoDTO cadastrar(CadastroEventoDTO novoEvento) {
         Fotografo fotografo = fotografoRepository.findById(novoEvento.getIdFotografo())
-                .orElseThrow(() -> new EntidadeNaoEncontradaException("Fotografo não encontado"));
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Fotografo não encontrado"));
 
         Cliente cliente = clienteRepository.findById(novoEvento.getIdCliente())
                 .orElseThrow(() -> new EntidadeNaoEncontradaException("Cliente não encontrado"));
