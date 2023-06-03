@@ -4,7 +4,7 @@ import com.example.picmejava.model.Endereco;
 import com.example.picmejava.service.endereco.builder.EnderecoBuilder;
 import com.example.picmejava.service.endereco.dto.CadastroEnderecoDTO;
 import com.example.picmejava.service.endereco.dto.RetornoEnderecoDTO;
-import com.example.picmejava.model.exception.EntidadeNaoEncontradaException;
+import com.example.picmejava.infra.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.repository.EnderecoRepository;
 import com.example.picmejava.repository.EventoRepository;
 import org.junit.jupiter.api.DisplayName;

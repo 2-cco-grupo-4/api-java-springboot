@@ -7,7 +7,7 @@ import com.example.picmejava.service.temaUsuario.dto.CadastroTemaClienteDTO;
 import com.example.picmejava.service.temaUsuario.dto.CadastroTemaFotografoDTO;
 import com.example.picmejava.service.temaUsuario.dto.RetornoTemaClienteDTO;
 import com.example.picmejava.service.temaUsuario.dto.RetornoTemaFotografoDTO;
-import com.example.picmejava.model.exception.EntidadeNaoEncontradaException;
+import com.example.picmejava.infra.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.model.mapper.TemaUsuarioMapper;
 import com.example.picmejava.repository.ClienteRepository;
 import com.example.picmejava.repository.FotografoRepository;

@@ -1,4 +1,4 @@
-package com.example.picmejava.model.exception;
+package com.example.picmejava.infra.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

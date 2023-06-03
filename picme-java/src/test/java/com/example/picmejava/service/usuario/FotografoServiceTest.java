@@ -1,7 +1,7 @@
 package com.example.picmejava.service.usuario;
 
 import com.example.picmejava.model.Fotografo;
-import com.example.picmejava.model.exception.EntidadeNaoEncontradaException;
+import com.example.picmejava.infra.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.repository.FotografoRepository;
 import com.example.picmejava.service.usuario.builder.FotografoBuilder;
 import com.example.picmejava.service.usuario.dto.*;

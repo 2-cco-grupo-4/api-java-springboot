@@ -3,7 +3,7 @@ package com.example.picmejava.service.temaUsuario;
 import com.example.picmejava.model.Cliente;
 import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.Tema;
-import com.example.picmejava.model.exception.EntidadeNaoEncontradaException;
+import com.example.picmejava.infra.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.repository.ClienteRepository;
 import com.example.picmejava.repository.FotografoRepository;
 import com.example.picmejava.repository.TemaRepository;

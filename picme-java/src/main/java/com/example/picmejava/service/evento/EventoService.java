@@ -3,7 +3,7 @@ package com.example.picmejava.service.evento;
 import com.example.picmejava.model.*;
 import com.example.picmejava.service.evento.dto.CadastroEventoDTO;
 import com.example.picmejava.service.evento.dto.RetornoEventoDTO;
-import com.example.picmejava.model.exception.EntidadeNaoEncontradaException;
+import com.example.picmejava.infra.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.model.mapper.EventoMapper;
 import com.example.picmejava.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;

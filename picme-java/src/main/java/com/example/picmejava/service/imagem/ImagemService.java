@@ -3,7 +3,7 @@ package com.example.picmejava.service.imagem;
 import com.example.picmejava.model.Album;
 import com.example.picmejava.model.Imagem;
 import com.example.picmejava.service.imagem.dto.RetornoImagemDTO;
-import com.example.picmejava.model.exception.EntidadeNaoEncontradaException;
+import com.example.picmejava.infra.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.model.mapper.ImagemMapper;
 import com.example.picmejava.repository.AlbumRepository;
 import com.example.picmejava.repository.ImagemRepository;

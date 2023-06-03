@@ -1,4 +1,4 @@
-package com.example.picmejava.model.exception;
+package com.example.picmejava.infra.exception;
 
 public class EntidadeNaoEncontradaException extends RuntimeException{
 

@@ -54,7 +54,7 @@ public class FotografoController {
 
     @Operation(summary = "Login fotógrafo", description = "Passando as credenciais válidas de um fotógrafo, é realizado o login na API")
     @PatchMapping("/entrar")
-    public ResponseEntity<RetornoFotografoDTO> login(@RequestBody LoginUsuarioDTO usuarioLoginDTO){
+    public ResponseEntity<RetornoFotografoDTO> login(@RequestBody @Valid LoginUsuarioDTO usuarioLoginDTO){
         return ResponseEntity.status(200).body(
                 fotografoMapper.toRetornoFotografoDTO(serviceFotografo.login(usuarioLoginDTO))
         );
@@ -63,7 +63,7 @@ public class FotografoController {
     @Operation(summary = "Logoff fotógrafo", description = "EndPoint para logoff do fotógrafo, é necessário passar as suas credenciais novamente")
     @SecurityRequirement(name = "Bearer")
     @PatchMapping("/sair")
-    public ResponseEntity<PerfilFotografoDTO> logoff(@RequestBody LoginUsuarioDTO buscarFotografo){
+    public ResponseEntity<PerfilFotografoDTO> logoff(@RequestBody @Valid LoginUsuarioDTO buscarFotografo){
         return ResponseEntity.status(200).body(fotografoMapper.toPerfilFotogradoDTO(
                 serviceFotografo.logoff(buscarFotografo)
         ));

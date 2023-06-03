@@ -6,7 +6,7 @@ import com.example.picmejava.model.Tema;
 import com.example.picmejava.service.album.dto.AtualizarAlbumDTO;
 import com.example.picmejava.service.album.dto.CadastroAlbumDTO;
 import com.example.picmejava.service.album.dto.RetornoAlbumDTO;
-import com.example.picmejava.model.exception.EntidadeNaoEncontradaException;
+import com.example.picmejava.infra.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.repository.AlbumRepository;
 import com.example.picmejava.repository.FotografoRepository;
 import com.example.picmejava.repository.TemaRepository;

@@ -1,4 +1,4 @@
-package com.example.picmejava.model.exception;
+package com.example.picmejava.infra.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
