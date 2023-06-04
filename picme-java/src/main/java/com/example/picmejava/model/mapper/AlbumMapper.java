@@ -1,10 +1,12 @@
 package com.example.picmejava.model.mapper;
 
 import com.example.picmejava.model.Album;
+import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.Tema;
-import com.example.picmejava.model.dto.PerfilAlbumDTO;
-import com.example.picmejava.model.dto.AtualizarAlbumDTO;
-import com.example.picmejava.model.dto.RetornoAlbumDTO;
+import com.example.picmejava.service.album.dto.CadastroAlbumDTO;
+import com.example.picmejava.service.album.dto.PerfilAlbumDTO;
+import com.example.picmejava.service.album.dto.AtualizarAlbumDTO;
+import com.example.picmejava.service.album.dto.RetornoAlbumDTO;
 
 public class AlbumMapper {
 
@@ -28,7 +30,8 @@ public class AlbumMapper {
 
         dto.setId(dados.getId());
         dto.setTitulo(dados.getTitulo());
-        dto.setTema(dados.getTema());
+        TemaMapper.toPerfilTemaDTO(dados.getTema());
+        dto.setTema(TemaMapper.toPerfilTemaDTO(dados.getTema()));
 
         return dto;
     }
@@ -37,7 +40,7 @@ public class AlbumMapper {
         RetornoAlbumDTO dto = new RetornoAlbumDTO();
 
         dto.setId(dados.getId());
-        dto.setTema(dados.getTema());
+        dto.setTema(TemaMapper.toPerfilTemaDTO(dados.getTema()));
         dto.setTitulo(dados.getTitulo());
         dto.setFotografo(fotografoMapper.toPerfilFotogradoDTO(dados.getFotografo()));
         if (dados.getImagems() != null){
@@ -45,5 +48,16 @@ public class AlbumMapper {
         }
 
         return dto;
+    }
+
+    public Album toAlbum(CadastroAlbumDTO dados, Fotografo fotografo, Tema tema) {
+        Album album = new Album();
+
+        album.setFotografo(fotografo);
+        album.setDescricao(dados.getDescricao());
+        album.setTitulo(dados.getTitulo());
+        album.setTema(tema);
+
+        return album;
     }
 }

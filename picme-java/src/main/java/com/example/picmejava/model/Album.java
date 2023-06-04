@@ -23,7 +23,8 @@ public class Album implements Identificavel{
     )
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "ID_ALBUM")
+    private Long id;
 
     @Schema(
             description = "Nome dado ao albúm",

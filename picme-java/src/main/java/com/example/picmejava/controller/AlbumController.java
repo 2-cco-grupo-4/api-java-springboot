@@ -1,10 +1,10 @@
 package com.example.picmejava.controller;
 
 import com.example.picmejava.model.Album;
-import com.example.picmejava.model.Fotografo;
-import com.example.picmejava.model.dto.AtualizarAlbumDTO;
-import com.example.picmejava.model.dto.RetornoAlbumDTO;
-import com.example.picmejava.service.AlbumService;
+import com.example.picmejava.service.album.dto.AtualizarAlbumDTO;
+import com.example.picmejava.service.album.dto.CadastroAlbumDTO;
+import com.example.picmejava.service.album.dto.RetornoAlbumDTO;
+import com.example.picmejava.service.album.AlbumService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -31,7 +31,7 @@ public class AlbumController {
     @SecurityRequirement(name = "Bearer")
 
     @PostMapping
-    public ResponseEntity<RetornoAlbumDTO> cadastrar(@RequestBody Album novoAlbum){
+    public ResponseEntity<RetornoAlbumDTO> cadastrar(@RequestBody @Valid CadastroAlbumDTO novoAlbum){
         return ResponseEntity.status(201).body(albumService.cadastrar(novoAlbum));
     }
 
@@ -39,7 +39,7 @@ public class AlbumController {
     @SecurityRequirement(name = "Bearer")
 
     @PutMapping("/{id}")
-    public ResponseEntity<RetornoAlbumDTO> atualizar(@PathVariable Integer id, @RequestBody @Valid AtualizarAlbumDTO albumAtualizado){
+    public ResponseEntity<RetornoAlbumDTO> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizarAlbumDTO albumAtualizado){
         return ResponseEntity.status(200).body(albumService.atualizar(id, albumAtualizado));
     }
 
@@ -47,7 +47,7 @@ public class AlbumController {
     @SecurityRequirement(name = "Bearer")
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Album> deletar(@PathVariable int id){
+    public ResponseEntity<Album> deletar(@PathVariable long id){
         albumService.deletar(id);
         return ResponseEntity.status(204).build();
     }

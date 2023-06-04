@@ -3,8 +3,8 @@ package com.example.picmejava.model.mapper;
 import com.example.picmejava.model.Cliente;
 import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.Tema;
-import com.example.picmejava.model.dto.RetornoTemaClienteDTO;
-import com.example.picmejava.model.dto.RetornoTemaFotografoDTO;
+import com.example.picmejava.service.temaUsuario.dto.RetornoTemaClienteDTO;
+import com.example.picmejava.service.temaUsuario.dto.RetornoTemaFotografoDTO;
 
 import java.util.List;
 

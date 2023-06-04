@@ -1,8 +1,8 @@
 package com.example.picmejava.controller;
 
-import com.example.picmejava.model.dto.*;
 import com.example.picmejava.model.mapper.FotografoMapper;
-import com.example.picmejava.service.FotografoService;
+import com.example.picmejava.service.usuario.FotografoService;
+import com.example.picmejava.service.usuario.dto.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
 
 @Tag(
         name = "Fotografo Controller",
@@ -46,7 +45,7 @@ public class FotografoController {
     @SecurityRequirement(name = "Bearer")
     @PutMapping("/atualizar/{idFotografo}")
     public ResponseEntity<PerfilFotografoDTO> atualizar(
-            @PathVariable Integer idFotografo, @RequestBody @Valid AtualizarUsuarioDTO fotografoAtualizado
+            @PathVariable Long idFotografo, @RequestBody @Valid AtualizarUsuarioDTO fotografoAtualizado
     ){
         return ResponseEntity.status(200).body(fotografoMapper.toPerfilFotogradoDTO(
                 serviceFotografo.atualizar(idFotografo, fotografoAtualizado)
@@ -55,7 +54,7 @@ public class FotografoController {
 
     @Operation(summary = "Login fotógrafo", description = "Passando as credenciais válidas de um fotógrafo, é realizado o login na API")
     @PatchMapping("/entrar")
-    public ResponseEntity<RetornoFotografoDTO> login(@RequestBody LoginUsuarioDTO usuarioLoginDTO){
+    public ResponseEntity<RetornoFotografoDTO> login(@RequestBody @Valid LoginUsuarioDTO usuarioLoginDTO){
         return ResponseEntity.status(200).body(
                 fotografoMapper.toRetornoFotografoDTO(serviceFotografo.login(usuarioLoginDTO))
         );
@@ -64,7 +63,7 @@ public class FotografoController {
     @Operation(summary = "Logoff fotógrafo", description = "EndPoint para logoff do fotógrafo, é necessário passar as suas credenciais novamente")
     @SecurityRequirement(name = "Bearer")
     @PatchMapping("/sair")
-    public ResponseEntity<PerfilFotografoDTO> logoff(@RequestBody LoginUsuarioDTO buscarFotografo){
+    public ResponseEntity<PerfilFotografoDTO> logoff(@RequestBody @Valid LoginUsuarioDTO buscarFotografo){
         return ResponseEntity.status(200).body(fotografoMapper.toPerfilFotogradoDTO(
                 serviceFotografo.logoff(buscarFotografo)
         ));

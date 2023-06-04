@@ -1,5 +1,7 @@
 package com.example.picmejava.instagram;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -10,6 +12,7 @@ import reactor.core.publisher.Mono;
 
 
 @Service
+@Tag(name = "Instagram Service", description = "Serviço responsável por integração com o Instagram")
 public class InstagramService {
 
     String client_id = "1556911098134262";
@@ -48,6 +51,7 @@ public class InstagramService {
 //        return usuarioInstagram;
 //    }
 
+    @Operation(summary = "Obter token de acesso do usuário do Instagram")
     public Mono<UsuarioInstagram> postUsuarioInsta(String codigo){
         String cURL = "https://api.instagram.com/oauth/access_token";
 
@@ -78,6 +82,7 @@ public class InstagramService {
 
     }
 
+    @Operation(summary = "Obter imagens do usuário no Instagram")
     public Mono<ListaImagensInstagram> getImagensInsta(String accessToken) {
         String cURL = "https://graph.instagram.com/me/media?fields=id,caption&access_token=" + accessToken;
 
@@ -91,6 +96,7 @@ public class InstagramService {
         return Mono.just(response);
     }
 
+    @Operation(summary = "Obter detalhes de uma imagem do Instagram")
     public Mono<MediaInstagram> getImagem(String idImagem, String accessToken) {
         String cURL = String.format("https://graph.instagram.com/%s?fields=id,media_type,media_url,permalink,caption,username,timestamp&access_token=%s", idImagem, accessToken);
 

@@ -23,7 +23,8 @@ public class Tema implements Identificavel {
     )
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "ID_TEMA")
+    private Long id;
 
     @Schema(
             description = "Nome do tema",
@@ -33,5 +34,7 @@ public class Tema implements Identificavel {
 
     @ManyToMany(mappedBy = "temas")
     List<Usuario> usuarios;
+
+
 }
 

@@ -1,8 +1,10 @@
 package com.example.picmejava.model.mapper;
 
 import com.example.picmejava.model.Endereco;
-import com.example.picmejava.model.dto.PerfilEnderecoDTO;
-import com.example.picmejava.model.dto.RetornoEnderecoDTO;
+import com.example.picmejava.model.Evento;
+import com.example.picmejava.service.endereco.dto.CadastroEnderecoDTO;
+import com.example.picmejava.service.endereco.dto.PerfilEnderecoDTO;
+import com.example.picmejava.service.endereco.dto.RetornoEnderecoDTO;
 
 public class EnderecoMapper {
 
@@ -21,6 +23,20 @@ public class EnderecoMapper {
         dto.setComplemento(endereco.getComplemento());
 
         return dto;
+    }
+
+    public static Endereco toEndereco(CadastroEnderecoDTO novoEndereco, Evento evento) {
+        Endereco endereco = new Endereco();
+        endereco.setLogradouro(novoEndereco.getLogradouro());
+        endereco.setCidade(novoEndereco.getCidade());
+        endereco.setCep(novoEndereco.getCep());
+        endereco.setEstado(novoEndereco.getEstado());
+        endereco.setComplemento(novoEndereco.getComplemento());
+        endereco.setEvento(evento);
+        endereco.setBairro(novoEndereco.getBairro());
+        endereco.setNumero(novoEndereco.getNumero());
+
+        return endereco;
     }
 
     public RetornoEnderecoDTO toRetornoEnderecoDTO(Endereco endereco){

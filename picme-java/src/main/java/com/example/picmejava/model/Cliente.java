@@ -9,11 +9,11 @@ import java.util.ArrayList;
 
 @Entity
 
-@DiscriminatorValue("cliente")
+@DiscriminatorValue("1")
 public class Cliente extends Usuario{
 
     @Override
-    public String getTipoUsuario() {
-        return "Cliente";
+    public int getTipoUsuario() {
+        return 1;
     }
 }

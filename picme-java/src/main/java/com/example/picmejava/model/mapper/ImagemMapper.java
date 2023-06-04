@@ -1,8 +1,8 @@
 package com.example.picmejava.model.mapper;
 
 import com.example.picmejava.model.Imagem;
-import com.example.picmejava.model.dto.PerfilImagemDTO;
-import com.example.picmejava.model.dto.RetornoImagemDTO;
+import com.example.picmejava.service.imagem.dto.PerfilImagemDTO;
+import com.example.picmejava.service.imagem.dto.RetornoImagemDTO;
 
 public class ImagemMapper {
 
