@@ -1,4 +1,4 @@
-package com.example.picmejava.service;
+package com.example.picmejava.service.usuario;
 
 import com.example.picmejava.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;

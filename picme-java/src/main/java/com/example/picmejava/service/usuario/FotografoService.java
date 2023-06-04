@@ -6,6 +6,7 @@ import com.example.picmejava.model.mapper.FotografoMapper;
 import com.example.picmejava.repository.FotografoRepository;
 import com.example.picmejava.service.usuario.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,12 +14,17 @@ import java.util.Optional;
 
 @Service
 public class FotografoService {
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private FotografoRepository fotografoRepository;
     private FotografoMapper fotografoMapper = new FotografoMapper();
 
     public PerfilFotografoDTO cadastrar(CadastroUsuarioDTO novoFotografo){
+        String senhaCriptografada = passwordEncoder.encode(novoFotografo.getSenha());
+        novoFotografo.setSenha(senhaCriptografada);
+
         Fotografo fotografo = fotografoRepository.save(fotografoMapper.toFotografo(novoFotografo));
         return fotografoMapper.toPerfilFotogradoDTO(fotografo);
     }

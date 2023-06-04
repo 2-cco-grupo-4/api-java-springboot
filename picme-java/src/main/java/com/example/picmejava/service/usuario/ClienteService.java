@@ -9,6 +9,7 @@ import com.example.picmejava.infra.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.model.mapper.ClienteMapper;
 import com.example.picmejava.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -17,11 +18,17 @@ import java.util.Optional;
 public class ClienteService {
 
     @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
     private ClienteRepository clienteRepository;
 
     private ClienteMapper clienteMapper = new ClienteMapper();
 
     public Cliente cadastrar(CadastroUsuarioDTO novoCliente){
+        String senhaCriptografada = passwordEncoder.encode(novoCliente.getSenha());
+        novoCliente.setSenha(senhaCriptografada);
+
         return clienteRepository.save(clienteMapper.toCliente(novoCliente));
     }
 
