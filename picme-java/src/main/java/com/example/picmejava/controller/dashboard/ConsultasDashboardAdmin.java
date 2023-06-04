@@ -112,6 +112,42 @@ public class ConsultasDashboardAdmin {
         return faixaEtariaClienteDtos;
     }
 
+    @GetMapping("/progressao-usuarios-mes")
+    public List<FaixaEtariaClienteDto> progressaoUsuariosMes(){
+        Query query = entityManager.createNativeQuery("SELECT * FROM vw_progressao_cadastro_usuarios");
+        List<Object[]> resultado = query.getResultList();
+
+        List<FaixaEtariaClienteDto> faixaEtariaClienteDtos = new ArrayList<>();
+
+        for (Object[] linha : resultado) {
+            String faixa = (String) linha[0];
+            Long quantidade = (Long) linha[1];
+
+            FaixaEtariaClienteDto faixaEtariaClienteDto = new FaixaEtariaClienteDto(faixa, quantidade);
+            faixaEtariaClienteDtos.add(faixaEtariaClienteDto);
+        }
+
+        return faixaEtariaClienteDtos;
+    }
+
+    @GetMapping("/progressao-relizacao-sessoes")
+    public List<FaixaEtariaClienteDto> progressaoRealizacaoSessoes(){
+        Query query = entityManager.createNativeQuery("SELECT * FROM vw_progressao_sessoes_realizadas");
+        List<Object[]> resultado = query.getResultList();
+
+        List<FaixaEtariaClienteDto> faixaEtariaClienteDtos = new ArrayList<>();
+
+        for (Object[] linha : resultado) {
+            String faixa = (String) linha[0];
+            Long quantidade = (Long) linha[1];
+
+            FaixaEtariaClienteDto faixaEtariaClienteDto = new FaixaEtariaClienteDto(faixa, quantidade);
+            faixaEtariaClienteDtos.add(faixaEtariaClienteDto);
+        }
+
+        return faixaEtariaClienteDtos;
+    }
+
     @GetMapping("/kpi-total-usuarios")
     public List<FaixaEtariaClienteDto> trazerKpiTotalUsuarios(){
         Query query = entityManager.createNativeQuery("SELECT * FROM vw_kpi_usuarios_mes");
