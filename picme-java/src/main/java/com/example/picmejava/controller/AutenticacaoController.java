@@ -1,5 +1,7 @@
 package com.example.picmejava.controller;
 
+import com.example.picmejava.infra.security.TokenService;
+import com.example.picmejava.model.Usuario;
 import com.example.picmejava.service.usuario.dto.LoginUsuarioDTO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,11 +22,14 @@ public class AutenticacaoController {
     @Autowired
     private AuthenticationManager manager;
 
-    @PostMapping
-    public ResponseEntity<Void> efetuarLogin(@RequestBody @Valid LoginUsuarioDTO login){
-        var token = new UsernamePasswordAuthenticationToken(login.getEmail(), login.getSenha());
-        var authenticate = manager.authenticate(token);
+    @Autowired
+    private TokenService tokenService;
 
-        return ResponseEntity.ok().build();
+    @PostMapping
+        public ResponseEntity efetuarLogin(@RequestBody @Valid LoginUsuarioDTO login){
+        var token = new UsernamePasswordAuthenticationToken(login.getEmail(), login.getSenha());
+        var authentication = manager.authenticate(token);
+
+        return ResponseEntity.ok(tokenService.gerarToken((Usuario) authentication.getPrincipal()));
     }
 }
