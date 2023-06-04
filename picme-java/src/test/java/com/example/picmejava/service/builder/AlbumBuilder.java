@@ -17,6 +17,7 @@ public class AlbumBuilder {
         album.setTitulo("Album 01");
         album.setTema(TemaBuilder.criarTema());
         album.setFotografo(FotografoBuilder.criarFotografo());
+        album.setId(1);
         album.setDescricao("Descrição do album 01");
 
         return album;

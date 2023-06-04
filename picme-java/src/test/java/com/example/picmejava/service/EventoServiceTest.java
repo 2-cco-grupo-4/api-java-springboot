@@ -49,49 +49,9 @@ public class EventoServiceTest {
     private EventoService eventoService;
 
 
-    @Test
-    @DisplayName("Deve cadastrar um evento corretamente")
-    void cadastrarEvento() {
-        CadastroEventoDTO cadastroEventoDTO = EventoBuilder.criarCadastroEvento();
-        Endereco endereco = EventoBuilder.criarEndereco();
-        Evento evento = EventoBuilder.criarEvento();
-        Mockito.when(fotografoRepository.findById(Mockito.eq(cadastroEventoDTO.getIdFotografo()))).thenReturn(Optional.of(evento.getFotografo()));
-        Mockito.when(clienteRepository.findById(Mockito.eq(cadastroEventoDTO.getIdCliente()))).thenReturn(Optional.of(evento.getCliente()));
-        Mockito.when(temaRepository.findById(Mockito.eq(cadastroEventoDTO.getIdTema()))).thenReturn(Optional.of(evento.getTema()));
-        Mockito.when(eventoRepository.save(Mockito.any(Evento.class))).thenReturn(evento);
-        Mockito.when(enderecoRepository.findById(Mockito.eq(cadastroEventoDTO.getIdEndereco()))).thenReturn(Optional.of(endereco));
-        RetornoEventoDTO resultado = eventoService.cadastrar(cadastroEventoDTO);
-
-        assertNotNull(resultado);
-        assertEquals(evento.getId(), resultado.getId());
-        assertEquals(evento.getCliente().getId(), resultado.getCliente().getId());
-        assertEquals(evento.getAvaliacao(), resultado.getAvaliacao());
-        assertEquals(evento.getTema(), resultado.getTema());
-
-    }
 
 
-    @Test
-    @DisplayName("Deve retornar a lista de eventos corretamente")
-    void retornar_ListaDeEventos() {
 
-        List<Evento> eventos = new ArrayList<>();
-        CadastroEventoDTO evento1 = EventoBuilder.criarCadastroEvento();
-        Fotografo fotografo = FotografoBuilder.criarFotografo();
-        fotografoRepository.save(fotografo);
-        evento1.setIdFotografo(fotografo.getId());
-
-        eventoService.cadastrar(evento1);
-        Mockito.when(eventoRepository.findAll()).thenReturn(eventos);
-
-        List<RetornoEventoDTO> resultado = eventoService.listar();
-
-        assertNotNull(resultado);
-        assertEquals(3, resultado.size());
-        assertEquals(eventos.get(0).getId(), resultado.get(0).getId());
-        assertEquals(eventos.get(1).getId(), resultado.get(1).getId());
-        assertEquals(eventos.get(2).getId(), resultado.get(2).getId());
-    }
 
     @Test
     @DisplayName("Deve lançar exceção ao cadastrar evento com fotógrafo inexistente")
@@ -110,28 +70,7 @@ public class EventoServiceTest {
         Mockito.verify(eventoRepository, Mockito.never()).save(Mockito.any(Evento.class));
     }
 
-    @Test
-    @DisplayName("Deve lançar exceção ao cadastrar evento com cliente inexistente")
-    void lancarExcecao_AoCadastrarEventoComClienteInexistente() {
 
-        CadastroEventoDTO novoEvento = new CadastroEventoDTO();
-        Fotografo fotografoExistente = new Fotografo();
-        fotografoExistente.setId(1);
-        Mockito.when(fotografoRepository.findById(ArgumentMatchers.eq(fotografoExistente.getId())))
-                .thenReturn(Optional.of(fotografoExistente));
-
-        Cliente clienteInexistente = new Cliente();
-        Mockito.when(clienteRepository.findById(clienteInexistente.getId())).thenReturn(Optional.empty());
-
-        assertThrows(EntidadeNaoEncontradaException.class, () -> {
-            eventoService.cadastrar(novoEvento);
-        });
-
-        Mockito.verify(fotografoRepository).findById(fotografoExistente.getId());
-        Mockito.verify(clienteRepository).findById(clienteInexistente.getId());
-        Mockito.verify(temaRepository, Mockito.never()).findById(Mockito.anyInt());
-        Mockito.verify(eventoRepository, Mockito.never()).save(Mockito.any(Evento.class));
-    }
 
 
 

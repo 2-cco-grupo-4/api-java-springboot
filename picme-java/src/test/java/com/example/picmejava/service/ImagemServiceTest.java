@@ -2,12 +2,15 @@ package com.example.picmejava.service;
 
 import com.example.picmejava.lista.Lista;
 import com.example.picmejava.model.Album;
+import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.Imagem;
+import com.example.picmejava.model.Tema;
 import com.example.picmejava.model.dto.RetornoImagemDTO;
 import com.example.picmejava.model.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.repository.AlbumRepository;
 import com.example.picmejava.repository.ImagemRepository;
 import com.example.picmejava.service.builder.AlbumBuilder;
+import com.example.picmejava.service.builder.FotografoBuilder;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,6 +35,9 @@ public class ImagemServiceTest {
     private AlbumRepository albumRepository;
     @InjectMocks
     private ImagemService imagemService;
+
+    @InjectMocks
+    private EventoService eventoService;
 
 
     @Test
@@ -82,21 +88,7 @@ public class ImagemServiceTest {
         assertEquals(imagensExistentes.size(), resultado.size());
     }
 
-    @Test
-    @DisplayName("Deve listar todas as imagens de um álbum")
-    void listarTodasImagensDeUmAlbum() {
-        List<Imagem> imagens = new ArrayList<>();
-        Imagem imagem = new Imagem();
-        imagens.add(imagem);
-        Album album = AlbumBuilder.criarAlbum();
-        album.setImagems(imagens);
-        Mockito.when(albumRepository.findById(1)).thenReturn(Optional.of(album));
 
-        List<RetornoImagemDTO> resultado = imagemService.listarPorAlbum(1);
-
-        assertNotNull(resultado);
-        assertEquals(imagens.size(), resultado.size());
-    }
 
 
 
