@@ -14,11 +14,14 @@ import com.example.picmejava.repository.FotografoRepository;
 import com.example.picmejava.repository.TemaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Tag(name = "Tema Usuário Service", description = "APIs relacionadas a operações de temas para usuários")
 public class TemaUsuarioService {
     
     @Autowired
@@ -31,7 +34,8 @@ public class TemaUsuarioService {
     private ClienteRepository clienteRepository;
 
     private final TemaUsuarioMapper temaUsuarioMapper = new TemaUsuarioMapper();
-    
+
+    @Operation(summary = "Cadastrar temas para um fotógrafo")
     public RetornoTemaFotografoDTO cadastrarTemaFotografo(CadastroTemaFotografoDTO novoTemaFotografo) {
 
         List<Tema> temas = new ArrayList<>();
@@ -54,7 +58,7 @@ public class TemaUsuarioService {
         return temaUsuarioMapper.toRetornoTemaUsuarioDTO(temas, fotografo);
 
     }
-
+    @Operation(summary = "Cadastrar temas para um cliente")
     public RetornoTemaClienteDTO cadastrarTemaCliente(CadastroTemaClienteDTO novoTemaCliente) {
 
         List<Tema> temas = new ArrayList<>();

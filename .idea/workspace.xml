@@ -5,11 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ef51b8aa-1eef-41ff-92a2-fe581372663f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/celia/Fila.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/controller/AvaliacaoController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/service/AvaliacaoService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/controller/AutenticacaoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/controller/AutenticacaoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/controller/AvaliacaoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/controller/AvaliacaoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/controller/EnderecoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/controller/EnderecoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/controller/EventoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/controller/EventoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/controller/TemaUsuarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/controller/TemaUsuarioController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/controller/dashboard/ConsultasDashboardAdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/controller/dashboard/ConsultasDashboardAdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/instagram/InstagramController.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/instagram/InstagramController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/instagram/InstagramService.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/instagram/InstagramService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/model/Endereco.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/model/Endereco.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/model/Evento.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/model/Evento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/model/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/model/Usuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/service/album/AlbumService.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/service/album/AlbumService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/service/avaliacao/AvaliacaoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/service/avaliacao/AvaliacaoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/service/dashboard/DashboardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/service/dashboard/DashboardService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/service/endereco/EnderecoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/service/endereco/EnderecoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/service/evento/EventoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/service/evento/EventoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/service/imagem/ImagemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/service/imagem/ImagemService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/service/tema/TemaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/service/tema/TemaService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/service/temaUsuario/TemaUsuarioService.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/service/temaUsuario/TemaUsuarioService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/service/usuario/AutenticacaoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/service/usuario/AutenticacaoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/service/usuario/ClienteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/service/usuario/ClienteService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/service/usuario/FotografoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/picme-java/src/main/java/com/example/picmejava/service/usuario/FotografoService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +61,7 @@
     "git-widget-placeholder": "feature/avaliacao",
     "ignore.preview.features.used": "true",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/rafael/Documents/api-java-springboot/picme-java",
+    "last_opened_file_path": "C:/Users/kelvi/Desktop/api-java-springboot-Swagger2",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",

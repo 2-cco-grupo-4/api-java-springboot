@@ -7,17 +7,21 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Tag(name = "Dashboard", description = "Endpoints para informações do painel de controle")
 public class DashboardService {
 
     @Autowired
     private EntityManager entityManager;
 
-    public List<FaixaEtariaCliente> trazerFaixaEtariaCliente(){
+    @Operation(summary = "Obter faixa etária dos clientes", description = "Retorna a contagem de clientes por faixa etária.")
+    public List<FaixaEtariaCliente> trazerFaixaEtariaCliente() {
         Query query = entityManager.createNativeQuery("SELECT * FROM vw_faixa_etaria_cliente");
         List<Object[]> resultado = query.getResultList();
 
@@ -34,7 +38,8 @@ public class DashboardService {
         return faixaEtariaClientes;
     }
 
-    public List<TemaContatosCliente> trazerContagemTemaContato(){
+    @Operation(summary = "Obter contagem de tema de contatos", description = "Retorna a contagem de contatos por tema.")
+    public List<TemaContatosCliente> trazerContagemTemaContato() {
         Query query = entityManager.createNativeQuery("SELECT tema, contatos FROM vw_contagem_tema_contato");
         List<Object[]> resultado = query.getResultList();
 
@@ -44,13 +49,13 @@ public class DashboardService {
             String tema = (String) linha[0];
             Long contatos = (Long) linha[1];
 
-
             TemaContatosCliente temaContatosCliente = new TemaContatosCliente(tema, contatos);
             temaContatosClientes.add(temaContatosCliente);
         }
         return temaContatosClientes;
     }
 
+    @Operation(summary = "Obter contagem de clientes em acordo em uma semana", description = "Retorna a contagem de clientes em acordo em uma semana.")
     public List<ContagemClientesAcordoUmaSemana> trazerContagemClientesAcordoUmaSemana() {
         Query query = entityManager.createNativeQuery("SELECT * FROM vw_clientes_acordo_1semana");
         List<Object[]> resultado = query.getResultList();

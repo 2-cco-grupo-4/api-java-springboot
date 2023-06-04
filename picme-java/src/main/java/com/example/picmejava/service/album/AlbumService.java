@@ -13,11 +13,14 @@ import com.example.picmejava.service.album.dto.CadastroAlbumDTO;
 import com.example.picmejava.service.album.dto.RetornoAlbumDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Tag(name = "Album Service", description = "APIs relacionadas a operações de álbuns")
 public class AlbumService {
 
     @Autowired
@@ -31,6 +34,7 @@ public class AlbumService {
 
     private AlbumMapper albumMapper = new AlbumMapper();
 
+    @Operation(summary = "Cadastrar um novo álbum")
     public RetornoAlbumDTO cadastrar(CadastroAlbumDTO novoAlbum){
         Tema tema = temaRepository.findById(novoAlbum.getIdTema())
                 .orElseThrow(() -> new EntidadeNaoEncontradaException("Tema não existe"));
@@ -45,6 +49,7 @@ public class AlbumService {
         return albumMapper.toRetornoAlbumDTO(album);
     }
 
+    @Operation(summary = "Atualizar um álbum existente")
     public RetornoAlbumDTO atualizar(Long idAlbum, AtualizarAlbumDTO albumAtualizado){
         Album albumDesatualizado = buscarPorId(idAlbum);
 
@@ -56,6 +61,7 @@ public class AlbumService {
         return albumMapper.toRetornoAlbumDTO(album);
     }
 
+    @Operation(summary = "Deletar um álbum")
     public Album deletar(Long idAlbum){
         Album album = buscarPorId(idAlbum);
 
@@ -64,6 +70,7 @@ public class AlbumService {
         return album;
     }
 
+    @Operation(summary = "Listar todos os álbuns")
     public List<RetornoAlbumDTO> listar() {
         List<Album> albums = albumRepository.findAll();
         return albums.stream()
@@ -71,6 +78,7 @@ public class AlbumService {
                 .toList();
     }
 
+    @Operation(summary = "Buscar um álbum por ID")
     public Album buscarPorId(Long idAlbum){
         Optional<Album> albumOptional = albumRepository.findById(idAlbum);
         Album album = albumOptional.orElseThrow(() -> new EntidadeNaoEncontradaException("Album não encontrado"));
