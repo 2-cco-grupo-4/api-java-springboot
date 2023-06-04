@@ -8,6 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -47,7 +48,20 @@ public abstract class Usuario implements UserDetails, Identificavel {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        List<GrantedAuthority> authorities = new ArrayList<>();
+
+        switch (tipoUsuario) {
+            case 0:
+                authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+                break;
+            case 1:
+                authorities.add(new SimpleGrantedAuthority("ROLE_CLIENTE"));
+                break;
+            case 2:
+                authorities.add(new SimpleGrantedAuthority("ROLE_FOTOGRAFO"));
+                break;
+        }
+        return authorities;
     }
 
     @Override

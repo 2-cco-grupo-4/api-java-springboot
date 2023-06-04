@@ -33,7 +33,12 @@ public class SecurityConfigurations {
                     req.requestMatchers("/swagger-ui/**").permitAll();
                     req.requestMatchers(HttpMethod.POST, "/clientes/cadastrar").permitAll();
                     req.requestMatchers(HttpMethod.POST, "/fotografos/cadastrar").permitAll();
-                    req.anyRequest().permitAll();
+                    req.requestMatchers(HttpMethod.POST, "/imagens").hasAnyRole("FOTOGRAFO", "ADMIN");
+                    req.requestMatchers(HttpMethod.PUT, "/imagens").hasAnyRole("FOTOGRAFO", "ADMIN");
+                    req.requestMatchers(HttpMethod.POST, "/albums").hasAnyRole("FOTOGRAFO", "ADMIN");
+                    req.requestMatchers(HttpMethod.POST, "/temas").hasAnyRole("FOTOGRAFO", "ADMIN");
+                    req.requestMatchers("/admin/**").hasRole("ADMIN");
+                    req.anyRequest().authenticated();
                 })
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

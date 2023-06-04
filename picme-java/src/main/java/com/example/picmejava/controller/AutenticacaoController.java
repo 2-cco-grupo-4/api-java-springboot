@@ -26,8 +26,11 @@ public class AutenticacaoController {
 
     @PostMapping
         public ResponseEntity efetuarLogin(@RequestBody @Valid LoginUsuarioDTO login){
+        System.out.println(login.getEmail());
         var authenticationToken = new UsernamePasswordAuthenticationToken(login.getEmail(), login.getSenha());
+        System.out.println(authenticationToken);
         var authentication = manager.authenticate(authenticationToken);
+        System.out.println(authentication);
 
         var tokenJWT = tokenService.gerarToken((Usuario) authentication.getPrincipal());
 
