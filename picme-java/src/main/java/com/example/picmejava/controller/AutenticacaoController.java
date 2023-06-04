@@ -30,11 +30,8 @@ public class AutenticacaoController {
     @PostMapping
     @Operation(summary = "Efetuar login", description = "Realiza o processo de autenticação do usuário e retorna o token de acesso.")
     public ResponseEntity efetuarLogin(@RequestBody @Valid LoginUsuarioDTO login) {
-        System.out.println(login.getEmail());
         var authenticationToken = new UsernamePasswordAuthenticationToken(login.getEmail(), login.getSenha());
-        System.out.println(authenticationToken);
         var authentication = manager.authenticate(authenticationToken);
-        System.out.println(authentication);
 
         var tokenJWT = tokenService.gerarToken((Usuario) authentication.getPrincipal());
 
