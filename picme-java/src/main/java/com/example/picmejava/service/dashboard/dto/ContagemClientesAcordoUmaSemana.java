@@ -11,6 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ContagemClientesAcordoUmaSemana {
 
-    private Long clienteContato;
-    private Long totalCliente;
+    private String label;
+    private Long quantidade;
 }
