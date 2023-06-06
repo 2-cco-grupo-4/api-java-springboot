@@ -15,7 +15,7 @@ public class Avaliacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Schema(
             description = "Descrição da avaliação, texto que o usuário insere",
@@ -26,6 +26,12 @@ public class Avaliacao {
             description = "Nota da avaliação, de 0 a 5",
             example = "4.5"
     )
+
+
     @Max(5)
     private Double valor ;
+
+    @ManyToOne
+    @JoinColumn(name = "FK_FOTOGRAFO")
+    private Fotografo fotografo ;
 }

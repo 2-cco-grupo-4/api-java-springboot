@@ -1,6 +1,6 @@
 package com.example.picmejava.service.usuario;
 
-import com.example.picmejava.lista.Lista;
+import com.example.picmejava.model.utils.ListaObj;
 import com.example.picmejava.model.Cliente;
 import com.example.picmejava.service.usuario.dto.AtualizarUsuarioDTO;
 import com.example.picmejava.service.usuario.dto.CadastroUsuarioDTO;
@@ -37,9 +37,9 @@ public class ClienteService {
     }
 
     @Operation(summary = "Listar todos os clientes")
-    public Lista<Cliente> listar() {
+    public ListaObj<Cliente> listar() {
 
-        Lista<Cliente> clientes = new Lista();
+        ListaObj<Cliente> clientes = new ListaObj();
         for(Cliente i :  clienteRepository.findAll()){
             clientes.add(i);
         }

@@ -1,14 +1,14 @@
-package com.example.picmejava.celia;
+package com.example.picmejava.model.utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pilha<T> {
+public class PilhaObj<T> {
     private Object[] pilha;
     private int tamanho;
     private int topo;
 
-    public Pilha(int capacidade) {
+    public PilhaObj(int capacidade) {
         pilha = new Object[capacidade];
         tamanho = 0;
         topo = -1;
@@ -17,6 +17,8 @@ public class Pilha<T> {
     public boolean isEmpty() {
         return tamanho == 0;
     }
+
+
 
     public boolean isFull() {
         return topo == pilha.length - 1;
@@ -62,6 +64,10 @@ public class Pilha<T> {
             lista.add((T) pilha[i]);
         }
         return lista;
+    }
+
+    public int size() {
+        return tamanho;
     }
 
 }

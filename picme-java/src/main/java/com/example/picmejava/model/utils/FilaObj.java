@@ -1,12 +1,15 @@
-package com.example.picmejava.celia;
+package com.example.picmejava.model.utils;
 
-public class Fila<T> {
+import java.util.ArrayList;
+import java.util.List;
+
+public class FilaObj<T> {
     private Object[] fila;
     private int tamanho;
     private int frente;
     private int tras;
 
-    public Fila(int capacidade) {
+    public FilaObj(int capacidade) {
         fila = new Object[capacidade];
         tamanho = 0;
         frente = 0;
@@ -58,4 +61,15 @@ public class Fila<T> {
             }
         }
     }
+
+    public List<T> toList() {
+        List<T> lista = new ArrayList<>();
+        for (int i = frente; i <= tras; i++) {
+            lista.add((T) fila[i]);
+        }
+        return lista;
+    }
+
+
 }
+

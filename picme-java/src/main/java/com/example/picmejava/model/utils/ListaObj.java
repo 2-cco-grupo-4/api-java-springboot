@@ -1,4 +1,4 @@
-package com.example.picmejava.lista;
+package com.example.picmejava.model.utils;
 
 import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.Identificavel;
@@ -8,17 +8,17 @@ import java.lang.reflect.Method;
 import java.util.*;
 import java.util.stream.Stream;
 
-public class Lista<T> {
+public class ListaObj<T> {
     private T[] array;
     private int tamanho;
 
-    public Lista() {
+    public ListaObj() {
         this.array = (T[]) new Object[10];
         this.tamanho = 0;
     }
 
 
-    public Lista(List<T> elementos) {
+    public ListaObj(List<T> elementos) {
         this.array = (T[]) elementos.toArray();
     }
 

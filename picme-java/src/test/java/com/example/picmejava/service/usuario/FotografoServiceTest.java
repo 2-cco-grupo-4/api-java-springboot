@@ -4,6 +4,7 @@ import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.infra.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.repository.FotografoRepository;
 import com.example.picmejava.service.usuario.builder.FotografoBuilder;
+import com.example.picmejava.service.usuario.builder.UsuarioBuilder;
 import com.example.picmejava.service.usuario.dto.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,7 +33,7 @@ class FotografoServiceTest {
     @DisplayName("Deve cadastrar o fotografo quando dados validos")
     void deveCadastrarOClienteQuandoDadosValidos(){
         Fotografo fotografo = FotografoBuilder.criarFotografo();
-        CadastroUsuarioDTO cadastroDto = FotografoBuilder.criarCadastroUsuarioDto();
+        CadastroUsuarioDTO cadastroDto = UsuarioBuilder.criarCadastroUsuarioDto();
 
         Mockito.when(fotografoRepository.save(Mockito.any(Fotografo.class))).thenReturn(fotografo);
 
@@ -76,7 +77,7 @@ class FotografoServiceTest {
     @DisplayName("Deve atualizar fotografo quando dados validos")
     void deveAtualizarFotografoQuandoDadosValidos(){
         Fotografo fotografo = FotografoBuilder.criarFotografo();
-        AtualizarUsuarioDTO atualizarDto = FotografoBuilder.criarAtualizazrUsuarioDTO();
+        AtualizarUsuarioDTO atualizarDto = UsuarioBuilder.criarAtualizazrUsuarioDTO();
 
         Mockito.when(fotografoRepository.findById(fotografo.getId())).thenReturn(Optional.of(fotografo));
         Mockito.when(fotografoRepository.save(Mockito.any(Fotografo.class))).thenReturn(fotografo);
@@ -91,7 +92,7 @@ class FotografoServiceTest {
     @DisplayName("Deve retornar excecao quando atualizar fotografo e Id não encontrado")
     void deveRetornarExcecaoQuandoAtualizarFotografoEIdNaoEncontrado(){
         Long id = 1L;
-        AtualizarUsuarioDTO atualizarDto = FotografoBuilder.criarAtualizazrUsuarioDTO();
+        AtualizarUsuarioDTO atualizarDto = UsuarioBuilder.criarAtualizazrUsuarioDTO();
 
         Mockito.lenient().when(fotografoRepository.existsById(id)).thenReturn(false);
 
@@ -144,7 +145,7 @@ class FotografoServiceTest {
         boolean valorEsperado = true;
 
         Fotografo fotografo = FotografoBuilder.criarFotografo();
-        LoginUsuarioDTO loguinDto = FotografoBuilder.criarLoginUsuarioDto();
+        LoginUsuarioDTO loguinDto = UsuarioBuilder.criarLoginUsuarioDto();
 
         Mockito.when(fotografoRepository.findByEmailAndSenha(
                 Mockito.eq(fotografo.getEmail()), Mockito.eq(fotografo.getSenha())
@@ -160,7 +161,7 @@ class FotografoServiceTest {
     @Test
     @DisplayName("Deve retornar excecao quando autenticar fotografo")
     void deveRetornarExcecaoQuandoLoginFotografo(){
-        LoginUsuarioDTO loguinDto = FotografoBuilder.criarLoginUsuarioDto();
+        LoginUsuarioDTO loguinDto = UsuarioBuilder.criarLoginUsuarioDto();
         Fotografo fotografo = FotografoBuilder.criarFotografo();
 
         Mockito.lenient().when(fotografoRepository.existsById(Mockito.eq(fotografo.getId()))).thenReturn(false);
@@ -176,7 +177,7 @@ class FotografoServiceTest {
     @DisplayName("Deve retornar fotografo desautenticado quando logoff fotografo cam dados validos")
     void deveRetornarFotografoDesautenticadoQuandoLogOffFotografoComDadosValidos(){
         Fotografo fotografo = FotografoBuilder.criarFotografo();
-        LoginUsuarioDTO loguinDto = FotografoBuilder.criarLoginUsuarioDto();
+        LoginUsuarioDTO loguinDto = UsuarioBuilder.criarLoginUsuarioDto();
 
         Mockito.when(fotografoRepository.findByEmailAndSenha(
                 Mockito.eq(fotografo.getEmail()), Mockito.eq(fotografo.getSenha())
