@@ -13,6 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,9 @@ class FotografoServiceTest {
     @Mock
     private FotografoRepository fotografoRepository;
 
+    @Mock
+    private PasswordEncoder passwordEncoder;
+
     @InjectMocks
     private FotografoService fotografoService;
 
@@ -33,9 +37,11 @@ class FotografoServiceTest {
     @DisplayName("Deve cadastrar o fotografo quando dados validos")
     void deveCadastrarOClienteQuandoDadosValidos(){
         Fotografo fotografo = FotografoBuilder.criarFotografo();
+        String encode = passwordEncoder.encode(fotografo.getSenha());
         CadastroUsuarioDTO cadastroDto = UsuarioBuilder.criarCadastroUsuarioDto();
 
         Mockito.when(fotografoRepository.save(Mockito.any(Fotografo.class))).thenReturn(fotografo);
+        Mockito.when(passwordEncoder.encode(fotografo.getSenha())).thenReturn(encode);
 
         PerfilFotografoDTO resultado = fotografoService.cadastrar(cadastroDto);
 
