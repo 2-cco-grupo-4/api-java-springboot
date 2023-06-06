@@ -26,7 +26,7 @@ public class AvaliacaoController {
 
     @Operation(summary = "Avaliar", description = "Realiza uma avaliação")
     @PostMapping
-    public ResponseEntity<Avaliacao> avaliar(@RequestBody  Avaliacao avaliacao) {
+    public ResponseEntity<Avaliacao> avaliar(@RequestBody Avaliacao avaliacao) {
         avaliacaoService.avaliar(avaliacao);
         return ResponseEntity.status(201).body(avaliacao);
     }

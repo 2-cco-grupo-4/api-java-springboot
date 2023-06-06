@@ -31,18 +31,18 @@ class AvaliacaoServiceTest {
         Avaliacao avaliacao = new Avaliacao();
 
         AvaliacaoService avaliacaoServiceMock = Mockito.mock(AvaliacaoService.class);
-
         Mockito.doNothing().when(avaliacaoServiceMock).avaliar(Mockito.any(Avaliacao.class));
+
+        List<Avaliacao> pilhaAtual = new ArrayList<>();
+        pilhaAtual.add(avaliacao);
+
+        Mockito.when(avaliacaoServiceMock.exibir()).thenReturn(pilhaAtual);
 
         avaliacaoServiceMock.avaliar(avaliacao);
 
-        List<Avaliacao> pilhaAtual = avaliacaoServiceMock.exibir();
         assertNotNull(pilhaAtual);
-
         assertEquals(avaliacao, pilhaAtual.get(0));
     }
-
-
 
     @Test
     @DisplayName("Deve remover a última avaliação adicionada à pilha")

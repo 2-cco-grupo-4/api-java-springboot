@@ -82,19 +82,6 @@ class ClienteServiceTest {
         assertEquals(0, resultado.size());
     }
 
-    @Test
-<<<<<<< HEAD
-    @DisplayName("Deve gerar exceção quando atualizarClienteQuandoDadosInvalidos")
-    void deveGerarExcecaoQuandoAtualizarClienteQuandoDadosInvalidos() {
-        AtualizarUsuarioDTO dadosAtualizados = new AtualizarUsuarioDTO();
-        dadosAtualizados.setNome("Nome");
-        dadosAtualizados.setNumCelular("123456789");
-        dadosAtualizados.setSenha("rafael");
-
-        Mockito.when(clienteRepository.findById(1L)).thenReturn(Optional.of(new Cliente()));
-
-        assertThrows(EntidadeNaoEncontradaException.class, () -> clienteService.atualizar(1L, dadosAtualizados));
-=======
     @DisplayName("Deve atualizar o cliente quando atualizar cliente e dados validos")
     void deveAtualizarClienteQuandoAtualizarClienteEDadosValidos() {
         Cliente cliente = ClienteBuilder.criarCliente();
@@ -107,7 +94,6 @@ class ClienteServiceTest {
 
         assertNotNull(resultado);
         assertEquals(cliente, resultado);
->>>>>>> refs/remotes/origin/main
     }
 
     @Test

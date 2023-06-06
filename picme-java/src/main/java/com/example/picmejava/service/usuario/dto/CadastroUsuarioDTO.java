@@ -18,7 +18,6 @@ public class CadastroUsuarioDTO {
     @NotBlank
     private String cpf;
     @Past
-    @NotBlank
     private LocalDate dataNasc;
     @Email
     @NotBlank
