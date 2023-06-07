@@ -1,17 +1,22 @@
 package com.example.picmejava.controller;
 
+import com.example.picmejava.infra.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.infra.security.DadosTokenJWT;
 import com.example.picmejava.infra.security.TokenService;
 import com.example.picmejava.model.Usuario;
+import com.example.picmejava.repository.UsuarioRepository;
 import com.example.picmejava.service.usuario.dto.LoginUsuarioDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -23,6 +28,9 @@ public class AutenticacaoController {
     private AuthenticationManager manager;
 
     @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    @Autowired
     private TokenService tokenService;
 
     @PostMapping
@@ -31,8 +39,11 @@ public class AutenticacaoController {
         var authenticationToken = new UsernamePasswordAuthenticationToken(login.getEmail(), login.getSenha());
         var authentication = manager.authenticate(authenticationToken);
 
-        var tokenJWT = tokenService.gerarToken((Usuario) authentication.getPrincipal());
+        Usuario principal = (Usuario) authentication.getPrincipal();
 
-        return ResponseEntity.ok(new DadosTokenJWT(tokenJWT));
+        var tokenJWT = tokenService.gerarToken(principal);
+
+        return ResponseEntity.ok(new DadosTokenJWT(tokenJWT,
+                principal.getId(), principal.getNome(), principal.getTipoUsuario()));
     }
 }
