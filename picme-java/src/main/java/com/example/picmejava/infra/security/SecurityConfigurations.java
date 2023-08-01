@@ -35,6 +35,7 @@ public class SecurityConfigurations implements WebMvcConfigurer {
                 .cors().and()
                 .authorizeHttpRequests(req -> {
                     req.requestMatchers(HttpMethod.POST, "/login").permitAll();
+                    req.requestMatchers(HttpMethod.POST, "/usuario/validarNovoUsuario").permitAll();
                     req.requestMatchers("/swagger-ui/**").permitAll();
                     req.requestMatchers(HttpMethod.POST, "/clientes/cadastrar").permitAll();
                     req.requestMatchers(HttpMethod.POST, "/fotografos/cadastrar").permitAll();

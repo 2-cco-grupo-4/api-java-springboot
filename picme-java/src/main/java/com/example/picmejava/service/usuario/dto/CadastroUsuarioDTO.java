@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class CadastroUsuarioDTO {
 
     @NotBlank
-    @Size(max = 32, min = 1)
+    @Size(max = 120, min = 3)
     private String nome;
     @CPF
     @NotBlank
@@ -26,6 +26,6 @@ public class CadastroUsuarioDTO {
     @Size(max = 32, min = 8)
     private String senha;
     @NotBlank
-    @Size(max = 15, min = 11)
+    @Size(max = 15, min = 10)
     private String numCelular;
 }

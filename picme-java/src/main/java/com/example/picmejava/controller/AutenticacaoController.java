@@ -5,7 +5,9 @@ import com.example.picmejava.infra.security.DadosTokenJWT;
 import com.example.picmejava.infra.security.TokenService;
 import com.example.picmejava.model.Usuario;
 import com.example.picmejava.repository.UsuarioRepository;
+import com.example.picmejava.service.usuario.AutenticacaoService;
 import com.example.picmejava.service.usuario.dto.LoginUsuarioDTO;
+import com.example.picmejava.service.usuario.dto.ValidarNovoUsuarioDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -29,6 +33,9 @@ public class AutenticacaoController {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private AutenticacaoService autenticacaoService;
 
     @Autowired
     private TokenService tokenService;
@@ -46,4 +53,17 @@ public class AutenticacaoController {
         return ResponseEntity.ok(new DadosTokenJWT(tokenJWT,
                 principal.getId(), principal.getNome(), principal.getTipoUsuario()));
     }
+
+    @PostMapping("/validarNovoUsuario")
+    @Operation(summary = "Validar novo usuário", description = "Caso já exista um usuário com o cpf ou email informado será retornado o item repetido")
+    public ResponseEntity validarNovoUsuario(@RequestBody @Valid ValidarNovoUsuarioDTO dadosUnicos) {
+        List<ValidarNovoUsuarioDTO> listaValidacao = new ArrayList<>();
+        listaValidacao = autenticacaoService.validarEmailCpf(dadosUnicos.getEmail(), dadosUnicos.getCpf());
+        if(listaValidacao.isEmpty()){
+            return ResponseEntity.status(201).body("Usuário válido!");
+        }else{
+            return ResponseEntity.status(204).body("Usuário já cadastrado!");
+        }
+    }
+
 }
