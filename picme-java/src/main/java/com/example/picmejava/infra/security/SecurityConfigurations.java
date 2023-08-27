@@ -8,6 +8,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -35,7 +36,8 @@ public class SecurityConfigurations implements WebMvcConfigurer {
                 .cors().and()
                 .authorizeHttpRequests(req -> {
                     req.requestMatchers(HttpMethod.POST, "/login").permitAll();
-                    req.requestMatchers("/swagger-ui/**").permitAll();
+                    req.requestMatchers(HttpMethod.GET, "/swagger-ui/**").permitAll();
+                    req.requestMatchers(HttpMethod.GET, "/v3/api-docs/**").permitAll();
                     req.requestMatchers(HttpMethod.POST, "/clientes/cadastrar").permitAll();
                     req.requestMatchers(HttpMethod.POST, "/fotografos/cadastrar").permitAll();
                     req.requestMatchers(HttpMethod.POST, "/imagens").hasAnyRole("FOTOGRAFO", "ADMIN");
