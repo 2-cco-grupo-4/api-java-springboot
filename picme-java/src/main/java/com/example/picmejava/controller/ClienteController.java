@@ -1,5 +1,6 @@
 package com.example.picmejava.controller;
 
+import com.example.picmejava.model.Cliente;
 import com.example.picmejava.service.usuario.dto.AtualizarUsuarioDTO;
 import com.example.picmejava.service.usuario.dto.CadastroUsuarioDTO;
 import com.example.picmejava.service.usuario.dto.LoginUsuarioDTO;
@@ -81,5 +82,16 @@ public class ClienteController {
         return ResponseEntity.status(200).body(clienteMapper.toPerfilClienteDTO(
                 serviceCliente.logoff(buscarCliente)
         ));
+    }
+
+
+    @Operation(summary = "Buscar cliente", description = "Busca um cliente pelo seu nome")
+    @SecurityRequirement(name = "Bearer")
+
+    @PatchMapping("/busca-nome-hash/{nomeCliente}")
+    public ResponseEntity<List<String>> buscarCliente( @PathVariable String nomeCliente){
+        return ResponseEntity.status(200).body(
+                serviceCliente.buscarCliente(nomeCliente)
+        );
     }
 }

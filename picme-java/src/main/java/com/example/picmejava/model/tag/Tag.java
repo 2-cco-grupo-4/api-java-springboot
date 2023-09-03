@@ -1,4 +1,4 @@
-package com.example.picmejava.service.tag;
+package com.example.picmejava.model.tag;
 
 public enum Tag {
     CASAMENTO,
