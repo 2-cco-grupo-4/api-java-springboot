@@ -19,7 +19,7 @@ public class TabelaHash {
 
     public void adicionarUsuario(String usuario) {
         char primeiraLetra = Character.toLowerCase(usuario.charAt(0));
-        int indice = calcularIndice(primeiraLetra));
+        int indice = calcularIndice(primeiraLetra);
         tabela.get(indice).add(usuario);
     }
 
