@@ -62,6 +62,10 @@ public class SecurityConfigurations implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowedOrigins("http://picme.sytes.net")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT");
+
+        registry.addMapping("/**")
+                .allowedOrigins("http://localhost:3000")
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT");
     }
 
     @Bean
