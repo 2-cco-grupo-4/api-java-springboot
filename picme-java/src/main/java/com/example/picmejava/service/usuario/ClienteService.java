@@ -1,10 +1,18 @@
 package com.example.picmejava.service.usuario;
 
+
 import com.example.picmejava.infra.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.model.Cliente;
 import com.example.picmejava.model.mapper.ClienteMapper;
 import com.example.picmejava.model.utils.ListaObj;
 import com.example.picmejava.repository.ClienteRepository;
+
+import com.example.picmejava.infra.exception.ConflitoNoCadastroException;
+import com.example.picmejava.model.Fotografo;
+import com.example.picmejava.model.Usuario;
+import com.example.picmejava.model.utils.ListaObj;
+import com.example.picmejava.model.Cliente;
+import com.example.picmejava.repository.UsuarioRepository;
 import com.example.picmejava.service.usuario.dto.AtualizarUsuarioDTO;
 import com.example.picmejava.service.usuario.dto.CadastroUsuarioDTO;
 import com.example.picmejava.service.usuario.dto.LoginUsuarioDTO;
@@ -39,6 +47,11 @@ public class ClienteService {
     public Cliente cadastrar(CadastroUsuarioDTO novoCliente){
         String senhaCriptografada = passwordEncoder.encode(novoCliente.getSenha());
         novoCliente.setSenha(senhaCriptografada);
+
+        boolean isValido = validarCadastro(novoCliente.getCpf(), novoCliente.getEmail());
+        if (!isValido){
+            throw new ConflitoNoCadastroException("Usuário já cadastrado");
+        }
 
         return clienteRepository.save(clienteMapper.toCliente(novoCliente));
     }
@@ -79,17 +92,7 @@ public class ClienteService {
         return clienteOptional.get();
     }
 
-
-    private void adicionarClientesNaTabela() {
-        List<Cliente> todosClientes = clienteRepository.findAll();
-
-
-        for (Cliente cliente : todosClientes) {
-            PerfilClienteDTO perfilClienteDTO = PerfilClienteDtoMapper.mapClienteToPerfilClienteDTO(cliente);
-            tabelaHash.add(perfilClienteDTO);
-        }
-    }
-
+   
     @Operation(summary = "Buscar um cliente pelo nome")
     public List<PerfilClienteDTO> buscarCliente(String nome) {
 
@@ -103,6 +106,29 @@ public class ClienteService {
     public Cliente buscarClientePorNome(String nome) {
         Optional<Cliente> clienteOptional = clienteRepository.findByNome(nome);
         return clienteOptional.orElseThrow(() -> new EntidadeNaoEncontradaException("Cliente não encontrado"));
+    }
+
+
+    @Operation(summary = "Validar cadastro")
+    public boolean validarCadastro(String cpf, String email) {
+        Optional<Cliente> usuarioPorCpf = clienteRepository.findByCpf(cpf);
+        Optional<Cliente> usuarioPorEmail = clienteRepository.findByEmail(email);
+
+        if (usuarioPorCpf.isPresent() || usuarioPorEmail.isPresent()) {
+            return false;
+        }
+
+        return true;
+    }
+  
+   private void adicionarClientesNaTabela() {
+        List<Cliente> todosClientes = clienteRepository.findAll();
+
+
+        for (Cliente cliente : todosClientes) {
+            PerfilClienteDTO perfilClienteDTO = PerfilClienteDtoMapper.mapClienteToPerfilClienteDTO(cliente);
+            tabelaHash.add(perfilClienteDTO);
+        }
     }
 
 

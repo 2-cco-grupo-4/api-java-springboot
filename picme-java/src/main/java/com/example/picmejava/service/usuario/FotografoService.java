@@ -1,7 +1,9 @@
 package com.example.picmejava.service.usuario;
 
+import com.example.picmejava.infra.exception.ConflitoNoCadastroException;
 import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.infra.exception.EntidadeNaoEncontradaException;
+import com.example.picmejava.model.Usuario;
 import com.example.picmejava.model.mapper.FotografoMapper;
 import com.example.picmejava.repository.FotografoRepository;
 import com.example.picmejava.service.usuario.dto.*;
@@ -28,6 +30,11 @@ public class FotografoService {
     public PerfilFotografoDTO cadastrar(CadastroUsuarioDTO novoFotografo){
         String senhaCriptografada = passwordEncoder.encode(novoFotografo.getSenha());
         novoFotografo.setSenha(senhaCriptografada);
+
+        boolean isValido = validarCadastro(novoFotografo.getCpf(), novoFotografo.getEmail());
+        if (!isValido){
+            throw new ConflitoNoCadastroException("Cadastro ja existe");
+        }
 
         Fotografo fotografo = fotografoRepository.save(fotografoMapper.toFotografo(novoFotografo));
         return fotografoMapper.toPerfilFotogradoDTO(fotografo);
@@ -71,5 +78,17 @@ public class FotografoService {
         );
 
         return fotografo;
+    }
+
+    @Operation(summary = "Validar cadastro")
+    public boolean validarCadastro(String cpf, String email) {
+        Optional<Fotografo> usuarioPorCpf = fotografoRepository.findByCpf(cpf);
+        Optional<Fotografo> usuarioPorEmail = fotografoRepository.findByEmail(email);
+
+        if (usuarioPorCpf.isPresent() || usuarioPorEmail.isPresent()) {
+            return false;
+        }
+
+        return true;
     }
 }
