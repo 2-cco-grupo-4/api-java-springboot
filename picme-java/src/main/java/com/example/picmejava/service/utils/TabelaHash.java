@@ -1,6 +1,5 @@
 package com.example.picmejava.service.utils;
 
-import com.example.picmejava.model.Cliente;
 import com.example.picmejava.service.usuario.dto.PerfilClienteDTO;
 
 import java.util.ArrayList;
@@ -39,15 +38,28 @@ public class TabelaHash<V> {
         }
     }
 
-    public List<PerfilClienteDTO> searchByFirstChar(char firstChar) {
-        int index = Character.toLowerCase(firstChar) - 'a';
+    public List<PerfilClienteDTO> searchByString(String name) {
+        char firstChar = Character.toLowerCase(name.charAt(0));
+        int index = firstChar - 'a';
+        List<PerfilClienteDTO> clients = new LinkedList<>();
+
+        System.out.println("Index: " + index);
 
         if (index >= 0 && index < NUM_OF_INDICES) {
             LinkedList<PerfilClienteDTO> list = hashtable.get(index);
-            return new LinkedList<PerfilClienteDTO>(list);
+            System.out.println("List: " + list.toString());
+
+            for (PerfilClienteDTO cliente : list) {
+                if (cliente.getNome().toLowerCase().contains(name.toLowerCase())) {
+                    clients.add(cliente);
+                }
+            }
+
+            return clients;
         } else {
             return new LinkedList<>();
         }
     }
+
 
 }

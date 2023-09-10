@@ -95,7 +95,7 @@ public class ClienteService {
 
         adicionarClientesNaTabela();
 
-        List<PerfilClienteDTO> clientes = tabelaHash.searchByFirstChar(nome.charAt(0));
+        List<PerfilClienteDTO> clientes = tabelaHash.searchByString(nome);
 
         return clientes;
     }
