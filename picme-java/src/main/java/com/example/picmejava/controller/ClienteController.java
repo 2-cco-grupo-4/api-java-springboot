@@ -88,8 +88,10 @@ public class ClienteController {
     @Operation(summary = "Buscar cliente", description = "Busca um cliente pelo seu nome")
     @SecurityRequirement(name = "Bearer")
 
-    @PatchMapping("/busca-nome-hash/{nomeCliente}")
-    public ResponseEntity<List<String>> buscarCliente( @PathVariable String nomeCliente){
+    @GetMapping("/buscar/{nomeCliente}")
+    public ResponseEntity<List<PerfilClienteDTO>> buscarCliente( @PathVariable String nomeCliente){
+
+
         return ResponseEntity.status(200).body(
                 serviceCliente.buscarCliente(nomeCliente)
         );
