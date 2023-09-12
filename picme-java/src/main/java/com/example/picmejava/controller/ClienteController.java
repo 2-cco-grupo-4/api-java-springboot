@@ -83,15 +83,4 @@ public class ClienteController {
                 serviceCliente.logoff(buscarCliente)
         ));
     }
-
-
-    @Operation(summary = "Buscar cliente", description = "Busca um cliente pelo seu nome")
-    @SecurityRequirement(name = "Bearer")
-
-    @PatchMapping("/busca-nome-hash/{nomeCliente}")
-    public ResponseEntity<List<String>> buscarCliente( @PathVariable String nomeCliente){
-        return ResponseEntity.status(200).body(
-                serviceCliente.buscarCliente(nomeCliente)
-        );
-    }
 }

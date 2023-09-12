@@ -8,7 +8,6 @@ import com.example.picmejava.service.usuario.dto.LoginUsuarioDTO;
 import com.example.picmejava.infra.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.model.mapper.ClienteMapper;
 import com.example.picmejava.repository.ClienteRepository;
-import com.example.picmejava.service.utils.TabelaHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,13 +29,11 @@ public class ClienteService {
     private ClienteRepository clienteRepository;
 
     private ClienteMapper clienteMapper = new ClienteMapper();
-    private TabelaHash tabelaHash = new TabelaHash();
 
     @Operation(summary = "Cadastrar um novo cliente")
     public Cliente cadastrar(CadastroUsuarioDTO novoCliente){
         String senhaCriptografada = passwordEncoder.encode(novoCliente.getSenha());
         novoCliente.setSenha(senhaCriptografada);
-        tabelaHash.adicionarUsuario(novoCliente.getNome());
         return clienteRepository.save(clienteMapper.toCliente(novoCliente));
     }
 
@@ -81,12 +77,5 @@ public class ClienteService {
         clienteOptional.orElseThrow(() -> new EntidadeNaoEncontradaException("Cliente não encontrado"));
         return clienteOptional.get();
     }
-
-
-    @Operation(summary = "Buscar um cliente pelo nome")
-    public List<String> buscarCliente(String nome) {
-        return tabelaHash.pesquisarUsuariosPorNome(nome);
-    }
-
 
 }
