@@ -1,5 +1,6 @@
 package com.example.picmejava.controller;
 
+import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.mapper.FotografoMapper;
 import com.example.picmejava.service.usuario.FotografoService;
 import com.example.picmejava.service.usuario.dto.*;
@@ -67,6 +68,16 @@ public class FotografoController {
         return ResponseEntity.status(200).body(fotografoMapper.toPerfilFotogradoDTO(
                 serviceFotografo.logoff(buscarFotografo)
         ));
+    }
+
+    @Operation(summary = "Atualizar token solicitacao usuário", description = "Endpoint utilizado para atualizar o token de soliticação do usuário no banco de dados")
+    @PatchMapping("/atualizarToken/{idFotografo}")
+    public ResponseEntity<PerfilFotografoDTO> atualizarTokenSolicitacao(@PathVariable Long idFotografo, @RequestParam String codigo) {
+
+        return ResponseEntity.status(200).body(fotografoMapper.toPerfilFotogradoDTO(
+                serviceFotografo.atualizarAccessToken(idFotografo, codigo)
+        ));
+
     }
 
 

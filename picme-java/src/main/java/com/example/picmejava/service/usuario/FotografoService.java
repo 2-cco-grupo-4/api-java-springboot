@@ -1,6 +1,9 @@
 package com.example.picmejava.service.usuario;
 
 import com.example.picmejava.infra.exception.ConflitoNoCadastroException;
+import com.example.picmejava.instagram.controller.InstagramController;
+import com.example.picmejava.instagram.model.AccessToken;
+import com.example.picmejava.instagram.model.LongAccessToken;
 import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.infra.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.model.Usuario;
@@ -8,10 +11,13 @@ import com.example.picmejava.model.mapper.FotografoMapper;
 import com.example.picmejava.repository.FotografoRepository;
 import com.example.picmejava.service.usuario.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,6 +30,10 @@ public class FotografoService {
 
     @Autowired
     private FotografoRepository fotografoRepository;
+
+    @Autowired
+    private InstagramController instagramController;
+
     private FotografoMapper fotografoMapper = new FotografoMapper();
 
     @Operation(summary = "Cadastrar um novo fotógrafo")
@@ -91,4 +101,47 @@ public class FotografoService {
 
         return true;
     }
+
+    @Transactional
+    @Operation(summary = "Atualizar access token")
+    public Fotografo atualizarAccessToken(Long idFotografo, String codigo) {
+        Optional<Fotografo> fotografoOptional = fotografoRepository.findById(idFotografo);
+        Fotografo fotografo = fotografoOptional.orElseThrow(() -> new EntidadeNaoEncontradaException(
+                "Fotografo não existe")
+        );
+
+        UpdateTokenUsuarioDTO updateTokenUsuarioDTO = new UpdateTokenUsuarioDTO();
+
+
+
+        if(fotografo.getTokenSolicitacao() == null) {
+            ResponseEntity<AccessToken> accessToken;
+            accessToken = instagramController.acessTokenUsuario(codigo);
+            if(accessToken.getStatusCode() == HttpStatusCode.valueOf(200)) {
+                ResponseEntity<LongAccessToken> longAccessToken = instagramController.getLongAccessToken(accessToken.getBody().getAccess_token());
+
+                if(longAccessToken.getStatusCode() == HttpStatusCode.valueOf(200)) {
+                    updateTokenUsuarioDTO.setTokenSolicitacao(longAccessToken.getBody().getAccess_token());
+                }
+
+            }
+        } else {
+            ResponseEntity<LongAccessToken> accessToken;
+            accessToken = instagramController.refreshLongAccessToken(fotografo.getTokenSolicitacao());
+            if(accessToken.getStatusCode() == HttpStatusCode.valueOf(200)) {
+                updateTokenUsuarioDTO.setTokenSolicitacao(accessToken.getBody().getAccess_token());
+            }
+        }
+
+        return fotografoRepository.save(fotografoMapper.toFotografoAccessTokenAtualizado(fotografo, updateTokenUsuarioDTO));
+    }
+
+    @Operation(summary = "Buscar fotógrafo por ID")
+    public Fotografo findById(Long idFotografo) {
+        Optional<Fotografo> fotografoOptional = fotografoRepository.findById(idFotografo);
+        return fotografoOptional.orElseThrow(() -> new EntidadeNaoEncontradaException(
+                "Fotografo não existe")
+        );
+    }
+
 }

@@ -2,6 +2,7 @@ package com.example.picmejava.instagram.controller;
 
 
 import com.example.picmejava.instagram.model.AccessToken;
+import com.example.picmejava.instagram.model.LongAccessToken;
 import com.example.picmejava.instagram.service.InstagramService;
 import com.example.picmejava.instagram.model.ListData;
 import com.example.picmejava.instagram.model.Media;
@@ -52,6 +53,32 @@ public class InstagramController {
     public ResponseEntity<List<Media>> getListImagem(@RequestParam String accessToken) {
         List<Media> listaMedia = instagramService.getListImagens(accessToken);
         return ResponseEntity.status(200).body(listaMedia);
+    }
+
+    @Operation(summary = "Obter access token de longa duração", description = "Endpoint para obter o access token de longa duração (60 Dias) do Usuário do Instagram")
+    @GetMapping("/longAccessToken")
+    public ResponseEntity<LongAccessToken> getLongAccessToken(@RequestParam String accessToken) {
+        LongAccessToken longAccessToken = instagramService.getLongAccessToken(accessToken).block();
+
+        // Talves de pra melhorar o tratamento...
+        if (longAccessToken != null) {
+            return ResponseEntity.status(200).body(longAccessToken);
+        } else {
+            return ResponseEntity.status(400).build();
+        }
+
+    }
+
+    @Operation(summary = "Renovar access token de longa duração", description = "Endpoint para renovar o access token de longa duração por mais 60 dias")
+    @GetMapping("/refreshLongAccessToken")
+    public ResponseEntity<LongAccessToken> refreshLongAccessToken(@RequestParam String accessToken) {
+        LongAccessToken longAccessToken = instagramService.getRefreshedLongAccessToken(accessToken).block();
+
+        if(longAccessToken != null) {
+            return ResponseEntity.status(200).body(longAccessToken);
+        } else {
+            return ResponseEntity.status(400).build();
+        }
     }
 
 }

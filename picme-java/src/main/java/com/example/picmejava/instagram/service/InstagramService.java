@@ -1,9 +1,6 @@
 package com.example.picmejava.instagram.service;
 
-import com.example.picmejava.instagram.model.AccessToken;
-import com.example.picmejava.instagram.model.ItemData;
-import com.example.picmejava.instagram.model.ListData;
-import com.example.picmejava.instagram.model.Media;
+import com.example.picmejava.instagram.model.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.MediaType;
@@ -103,5 +100,37 @@ public class InstagramService {
     }
 
     // Chamar endpoints para o long access token e fazer testes de inserção no BD
+    @Operation(summary = "Obter access token de longa duração", description = "Endpoint utilizado para gerar um acces token de longa duração (Válido por 60 dias)")
+    public Mono<LongAccessToken> getLongAccessToken(String accessToken) {
+
+        String cURL = String.format("http://localhost:8090/instagram/long_access_token?accessToken=%s", accessToken);
+
+        LongAccessToken longAccessToken = webClient.get()
+                .uri(cURL)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .bodyToMono(LongAccessToken.class)
+                .block();
+
+        return Mono.just(longAccessToken);
+
+    }
+
+    @Operation(summary = "Renovar access token de longa duração", description = "Endpoint utilizado para obter um long access token renovado por mais 60 dias")
+    public Mono<LongAccessToken> getRefreshedLongAccessToken(String accessToken) {
+
+        String cURL = String.format("http://localhost:8090/instagram/refresh_access_token?accessToken=%s", accessToken);
+
+        LongAccessToken longAccessToken = webClient.get()
+                .uri(cURL)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .bodyToMono(LongAccessToken.class)
+                .block();
+
+
+        return Mono.just(longAccessToken);
+
+    }
 
 }
