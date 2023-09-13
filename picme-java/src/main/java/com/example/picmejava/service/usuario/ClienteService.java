@@ -1,7 +1,11 @@
 package com.example.picmejava.service.usuario;
 
+import com.example.picmejava.infra.exception.ConflitoNoCadastroException;
+import com.example.picmejava.model.Fotografo;
+import com.example.picmejava.model.Usuario;
 import com.example.picmejava.model.utils.ListaObj;
 import com.example.picmejava.model.Cliente;
+import com.example.picmejava.repository.UsuarioRepository;
 import com.example.picmejava.service.usuario.dto.AtualizarUsuarioDTO;
 import com.example.picmejava.service.usuario.dto.CadastroUsuarioDTO;
 import com.example.picmejava.service.usuario.dto.LoginUsuarioDTO;
@@ -34,6 +38,12 @@ public class ClienteService {
     public Cliente cadastrar(CadastroUsuarioDTO novoCliente){
         String senhaCriptografada = passwordEncoder.encode(novoCliente.getSenha());
         novoCliente.setSenha(senhaCriptografada);
+
+        boolean isValido = validarCadastro(novoCliente.getCpf(), novoCliente.getEmail());
+        if (!isValido){
+            throw new ConflitoNoCadastroException("Usuário já cadastrado");
+        }
+
         return clienteRepository.save(clienteMapper.toCliente(novoCliente));
     }
 
@@ -76,6 +86,18 @@ public class ClienteService {
         Optional<Cliente> clienteOptional = clienteRepository.findByEmailAndSenha(email, senha);
         clienteOptional.orElseThrow(() -> new EntidadeNaoEncontradaException("Cliente não encontrado"));
         return clienteOptional.get();
+    }
+
+    @Operation(summary = "Validar cadastro")
+    public boolean validarCadastro(String cpf, String email) {
+        Optional<Cliente> usuarioPorCpf = clienteRepository.findByCpf(cpf);
+        Optional<Cliente> usuarioPorEmail = clienteRepository.findByEmail(email);
+
+        if (usuarioPorCpf.isPresent() || usuarioPorEmail.isPresent()) {
+            return false;
+        }
+
+        return true;
     }
 
 }

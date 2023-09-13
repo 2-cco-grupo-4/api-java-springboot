@@ -8,6 +8,8 @@ public class MediaInstagram {
     private String username;
     private String timestamp;
 
+    private String permalink;
+
     public String getId() {
         return id;
     }
@@ -46,5 +48,13 @@ public class MediaInstagram {
 
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String getPermalink() {
+        return permalink;
+    }
+
+    public void setPermalink(String permalink) {
+        this.permalink = permalink;
     }
 }

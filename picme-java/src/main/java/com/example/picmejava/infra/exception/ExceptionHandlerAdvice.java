@@ -18,4 +18,12 @@ public class ExceptionHandlerAdvice extends ResponseEntityExceptionHandler {
         );
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
+
+    @ExceptionHandler(ConflitoNoCadastroException.class)
+    public ResponseEntity<MensagemExceptionHandler> ConflitoNoCadastroException(EntidadeNaoEncontradaException ex){
+        MensagemExceptionHandler error = new MensagemExceptionHandler(
+                LocalDateTime.now(), HttpStatus.CONFLICT.value(), ex.getMessage()
+        );
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+    }
 }
