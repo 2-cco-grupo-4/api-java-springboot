@@ -1,13 +1,13 @@
-package com.example.picmejava.instagram;
+package com.example.picmejava.instagram.model;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.NoArgsConstructor;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @NoArgsConstructor
-public class DataInstagram {
+public class Cursor {
 
-    private String id;
-    private String caption;
+    private String before;
+    private String after;
 
 }

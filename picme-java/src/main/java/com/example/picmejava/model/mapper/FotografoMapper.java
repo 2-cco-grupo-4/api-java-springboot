@@ -1,10 +1,8 @@
 package com.example.picmejava.model.mapper;
 
+import com.example.picmejava.instagram.model.AccessToken;
 import com.example.picmejava.model.Fotografo;
-import com.example.picmejava.service.usuario.dto.AtualizarUsuarioDTO;
-import com.example.picmejava.service.usuario.dto.CadastroUsuarioDTO;
-import com.example.picmejava.service.usuario.dto.PerfilFotografoDTO;
-import com.example.picmejava.service.usuario.dto.RetornoFotografoDTO;
+import com.example.picmejava.service.usuario.dto.*;
 
 import java.time.LocalDate;
 import java.util.stream.Collectors;
@@ -69,6 +67,9 @@ public class FotografoMapper {
         }
         if (dadosAtualizados.getDataNasc() != null){
             fotografo.setDataNasc(dadosAtualizados.getDataNasc());
+        }
+        if(dadosAtualizados.getTokenSolicitacao() != null) {
+            fotografo.setTokenSolicitacao(dadosAtualizados.getTokenSolicitacao());
         }
         return fotografo;
     }

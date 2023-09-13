@@ -1,6 +1,6 @@
-package com.example.picmejava.instagram;
+package com.example.picmejava.instagram.model;
 
-public class MediaInstagram {
+public class Media {
 
     private String id;
     private String media_type;

@@ -1,19 +1,19 @@
-package com.example.picmejava.instagram;
+package com.example.picmejava.instagram.model;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.NoArgsConstructor;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @NoArgsConstructor
-public class PagingInstagram {
+public class Paging {
 
-    private CursorsInstagram cursors;
+    private Cursor cursors;
 
-    public CursorsInstagram getCursors() {
+    public Cursor getCursors() {
         return cursors;
     }
 
-    public void setCursors(CursorsInstagram cursors) {
+    public void setCursors(Cursor cursors) {
         this.cursors = cursors;
     }
 }
