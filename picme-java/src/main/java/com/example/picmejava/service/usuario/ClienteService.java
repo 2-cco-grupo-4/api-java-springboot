@@ -1,5 +1,12 @@
 package com.example.picmejava.service.usuario;
 
+
+import com.example.picmejava.infra.exception.EntidadeNaoEncontradaException;
+import com.example.picmejava.model.Cliente;
+import com.example.picmejava.model.mapper.ClienteMapper;
+import com.example.picmejava.model.utils.ListaObj;
+import com.example.picmejava.repository.ClienteRepository;
+
 import com.example.picmejava.infra.exception.ConflitoNoCadastroException;
 import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.Usuario;
@@ -9,14 +16,18 @@ import com.example.picmejava.repository.UsuarioRepository;
 import com.example.picmejava.service.usuario.dto.AtualizarUsuarioDTO;
 import com.example.picmejava.service.usuario.dto.CadastroUsuarioDTO;
 import com.example.picmejava.service.usuario.dto.LoginUsuarioDTO;
+
+import com.example.picmejava.service.usuario.dto.PerfilClienteDTO;
+import com.example.picmejava.service.usuario.mapper.PerfilClienteDtoMapper;
+import com.example.picmejava.service.utils.TabelaHash;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import com.example.picmejava.infra.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.model.mapper.ClienteMapper;
 import com.example.picmejava.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.util.Iterator;
 import java.util.List;
@@ -33,6 +44,8 @@ public class ClienteService {
     private ClienteRepository clienteRepository;
 
     private ClienteMapper clienteMapper = new ClienteMapper();
+
+    private TabelaHash<String> tabelaHash = new TabelaHash();
 
     @Operation(summary = "Cadastrar um novo cliente")
     public Cliente cadastrar(CadastroUsuarioDTO novoCliente){
@@ -81,12 +94,30 @@ public class ClienteService {
         cliente.setAutenticado(false);
         return clienteRepository.save(cliente);
     }
+
     @Operation(summary = "Validar um cliente")
-    public Cliente validarCliente(String email, String senha){
+    public Cliente validarCliente(String email, String senha) {
         Optional<Cliente> clienteOptional = clienteRepository.findByEmailAndSenha(email, senha);
         clienteOptional.orElseThrow(() -> new EntidadeNaoEncontradaException("Cliente não encontrado"));
         return clienteOptional.get();
     }
+
+   
+    @Operation(summary = "Buscar um cliente pelo nome")
+    public List<PerfilClienteDTO> buscarCliente(String nome) {
+
+        adicionarClientesNaTabela();
+
+        List<PerfilClienteDTO> clientes = tabelaHash.searchByString(nome);
+
+        return clientes;
+    }
+
+    public Cliente buscarClientePorNome(String nome) {
+        Optional<Cliente> clienteOptional = clienteRepository.findByNome(nome);
+        return clienteOptional.orElseThrow(() -> new EntidadeNaoEncontradaException("Cliente não encontrado"));
+    }
+
 
     @Operation(summary = "Validar cadastro")
     public boolean validarCadastro(String cpf, String email) {
@@ -99,5 +130,16 @@ public class ClienteService {
 
         return true;
     }
+  
+   private void adicionarClientesNaTabela() {
+        List<Cliente> todosClientes = clienteRepository.findAll();
+
+
+        for (Cliente cliente : todosClientes) {
+            PerfilClienteDTO perfilClienteDTO = PerfilClienteDtoMapper.mapClienteToPerfilClienteDTO(cliente);
+            tabelaHash.add(perfilClienteDTO);
+        }
+    }
+
 
 }

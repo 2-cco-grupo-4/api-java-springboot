@@ -19,7 +19,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+
 @RequestMapping("/login")
 @Tag(name = "Autenticação", description = "Endpoints para autenticação")
 public class AutenticacaoController {
