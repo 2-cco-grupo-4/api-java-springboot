@@ -1,12 +1,16 @@
 package com.example.picmejava.service.usuario;
 
 import com.example.picmejava.infra.exception.ConflitoNoCadastroException;
+import com.example.picmejava.model.Cliente;
 import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.infra.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.model.Usuario;
 import com.example.picmejava.model.mapper.FotografoMapper;
 import com.example.picmejava.repository.FotografoRepository;
 import com.example.picmejava.service.usuario.dto.*;
+import com.example.picmejava.service.usuario.mapper.PerfilClienteDtoMapper;
+import com.example.picmejava.service.usuario.mapper.PerfilFotografoDTOMapper;
+import com.example.picmejava.service.utils.TabelaHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,6 +30,7 @@ public class FotografoService {
     private FotografoRepository fotografoRepository;
     private FotografoMapper fotografoMapper = new FotografoMapper();
 
+    private TabelaHash<String> tabelaHash = new TabelaHash();
     @Operation(summary = "Cadastrar um novo fotógrafo")
     public PerfilFotografoDTO cadastrar(CadastroUsuarioDTO novoFotografo){
         String senhaCriptografada = passwordEncoder.encode(novoFotografo.getSenha());
@@ -80,6 +85,27 @@ public class FotografoService {
         return fotografo;
     }
 
+    @Operation(summary = "Buscar um cliente pelo nome")
+    public List<PerfilFotografoDTO> buscarFotografo(String nome) {
+
+        if (tabelaHash.isEmpty()) {
+            adicionarFotografoNaTabela();
+        }
+        List<PerfilFotografoDTO> fotografos = tabelaHash.searchByString(nome);
+
+        return fotografos;
+    }
+
+    private void adicionarFotografoNaTabela() {
+        List<Fotografo> todosFotografos = fotografoRepository.findAll();
+
+
+        for (Fotografo fotografo : todosFotografos) {
+            PerfilFotografoDTO perfilFotografoDto = PerfilFotografoDTOMapper.mapFotografo(fotografo);
+            tabelaHash.add(perfilFotografoDto);
+        }
+    }
+
     @Operation(summary = "Validar cadastro")
     public boolean validarCadastro(String cpf, String email) {
         Optional<Fotografo> usuarioPorCpf = fotografoRepository.findByCpf(cpf);
@@ -91,4 +117,6 @@ public class FotografoService {
 
         return true;
     }
+
+    
 }

@@ -69,5 +69,17 @@ public class FotografoController {
         ));
     }
 
+    @Operation(summary = "Buscar cliente", description = "Busca um cliente pelo seu nome")
+    @SecurityRequirement(name = "Bearer")
+
+    @GetMapping("/buscar/{nomeFotografo}")
+    public ResponseEntity<List<PerfilFotografoDTO>> buscarFotografo( @PathVariable String nomeFotografo){
+
+
+        return ResponseEntity.status(200).body(
+                serviceFotografo.buscarFotografo(nomeFotografo)
+        );
+    }
+
 
 }
