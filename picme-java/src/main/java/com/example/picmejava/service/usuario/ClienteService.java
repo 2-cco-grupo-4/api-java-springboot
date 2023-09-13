@@ -103,20 +103,7 @@ public class ClienteService {
     }
 
    
-    @Operation(summary = "Buscar um cliente pelo nome")
-    public List<PerfilClienteDTO> buscarCliente(String nome) {
 
-        adicionarClientesNaTabela();
-
-        List<PerfilClienteDTO> clientes = tabelaHash.searchByString(nome);
-
-        return clientes;
-    }
-
-    public Cliente buscarClientePorNome(String nome) {
-        Optional<Cliente> clienteOptional = clienteRepository.findByNome(nome);
-        return clienteOptional.orElseThrow(() -> new EntidadeNaoEncontradaException("Cliente não encontrado"));
-    }
 
 
     @Operation(summary = "Validar cadastro")
@@ -131,15 +118,8 @@ public class ClienteService {
         return true;
     }
   
-   private void adicionarClientesNaTabela() {
-        List<Cliente> todosClientes = clienteRepository.findAll();
 
 
-        for (Cliente cliente : todosClientes) {
-            PerfilClienteDTO perfilClienteDTO = PerfilClienteDtoMapper.mapClienteToPerfilClienteDTO(cliente);
-            tabelaHash.add(perfilClienteDTO);
-        }
-    }
 
 
 }
