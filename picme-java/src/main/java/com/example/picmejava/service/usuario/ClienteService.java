@@ -18,6 +18,8 @@ import org.springframework.stereotype.Service;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -47,13 +49,19 @@ public class ClienteService {
 
     @Operation(summary = "Listar todos os clientes")
     public ListaObj<Cliente> listar() {
-
-        ListaObj<Cliente> clientes = new ListaObj();
-        for(Cliente i :  clienteRepository.findAll()){
-            clientes.add(i);
-        }
+        ListaObj<Cliente> clientes = new ListaObj<>();
+        listarClientesRecursivamente(clientes, clienteRepository.findAll().iterator());
         return clientes;
     }
+
+    private void listarClientesRecursivamente(ListaObj<Cliente> clientes, Iterator<Cliente> iterator) {
+        if (iterator.hasNext()) {
+            Cliente cliente = iterator.next();
+            clientes.add(cliente);
+            listarClientesRecursivamente(clientes, iterator);
+        }
+    }
+
     @Operation(summary = "Atualizar dados de um cliente")
     public Cliente atualizar(Long idCliente, AtualizarUsuarioDTO dadosAtualizados){
         Optional<Cliente> clienteOptional = clienteRepository.findById(idCliente);

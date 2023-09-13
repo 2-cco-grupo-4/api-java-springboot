@@ -1,5 +1,6 @@
 package com.example.picmejava.controller;
 
+import com.example.picmejava.model.Cliente;
 import com.example.picmejava.service.usuario.dto.AtualizarUsuarioDTO;
 import com.example.picmejava.service.usuario.dto.CadastroUsuarioDTO;
 import com.example.picmejava.service.usuario.dto.LoginUsuarioDTO;
