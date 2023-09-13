@@ -88,8 +88,9 @@ public class FotografoService {
     @Operation(summary = "Buscar um cliente pelo nome")
     public List<PerfilFotografoDTO> buscarFotografo(String nome) {
 
-        adicionarFotografoNaTabela();
-
+        if (tabelaHash.isEmpty()) {
+            adicionarFotografoNaTabela();
+        }
         List<PerfilFotografoDTO> fotografos = tabelaHash.searchByString(nome);
 
         return fotografos;

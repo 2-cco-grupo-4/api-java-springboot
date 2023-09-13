@@ -62,4 +62,12 @@ public class TabelaHash<V> {
     }
 
 
+    public boolean isEmpty() {
+        for (LinkedList<PerfilFotografoDTO> list : hashtable) {
+            if (!list.isEmpty()) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
