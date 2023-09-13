@@ -13,7 +13,7 @@ import java.util.List;
 @Entity
 @DiscriminatorValue("2")
 public class Fotografo extends Usuario implements Identificavel{
-    private String tokenSolicitacao;
+//    private String tokenSolicitacao;
 
     @OneToMany
     @JoinColumn(name = "FK_FOTOGRAFO")

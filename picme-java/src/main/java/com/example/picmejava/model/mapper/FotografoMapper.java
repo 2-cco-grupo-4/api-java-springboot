@@ -68,12 +68,9 @@ public class FotografoMapper {
         if (dadosAtualizados.getDataNasc() != null){
             fotografo.setDataNasc(dadosAtualizados.getDataNasc());
         }
-        return fotografo;
-    }
-
-    public Fotografo toFotografoAccessTokenAtualizado(Fotografo fotografo, UpdateTokenUsuarioDTO updateTokenUsuarioDTO) {
-        fotografo.setTokenSolicitacao(updateTokenUsuarioDTO.getTokenSolicitacao());
-
+        if(dadosAtualizados.getTokenSolicitacao() != null) {
+            fotografo.setTokenSolicitacao(dadosAtualizados.getTokenSolicitacao());
+        }
         return fotografo;
     }
 }

@@ -110,7 +110,7 @@ public class FotografoService {
                 "Fotografo não existe")
         );
 
-        UpdateTokenUsuarioDTO updateTokenUsuarioDTO = new UpdateTokenUsuarioDTO();
+        AtualizarUsuarioDTO updateTokenUsuarioDTO = new AtualizarUsuarioDTO();
 
 
 
@@ -133,7 +133,11 @@ public class FotografoService {
             }
         }
 
-        return fotografoRepository.save(fotografoMapper.toFotografoAccessTokenAtualizado(fotografo, updateTokenUsuarioDTO));
+        Fotografo teste = fotografoRepository.save(fotografoMapper.toFotografoAtualizado(fotografo, updateTokenUsuarioDTO));
+
+        System.out.printf("Teste:\n\nID Usuário: %d\ntoken: %s\n\n", teste.getId(), teste.getTokenSolicitacao());
+
+        return teste;
     }
 
     @Operation(summary = "Buscar fotógrafo por ID")

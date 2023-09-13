@@ -53,7 +53,7 @@ public class InstagramService {
 
     @Operation(summary = "Obter imagens do usuário no Instagram")
     public Mono<ListData> getImagensInsta(String accessToken) {
-        String cURL = "http://localhost:8090/instagram/listaImagens?accessToken=" + accessToken;
+        String cURL = "http://localhost:8090/instagram/lista_imagens?accessToken=" + accessToken;
 
         ListData response = webClient.get()
                 .uri(cURL)
