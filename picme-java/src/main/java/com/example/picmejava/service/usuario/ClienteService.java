@@ -102,10 +102,6 @@ public class ClienteService {
         return clienteOptional.get();
     }
 
-   
-
-
-
     @Operation(summary = "Validar cadastro")
     public boolean validarCadastro(String cpf, String email) {
         Optional<Cliente> usuarioPorCpf = clienteRepository.findByCpf(cpf);
@@ -117,9 +113,5 @@ public class ClienteService {
 
         return true;
     }
-  
-
-
-
 
 }
