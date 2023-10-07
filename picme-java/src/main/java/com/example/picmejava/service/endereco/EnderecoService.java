@@ -19,13 +19,17 @@ import java.util.List;
 @Tag(name = "Endereco Service", description = "APIs relacionadas a operações de endereços")
 public class EnderecoService {
 
-    @Autowired
-    private EnderecoRepository enderecoRepository;
+    private final EnderecoRepository enderecoRepository;
+    private final EventoRepository eventoRepository;
+    private final EnderecoMapper enderecoMapper = new EnderecoMapper();
 
     @Autowired
-    private EventoRepository eventoRepository;
-
-    EnderecoMapper enderecoMapper = new EnderecoMapper();
+    public EnderecoService(
+            EnderecoRepository enderecoRepository,
+            EventoRepository eventoRepository) {
+        this.enderecoRepository = enderecoRepository;
+        this.eventoRepository = eventoRepository;
+    }
 
     @Operation(summary = "Cadastrar um novo endereço")
     public RetornoEnderecoDTO cadastrar(CadastroEnderecoDTO novoEndereco){

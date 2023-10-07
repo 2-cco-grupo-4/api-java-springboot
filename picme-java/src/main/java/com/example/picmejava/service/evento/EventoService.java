@@ -17,33 +17,32 @@ import java.util.List;
 @Tag(name = "Evento Service", description = "APIs relacionadas a operações de eventos")
 public class EventoService {
 
-    @Autowired
-    private EventoRepository eventoRepository;
+    private final EventoRepository eventoRepository;
+    private final ClienteRepository clienteRepository;
+    private final FotografoRepository fotografoRepository;
+    private final EnderecoRepository enderecoRepository;
+    private final TemaRepository temaRepository;
+    private final EventoMapper eventoMapper = new EventoMapper();
 
     @Autowired
-    private ClienteRepository clienteRepository;
-
-    @Autowired
-    private FotografoRepository fotografoRepository;
-
-    @Autowired
-    private EnderecoRepository enderecoRepository;
-
-    @Autowired
-    private TemaRepository temaRepository;
-
-    EventoMapper eventoMapper = new EventoMapper();
+    public EventoService(
+            EventoRepository eventoRepository,
+            ClienteRepository clienteRepository,
+            FotografoRepository fotografoRepository,
+            EnderecoRepository enderecoRepository,
+            TemaRepository temaRepository) {
+        this.eventoRepository = eventoRepository;
+        this.clienteRepository = clienteRepository;
+        this.fotografoRepository = fotografoRepository;
+        this.enderecoRepository = enderecoRepository;
+        this.temaRepository = temaRepository;
+    }
 
     @Operation(summary = "Cadastrar um novo evento")
     public RetornoEventoDTO cadastrar(CadastroEventoDTO novoEvento) {
-        Fotografo fotografo = fotografoRepository.findById(novoEvento.getIdFotografo())
-                .orElseThrow(() -> new EntidadeNaoEncontradaException("Fotografo não encontrado"));
-
-        Cliente cliente = clienteRepository.findById(novoEvento.getIdCliente())
-                .orElseThrow(() -> new EntidadeNaoEncontradaException("Cliente não encontrado"));
-
-        Tema tema = temaRepository.findById(novoEvento.getIdTema())
-                .orElseThrow(() -> new EntidadeNaoEncontradaException("Tema não encontrado"));
+        Fotografo fotografo = getFotografo(novoEvento.getIdFotografo());
+        Cliente cliente = getCliente(novoEvento.getIdCliente());
+        Tema tema = getTema(novoEvento.getIdTema());
 
         Evento evento = eventoMapper.toEvento(fotografo, cliente, tema, novoEvento);
         eventoRepository.save(evento);
@@ -57,5 +56,20 @@ public class EventoService {
         return eventos.stream()
                 .map(evento -> eventoMapper.toRetornoEventoDTO(evento))
                 .toList();
+    }
+
+    private Fotografo getFotografo(Long idFotografo) {
+        return fotografoRepository.findById(idFotografo)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Fotografo não encontrado"));
+    }
+
+    private Cliente getCliente(Long idCliente) {
+        return clienteRepository.findById(idCliente)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Cliente não encontrado"));
+    }
+
+    private Tema getTema(Long idTema) {
+        return temaRepository.findById(idTema)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Tema não encontrado"));
     }
 }

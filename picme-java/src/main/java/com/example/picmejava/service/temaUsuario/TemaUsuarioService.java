@@ -23,59 +23,57 @@ import java.util.List;
 @Service
 @Tag(name = "Tema Usuário Service", description = "APIs relacionadas a operações de temas para usuários")
 public class TemaUsuarioService {
-    
-    @Autowired
-    private TemaRepository temaRepository;
-    
-    @Autowired
-    private FotografoRepository fotografoRepository;
-    
-    @Autowired
-    private ClienteRepository clienteRepository;
 
+    private final TemaRepository temaRepository;
+    private final FotografoRepository fotografoRepository;
+    private final ClienteRepository clienteRepository;
     private final TemaUsuarioMapper temaUsuarioMapper = new TemaUsuarioMapper();
+
+    @Autowired
+    public TemaUsuarioService(
+            TemaRepository temaRepository,
+            FotografoRepository fotografoRepository,
+            ClienteRepository clienteRepository) {
+        this.temaRepository = temaRepository;
+        this.fotografoRepository = fotografoRepository;
+        this.clienteRepository = clienteRepository;
+    }
 
     @Operation(summary = "Cadastrar temas para um fotógrafo")
     public RetornoTemaFotografoDTO cadastrarTemaFotografo(CadastroTemaFotografoDTO novoTemaFotografo) {
-
-        List<Tema> temas = new ArrayList<>();
-        novoTemaFotografo
-                .getTemas()
-                .forEach(tema -> {
-                    Tema tema1 = temaRepository.findById(tema.getId()).orElseThrow(
-                            () -> new EntidadeNaoEncontradaException("Tema não encontrado")
-                    );
-                    temas.add(tema1);
-                });
-
-        Fotografo fotografo = fotografoRepository.findById(novoTemaFotografo.getIdFotografo())
-                .orElseThrow(() -> new EntidadeNaoEncontradaException("Fotografo não encontrado"));
-
-
+        Fotografo fotografo = getFotografoById(novoTemaFotografo.getIdFotografo());
+        List<Tema> temas = getTemasByIds(novoTemaFotografo.getTemas());
         fotografo.setTemas(temas);
         fotografoRepository.save(fotografo);
-
         return temaUsuarioMapper.toRetornoTemaUsuarioDTO(temas, fotografo);
-
     }
+
     @Operation(summary = "Cadastrar temas para um cliente")
     public RetornoTemaClienteDTO cadastrarTemaCliente(CadastroTemaClienteDTO novoTemaCliente) {
-
-        List<Tema> temas = new ArrayList<>();
-        novoTemaCliente.getTemas()
-                .forEach(tema -> {
-                    Tema tema1 = temaRepository.findById(tema.getId()).orElseThrow(
-                            () -> new EntidadeNaoEncontradaException("Tema não encontrado")
-                    );
-                    temas.add(tema1);
-                });
-
-        Cliente cliente = clienteRepository.findById(novoTemaCliente.getIdCliente())
-                .orElseThrow(() -> new EntidadeNaoEncontradaException("Cliente não encontrado"));
-
+        Cliente cliente = getClienteById(novoTemaCliente.getIdCliente());
+        List<Tema> temas = getTemasByIds(novoTemaCliente.getTemas());
         cliente.setTemas(temas);
         clienteRepository.save(cliente);
-
         return temaUsuarioMapper.toRetornoTemaUsuarioDTO(temas, cliente);
+    }
+
+    private Fotografo getFotografoById(Long fotografoId) {
+        return fotografoRepository.findById(fotografoId)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Fotógrafo não encontrado"));
+    }
+
+    private Cliente getClienteById(Long clienteId) {
+        return clienteRepository.findById(clienteId)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Cliente não encontrado"));
+    }
+
+    private List<Tema> getTemasByIds(List<Long> temaIds) {
+        List<Tema> temas = new ArrayList<>();
+        for (Long temaId : temaIds) {
+            Tema tema = temaRepository.findById(temaId)
+                    .orElseThrow(() -> new EntidadeNaoEncontradaException("Tema não encontrado"));
+            temas.add(tema);
+        }
+        return temas;
     }
 }
