@@ -1,12 +1,12 @@
 package com.example.picmejava.controller;
 
 import com.example.picmejava.model.Cliente;
+import com.example.picmejava.service.usuario.ClienteService;
 import com.example.picmejava.service.usuario.dto.AtualizarUsuarioDTO;
 import com.example.picmejava.service.usuario.dto.CadastroUsuarioDTO;
 import com.example.picmejava.service.usuario.dto.LoginUsuarioDTO;
 import com.example.picmejava.service.usuario.dto.PerfilClienteDTO;
 import com.example.picmejava.model.mapper.ClienteMapper;
-import com.example.picmejava.service.usuario.ClienteService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -67,23 +67,15 @@ public class ClienteController {
         ));
     }
 
-    @Operation(summary = "Login cliente", description = "Passando as credenciais válidas de um cliente, é realizado o login na API")
-
-    @PatchMapping("/entrar")
-    public ResponseEntity<PerfilClienteDTO> login(@RequestBody LoginUsuarioDTO usuarioLoginDTO){
-        return ResponseEntity.status(200).body(clienteMapper.toPerfilClienteDTO(serviceCliente.login(usuarioLoginDTO)));
-    }
-
-    @Operation(summary = "Logoff cliente", description = "EndPoint para logoff do cliente, é necessário passar as suas credenciais novamente")
+    @Operation(summary = "Login/Logoff cliente", description = "Passando as credenciais válidas de um cliente, é realizado o login na API. Passando as mesmas credenciais novamente, é feito o logoff.")
     @SecurityRequirement(name = "Bearer")
+    @PatchMapping("/autenticar")
+    public ResponseEntity<PerfilClienteDTO> autenticar(@RequestBody LoginUsuarioDTO usuarioLoginDTO){
+        Cliente cliente = serviceCliente.validarCliente(usuarioLoginDTO.getEmail(), usuarioLoginDTO.getSenha());
+        boolean autenticar = !cliente.isAutenticado();
 
-    @PatchMapping("/sair")
-    public ResponseEntity<PerfilClienteDTO> logoff(@RequestBody LoginUsuarioDTO buscarCliente){
         return ResponseEntity.status(200).body(clienteMapper.toPerfilClienteDTO(
-                serviceCliente.logoff(buscarCliente)
+                serviceCliente.autenticarCliente(usuarioLoginDTO, autenticar)
         ));
     }
-
-
-
 }

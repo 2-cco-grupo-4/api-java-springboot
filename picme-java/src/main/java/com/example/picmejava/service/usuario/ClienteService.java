@@ -75,10 +75,16 @@ public class ClienteService {
         return clienteRepository.save(clienteMapper.toClienteAtualizado(cliente, dadosAtualizados));
     }
 
-    @Operation(summary = "Autenticar ou desconectar um cliente")
+    @Operation(summary = "Autenticar (login) ou desconectar (logoff) um cliente")
     public Cliente autenticarCliente(LoginUsuarioDTO usuario, boolean autenticar) {
         Cliente cliente = validarCliente(usuario.getEmail(), usuario.getSenha());
-        cliente.setAutenticado(autenticar);
+
+        if (autenticar) {
+            cliente.setAutenticado(true);
+        } else {
+            cliente.setAutenticado(false);
+        }
+
         return clienteRepository.save(cliente);
     }
 

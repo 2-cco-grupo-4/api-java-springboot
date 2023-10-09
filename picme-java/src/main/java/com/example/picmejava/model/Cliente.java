@@ -19,4 +19,13 @@ public class Cliente extends Usuario{
     public int getTipoUsuario() {
         return 1;
     }
+
+    private boolean autenticado;
+    public boolean isAutenticado() {
+        return autenticado;
+    }
+
+    public void setAutenticado(boolean autenticado) {
+        this.autenticado = autenticado;
+    }
 }

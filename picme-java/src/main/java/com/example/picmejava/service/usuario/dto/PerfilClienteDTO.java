@@ -15,4 +15,5 @@ public class PerfilClienteDTO {
     private Boolean autenticado;
     private int tipoUsuario;
     private List<PerfilTemaDTO> temas;
+
 }
