@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class FaixaEtariaCliente {
+public class vwFaixaEtariaCliente {
 
     private String faixa;
     private Long quantidade;

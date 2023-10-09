@@ -9,8 +9,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ContagemClientesAcordoUmaSemana {
+public class vwKpiSessoesMes {
 
-    private String label;
-    private Long quantidade;
+    private String mes;
+    private Long sessoes;
+
 }

@@ -9,8 +9,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TemaContatosCliente {
+public class vwKpiUsuariosMes {
 
-    private String tema;
-    private Long contatos;
+    private String mes;
+    private Long quantidade;
+
 }
