@@ -1,6 +1,6 @@
 package com.example.picmejava.service.dashboard;
 
-import com.example.picmejava.service.dashboard.dto.*;
+import com.example.picmejava.service.dashboard.dto.admin.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Tag(name = "Dashboard", description = "Endpoints para informações do painel de controle")
-public class DashboardService {
+@Tag(name = "Dashboard Admin", description = "Endpoints para informações do painel de controle")
+public class DashboardAdminService {
 
     @Autowired
     private EntityManager entityManager;

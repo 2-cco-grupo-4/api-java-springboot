@@ -14,7 +14,7 @@ class DashboardServiceTest {
     private Query query;
 
     @InjectMocks
-    private DashboardService dashboardService;
+    private DashboardAdminService dashboardAdminService;
 
 //    @Test
 //    public void testTrazerFaixaEtariaCliente() {

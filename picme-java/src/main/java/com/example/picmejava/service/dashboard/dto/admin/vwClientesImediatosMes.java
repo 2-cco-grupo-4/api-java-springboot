@@ -1,4 +1,4 @@
-package com.example.picmejava.service.dashboard.dto;
+package com.example.picmejava.service.dashboard.dto.admin;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,9 +9,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class vwKpiUsuariosMes {
+public class vwClientesImediatosMes {
 
     private String mes;
-    private Long quantidade;
+    private Long agendaram;
+    private Long total;
+    private Long naoAgendaram;
 
 }

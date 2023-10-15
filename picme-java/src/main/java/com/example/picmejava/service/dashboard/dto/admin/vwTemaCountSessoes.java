@@ -1,4 +1,4 @@
-package com.example.picmejava.service.dashboard.dto;
+package com.example.picmejava.service.dashboard.dto.admin;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,9 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class vwProgressaoSessoesRealizadas {
+public class vwTemaCountSessoes {
 
-    private String mes;
-    private Long quantidade;
-
+    private String tema;
+    private Long sessoes;
 }
