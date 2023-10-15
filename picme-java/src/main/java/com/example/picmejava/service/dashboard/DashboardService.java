@@ -1,8 +1,6 @@
 package com.example.picmejava.service.dashboard;
 
-import com.example.picmejava.service.dashboard.dto.vwClientesImediatosMes;
-import com.example.picmejava.service.dashboard.dto.vwFaixaEtariaCliente;
-import com.example.picmejava.service.dashboard.dto.vwTemaCountSessoes;
+import com.example.picmejava.service.dashboard.dto.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,57 +75,59 @@ public class DashboardService {
         return listaResponse;
     }
     @Operation(summary = "Obter total de clientes e fotógrafos", description = "Retorna a contagem total de clientes e de fotógrafos.")
-    public List<vwFaixaEtariaCliente> totalClientesFotografos(){
-        Query query = entityManager.createNativeQuery("SELECT * FROM vw_total_clientes_fotografos");
+    public List<vwClientesFotografos> totalClientesFotografos(){
+        Query query = entityManager.createNativeQuery("SELECT * FROM vw_clientes_fotografos");
         List<Object[]> resultado = query.getResultList();
 
-        List<vwFaixaEtariaCliente> faixaEtariaClienteDtos = new ArrayList<>();
+        List<vwClientesFotografos> clientesFotografosDTO = new ArrayList<>();
 
         for (Object[] linha : resultado) {
-            String faixa = (String) linha[0];
-            Long quantidade = (Long) linha[1];
+            String mes = (String) linha[0];
+            Long clientes = (Long) linha[1];
+            Long total = (Long) linha[2];
+            Long fotografos = (Long) linha[3];
 
-            vwFaixaEtariaCliente faixaEtariaClienteDto = new vwFaixaEtariaCliente(faixa, quantidade);
-            faixaEtariaClienteDtos.add(faixaEtariaClienteDto);
+            vwClientesFotografos clientesFotografos = new vwClientesFotografos(mes, clientes, total, fotografos);
+            clientesFotografosDTO.add(clientesFotografos);
         }
 
-        return faixaEtariaClienteDtos;
+        return clientesFotografosDTO;
     }
 
     @Operation(summary = "Progressão de usuários por mês", description = "Retorna a progressão da quantidade de novos usuários cadastrados nos últimos 6 meses")
-    public List<vwFaixaEtariaCliente> progressaoUsuariosMes(){
+    public List<vwProgressaoCadastroUsuarios> progressaoUsuariosMes(){
         Query query = entityManager.createNativeQuery("SELECT * FROM vw_progressao_cadastro_usuarios");
         List<Object[]> resultado = query.getResultList();
 
-        List<vwFaixaEtariaCliente> faixaEtariaClienteDtos = new ArrayList<>();
+        List<vwProgressaoCadastroUsuarios> listProgressaoCadastroUsuarios = new ArrayList<>();
 
         for (Object[] linha : resultado) {
-            String faixa = (String) linha[0];
+            String mes = (String) linha[0];
             Long quantidade = (Long) linha[1];
 
-            vwFaixaEtariaCliente faixaEtariaClienteDto = new vwFaixaEtariaCliente(faixa, quantidade);
-            faixaEtariaClienteDtos.add(faixaEtariaClienteDto);
+            vwProgressaoCadastroUsuarios progressaoCadastroUsuarios = new vwProgressaoCadastroUsuarios(mes, quantidade);
+            listProgressaoCadastroUsuarios.add(progressaoCadastroUsuarios);
         }
 
-        return faixaEtariaClienteDtos;
+        return listProgressaoCadastroUsuarios;
     }
 
     @Operation(summary = "Progressão de sessões por mês", description = "Retorna a progressão da quantidade de novas sessões realizadas nos últimos 6 meses")
-    public List<vwFaixaEtariaCliente> progressaoRealizacaoSessoes(){
+    public List<vwProgressaoSessoesRealizadas> progressaoRealizacaoSessoes(){
         Query query = entityManager.createNativeQuery("SELECT * FROM vw_progressao_sessoes_realizadas");
         List<Object[]> resultado = query.getResultList();
 
-        List<vwFaixaEtariaCliente> faixaEtariaClienteDtos = new ArrayList<>();
+        List<vwProgressaoSessoesRealizadas> listProgressaoSessoesRealizadas = new ArrayList<>();
 
         for (Object[] linha : resultado) {
-            String faixa = (String) linha[0];
+            String mes = (String) linha[0];
             Long quantidade = (Long) linha[1];
 
-            vwFaixaEtariaCliente faixaEtariaClienteDto = new vwFaixaEtariaCliente(faixa, quantidade);
-            faixaEtariaClienteDtos.add(faixaEtariaClienteDto);
+            vwProgressaoSessoesRealizadas progressaoSessoesRealizadas = new vwProgressaoSessoesRealizadas(mes, quantidade);
+            listProgressaoSessoesRealizadas.add(progressaoSessoesRealizadas);
         }
 
-        return faixaEtariaClienteDtos;
+        return listProgressaoSessoesRealizadas;
     }
 
     @Operation(summary = "KPI Total usuários", description = "Retorna o total de usuários cadastrados e a diferença do último mês para o atual")
@@ -184,22 +184,24 @@ public class DashboardService {
         return faixaEtariaClienteDtos;
     }
 
-//    @Operation(summary = "Obter contagem de sessões que foram finalizadas ou canceladas", description = "Retorna a contagem de sessões que foram finalizadas ou canceladas.")
-//    public List<vwClientesImediatosMes> trazerContagemSessoesFinalizadasCanceladas() {
-//        Query query = entityManager.createNativeQuery("SELECT * FROM vw_total_sessoes_finalizadas_canceladas");
-//        List<Object[]> resultado = query.getResultList();
-//
-//        List<vwClientesImediatosMes> listaContagem = new ArrayList<>();
-//
-//        for (Object[] linha : resultado) {
-//            String label = (String) linha[0];
-//            Long quantidade = (Long) linha[1];
-//
-//            vwClientesImediatosMes contagem = new vwClientesImediatosMes(label, quantidade);
-//            listaContagem.add(contagem);
-//        }
-//
-//        return listaContagem;
-//    }
+    @Operation(summary = "Obter contagem de sessões que foram finalizadas ou canceladas", description = "Retorna a contagem de sessões que foram finalizadas ou canceladas.")
+    public List<vwSessoesFinalizadasCanceladas> trazerContagemSessoesFinalizadasCanceladas() {
+        Query query = entityManager.createNativeQuery("SELECT * FROM vw_sessoes_realizadas_finalizadas");
+        List<Object[]> resultado = query.getResultList();
+
+        List<vwSessoesFinalizadasCanceladas> sessoesFinalizadasCanceladas = new ArrayList<>();
+
+        for (Object[] linha : resultado) {
+            String mes = (String) linha[0];
+            Long convertidas = (Long) linha[1];
+            Long total = (Long) linha[2];
+            Long interrompidas = (Long) linha[3];
+
+            vwSessoesFinalizadasCanceladas contagem = new vwSessoesFinalizadasCanceladas(mes, convertidas, total, interrompidas);
+            sessoesFinalizadasCanceladas.add(contagem);
+        }
+
+        return sessoesFinalizadasCanceladas;
+    }
 
 }

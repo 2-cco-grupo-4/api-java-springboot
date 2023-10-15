@@ -1,9 +1,7 @@
 package com.example.picmejava.controller.dashboard;
 
 import com.example.picmejava.service.dashboard.DashboardService;
-import com.example.picmejava.service.dashboard.dto.vwClientesImediatosMes;
-import com.example.picmejava.service.dashboard.dto.vwFaixaEtariaCliente;
-import com.example.picmejava.service.dashboard.dto.vwTemaCountSessoes;
+import com.example.picmejava.service.dashboard.dto.*;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -74,20 +72,19 @@ public class ConsultasDashboardAdminController {
     }
 
     /* 5 */
-    @Operation(summary = "Obter total de clientes e fotógrafos", description = "Retorna a contagem total de clientes e de fotógrafos.")
+    @Operation(summary = "Obter total de clientes e fotógrafos", description = "Retorna a contagem total de clientes e de fotógrafos nos últimos 4 meses.")
     @GetMapping("/total-clientes-fotografos")
-    public ResponseEntity<List<vwFaixaEtariaCliente>> totalClientesFotografos() {
+    public ResponseEntity<List<vwClientesFotografos>> totalClientesFotografos() {
         if (dashboardService.totalClientesFotografos().isEmpty()){
             ResponseEntity.noContent().build();
         }
-
         return ResponseEntity.ok(dashboardService.totalClientesFotografos());
     }
 
     /* 6 */
     @Operation(summary = "Progressão de usuários por mês", description = "Retorna a progressão da quantidade de novos usuários cadastrados nos últimos 6 meses")
     @GetMapping("/progressao-usuarios-mes")
-    public ResponseEntity<List<vwFaixaEtariaCliente>> progressaoUsuariosMes() {
+    public ResponseEntity<List<vwProgressaoCadastroUsuarios>> progressaoUsuariosMes() {
         if (dashboardService.progressaoUsuariosMes().isEmpty()){
             ResponseEntity.noContent().build();
         }
@@ -98,7 +95,7 @@ public class ConsultasDashboardAdminController {
     /* 7 */
     @Operation(summary = "Progressão de sessões por mês", description = "Retorna a progressão da quantidade de novas sessões realizadas nos últimos 6 meses")
     @GetMapping("/progressao-relizacao-sessoes")
-    public ResponseEntity<List<vwFaixaEtariaCliente>> progressaoRealizacaoSessoes() {
+    public ResponseEntity<List<vwProgressaoSessoesRealizadas>> progressaoRealizacaoSessoes() {
         if (dashboardService.progressaoRealizacaoSessoes().isEmpty()){
             ResponseEntity.noContent().build();
         }
@@ -140,14 +137,14 @@ public class ConsultasDashboardAdminController {
     }
 
     /* 11 */
-//    @Operation(summary = "Obter contagem de sessões que foram finalizadas ou canceladas", description = "Retorna a contagem de sessões que foram finalizadas ou canceladas.")
-//    @GetMapping("/sessoes-finalizadas-canceladas")
-//    public ResponseEntity<List<vwClientesImediatosMes>> trazerContagemSessoesFinalizadasCanceladas() {
-//        if (dashboardService.trazerContagemSessoesFinalizadasCanceladas().isEmpty()){
-//            ResponseEntity.noContent().build();
-//        }
-//
-//        return ResponseEntity.ok(dashboardService.trazerContagemSessoesFinalizadasCanceladas());
-//    }
+    @Operation(summary = "Obter contagem de sessões que foram finalizadas ou canceladas", description = "Retorna a contagem de sessões que foram finalizadas ou canceladas.")
+    @GetMapping("/sessoes-finalizadas-canceladas")
+    public ResponseEntity<List<vwSessoesFinalizadasCanceladas>> trazerContagemSessoesFinalizadasCanceladas() {
+        if (dashboardService.trazerContagemSessoesFinalizadasCanceladas().isEmpty()){
+            ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(dashboardService.trazerContagemSessoesFinalizadasCanceladas());
+    }
 
 }
