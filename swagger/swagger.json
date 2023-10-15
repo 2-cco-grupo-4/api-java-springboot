@@ -1,2577 +1,2342 @@
 {
-    "openapi": "3.0.1",
-    "info": {
-        "title": "PICME API",
-        "description": "API REST do Projeto PICME, do grupo 4 de 2CCO de 2023 - SPTech School",
-        "contact": {
-            "name": "Grupo 4",
-            "url": "https://github.com/2-cco-grupo-4"
-        },
-        "license": {
-            "name": "UNLICENSED"
-        },
-        "version": "0.9"
+  "openapi": "3.0.1",
+  "info": {
+    "title": "PICME API",
+    "description": "API REST do Projeto PICME, do grupo 4 de 2CCO de 2023 - SPTech School",
+    "contact": { "name": "Grupo 4", "url": "https://github.com/2-cco-grupo-4" },
+    "license": { "name": "UNLICENSED" },
+    "version": "0.9"
+  },
+  "servers": [
+    { "url": "http://localhost:8080", "description": "Generated server url" }
+  ],
+  "tags": [
+    {
+      "name": "Tema controller",
+      "description": "Controller responsável pela entidade tema"
     },
-    "servers": [
-        {
-            "url": "http://localhost:8080",
-            "description": "Generated server url"
-        }
-    ],
-    "tags": [
-        {
-            "name": "Avaliação Controller",
-            "description": "Controller responsável pela entidade Avaliação"
-        },
-        {
-            "name": "Dashboard Admin Controller",
-            "description": "Controller responsável pelas consultas do painel administrativo"
-        },
-        {
-            "name": "Tema controller",
-            "description": "Controller responsável pela entidade tema"
-        },
-        {
-            "name": "Fotografo Controller",
-            "description": "Controller responsável pela entidade Fotografo"
-        },
-        {
-            "name": "Tema do Usuário Controller",
-            "description": "Controller responsável pela escolha de temas do usuário"
-        },
-        {
-            "name": "Evento Controller",
-            "description": "Controller responsável pela entidade Evento"
-        },
-        {
-            "name": "Endereço Controller",
-            "description": "Controller responsável pela entidade Endereço"
-        },
-        {
-            "name": "Instagram controller",
-            "description": "Controller responsável por conectar a API REST do Instagram com a API do projeto picme"
-        },
-        {
-            "name": "Album Controller",
-            "description": "Controller responsável pela entidade Album"
-        },
-        {
-            "name": "Cliente Controller",
-            "description": "Controller responsável pela entidade Cliente"
-        },
-        {
-            "name": "Autenticação",
-            "description": "Endpoints para autenticação"
-        },
-        {
-            "name": "Imagem controller",
-            "description": "Controller responsável pela entidade imagem"
-        }
-    ],
-    "paths": {
-        "/fotografos/atualizar/{idFotografo}": {
-            "put": {
-                "tags": [
-                    "Fotografo Controller"
-                ],
-                "summary": "Atualizar dados fotógrafo",
-                "description": "Passando o ID do fotógrafo e seus novos dados, podemos atualizar suas informações",
-                "operationId": "atualizar",
-                "parameters": [
-                    {
-                        "name": "idFotografo",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/AtualizarUsuarioDTO"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PerfilFotografoDTO"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
-            }
-        },
-        "/clientes/atualizar/{idCliente}": {
-            "put": {
-                "tags": [
-                    "Cliente Controller"
-                ],
-                "summary": "Atualizar dados cliente",
-                "description": "Passando o ID do cliente e seus novos dados, podemos atualizar suas informações",
-                "operationId": "atualizar_1",
-                "parameters": [
-                    {
-                        "name": "idCliente",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/AtualizarUsuarioDTO"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PerfilClienteDTO"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
-            }
-        },
-        "/albums/{id}": {
-            "put": {
-                "tags": [
-                    "Album Controller"
-                ],
-                "summary": "Atualizar um album",
-                "description": "Passando o ID do album e o seus novos valores, podemos atualizá-lo",
-                "operationId": "atualizar_2",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/AtualizarAlbumDTO"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/RetornoAlbumDTO"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
-            },
-            "delete": {
-                "tags": [
-                    "Album Controller"
-                ],
-                "summary": "Deletar um album",
-                "description": "Passando um ID de um album cadastrado, podemos deletá-lo",
-                "operationId": "deletar_1",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Album"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
-            }
-        },
-        "/temas": {
-            "get": {
-                "tags": [
-                    "Tema controller"
-                ],
-                "summary": "Listar temas",
-                "description": "Lista todos os temas cadastrados",
-                "operationId": "listar",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/PerfilTemaDTO"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
-            },
-            "post": {
-                "tags": [
-                    "Tema controller"
-                ],
-                "summary": "Cadastrar um novo tema",
-                "description": "Passando os dados necessários, podemos cadastrar um novo tema",
-                "operationId": "cadastrar",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/CadastroTemaDto"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PerfilTemaDTO"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
-            }
-        },
-        "/login": {
-            "post": {
-                "tags": [
-                    "Autenticação"
-                ],
-                "summary": "Efetuar login",
-                "description": "Realiza o processo de autenticação do usuário e retorna o token de acesso.",
-                "operationId": "efetuarLogin",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/LoginUsuarioDTO"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/instagram": {
-            "post": {
-                "tags": [
-                    "Instagram controller"
-                ],
-                "summary": "Obter access token do usuário",
-                "description": "Endpoint para acessar o token de usuário do Instagram",
-                "operationId": "acessTokenUsuario",
-                "parameters": [
-                    {
-                        "name": "codigo",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/AccessToken"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/imagens/{idAlbum}": {
-            "post": {
-                "tags": [
-                    "Imagem controller"
-                ],
-                "summary": "Cadastrar uma nova imagem",
-                "description": "Passando os dados necessário, podemos cadastrar uma nova imagem",
-                "operationId": "cadastrar_1",
-                "parameters": [
-                    {
-                        "name": "idAlbum",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Imagem"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/RetornoImagemDTO"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
-            }
-        },
-        "/fotografos/cadastrar": {
-            "post": {
-                "tags": [
-                    "Fotografo Controller"
-                ],
-                "summary": "Cadastrar um novo fotógrafo",
-                "description": "Passando os dados necessários, podemos cadastrar um novo fotógrafo",
-                "operationId": "cadastrar_2",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/CadastroUsuarioDTO"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PerfilFotografoDTO"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/eventos": {
-            "get": {
-                "tags": [
-                    "Evento Controller"
-                ],
-                "summary": "Listar eventos",
-                "description": "Obter a lista de todos os eventos",
-                "operationId": "listar_3",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/RetornoEventoDTO"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Evento Controller"
-                ],
-                "summary": "Cadastrar um novo evento",
-                "description": "Passando o JSON do evento, podemos cadastrar um novo evento",
-                "operationId": "cadastrar_3",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/CadastroEventoDTO"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/RetornoEventoDTO"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/escolha-tema/fotografo": {
-            "post": {
-                "tags": [
-                    "Tema do Usuário Controller"
-                ],
-                "summary": "Cadastrar tema de fotógrafo",
-                "description": "Cadastra um novo tema para fotógrafo",
-                "operationId": "cadastrar_4",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/CadastroTemaFotografoDTO"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/RetornoTemaFotografoDTO"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/escolha-tema/cliente": {
-            "post": {
-                "tags": [
-                    "Tema do Usuário Controller"
-                ],
-                "summary": "Cadastrar tema de cliente",
-                "description": "Cadastra um novo tema para cliente",
-                "operationId": "cadastrar_5",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/CadastroTemaClienteDTO"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/RetornoTemaClienteDTO"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/enderecos": {
-            "get": {
-                "tags": [
-                    "Endereço Controller"
-                ],
-                "summary": "Listar endereços",
-                "description": "Obtém a lista de todos os endereços",
-                "operationId": "listar_4",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/RetornoEnderecoDTO"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Endereço Controller"
-                ],
-                "summary": "Cadastrar um novo endereço",
-                "description": "Cadastra um novo endereço",
-                "operationId": "cadastrar_6",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/CadastroEnderecoDTO"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/RetornoEnderecoDTO"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/clientes/cadastrar": {
-            "post": {
-                "tags": [
-                    "Cliente Controller"
-                ],
-                "summary": "Cadastrar um novo cliente",
-                "description": "Passando os dados necessários, podemos cadastrar um novo cliente",
-                "operationId": "cadastrar_7",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/CadastroUsuarioDTO"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PerfilClienteDTO"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/avaliacoes": {
-            "get": {
-                "tags": [
-                    "Avaliação Controller"
-                ],
-                "summary": "Exibir avaliações",
-                "description": "Obtém a lista de todas as avaliações",
-                "operationId": "exibir",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/Avaliacao"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Avaliação Controller"
-                ],
-                "summary": "Avaliar",
-                "description": "Realiza uma avaliação",
-                "operationId": "avaliar",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Avaliacao"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Avaliacao"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/albums": {
-            "get": {
-                "tags": [
-                    "Album Controller"
-                ],
-                "summary": "Listar albuns fotógrafo",
-                "description": "Passando o ID do fotógrafo podemos obter a lista de todos os seus albuns",
-                "operationId": "listar_6",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/RetornoAlbumDTO"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
-            },
-            "post": {
-                "tags": [
-                    "Album Controller"
-                ],
-                "summary": "Cadastrar um novo album",
-                "description": "Passando o ID do fotógrafo e o JSON do album, podemos cadastrar um novo album",
-                "operationId": "cadastrar_8",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/CadastroAlbumDTO"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/RetornoAlbumDTO"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
-            }
-        },
-        "/fotografos/sair": {
-            "patch": {
-                "tags": [
-                    "Fotografo Controller"
-                ],
-                "summary": "Logoff fotógrafo",
-                "description": "EndPoint para logoff do fotógrafo, é necessário passar as suas credenciais novamente",
-                "operationId": "logoff",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/LoginUsuarioDTO"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PerfilFotografoDTO"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
-            }
-        },
-        "/fotografos/entrar": {
-            "patch": {
-                "tags": [
-                    "Fotografo Controller"
-                ],
-                "summary": "Login fotógrafo",
-                "description": "Passando as credenciais válidas de um fotógrafo, é realizado o login na API",
-                "operationId": "login",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/LoginUsuarioDTO"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/RetornoFotografoDTO"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/fotografos/atualizarToken/{idFotografo}": {
-            "patch": {
-                "tags": [
-                    "Fotografo Controller"
-                ],
-                "summary": "Atualizar token solicitacao usuário",
-                "description": "Endpoint utilizado para atualizar o token de soliticação do usuário no banco de dados",
-                "operationId": "atualizarTokenSolicitacao",
-                "parameters": [
-                    {
-                        "name": "idFotografo",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    },
-                    {
-                        "name": "codigo",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Fotografo"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/clientes/sair": {
-            "patch": {
-                "tags": [
-                    "Cliente Controller"
-                ],
-                "summary": "Logoff cliente",
-                "description": "EndPoint para logoff do cliente, é necessário passar as suas credenciais novamente",
-                "operationId": "logoff_1",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/LoginUsuarioDTO"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PerfilClienteDTO"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
-            }
-        },
-        "/clientes/entrar": {
-            "patch": {
-                "tags": [
-                    "Cliente Controller"
-                ],
-                "summary": "Login cliente",
-                "description": "Passando as credenciais válidas de um cliente, é realizado o login na API",
-                "operationId": "login_1",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/LoginUsuarioDTO"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PerfilClienteDTO"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/instagram/refreshLongAccessToken": {
-            "get": {
-                "tags": [
-                    "Instagram controller"
-                ],
-                "summary": "Renovar access token de longa duração",
-                "description": "Endpoint para renovar o access token de longa duração por mais 60 dias",
-                "operationId": "refreshLongAccessToken",
-                "parameters": [
-                    {
-                        "name": "accessToken",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/LongAccessToken"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/instagram/longAccessToken": {
-            "get": {
-                "tags": [
-                    "Instagram controller"
-                ],
-                "summary": "Obter access token de longa duração",
-                "description": "Endpoint para obter o access token de longa duração (60 Dias) do Usuário do Instagram",
-                "operationId": "getLongAccessToken",
-                "parameters": [
-                    {
-                        "name": "accessToken",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/LongAccessToken"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/instagram/listaMedia": {
-            "get": {
-                "tags": [
-                    "Instagram controller"
-                ],
-                "summary": "Obter lista de imagens do usuário",
-                "description": "Endpoint para obter a lista de imagens do usuário no Instagram",
-                "operationId": "getImagensUsuario",
-                "parameters": [
-                    {
-                        "name": "accessToken",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ListData"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/instagram/listImagem": {
-            "get": {
-                "tags": [
-                    "Instagram controller"
-                ],
-                "summary": "Obter lista de imagens",
-                "description": "Endpoint para obter a lista de imagens e seus detalhes do Instagram",
-                "operationId": "getListImagem",
-                "parameters": [
-                    {
-                        "name": "accessToken",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/Media"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/instagram/imagem": {
-            "get": {
-                "tags": [
-                    "Instagram controller"
-                ],
-                "summary": "Obter imagem",
-                "description": "Endpoint para obter uma imagem específica do Instagram",
-                "operationId": "getImagem",
-                "parameters": [
-                    {
-                        "name": "idImagem",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "accessToken",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Media"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/imagens": {
-            "get": {
-                "tags": [
-                    "Imagem controller"
-                ],
-                "summary": "Listar imagens",
-                "description": "Passando o ID do album, podemos listar todas as imagens de determinado album",
-                "operationId": "listar_1",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/RetornoImagemDTO"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
-            }
-        },
-        "/fotografos": {
-            "get": {
-                "tags": [
-                    "Fotografo Controller"
-                ],
-                "summary": "Listar fotógrafos",
-                "description": "Lista todos os fotógrafos cadastrados",
-                "operationId": "listar_2",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/RetornoFotografoDTO"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
-            }
-        },
-        "/fotografos/buscar/{nomeFotografo}": {
-            "get": {
-                "tags": [
-                    "Fotografo Controller"
-                ],
-                "summary": "Buscar cliente",
-                "description": "Busca um cliente pelo seu nome",
-                "operationId": "buscarFotografo",
-                "parameters": [
-                    {
-                        "name": "nomeFotografo",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/PerfilFotografoDTO"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
-            }
-        },
-        "/clientes": {
-            "get": {
-                "tags": [
-                    "Cliente Controller"
-                ],
-                "summary": "Listar clientes",
-                "description": "Lista todos os clientes cadastrados",
-                "operationId": "listar_5",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/PerfilClienteDTO"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
-            }
-        },
-        "/avaliacoes/enfileira": {
-            "get": {
-                "tags": [
-                    "Avaliação Controller"
-                ],
-                "summary": "Exibir avaliações enfileiradas",
-                "description": "Obtém a lista de todas as avaliações de forma enfileirada",
-                "operationId": "verEmFila",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/FilaObjAvaliacao"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/admin/total-clientes-fotografos": {
-            "get": {
-                "tags": [
-                    "Dashboard Admin Controller"
-                ],
-                "summary": "Obter total de clientes e fotógrafos",
-                "description": "Retorna a contagem total de clientes e de fotógrafos.",
-                "operationId": "totalClientesFotografos",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/FaixaEtariaCliente"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/admin/sessoes-finalizadas-canceladas": {
-            "get": {
-                "tags": [
-                    "Dashboard Admin Controller"
-                ],
-                "summary": "Obter contagem de sessões que foram finalizadas ou canceladas",
-                "description": "Retorna a contagem de sessões que foram finalizadas ou canceladas.",
-                "operationId": "trazerContagemSessoesFinalizadasCanceladas",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/ContagemClientesAcordoUmaSemana"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/admin/progressao-usuarios-mes": {
-            "get": {
-                "tags": [
-                    "Dashboard Admin Controller"
-                ],
-                "summary": "Progressão de usuários por mês",
-                "description": "Retorna a progressão da quantidade de novos usuários cadastrados nos últimos 6 meses",
-                "operationId": "progressaoUsuariosMes",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/FaixaEtariaCliente"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/admin/progressao-relizacao-sessoes": {
-            "get": {
-                "tags": [
-                    "Dashboard Admin Controller"
-                ],
-                "summary": "Progressão de sessões por mês",
-                "description": "Retorna a progressão da quantidade de novas sessões realizadas nos últimos 6 meses",
-                "operationId": "progressaoRealizacaoSessoes",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/FaixaEtariaCliente"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/admin/kpi-total-usuarios": {
-            "get": {
-                "tags": [
-                    "Dashboard Admin Controller"
-                ],
-                "summary": "KPI Total usuários",
-                "description": "Retorna o total de usuários cadastrados e a diferença do último mês para o atual",
-                "operationId": "trazerKpiTotalUsuarios",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/FaixaEtariaCliente"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/admin/kpi-total-acessos": {
-            "get": {
-                "tags": [
-                    "Dashboard Admin Controller"
-                ],
-                "summary": "KPI Total acessos",
-                "description": "Retorna o total de acessos e a diferença do último mês para o atual",
-                "operationId": "trazerKpiTotalAcessos",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/FaixaEtariaCliente"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/admin/kpi-sessoes-realizadas": {
-            "get": {
-                "tags": [
-                    "Dashboard Admin Controller"
-                ],
-                "summary": "KPI Total sessões realizadas",
-                "description": "Retorna o total de sessões realizadas e a diferença do último mês para o atual",
-                "operationId": "trazerKpiSessoesRealizadas",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/FaixaEtariaCliente"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/admin/faixa-etaria-clientes": {
-            "get": {
-                "tags": [
-                    "Dashboard Admin Controller"
-                ],
-                "summary": "Obter faixa etária dos clientes",
-                "description": "Obtém a faixa etária dos clientes registrados",
-                "operationId": "trazerFaixaEtariaCliente",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/FaixaEtariaCliente"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/admin/faixa-etaria-clientes-tema/{tema}": {
-            "get": {
-                "tags": [
-                    "Dashboard Admin Controller"
-                ],
-                "summary": "Obter faixa etária dos clientes por tema",
-                "description": "Retorna a contagem de clientes divididos pela sua faixa etária e tema de evento",
-                "operationId": "trazerFaixaEtariaClienteTema",
-                "parameters": [
-                    {
-                        "name": "tema",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/FaixaEtariaCliente"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/admin/contagem-tema-contato": {
-            "get": {
-                "tags": [
-                    "Dashboard Admin Controller"
-                ],
-                "summary": "Obter contagem de contatos por tema",
-                "description": "Obtém a contagem de contatos por tema",
-                "operationId": "trazerContagemTemaContato",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/TemaContatosCliente"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/admin/contagem-clientes-semana": {
-            "get": {
-                "tags": [
-                    "Dashboard Admin Controller"
-                ],
-                "summary": "Obter contagem de clientes que fecharam acordo em acordo em uma semana",
-                "description": "Retorna a contagem de clientes em acordo em uma semana.",
-                "operationId": "trazerContagemClientesAcordoUmaSemana",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/ContagemClientesAcordoUmaSemana"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/imagens/{id}": {
-            "delete": {
-                "tags": [
-                    "Imagem controller"
-                ],
-                "summary": "Remover uma imagem",
-                "description": "Passando o ID da imagem, podemos excluir determinada imagem",
-                "operationId": "deletar",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
-            }
-        },
-        "/avaliacoes/desfaz": {
-            "delete": {
-                "tags": [
-                    "Avaliação Controller"
-                ],
-                "summary": "Desfazer avaliação",
-                "description": "Desfaz a última avaliação realizada",
-                "operationId": "desfazer",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Avaliacao"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+    {
+      "name": "Fotografo Controller",
+      "description": "Controller responsável pela entidade Fotografo"
     },
-    "components": {
-        "schemas": {
-            "AtualizarUsuarioDTO": {
-                "type": "object",
-                "properties": {
-                    "nome": {
-                        "maxLength": 32,
-                        "minLength": 1,
-                        "type": "string"
-                    },
-                    "senha": {
-                        "maxLength": 32,
-                        "minLength": 8,
-                        "type": "string"
-                    },
-                    "numCelular": {
-                        "maxLength": 15,
-                        "minLength": 11,
-                        "type": "string"
-                    },
-                    "dataNasc": {
-                        "type": "string",
-                        "format": "date"
-                    },
-                    "tokenSolicitacao": {
-                        "type": "string"
-                    }
-                }
-            },
-            "PerfilFotografoDTO": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "nome": {
-                        "type": "string"
-                    },
-                    "autenticado": {
-                        "type": "boolean"
-                    },
-                    "tipoUsuario": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "temas": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/PerfilTemaDTO"
-                        }
-                    }
-                }
-            },
-            "PerfilTemaDTO": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "nome": {
-                        "type": "string"
-                    }
-                }
-            },
-            "PerfilClienteDTO": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "nome": {
-                        "type": "string"
-                    },
-                    "autenticado": {
-                        "type": "boolean"
-                    },
-                    "tipoUsuario": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "temas": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/PerfilTemaDTO"
-                        }
-                    }
-                }
-            },
-            "AtualizarAlbumDTO": {
-                "type": "object",
-                "properties": {
-                    "titulo": {
-                        "type": "string"
-                    },
-                    "idTema": {
-                        "type": "integer",
-                        "format": "int64"
-                    }
-                }
-            },
-            "PerfilImagemDTO": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "path": {
-                        "type": "string"
-                    },
-                    "tipo": {
-                        "type": "string"
-                    },
-                    "descricao": {
-                        "type": "string"
-                    }
-                }
-            },
-            "RetornoAlbumDTO": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "titulo": {
-                        "type": "string"
-                    },
-                    "tema": {
-                        "$ref": "#/components/schemas/PerfilTemaDTO"
-                    },
-                    "fotografo": {
-                        "$ref": "#/components/schemas/PerfilFotografoDTO"
-                    },
-                    "imagems": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/PerfilImagemDTO"
-                        }
-                    }
-                }
-            },
-            "CadastroTemaDto": {
-                "type": "object",
-                "properties": {
-                    "nome": {
-                        "type": "string"
-                    }
-                }
-            },
-            "LoginUsuarioDTO": {
-                "required": [
-                    "email",
-                    "senha"
-                ],
-                "type": "object",
-                "properties": {
-                    "email": {
-                        "type": "string"
-                    },
-                    "senha": {
-                        "type": "string"
-                    }
-                }
-            },
-            "AccessToken": {
-                "type": "object",
-                "properties": {
-                    "access_token": {
-                        "type": "string"
-                    },
-                    "user_id": {
-                        "type": "string"
-                    }
-                }
-            },
-            "Album": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "description": "Identificador do albúm",
-                        "format": "int64",
-                        "example": 1
-                    },
-                    "titulo": {
-                        "type": "string",
-                        "description": "Nome dado ao albúm",
-                        "example": "Album casamento Carlos e Maria"
-                    },
-                    "tema": {
-                        "$ref": "#/components/schemas/Tema"
-                    },
-                    "descricao": {
-                        "type": "string",
-                        "description": "Descrição do albúm",
-                        "example": "Fotos de um casamento no estilo vintage realizado em 18/03/2022"
-                    },
-                    "fotografo": {
-                        "$ref": "#/components/schemas/Fotografo"
-                    },
-                    "imagems": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Imagem"
-                        }
-                    }
-                },
-                "description": "ID do albúm que a imagem pertence",
-                "example": 1
-            },
-            "Fotografo": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "nome": {
-                        "type": "string",
-                        "description": "Nome do usuário"
-                    },
-                    "email": {
-                        "type": "string",
-                        "description": "E-mail do usuário"
-                    },
-                    "senha": {
-                        "type": "string",
-                        "description": "Senha do usuário"
-                    },
-                    "cpf": {
-                        "type": "string",
-                        "description": "CPF do usuário"
-                    },
-                    "dataNasc": {
-                        "type": "string",
-                        "description": "Data de nascimento do usuário",
-                        "format": "date"
-                    },
-                    "dataCadastro": {
-                        "type": "string",
-                        "description": "Data de cadastro do usuário",
-                        "format": "date"
-                    },
-                    "numCelular": {
-                        "type": "string",
-                        "description": "Número de celular do usuário"
-                    },
-                    "autenticado": {
-                        "type": "boolean",
-                        "description": "Indica se o usuário está autenticado"
-                    },
-                    "tipoUsuario": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "tokenSolicitacao": {
-                        "type": "string",
-                        "description": "Token de solicitação do usuário"
-                    },
-                    "temas": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Tema"
-                        }
-                    },
-                    "albums": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Album"
-                        }
-                    },
-                    "enabled": {
-                        "type": "boolean"
-                    },
-                    "credentialsNonExpired": {
-                        "type": "boolean"
-                    },
-                    "accountNonExpired": {
-                        "type": "boolean"
-                    },
-                    "username": {
-                        "type": "string"
-                    },
-                    "authorities": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/GrantedAuthority"
-                        }
-                    },
-                    "accountNonLocked": {
-                        "type": "boolean"
-                    },
-                    "password": {
-                        "type": "string"
-                    }
-                },
-                "description": "Identificador do Fotógrafo",
-                "example": 1
-            },
-            "GrantedAuthority": {
-                "type": "object",
-                "properties": {
-                    "authority": {
-                        "type": "string"
-                    }
-                }
-            },
-            "Imagem": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "description": "Identificador da imagem",
-                        "format": "int64",
-                        "example": 1
-                    },
-                    "path": {
-                        "type": "string",
-                        "description": "Caminho para a imagem",
-                        "example": "https://scontent-iad3-2.cdninstagram.com/v/t51.29350-15/342519547_715840500544965_8565762847588876392_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=8ae9d6&_nc_ohc=89Vs1o0LN_sAX92eU9A&_nc_ht=scontent-iad3-2.cdninstagram.com&edm=ANQ71j8EAAAA&oh=00_AfCjl80cpqI5AxCFJgTGWsLoKOzwyBtmnomfpH3mrBBf5A&oe=6449E5FB"
-                    },
-                    "tipo": {
-                        "type": "string",
-                        "description": "Tipo de arquivo, teoricamente deve ser imagem",
-                        "example": "IMAGE"
-                    },
-                    "descricao": {
-                        "type": "string",
-                        "description": "Descrição retornada pela API do instagram, caso não tenha, será nula",
-                        "example": "Foto demo picme 01"
-                    },
-                    "idAlbum": {
-                        "$ref": "#/components/schemas/Album"
-                    }
-                }
-            },
-            "Tema": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "description": "Identificador do tema",
-                        "format": "int64",
-                        "example": 1
-                    },
-                    "nome": {
-                        "type": "string",
-                        "description": "Nome do tema",
-                        "example": "Casamento"
-                    },
-                    "usuarios": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Usuario"
-                        }
-                    }
-                },
-                "description": "Tema do albúm",
-                "example": "CASAMENTO"
-            },
-            "Usuario": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "nome": {
-                        "type": "string",
-                        "description": "Nome do usuário"
-                    },
-                    "email": {
-                        "type": "string",
-                        "description": "E-mail do usuário"
-                    },
-                    "senha": {
-                        "type": "string",
-                        "description": "Senha do usuário"
-                    },
-                    "cpf": {
-                        "type": "string",
-                        "description": "CPF do usuário"
-                    },
-                    "dataNasc": {
-                        "type": "string",
-                        "description": "Data de nascimento do usuário",
-                        "format": "date"
-                    },
-                    "dataCadastro": {
-                        "type": "string",
-                        "description": "Data de cadastro do usuário",
-                        "format": "date"
-                    },
-                    "numCelular": {
-                        "type": "string",
-                        "description": "Número de celular do usuário"
-                    },
-                    "autenticado": {
-                        "type": "boolean",
-                        "description": "Indica se o usuário está autenticado"
-                    },
-                    "tipoUsuario": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "tokenSolicitacao": {
-                        "type": "string",
-                        "description": "Token de solicitação do usuário"
-                    },
-                    "temas": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Tema"
-                        }
-                    },
-                    "enabled": {
-                        "type": "boolean"
-                    },
-                    "credentialsNonExpired": {
-                        "type": "boolean"
-                    },
-                    "accountNonExpired": {
-                        "type": "boolean"
-                    },
-                    "username": {
-                        "type": "string"
-                    },
-                    "authorities": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/GrantedAuthority"
-                        }
-                    },
-                    "accountNonLocked": {
-                        "type": "boolean"
-                    },
-                    "password": {
-                        "type": "string"
-                    }
-                },
-                "description": "Representa um usuário"
-            },
-            "PerfilAlbumDTO": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "titulo": {
-                        "type": "string"
-                    },
-                    "tema": {
-                        "$ref": "#/components/schemas/PerfilTemaDTO"
-                    }
-                }
-            },
-            "RetornoImagemDTO": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "path": {
-                        "type": "string"
-                    },
-                    "tipo": {
-                        "type": "string"
-                    },
-                    "descricao": {
-                        "type": "string"
-                    },
-                    "album": {
-                        "$ref": "#/components/schemas/PerfilAlbumDTO"
-                    }
-                }
-            },
-            "CadastroUsuarioDTO": {
-                "required": [
-                    "cpf",
-                    "email",
-                    "nome",
-                    "numCelular",
-                    "senha"
-                ],
-                "type": "object",
-                "properties": {
-                    "nome": {
-                        "maxLength": 32,
-                        "minLength": 1,
-                        "type": "string"
-                    },
-                    "cpf": {
-                        "type": "string"
-                    },
-                    "dataNasc": {
-                        "type": "string",
-                        "format": "date"
-                    },
-                    "email": {
-                        "type": "string"
-                    },
-                    "senha": {
-                        "maxLength": 32,
-                        "minLength": 8,
-                        "type": "string"
-                    },
-                    "numCelular": {
-                        "maxLength": 15,
-                        "minLength": 11,
-                        "type": "string"
-                    }
-                }
-            },
-            "CadastroEventoDTO": {
-                "type": "object",
-                "properties": {
-                    "dataRealizacao": {
-                        "type": "string",
-                        "format": "date"
-                    },
-                    "statusEvento": {
-                        "type": "string"
-                    },
-                    "valor": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "idFotografo": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "idTema": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "idCliente": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "idEndereco": {
-                        "type": "integer",
-                        "format": "int64"
-                    }
-                }
-            },
-            "PerfilEnderecoDTO": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "estado": {
-                        "type": "string"
-                    },
-                    "cidade": {
-                        "type": "string"
-                    },
-                    "cep": {
-                        "type": "string"
-                    },
-                    "bairro": {
-                        "type": "string"
-                    },
-                    "rua": {
-                        "type": "string"
-                    },
-                    "numero": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "complemento": {
-                        "type": "string"
-                    }
-                }
-            },
-            "RetornoEventoDTO": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "dataRealizacao": {
-                        "type": "string",
-                        "format": "date"
-                    },
-                    "statusEvento": {
-                        "type": "string"
-                    },
-                    "valor": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "fotografo": {
-                        "$ref": "#/components/schemas/PerfilFotografoDTO"
-                    },
-                    "tema": {
-                        "$ref": "#/components/schemas/PerfilTemaDTO"
-                    },
-                    "cliente": {
-                        "$ref": "#/components/schemas/PerfilClienteDTO"
-                    },
-                    "endereco": {
-                        "$ref": "#/components/schemas/PerfilEnderecoDTO"
-                    }
-                }
-            },
-            "CadastroTemaFotografoDTO": {
-                "type": "object",
-                "properties": {
-                    "temas": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Tema"
-                        }
-                    },
-                    "idFotografo": {
-                        "type": "integer",
-                        "format": "int64"
-                    }
-                }
-            },
-            "RetornoTemaFotografoDTO": {
-                "type": "object",
-                "properties": {
-                    "temas": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/PerfilTemaDTO"
-                        }
-                    },
-                    "fotografo": {
-                        "$ref": "#/components/schemas/PerfilFotografoDTO"
-                    }
-                }
-            },
-            "CadastroTemaClienteDTO": {
-                "type": "object",
-                "properties": {
-                    "temas": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Tema"
-                        }
-                    },
-                    "idCliente": {
-                        "type": "integer",
-                        "format": "int64"
-                    }
-                }
-            },
-            "RetornoTemaClienteDTO": {
-                "type": "object",
-                "properties": {
-                    "temas": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/PerfilTemaDTO"
-                        }
-                    },
-                    "cliente": {
-                        "$ref": "#/components/schemas/PerfilClienteDTO"
-                    }
-                }
-            },
-            "CadastroEnderecoDTO": {
-                "type": "object",
-                "properties": {
-                    "estado": {
-                        "type": "string"
-                    },
-                    "cidade": {
-                        "type": "string"
-                    },
-                    "cep": {
-                        "type": "string"
-                    },
-                    "bairro": {
-                        "type": "string"
-                    },
-                    "logradouro": {
-                        "type": "string"
-                    },
-                    "numero": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "complemento": {
-                        "type": "string"
-                    },
-                    "idEvento": {
-                        "type": "integer",
-                        "format": "int64"
-                    }
-                }
-            },
-            "RetornoEnderecoDTO": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "estado": {
-                        "type": "string"
-                    },
-                    "cidade": {
-                        "type": "string"
-                    },
-                    "cep": {
-                        "type": "string"
-                    },
-                    "bairro": {
-                        "type": "string"
-                    },
-                    "rua": {
-                        "type": "string"
-                    },
-                    "numero": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "complemento": {
-                        "type": "string"
-                    },
-                    "evento": {
-                        "$ref": "#/components/schemas/RetornoEventoDTO"
-                    }
-                }
-            },
-            "Avaliacao": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "descricao": {
-                        "type": "string",
-                        "description": "Descrição da avaliação, texto que o usuário insere",
-                        "example": "Gostei muito da sua fotografia! Parabéns!"
-                    },
-                    "valor": {
-                        "maximum": 5,
-                        "type": "number",
-                        "description": "Nota da avaliação, de 0 a 5",
-                        "format": "double",
-                        "example": 4.5
-                    },
-                    "fotografo": {
-                        "$ref": "#/components/schemas/Fotografo"
-                    }
-                }
-            },
-            "CadastroAlbumDTO": {
-                "type": "object",
-                "properties": {
-                    "titulo": {
-                        "type": "string"
-                    },
-                    "descricao": {
-                        "type": "string"
-                    },
-                    "idTema": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "idFotografo": {
-                        "type": "integer",
-                        "format": "int64"
-                    }
-                }
-            },
-            "RetornoFotografoDTO": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "nome": {
-                        "type": "string"
-                    },
-                    "autenticado": {
-                        "type": "boolean"
-                    },
-                    "tipoUsuario": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "albums": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/PerfilAlbumDTO"
-                        }
-                    },
-                    "temas": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/PerfilTemaDTO"
-                        }
-                    }
-                }
-            },
-            "LongAccessToken": {
-                "type": "object",
-                "properties": {
-                    "access_token": {
-                        "type": "string"
-                    },
-                    "token_type": {
-                        "type": "string"
-                    },
-                    "expires_in": {
-                        "type": "integer",
-                        "format": "int32"
-                    }
-                }
-            },
-            "Cursor": {
-                "type": "object",
-                "properties": {
-                    "before": {
-                        "type": "string"
-                    },
-                    "after": {
-                        "type": "string"
-                    }
-                }
-            },
-            "ItemData": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "caption": {
-                        "type": "string"
-                    }
-                }
-            },
-            "ListData": {
-                "type": "object",
-                "properties": {
-                    "data": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/ItemData"
-                        }
-                    },
-                    "paging": {
-                        "$ref": "#/components/schemas/Paging"
-                    }
-                }
-            },
-            "Paging": {
-                "type": "object",
-                "properties": {
-                    "cursors": {
-                        "$ref": "#/components/schemas/Cursor"
-                    }
-                }
-            },
-            "Media": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "media_type": {
-                        "type": "string"
-                    },
-                    "media_url": {
-                        "type": "string"
-                    },
-                    "username": {
-                        "type": "string"
-                    },
-                    "timestamp": {
-                        "type": "string"
-                    },
-                    "permalink": {
-                        "type": "string"
-                    }
-                }
-            },
-            "FilaObjAvaliacao": {
-                "type": "object",
-                "properties": {
-                    "empty": {
-                        "type": "boolean"
-                    },
-                    "full": {
-                        "type": "boolean"
-                    }
-                }
-            },
-            "FaixaEtariaCliente": {
-                "type": "object",
-                "properties": {
-                    "faixa": {
-                        "type": "string"
-                    },
-                    "quantidade": {
-                        "type": "integer",
-                        "format": "int64"
-                    }
-                }
-            },
-            "ContagemClientesAcordoUmaSemana": {
-                "type": "object",
-                "properties": {
-                    "label": {
-                        "type": "string"
-                    },
-                    "quantidade": {
-                        "type": "integer",
-                        "format": "int64"
-                    }
-                }
-            },
-            "TemaContatosCliente": {
-                "type": "object",
-                "properties": {
-                    "tema": {
-                        "type": "string"
-                    },
-                    "contatos": {
-                        "type": "integer",
-                        "format": "int64"
-                    }
-                }
-            }
-        },
-        "securitySchemes": {
-            "Bearer": {
-                "type": "http",
-                "scheme": "bearer",
-                "bearerFormat": "JWT"
-            }
-        }
+    {
+      "name": "Endereço Controller",
+      "description": "Controller responsável pela entidade Endereço"
+    },
+    {
+      "name": "Sessao Controller",
+      "description": "Controller responsável pela entidade Sessao"
+    },
+    {
+      "name": "Album Controller",
+      "description": "Controller responsável pela entidade Album"
+    },
+    { "name": "Autenticação", "description": "Endpoints para autenticação" },
+    {
+      "name": "Avaliação Controller",
+      "description": "Controller responsável pela entidade Avaliação"
+    },
+    {
+      "name": "Dashboard Admin Controller",
+      "description": "Controller responsável pelas consultas do painel administrativo"
+    },
+    {
+      "name": "Tema do Usuário Controller",
+      "description": "Controller responsável pela escolha de temas do usuário"
+    },
+    {
+      "name": "Instagram controller",
+      "description": "Controller responsável por conectar a API REST do Instagram com a API do projeto picme"
+    },
+    {
+      "name": "Cliente Controller",
+      "description": "Controller responsável pela entidade Cliente"
+    },
+    {
+      "name": "Dashboard Fotografo Controller",
+      "description": "Controller responsável pelas consultas do painel fotografo"
+    },
+    {
+      "name": "Imagem controller",
+      "description": "Controller responsável pela entidade imagem"
     }
+  ],
+  "paths": {
+    "/fotografos/atualizar/{idFotografo}": {
+      "put": {
+        "tags": ["Fotografo Controller"],
+        "summary": "Atualizar dados fotógrafo",
+        "description": "Passando o ID do fotógrafo e seus novos dados, podemos atualizar suas informações",
+        "operationId": "atualizar",
+        "parameters": [
+          {
+            "name": "idFotografo",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/AtualizarUsuarioDTO" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/PerfilFotografoDTO" }
+              }
+            }
+          }
+        },
+        "security": [{ "Bearer": [] }]
+      }
+    },
+    "/clientes/atualizar/{idCliente}": {
+      "put": {
+        "tags": ["Cliente Controller"],
+        "summary": "Atualizar dados cliente",
+        "description": "Passando o ID do cliente e seus novos dados, podemos atualizar suas informações",
+        "operationId": "atualizar_1",
+        "parameters": [
+          {
+            "name": "idCliente",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/AtualizarUsuarioDTO" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/PerfilClienteDTO" }
+              }
+            }
+          }
+        },
+        "security": [{ "Bearer": [] }]
+      }
+    },
+    "/albums/{id}": {
+      "put": {
+        "tags": ["Album Controller"],
+        "summary": "Atualizar um album",
+        "description": "Passando o ID do album e o seus novos valores, podemos atualizá-lo",
+        "operationId": "atualizar_2",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/AtualizarAlbumDTO" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/RetornoAlbumDTO" }
+              }
+            }
+          }
+        },
+        "security": [{ "Bearer": [] }]
+      },
+      "delete": {
+        "tags": ["Album Controller"],
+        "summary": "Deletar um album",
+        "description": "Passando um ID de um album cadastrado, podemos deletá-lo",
+        "operationId": "deletar_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Album" } }
+            }
+          }
+        },
+        "security": [{ "Bearer": [] }]
+      }
+    },
+    "/temas": {
+      "get": {
+        "tags": ["Tema controller"],
+        "summary": "Listar temas",
+        "description": "Lista todos os temas cadastrados",
+        "operationId": "listar",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/PerfilTemaDTO" }
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "Bearer": [] }]
+      },
+      "post": {
+        "tags": ["Tema controller"],
+        "summary": "Cadastrar um novo tema",
+        "description": "Passando os dados necessários, podemos cadastrar um novo tema",
+        "operationId": "cadastrar",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CadastroTemaDto" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/PerfilTemaDTO" }
+              }
+            }
+          }
+        },
+        "security": [{ "Bearer": [] }]
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": ["Autenticação"],
+        "summary": "Efetuar login",
+        "description": "Realiza o processo de autenticação do usuário e retorna o token de acesso.",
+        "operationId": "efetuarLogin",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/LoginUsuarioDTO" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "type": "string" } } }
+          }
+        }
+      }
+    },
+    "/instagram": {
+      "post": {
+        "tags": ["Instagram controller"],
+        "summary": "Obter access token do usuário",
+        "description": "Endpoint para acessar o token de usuário do Instagram",
+        "operationId": "acessTokenUsuario",
+        "parameters": [
+          {
+            "name": "codigo",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/AccessToken" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/imagens/{idAlbum}": {
+      "post": {
+        "tags": ["Imagem controller"],
+        "summary": "Cadastrar uma nova imagem",
+        "description": "Passando os dados necessário, podemos cadastrar uma nova imagem",
+        "operationId": "cadastrar_1",
+        "parameters": [
+          {
+            "name": "idAlbum",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Imagem" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/RetornoImagemDTO" }
+              }
+            }
+          }
+        },
+        "security": [{ "Bearer": [] }]
+      }
+    },
+    "/fotografos/cadastrar": {
+      "post": {
+        "tags": ["Fotografo Controller"],
+        "summary": "Cadastrar um novo fotógrafo",
+        "description": "Passando os dados necessários, podemos cadastrar um novo fotógrafo",
+        "operationId": "cadastrar_2",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CadastroUsuarioDTO" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/PerfilFotografoDTO" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/eventos": {
+      "get": {
+        "tags": ["Sessao Controller"],
+        "summary": "Listar eventos",
+        "description": "Obter a lista de todos os eventos",
+        "operationId": "listar_3",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/RetornoEventoDTO" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Sessao Controller"],
+        "summary": "Cadastrar um novo evento",
+        "description": "Passando o JSON do evento, podemos cadastrar um novo evento",
+        "operationId": "cadastrar_3",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CadastroSessaoDTO" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/RetornoEventoDTO" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/escolha-tema/fotografo": {
+      "post": {
+        "tags": ["Tema do Usuário Controller"],
+        "summary": "Cadastrar tema de fotógrafo",
+        "description": "Cadastra um novo tema para fotógrafo",
+        "operationId": "cadastrar_4",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CadastroTemaFotografoDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RetornoTemaFotografoDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/escolha-tema/cliente": {
+      "post": {
+        "tags": ["Tema do Usuário Controller"],
+        "summary": "Cadastrar tema de cliente",
+        "description": "Cadastra um novo tema para cliente",
+        "operationId": "cadastrar_5",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CadastroTemaClienteDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RetornoTemaClienteDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/enderecos": {
+      "get": {
+        "tags": ["Endereço Controller"],
+        "summary": "Listar endereços",
+        "description": "Obtém a lista de todos os endereços",
+        "operationId": "listar_4",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/RetornoEnderecoDTO" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Endereço Controller"],
+        "summary": "Cadastrar um novo endereço",
+        "description": "Cadastra um novo endereço",
+        "operationId": "cadastrar_6",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CadastroEnderecoDTO" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/RetornoEnderecoDTO" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/clientes/cadastrar": {
+      "post": {
+        "tags": ["Cliente Controller"],
+        "summary": "Cadastrar um novo cliente",
+        "description": "Passando os dados necessários, podemos cadastrar um novo cliente",
+        "operationId": "cadastrar_7",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CadastroUsuarioDTO" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/PerfilClienteDTO" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/avaliacoes": {
+      "get": {
+        "tags": ["Avaliação Controller"],
+        "summary": "Exibir avaliações",
+        "description": "Obtém a lista de todas as avaliações",
+        "operationId": "exibir",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Avaliacao" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Avaliação Controller"],
+        "summary": "Avaliar",
+        "description": "Realiza uma avaliação",
+        "operationId": "avaliar",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Avaliacao" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Avaliacao" } }
+            }
+          }
+        }
+      }
+    },
+    "/albums": {
+      "get": {
+        "tags": ["Album Controller"],
+        "summary": "Listar albuns fotógrafo",
+        "description": "Passando o ID do fotógrafo podemos obter a lista de todos os seus albuns",
+        "operationId": "listar_6",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/RetornoAlbumDTO" }
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "Bearer": [] }]
+      },
+      "post": {
+        "tags": ["Album Controller"],
+        "summary": "Cadastrar um novo album",
+        "description": "Passando o ID do fotógrafo e o JSON do album, podemos cadastrar um novo album",
+        "operationId": "cadastrar_8",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CadastroAlbumDTO" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/RetornoAlbumDTO" }
+              }
+            }
+          }
+        },
+        "security": [{ "Bearer": [] }]
+      }
+    },
+    "/fotografos/sair": {
+      "patch": {
+        "tags": ["Fotografo Controller"],
+        "summary": "Logoff fotógrafo",
+        "description": "EndPoint para logoff do fotógrafo, é necessário passar as suas credenciais novamente",
+        "operationId": "logoff",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/LoginUsuarioDTO" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/PerfilFotografoDTO" }
+              }
+            }
+          }
+        },
+        "security": [{ "Bearer": [] }]
+      }
+    },
+    "/fotografos/entrar": {
+      "patch": {
+        "tags": ["Fotografo Controller"],
+        "summary": "Login fotógrafo",
+        "description": "Passando as credenciais válidas de um fotógrafo, é realizado o login na API",
+        "operationId": "login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/LoginUsuarioDTO" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/RetornoFotografoDTO" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fotografos/atualizarToken/{idFotografo}": {
+      "patch": {
+        "tags": ["Fotografo Controller"],
+        "summary": "Atualizar token solicitacao usuário",
+        "description": "Endpoint utilizado para atualizar o token de soliticação do usuário no banco de dados",
+        "operationId": "atualizarTokenSolicitacao",
+        "parameters": [
+          {
+            "name": "idFotografo",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "codigo",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Fotografo" } }
+            }
+          }
+        }
+      }
+    },
+    "/clientes/autenticar": {
+      "patch": {
+        "tags": ["Cliente Controller"],
+        "summary": "Login/Logoff cliente",
+        "description": "Passando as credenciais válidas de um cliente, é realizado o login na API. Passando as mesmas credenciais novamente, é feito o logoff.",
+        "operationId": "autenticar",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/LoginUsuarioDTO" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/PerfilClienteDTO" }
+              }
+            }
+          }
+        },
+        "security": [{ "Bearer": [] }]
+      }
+    },
+    "/instagram/refreshLongAccessToken": {
+      "get": {
+        "tags": ["Instagram controller"],
+        "summary": "Renovar access token de longa duração",
+        "description": "Endpoint para renovar o access token de longa duração por mais 60 dias",
+        "operationId": "refreshLongAccessToken",
+        "parameters": [
+          {
+            "name": "accessToken",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/LongAccessToken" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/instagram/longAccessToken": {
+      "get": {
+        "tags": ["Instagram controller"],
+        "summary": "Obter access token de longa duração",
+        "description": "Endpoint para obter o access token de longa duração (60 Dias) do Usuário do Instagram",
+        "operationId": "getLongAccessToken",
+        "parameters": [
+          {
+            "name": "accessToken",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/LongAccessToken" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/instagram/listaMedia": {
+      "get": {
+        "tags": ["Instagram controller"],
+        "summary": "Obter lista de imagens do usuário",
+        "description": "Endpoint para obter a lista de imagens do usuário no Instagram",
+        "operationId": "getImagensUsuario",
+        "parameters": [
+          {
+            "name": "accessToken",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/ListData" } }
+            }
+          }
+        }
+      }
+    },
+    "/instagram/listImagem": {
+      "get": {
+        "tags": ["Instagram controller"],
+        "summary": "Obter lista de imagens",
+        "description": "Endpoint para obter a lista de imagens e seus detalhes do Instagram",
+        "operationId": "getListImagem",
+        "parameters": [
+          {
+            "name": "accessToken",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Media" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/instagram/imagem": {
+      "get": {
+        "tags": ["Instagram controller"],
+        "summary": "Obter imagem",
+        "description": "Endpoint para obter uma imagem específica do Instagram",
+        "operationId": "getImagem",
+        "parameters": [
+          {
+            "name": "idImagem",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "accessToken",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Media" } }
+            }
+          }
+        }
+      }
+    },
+    "/imagens": {
+      "get": {
+        "tags": ["Imagem controller"],
+        "summary": "Listar imagens",
+        "description": "Passando o ID do album, podemos listar todas as imagens de determinado album",
+        "operationId": "listar_1",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/RetornoImagemDTO" }
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "Bearer": [] }]
+      }
+    },
+    "/fotografos": {
+      "get": {
+        "tags": ["Fotografo Controller"],
+        "summary": "Listar fotógrafos",
+        "description": "Lista todos os fotógrafos cadastrados",
+        "operationId": "listar_2",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RetornoFotografoDTO"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "Bearer": [] }]
+      }
+    },
+    "/fotografos/buscar/{nomeFotografo}": {
+      "get": {
+        "tags": ["Fotografo Controller"],
+        "summary": "Buscar cliente",
+        "description": "Busca um cliente pelo seu nome",
+        "operationId": "buscarFotografo",
+        "parameters": [
+          {
+            "name": "nomeFotografo",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/PerfilFotografoDTO" }
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "Bearer": [] }]
+      }
+    },
+    "/dashboard/fotografo/variacao-lucro-ultimos-meses": {
+      "get": {
+        "tags": ["Dashboard Fotografo Controller"],
+        "summary": "Obter variação lucro últimos meses",
+        "description": "Retorna a variação do lucro nos últimos meses.",
+        "operationId": "trazerVariacaoLucroUltimosMeses",
+        "parameters": [
+          {
+            "name": "idFotografo",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/vwVariacaoLucroUltimosMeses"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dashboard/fotografo/variacao-lucro-mensal": {
+      "get": {
+        "tags": ["Dashboard Fotografo Controller"],
+        "summary": "Obter variação do lucro mensal",
+        "description": "Retorna a variação do lucro mensal.",
+        "operationId": "trazerKpiVariacaoLucroMensal",
+        "parameters": [
+          {
+            "name": "idFotografo",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/vwKpiVariacaoLucroMensal"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dashboard/fotografo/valor-medio-cobrado": {
+      "get": {
+        "tags": ["Dashboard Fotografo Controller"],
+        "summary": "Obter valor médio cobrado por sessão",
+        "description": "Retorna o valor médio cobrado por sessão.",
+        "operationId": "trazerKpiValorMedioCobrado",
+        "parameters": [
+          {
+            "name": "idFotografo",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/vwKpiValorMedioCobrado"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dashboard/fotografo/sessoes-agendadas-mes": {
+      "get": {
+        "tags": ["Dashboard Fotografo Controller"],
+        "summary": "Contar sessões no mês",
+        "description": "Retorna a contagem de sessões no mês.",
+        "operationId": "trazerKpiSessoesAgendadasMes",
+        "parameters": [
+          {
+            "name": "idFotografo",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/vwKpiSessoesAgendadasMes"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dashboard/fotografo/propostas-recebidas-mes": {
+      "get": {
+        "tags": ["Dashboard Fotografo Controller"],
+        "summary": "Contar propostas de trabalho recebidas no mês atual e anterior",
+        "description": "Retorna a contagem de propostas de trabalho recebidas no mês atual e anterior.",
+        "operationId": "trazerKpiPropostasRecebidasMes",
+        "parameters": [
+          {
+            "name": "idFotografo",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/vwKpiPropostasRecebidasMesAtual"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dashboard/fotografo/contatos-convertidos-sessoes": {
+      "get": {
+        "tags": ["Dashboard Fotografo Controller"],
+        "summary": "Obter quantidade de contatos convertidos em sessões",
+        "description": "Retorna a quantidade de contatos convertidos em sessões.",
+        "operationId": "trazerContatosConvertidosSessoes",
+        "parameters": [
+          {
+            "name": "idFotografo",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/vwContatosConvertidosSessoes"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dashboard/fotografo/avaliacao-media-tema": {
+      "get": {
+        "tags": ["Dashboard Fotografo Controller"],
+        "summary": "Obter avaliação média por tema",
+        "description": "Retorna a avaliação média por tema.",
+        "operationId": "trazerAvaliacaoMediaTema",
+        "parameters": [
+          {
+            "name": "idFotografo",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/vwMediaAvaliacaoPorTema"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dashboard/admin/total-clientes-fotografos": {
+      "get": {
+        "tags": ["Dashboard Admin Controller"],
+        "summary": "Obter total de clientes e fotógrafos",
+        "description": "Retorna a contagem total de clientes e de fotógrafos nos últimos 4 meses.",
+        "operationId": "totalClientesFotografos",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/vwClientesFotografos"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dashboard/admin/sessoes-finalizadas-canceladas": {
+      "get": {
+        "tags": ["Dashboard Admin Controller"],
+        "summary": "Obter contagem de sessões que foram finalizadas ou canceladas",
+        "description": "Retorna a contagem de sessões que foram finalizadas ou canceladas.",
+        "operationId": "trazerContagemSessoesFinalizadasCanceladas",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/vwSessoesFinalizadasCanceladas"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dashboard/admin/progressao-usuarios-mes": {
+      "get": {
+        "tags": ["Dashboard Admin Controller"],
+        "summary": "Progressão de usuários por mês",
+        "description": "Retorna a progressão da quantidade de novos usuários cadastrados nos últimos 6 meses",
+        "operationId": "progressaoUsuariosMes",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/vwProgressaoCadastroUsuarios"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dashboard/admin/progressao-sessoes-mes": {
+      "get": {
+        "tags": ["Dashboard Admin Controller"],
+        "summary": "Progressão de sessões por mês",
+        "description": "Retorna a progressão da quantidade de novas sessões realizadas nos últimos 6 meses",
+        "operationId": "progressaoRealizacaoSessoes",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/vwProgressaoSessoesRealizadas"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dashboard/admin/kpi-total-usuarios": {
+      "get": {
+        "tags": ["Dashboard Admin Controller"],
+        "summary": "KPI Total usuários",
+        "description": "Retorna o total de usuários cadastrados e a diferença do último mês para o atual",
+        "operationId": "trazerKpiTotalUsuarios",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/vwFaixaEtariaCliente"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dashboard/admin/kpi-total-acessos": {
+      "get": {
+        "tags": ["Dashboard Admin Controller"],
+        "summary": "KPI Total acessos",
+        "description": "Retorna o total de acessos e a diferença do último mês para o atual",
+        "operationId": "trazerKpiTotalAcessos",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/vwFaixaEtariaCliente"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dashboard/admin/kpi-sessoes-realizadas": {
+      "get": {
+        "tags": ["Dashboard Admin Controller"],
+        "summary": "KPI Total sessões realizadas",
+        "description": "Retorna o total de sessões realizadas e a diferença do último mês para o atual",
+        "operationId": "trazerKpiSessoesRealizadas",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/vwFaixaEtariaCliente"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dashboard/admin/faixa-etaria-clientes": {
+      "get": {
+        "tags": ["Dashboard Admin Controller"],
+        "summary": "Obter faixa etária dos clientes",
+        "description": "Obtém a faixa etária dos clientes registrados",
+        "operationId": "trazerFaixaEtariaCliente",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/vwFaixaEtariaCliente"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dashboard/admin/contagem-tema-contato": {
+      "get": {
+        "tags": ["Dashboard Admin Controller"],
+        "summary": "Obter contagem de contatos por tema",
+        "description": "Obtém a contagem de contatos por tema",
+        "operationId": "trazerContagemTemaContato",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/vwTemaCountSessoes" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dashboard/admin/contagem-clientes-semana": {
+      "get": {
+        "tags": ["Dashboard Admin Controller"],
+        "summary": "Obter contagem de clientes que fecharam acordo em acordo em uma semana",
+        "description": "Retorna a contagem de clientes em acordo em uma semana.",
+        "operationId": "trazerContagemClientesAcordoUmaSemana",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/vwClientesImediatosMes"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/clientes": {
+      "get": {
+        "tags": ["Cliente Controller"],
+        "summary": "Listar clientes",
+        "description": "Lista todos os clientes cadastrados",
+        "operationId": "listar_5",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/PerfilClienteDTO" }
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "Bearer": [] }]
+      }
+    },
+    "/avaliacoes/enfileira": {
+      "get": {
+        "tags": ["Avaliação Controller"],
+        "summary": "Exibir avaliações enfileiradas",
+        "description": "Obtém a lista de todas as avaliações de forma enfileirada",
+        "operationId": "verEmFila",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/FilaObjAvaliacao" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/imagens/{id}": {
+      "delete": {
+        "tags": ["Imagem controller"],
+        "summary": "Remover uma imagem",
+        "description": "Passando o ID da imagem, podemos excluir determinada imagem",
+        "operationId": "deletar",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": { "200": { "description": "OK" } },
+        "security": [{ "Bearer": [] }]
+      }
+    },
+    "/avaliacoes/desfaz": {
+      "delete": {
+        "tags": ["Avaliação Controller"],
+        "summary": "Desfazer avaliação",
+        "description": "Desfaz a última avaliação realizada",
+        "operationId": "desfazer",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Avaliacao" } }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AtualizarUsuarioDTO": {
+        "type": "object",
+        "properties": {
+          "nome": { "maxLength": 32, "minLength": 1, "type": "string" },
+          "senha": { "maxLength": 32, "minLength": 8, "type": "string" },
+          "numCelular": { "maxLength": 15, "minLength": 11, "type": "string" },
+          "dataNasc": { "type": "string", "format": "date" },
+          "tokenSolicitacao": { "type": "string" }
+        }
+      },
+      "PerfilFotografoDTO": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "nome": { "type": "string" },
+          "autenticado": { "type": "boolean" },
+          "tipoUsuario": { "type": "integer", "format": "int32" },
+          "temas": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/PerfilTemaDTO" }
+          }
+        }
+      },
+      "PerfilTemaDTO": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "nome": { "type": "string" }
+        }
+      },
+      "PerfilClienteDTO": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "nome": { "type": "string" },
+          "autenticado": { "type": "boolean" },
+          "tipoUsuario": { "type": "integer", "format": "int32" },
+          "temas": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/PerfilTemaDTO" }
+          }
+        }
+      },
+      "AtualizarAlbumDTO": {
+        "type": "object",
+        "properties": {
+          "titulo": { "type": "string" },
+          "idTema": { "type": "integer", "format": "int64" }
+        }
+      },
+      "PerfilImagemDTO": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "path": { "type": "string" },
+          "tipo": { "type": "string" },
+          "descricao": { "type": "string" }
+        }
+      },
+      "RetornoAlbumDTO": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "titulo": { "type": "string" },
+          "tema": { "$ref": "#/components/schemas/PerfilTemaDTO" },
+          "fotografo": { "$ref": "#/components/schemas/PerfilFotografoDTO" },
+          "imagems": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/PerfilImagemDTO" }
+          }
+        }
+      },
+      "CadastroTemaDto": {
+        "type": "object",
+        "properties": { "nome": { "type": "string" } }
+      },
+      "LoginUsuarioDTO": {
+        "required": ["email", "senha"],
+        "type": "object",
+        "properties": {
+          "email": { "type": "string" },
+          "senha": { "type": "string" }
+        }
+      },
+      "AccessToken": {
+        "type": "object",
+        "properties": {
+          "access_token": { "type": "string" },
+          "user_id": { "type": "string" }
+        }
+      },
+      "Album": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Identificador do albúm",
+            "format": "int64",
+            "example": 1
+          },
+          "titulo": {
+            "type": "string",
+            "description": "Nome dado ao albúm",
+            "example": "Album casamento Carlos e Maria"
+          },
+          "tema": { "$ref": "#/components/schemas/Tema" },
+          "descricao": {
+            "type": "string",
+            "description": "Descrição do albúm",
+            "example": "Fotos de um casamento no estilo vintage realizado em 18/03/2022"
+          },
+          "fotografo": { "$ref": "#/components/schemas/Fotografo" },
+          "imagems": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Imagem" }
+          }
+        },
+        "description": "ID do albúm que a imagem pertence",
+        "example": 1
+      },
+      "Fotografo": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "nome": { "type": "string", "description": "Nome do usuário" },
+          "email": { "type": "string", "description": "E-mail do usuário" },
+          "senha": { "type": "string", "description": "Senha do usuário" },
+          "cpf": { "type": "string", "description": "CPF do usuário" },
+          "dataNasc": {
+            "type": "string",
+            "description": "Data de nascimento do usuário",
+            "format": "date"
+          },
+          "dataCadastro": {
+            "type": "string",
+            "description": "Data de cadastro do usuário",
+            "format": "date-time"
+          },
+          "numCelular": {
+            "type": "string",
+            "description": "Número de celular do usuário"
+          },
+          "autenticado": {
+            "type": "boolean",
+            "description": "Indica se o usuário está autenticado"
+          },
+          "tipoUsuario": { "type": "integer", "format": "int32" },
+          "tokenSolicitacao": {
+            "type": "string",
+            "description": "Token de solicitação do usuário"
+          },
+          "cidadePreferencia": {
+            "type": "string",
+            "description": "Cidade de escolha do fotógrafo para receber propostas"
+          },
+          "estadoPreferencia": {
+            "type": "string",
+            "description": "Estado de escolha do fotógrafo para receber propostas"
+          },
+          "temas": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Tema" }
+          },
+          "tags": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Tag" }
+          },
+          "logAcessos": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/LogAcessos" }
+          },
+          "albums": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Album" }
+          },
+          "enabled": { "type": "boolean" },
+          "password": { "type": "string" },
+          "authorities": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/GrantedAuthority" }
+          },
+          "username": { "type": "string" },
+          "credentialsNonExpired": { "type": "boolean" },
+          "accountNonExpired": { "type": "boolean" },
+          "accountNonLocked": { "type": "boolean" }
+        },
+        "description": "Identificador do Fotógrafo",
+        "example": 1
+      },
+      "GrantedAuthority": {
+        "type": "object",
+        "properties": { "authority": { "type": "string" } }
+      },
+      "Imagem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Identificador da imagem",
+            "format": "int64",
+            "example": 1
+          },
+          "mediaUrl": {
+            "type": "string",
+            "description": "Caminho para a imagem",
+            "example": "https://scontent-iad3-2.cdninstagram.com/v/t51.29350-15/342519547_715840500544965_8565762847588876392_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=8ae9d6&_nc_ohc=89Vs1o0LN_sAX92eU9A&_nc_ht=scontent-iad3-2.cdninstagram.com&edm=ANQ71j8EAAAA&oh=00_AfCjl80cpqI5AxCFJgTGWsLoKOzwyBtmnomfpH3mrBBf5A&oe=6449E5FB"
+          },
+          "permalink": {
+            "type": "string",
+            "description": "Link para a publicação no instagram",
+            "example": "https://www.instagram.com/p/CrZRF7zrkuK/"
+          },
+          "caption": {
+            "type": "string",
+            "description": "Legenda da publicação no instagram",
+            "example": "Foto demo picme 01"
+          },
+          "mediaType": {
+            "type": "string",
+            "description": "Tipo de arquivo retornado pelo Instagram, devemos guardar apenas IMAGE",
+            "example": "IMAGE"
+          },
+          "origemImagem": {
+            "type": "string",
+            "description": "Identifica se a imagem veio do instagram ou do S3",
+            "example": "Insta"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Data da última atualização da imagem",
+            "format": "date"
+          },
+          "idAlbum": { "$ref": "#/components/schemas/Album" },
+          "tags": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Tag" }
+          }
+        }
+      },
+      "LogAcessos": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Identificador do log",
+            "format": "int64",
+            "example": 1
+          },
+          "dataLogin": {
+            "type": "string",
+            "description": "Data de Login do usuário",
+            "format": "date"
+          },
+          "usuario": { "$ref": "#/components/schemas/Usuario" }
+        }
+      },
+      "Tag": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Identificador da tag",
+            "format": "int64",
+            "example": 1
+          },
+          "nome": {
+            "type": "string",
+            "description": "Nome da tag",
+            "example": "Noite"
+          },
+          "usuarios": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Usuario" }
+          },
+          "imagens": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Imagem" }
+          }
+        }
+      },
+      "Tema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Identificador do tema",
+            "format": "int64",
+            "example": 1
+          },
+          "nome": {
+            "type": "string",
+            "description": "Nome do tema",
+            "example": "Casamento"
+          },
+          "usuarios": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Usuario" }
+          }
+        },
+        "description": "Tema do albúm",
+        "example": "CASAMENTO"
+      },
+      "Usuario": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "nome": { "type": "string", "description": "Nome do usuário" },
+          "email": { "type": "string", "description": "E-mail do usuário" },
+          "senha": { "type": "string", "description": "Senha do usuário" },
+          "cpf": { "type": "string", "description": "CPF do usuário" },
+          "dataNasc": {
+            "type": "string",
+            "description": "Data de nascimento do usuário",
+            "format": "date"
+          },
+          "dataCadastro": {
+            "type": "string",
+            "description": "Data de cadastro do usuário",
+            "format": "date-time"
+          },
+          "numCelular": {
+            "type": "string",
+            "description": "Número de celular do usuário"
+          },
+          "autenticado": {
+            "type": "boolean",
+            "description": "Indica se o usuário está autenticado"
+          },
+          "tipoUsuario": { "type": "integer", "format": "int32" },
+          "tokenSolicitacao": {
+            "type": "string",
+            "description": "Token de solicitação do usuário"
+          },
+          "cidadePreferencia": {
+            "type": "string",
+            "description": "Cidade de escolha do fotógrafo para receber propostas"
+          },
+          "estadoPreferencia": {
+            "type": "string",
+            "description": "Estado de escolha do fotógrafo para receber propostas"
+          },
+          "temas": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Tema" }
+          },
+          "tags": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Tag" }
+          },
+          "logAcessos": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/LogAcessos" }
+          },
+          "enabled": { "type": "boolean" },
+          "password": { "type": "string" },
+          "authorities": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/GrantedAuthority" }
+          },
+          "username": { "type": "string" },
+          "credentialsNonExpired": { "type": "boolean" },
+          "accountNonExpired": { "type": "boolean" },
+          "accountNonLocked": { "type": "boolean" }
+        },
+        "description": "Representa um usuário"
+      },
+      "PerfilAlbumDTO": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "titulo": { "type": "string" },
+          "tema": { "$ref": "#/components/schemas/PerfilTemaDTO" }
+        }
+      },
+      "RetornoImagemDTO": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "path": { "type": "string" },
+          "tipo": { "type": "string" },
+          "descricao": { "type": "string" },
+          "album": { "$ref": "#/components/schemas/PerfilAlbumDTO" }
+        }
+      },
+      "CadastroUsuarioDTO": {
+        "required": ["cpf", "email", "nome", "numCelular", "senha"],
+        "type": "object",
+        "properties": {
+          "nome": { "maxLength": 32, "minLength": 1, "type": "string" },
+          "cpf": { "type": "string" },
+          "dataNasc": { "type": "string", "format": "date" },
+          "email": { "type": "string" },
+          "senha": { "maxLength": 32, "minLength": 8, "type": "string" },
+          "numCelular": { "maxLength": 15, "minLength": 11, "type": "string" }
+        }
+      },
+      "CadastroSessaoDTO": {
+        "type": "object",
+        "properties": {
+          "dataRealizacao": { "type": "string", "format": "date-time" },
+          "statusSessao": { "type": "string" },
+          "idFotografo": { "type": "integer", "format": "int64" },
+          "idCliente": { "type": "integer", "format": "int64" },
+          "idEndereco": { "type": "integer", "format": "int64" },
+          "idTema": { "type": "integer", "format": "int64" }
+        }
+      },
+      "PerfilEnderecoDTO": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "estado": { "type": "string" },
+          "cidade": { "type": "string" },
+          "cep": { "type": "string" },
+          "bairro": { "type": "string" },
+          "rua": { "type": "string" },
+          "numero": { "type": "string" },
+          "complemento": { "type": "string" }
+        }
+      },
+      "RetornoEventoDTO": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "dataRealizacao": { "type": "string", "format": "date-time" },
+          "statusSessao": { "type": "string" },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "fotografo": { "$ref": "#/components/schemas/PerfilFotografoDTO" },
+          "cliente": { "$ref": "#/components/schemas/PerfilClienteDTO" },
+          "endereco": { "$ref": "#/components/schemas/PerfilEnderecoDTO" },
+          "tema": { "$ref": "#/components/schemas/PerfilTemaDTO" }
+        }
+      },
+      "CadastroTemaFotografoDTO": {
+        "type": "object",
+        "properties": {
+          "temas": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Tema" }
+          },
+          "idFotografo": { "type": "integer", "format": "int64" }
+        }
+      },
+      "RetornoTemaFotografoDTO": {
+        "type": "object",
+        "properties": {
+          "temas": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/PerfilTemaDTO" }
+          },
+          "fotografo": { "$ref": "#/components/schemas/PerfilFotografoDTO" }
+        }
+      },
+      "CadastroTemaClienteDTO": {
+        "type": "object",
+        "properties": {
+          "temas": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Tema" }
+          },
+          "idCliente": { "type": "integer", "format": "int64" }
+        }
+      },
+      "RetornoTemaClienteDTO": {
+        "type": "object",
+        "properties": {
+          "temas": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/PerfilTemaDTO" }
+          },
+          "cliente": { "$ref": "#/components/schemas/PerfilClienteDTO" }
+        }
+      },
+      "CadastroEnderecoDTO": {
+        "type": "object",
+        "properties": {
+          "estado": { "type": "string" },
+          "cidade": { "type": "string" },
+          "cep": { "type": "string" },
+          "bairro": { "type": "string" },
+          "logradouro": { "type": "string" },
+          "numero": { "type": "string" },
+          "complemento": { "type": "string" },
+          "idEvento": { "type": "integer", "format": "int64" }
+        }
+      },
+      "RetornoEnderecoDTO": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "estado": { "type": "string" },
+          "cidade": { "type": "string" },
+          "cep": { "type": "string" },
+          "bairro": { "type": "string" },
+          "rua": { "type": "string" },
+          "numero": { "type": "string" },
+          "complemento": { "type": "string" },
+          "evento": { "$ref": "#/components/schemas/RetornoEventoDTO" }
+        }
+      },
+      "Avaliacao": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "descricao": {
+            "type": "string",
+            "description": "Descrição da avaliação, texto que o usuário insere",
+            "example": "Gostei muito da sua fotografia! Parabéns!"
+          },
+          "nota": {
+            "maximum": 5,
+            "type": "number",
+            "description": "Nota da avaliação, de 0 a 5",
+            "format": "double",
+            "example": 4.5
+          },
+          "sessao": { "$ref": "#/components/schemas/Sessao" }
+        }
+      },
+      "Cliente": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "nome": { "type": "string", "description": "Nome do usuário" },
+          "email": { "type": "string", "description": "E-mail do usuário" },
+          "senha": { "type": "string", "description": "Senha do usuário" },
+          "cpf": { "type": "string", "description": "CPF do usuário" },
+          "dataNasc": {
+            "type": "string",
+            "description": "Data de nascimento do usuário",
+            "format": "date"
+          },
+          "dataCadastro": {
+            "type": "string",
+            "description": "Data de cadastro do usuário",
+            "format": "date-time"
+          },
+          "numCelular": {
+            "type": "string",
+            "description": "Número de celular do usuário"
+          },
+          "autenticado": { "type": "boolean" },
+          "tipoUsuario": { "type": "integer", "format": "int32" },
+          "tokenSolicitacao": {
+            "type": "string",
+            "description": "Token de solicitação do usuário"
+          },
+          "cidadePreferencia": {
+            "type": "string",
+            "description": "Cidade de escolha do fotógrafo para receber propostas"
+          },
+          "estadoPreferencia": {
+            "type": "string",
+            "description": "Estado de escolha do fotógrafo para receber propostas"
+          },
+          "temas": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Tema" }
+          },
+          "tags": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Tag" }
+          },
+          "logAcessos": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/LogAcessos" }
+          },
+          "enabled": { "type": "boolean" },
+          "password": { "type": "string" },
+          "authorities": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/GrantedAuthority" }
+          },
+          "username": { "type": "string" },
+          "credentialsNonExpired": { "type": "boolean" },
+          "accountNonExpired": { "type": "boolean" },
+          "accountNonLocked": { "type": "boolean" }
+        }
+      },
+      "Endereco": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "estado": { "type": "string", "description": "Estado do endereço" },
+          "cidade": { "type": "string", "description": "Cidade do endereço" },
+          "cep": { "type": "string", "description": "CEP do endereço" },
+          "bairro": { "type": "string", "description": "Bairro do endereço" },
+          "logradouro": {
+            "type": "string",
+            "description": "Logradouro do endereço"
+          },
+          "numero": { "type": "string", "description": "Número do endereço" },
+          "complemento": {
+            "type": "string",
+            "description": "Complemento do endereço"
+          },
+          "sessao": { "$ref": "#/components/schemas/Sessao" }
+        },
+        "description": "Representa um endereço"
+      },
+      "LogSessao": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Identificador do log",
+            "format": "int64",
+            "example": 1
+          },
+          "dataModificacao": {
+            "type": "string",
+            "description": "Data de modificação do status da sessão",
+            "format": "date"
+          },
+          "statusSessao": {
+            "type": "string",
+            "description": "Status da sessão",
+            "example": "Agendada"
+          },
+          "dataRealizacao": {
+            "type": "string",
+            "description": "Data de realização da sessão",
+            "format": "date"
+          },
+          "sessao": { "$ref": "#/components/schemas/Sessao" }
+        }
+      },
+      "Pagamento": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Identificador do pagamento",
+            "format": "int64",
+            "example": 1
+          },
+          "forma": {
+            "type": "string",
+            "description": "Forma de pagamento escolhida para a sessão",
+            "example": "Cartão de Crédito"
+          },
+          "valor": {
+            "type": "number",
+            "description": "Valor inteiro da sessão",
+            "format": "double"
+          },
+          "parcelas": {
+            "type": "integer",
+            "description": "Quantidade de parcelas escolhida para o pagamento da sessão",
+            "format": "int32",
+            "example": 5
+          },
+          "sessao": { "$ref": "#/components/schemas/Sessao" }
+        }
+      },
+      "Sessao": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "dataRealizacao": {
+            "type": "string",
+            "description": "Data de realização da sessão",
+            "format": "date-time"
+          },
+          "statusSessao": {
+            "type": "string",
+            "description": "Status da sessão"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Data de criação da sessão",
+            "format": "date-time"
+          },
+          "fotografo": { "$ref": "#/components/schemas/Fotografo" },
+          "tema": { "$ref": "#/components/schemas/Tema" },
+          "cliente": { "$ref": "#/components/schemas/Cliente" },
+          "endereco": { "$ref": "#/components/schemas/Endereco" },
+          "pagamento": { "$ref": "#/components/schemas/Pagamento" },
+          "avaliacao": { "$ref": "#/components/schemas/Avaliacao" },
+          "logsSessao": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/LogSessao" }
+          }
+        },
+        "description": "Representa um evento"
+      },
+      "CadastroAlbumDTO": {
+        "type": "object",
+        "properties": {
+          "titulo": { "type": "string" },
+          "descricao": { "type": "string" },
+          "idTema": { "type": "integer", "format": "int64" },
+          "idFotografo": { "type": "integer", "format": "int64" }
+        }
+      },
+      "RetornoFotografoDTO": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "nome": { "type": "string" },
+          "autenticado": { "type": "boolean" },
+          "tipoUsuario": { "type": "integer", "format": "int32" },
+          "albums": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/PerfilAlbumDTO" }
+          },
+          "temas": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/PerfilTemaDTO" }
+          }
+        }
+      },
+      "LongAccessToken": {
+        "type": "object",
+        "properties": {
+          "access_token": { "type": "string" },
+          "token_type": { "type": "string" },
+          "expires_in": { "type": "integer", "format": "int32" }
+        }
+      },
+      "Cursor": {
+        "type": "object",
+        "properties": {
+          "before": { "type": "string" },
+          "after": { "type": "string" }
+        }
+      },
+      "ItemData": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "caption": { "type": "string" }
+        }
+      },
+      "ListData": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ItemData" }
+          },
+          "paging": { "$ref": "#/components/schemas/Paging" }
+        }
+      },
+      "Paging": {
+        "type": "object",
+        "properties": { "cursors": { "$ref": "#/components/schemas/Cursor" } }
+      },
+      "Media": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "media_type": { "type": "string" },
+          "media_url": { "type": "string" },
+          "username": { "type": "string" },
+          "timestamp": { "type": "string" },
+          "permalink": { "type": "string" }
+        }
+      },
+      "vwVariacaoLucroUltimosMeses": {
+        "type": "object",
+        "properties": {
+          "mes": { "type": "string" },
+          "lucro": { "type": "number" },
+          "user": { "type": "integer", "format": "int64" }
+        }
+      },
+      "vwKpiVariacaoLucroMensal": {
+        "type": "object",
+        "properties": {
+          "fotografo": { "type": "integer", "format": "int64" },
+          "atual": { "type": "number" },
+          "passado": { "type": "number" }
+        }
+      },
+      "vwKpiValorMedioCobrado": {
+        "type": "object",
+        "properties": {
+          "fotografo": { "type": "integer", "format": "int64" },
+          "media": { "type": "number", "format": "double" }
+        }
+      },
+      "vwKpiSessoesAgendadasMes": {
+        "type": "object",
+        "properties": {
+          "fotografo": { "type": "integer", "format": "int64" },
+          "total": { "type": "integer", "format": "int64" }
+        }
+      },
+      "vwKpiPropostasRecebidasMesAtual": {
+        "type": "object",
+        "properties": {
+          "fotografo": { "type": "integer", "format": "int64" },
+          "mesAtual": { "type": "string" },
+          "mesAtualTotal": { "type": "integer", "format": "int64" },
+          "mesAnterior": { "type": "string" },
+          "mesAnteriorTotal": { "type": "integer", "format": "int64" }
+        }
+      },
+      "vwContatosConvertidosSessoes": {
+        "type": "object",
+        "properties": {
+          "mes": { "type": "string" },
+          "convertidas": { "type": "integer", "format": "int64" },
+          "total": { "type": "integer", "format": "int64" },
+          "interrompidas": { "type": "integer", "format": "int64" },
+          "user": { "type": "integer", "format": "int64" }
+        }
+      },
+      "vwMediaAvaliacaoPorTema": {
+        "type": "object",
+        "properties": {
+          "tema": { "type": "string" },
+          "media": { "type": "number" },
+          "user": { "type": "integer", "format": "int64" }
+        }
+      },
+      "vwClientesFotografos": {
+        "type": "object",
+        "properties": {
+          "mes": { "type": "string" },
+          "clientes": { "type": "integer", "format": "int64" },
+          "total": { "type": "integer", "format": "int64" },
+          "fotografos": { "type": "integer", "format": "int64" }
+        }
+      },
+      "vwSessoesFinalizadasCanceladas": {
+        "type": "object",
+        "properties": {
+          "mes": { "type": "string" },
+          "convertidas": { "type": "integer", "format": "int64" },
+          "total": { "type": "integer", "format": "int64" },
+          "interrompidas": { "type": "integer", "format": "int64" }
+        }
+      },
+      "vwProgressaoCadastroUsuarios": {
+        "type": "object",
+        "properties": {
+          "mes": { "type": "string" },
+          "quantidade": { "type": "integer", "format": "int64" }
+        }
+      },
+      "vwProgressaoSessoesRealizadas": {
+        "type": "object",
+        "properties": {
+          "mes": { "type": "string" },
+          "quantidade": { "type": "integer", "format": "int64" }
+        }
+      },
+      "vwFaixaEtariaCliente": {
+        "type": "object",
+        "properties": {
+          "faixa": { "type": "string" },
+          "quantidade": { "type": "integer", "format": "int64" }
+        }
+      },
+      "vwTemaCountSessoes": {
+        "type": "object",
+        "properties": {
+          "tema": { "type": "string" },
+          "sessoes": { "type": "integer", "format": "int64" }
+        }
+      },
+      "vwClientesImediatosMes": {
+        "type": "object",
+        "properties": {
+          "mes": { "type": "string" },
+          "agendaram": { "type": "integer", "format": "int64" },
+          "total": { "type": "integer", "format": "int64" },
+          "naoAgendaram": { "type": "integer", "format": "int64" }
+        }
+      },
+      "FilaObjAvaliacao": {
+        "type": "object",
+        "properties": {
+          "empty": { "type": "boolean" },
+          "full": { "type": "boolean" }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Bearer": { "type": "http", "scheme": "bearer", "bearerFormat": "JWT" }
+    }
+  }
 }

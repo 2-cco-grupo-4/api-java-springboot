@@ -94,7 +94,7 @@ public class ConsultasDashboardAdminController {
 
     /* 7 */
     @Operation(summary = "Progressão de sessões por mês", description = "Retorna a progressão da quantidade de novas sessões realizadas nos últimos 6 meses")
-    @GetMapping("/progressao-relizacao-sessoes")
+    @GetMapping("/progressao-sessoes-mes")
     public ResponseEntity<List<vwProgressaoSessoesRealizadas>> progressaoRealizacaoSessoes() {
         if (dashboardAdminService.progressaoRealizacaoSessoes().isEmpty()){
             ResponseEntity.noContent().build();
