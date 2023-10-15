@@ -1,8 +1,9 @@
-package com.example.picmejava.service.evento;
+package com.example.picmejava.service.sessao;
 
-import com.example.picmejava.model.Evento;
-import com.example.picmejava.service.evento.builder.EventoBuilder;
-import com.example.picmejava.service.evento.dto.CadastroEventoDTO;
+import com.example.picmejava.model.Sessao;
+import com.example.picmejava.service.evento.SessaoService;
+import com.example.picmejava.service.sessao.builder.SessaoBuilder;
+import com.example.picmejava.service.evento.dto.CadastroSessaoDTO;
 import com.example.picmejava.service.evento.dto.RetornoEventoDTO;
 import com.example.picmejava.infra.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.repository.*;
@@ -21,7 +22,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-class EventoServiceTest {
+class SessaoServiceTest {
 
     @Mock
     private EnderecoRepository enderecoRepository;
@@ -39,32 +40,32 @@ class EventoServiceTest {
     private TemaRepository temaRepository;
 
     @InjectMocks
-    private EventoService eventoService;
+    private SessaoService sessaoService;
 
     @Test
     @DisplayName("Deve retornar evento quando cadastrar com dados validos")
     void deveRetonarEventoQuandoCadastrarComDadosValidos(){
-        Evento evento = EventoBuilder.criarEvento();
+        Sessao sessao = SessaoBuilder.criarEvento();
 
-        Mockito.when(eventoRepository.save(Mockito.any(Evento.class))).thenReturn(evento);
+        Mockito.when(eventoRepository.save(Mockito.any(Sessao.class))).thenReturn(sessao);
 
-        Evento resultado = eventoRepository.save(evento);
+        Sessao resultado = eventoRepository.save(sessao);
 
         assertNotNull(resultado);
-        assertEquals(evento, resultado);
+        assertEquals(sessao, resultado);
     }
 
     @Test
     @DisplayName("Deve retornar excecao quando idFotografo invalido")
     void deveRetornarExcecaoQuandoIdFotografoInvalido(){
-        CadastroEventoDTO cadastroEventoDTO = EventoBuilder.criarCadastroEvento();
-        Evento evento = EventoBuilder.criarEvento();
+        CadastroSessaoDTO cadastroSessaoDTO = SessaoBuilder.criarCadastroEvento();
+        Sessao sessao = SessaoBuilder.criarEvento();
 
         Mockito.when(fotografoRepository.findById(
-                Mockito.eq(cadastroEventoDTO.getIdFotografo()))).thenReturn(Optional.empty());
+                Mockito.eq(cadastroSessaoDTO.getIdFotografo()))).thenReturn(Optional.empty());
 
         EntidadeNaoEncontradaException exception = assertThrows(EntidadeNaoEncontradaException.class, () -> {
-            eventoService.cadastrar(cadastroEventoDTO);
+            sessaoService.cadastrar(cadastroSessaoDTO);
         });
 
         assertEquals("Fotografo não encontrado", exception.getMessage());
@@ -73,15 +74,15 @@ class EventoServiceTest {
     @Test
     @DisplayName("Deve retornar excecao quando idCliente invalido")
     void deveRetornarExcecaoQuandoIdClienteInvalido(){
-        CadastroEventoDTO cadastroEventoDTO = EventoBuilder.criarCadastroEvento();
-        Evento evento = EventoBuilder.criarEvento();
+        CadastroSessaoDTO cadastroSessaoDTO = SessaoBuilder.criarCadastroEvento();
+        Sessao sessao = SessaoBuilder.criarEvento();
 
         Mockito.when(fotografoRepository.findById(
-                Mockito.eq(cadastroEventoDTO.getIdFotografo()))).thenReturn(Optional.of(evento.getFotografo()));
+                Mockito.eq(cadastroSessaoDTO.getIdFotografo()))).thenReturn(Optional.of(sessao.getFotografo()));
         Mockito.when(clienteRepository.findById(Mockito.anyLong())).thenReturn(Optional.empty());
 
         EntidadeNaoEncontradaException exception = assertThrows(EntidadeNaoEncontradaException.class, () -> {
-            eventoService.cadastrar(cadastroEventoDTO);
+            sessaoService.cadastrar(cadastroSessaoDTO);
         });
 
         assertEquals("Cliente não encontrado", exception.getMessage());
@@ -90,16 +91,16 @@ class EventoServiceTest {
     @Test
     @DisplayName("Deve retornar excecao quando idTema invalido")
     void deveRetornarExcecaoQuandoIdTemaInvalido(){
-        CadastroEventoDTO cadastroEventoDTO = EventoBuilder.criarCadastroEvento();
-        Evento evento = EventoBuilder.criarEvento();
+        CadastroSessaoDTO cadastroSessaoDTO = SessaoBuilder.criarCadastroEvento();
+        Sessao sessao = SessaoBuilder.criarEvento();
 
         Mockito.when(fotografoRepository.findById(
-                Mockito.eq(cadastroEventoDTO.getIdFotografo()))).thenReturn(Optional.of(evento.getFotografo()));
-        Mockito.when(clienteRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(evento.getCliente()));
-        Mockito.when(temaRepository.findById(Mockito.eq(cadastroEventoDTO.getIdTema()))).thenReturn(Optional.empty());
+                Mockito.eq(cadastroSessaoDTO.getIdFotografo()))).thenReturn(Optional.of(sessao.getFotografo()));
+        Mockito.when(clienteRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(sessao.getCliente()));
+        Mockito.when(temaRepository.findById(Mockito.eq(cadastroSessaoDTO.getIdTema()))).thenReturn(Optional.empty());
 
         EntidadeNaoEncontradaException exception = assertThrows(EntidadeNaoEncontradaException.class, () -> {
-            eventoService.cadastrar(cadastroEventoDTO);
+            sessaoService.cadastrar(cadastroSessaoDTO);
         });
 
         assertEquals("Tema não encontrado", exception.getMessage());
@@ -109,11 +110,11 @@ class EventoServiceTest {
     @DisplayName("Deve retornar lista com tres itens quando tres itens cadastrados")
     void deveRetornarTresItensQuandoTresItensCadastrados(){
         int tamanhoEsperado = 3;
-        List<Evento> eventos = EventoBuilder.criarListaEvento();
+        List<Sessao> sessoes = SessaoBuilder.criarListaEvento();
 
-        Mockito.when(eventoRepository.findAll()).thenReturn(eventos);
+        Mockito.when(eventoRepository.findAll()).thenReturn(sessoes);
 
-        List<RetornoEventoDTO> resultado = eventoService.listar();
+        List<RetornoEventoDTO> resultado = sessaoService.listar();
 
         assertNotNull(resultado);
         assertEquals(tamanhoEsperado, resultado.size());
@@ -126,7 +127,7 @@ class EventoServiceTest {
 
         Mockito.when(eventoRepository.findAll()).thenReturn(new ArrayList<>());
 
-        List<RetornoEventoDTO> resultado = eventoService.listar();
+        List<RetornoEventoDTO> resultado = sessaoService.listar();
 
         assertTrue(resultado.isEmpty());
         assertEquals(tamanhoEsperado, resultado.size());

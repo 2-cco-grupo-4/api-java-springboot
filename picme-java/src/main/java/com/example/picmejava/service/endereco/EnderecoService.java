@@ -1,7 +1,7 @@
 package com.example.picmejava.service.endereco;
 
 import com.example.picmejava.model.Endereco;
-import com.example.picmejava.model.Evento;
+import com.example.picmejava.model.Sessao;
 import com.example.picmejava.service.endereco.dto.CadastroEnderecoDTO;
 import com.example.picmejava.service.endereco.dto.RetornoEnderecoDTO;
 import com.example.picmejava.infra.exception.EntidadeNaoEncontradaException;
@@ -33,10 +33,10 @@ public class EnderecoService {
 
     @Operation(summary = "Cadastrar um novo endereço")
     public RetornoEnderecoDTO cadastrar(CadastroEnderecoDTO novoEndereco){
-        Evento evento = eventoRepository.findById(novoEndereco.getIdEvento()).orElseThrow(
-                () -> new EntidadeNaoEncontradaException("Evento não encontrado")
+        Sessao sessao = eventoRepository.findById(novoEndereco.getIdEvento()).orElseThrow(
+                () -> new EntidadeNaoEncontradaException("Sessao não encontrado")
         );
-        Endereco endereco = EnderecoMapper.toEndereco(novoEndereco, evento);
+        Endereco endereco = EnderecoMapper.toEndereco(novoEndereco, sessao);
         return enderecoMapper.toRetornoEnderecoDTO(enderecoRepository.save(endereco));
     }
 

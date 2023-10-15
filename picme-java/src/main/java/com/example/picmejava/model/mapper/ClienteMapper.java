@@ -6,6 +6,7 @@ import com.example.picmejava.service.usuario.dto.CadastroUsuarioDTO;
 import com.example.picmejava.service.usuario.dto.PerfilClienteDTO;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class ClienteMapper {
 
@@ -32,7 +33,7 @@ public class ClienteMapper {
         cliente.setDataNasc(dados.getDataNasc());
         cliente.setEmail(dados.getEmail());
         cliente.setSenha(dados.getSenha());
-        cliente.setDataCadastro(LocalDate.now());
+        cliente.setDataCadastro(LocalDateTime.now());
         cliente.setNumCelular(dados.getNumCelular());
         cliente.setAutenticado(false);
 

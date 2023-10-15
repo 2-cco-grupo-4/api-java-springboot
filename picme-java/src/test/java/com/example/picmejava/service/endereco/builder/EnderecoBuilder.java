@@ -1,7 +1,7 @@
 package com.example.picmejava.service.endereco.builder;
 
 import com.example.picmejava.model.Endereco;
-import com.example.picmejava.service.evento.builder.EventoBuilder;
+import com.example.picmejava.service.sessao.builder.SessaoBuilder;
 import com.example.picmejava.service.endereco.dto.CadastroEnderecoDTO;
 import com.example.picmejava.service.endereco.dto.PerfilEnderecoDTO;
 
@@ -23,7 +23,7 @@ public class EnderecoBuilder {
         endereco.setEstado("Estado cidade 01");
         endereco.setComplemento("Complemento endereço 01");
         endereco.setLogradouro("Logradouro endereço 01");
-        endereco.setEvento(EventoBuilder.criarEvento());
+        endereco.setSessao(SessaoBuilder.criarEvento());
 
         return endereco;
     }

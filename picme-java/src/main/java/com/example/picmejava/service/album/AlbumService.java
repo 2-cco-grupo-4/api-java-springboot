@@ -26,18 +26,16 @@ public class AlbumService {
     private final AlbumRepository albumRepository;
     private final TemaRepository temaRepository;
     private final FotografoRepository fotografoRepository;
-    private final AlbumMapper albumMapper;
+    private final AlbumMapper albumMapper = new AlbumMapper();
 
     @Autowired
     public AlbumService(
             AlbumRepository albumRepository,
             TemaRepository temaRepository,
-            FotografoRepository fotografoRepository,
-            AlbumMapper albumMapper) {
+            FotografoRepository fotografoRepository) {
         this.albumRepository = albumRepository;
         this.temaRepository = temaRepository;
         this.fotografoRepository = fotografoRepository;
-        this.albumMapper = albumMapper;
     }
 
     @Operation(summary = "Cadastrar um novo álbum")

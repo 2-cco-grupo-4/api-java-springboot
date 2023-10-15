@@ -7,35 +7,36 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "tb_tema")
+@Table(name = "tb_tag")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Tema implements Identificavel {
+
+public class Tag {
 
     @Schema(
-            description = "Identificador do tema",
+            description = "Identificador da tag",
             example = "1"
     )
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_tema")
+    @Column(name = "id_tag")
     private Long id;
 
     @Schema(
-            description = "Nome do tema",
-            example = "Casamento"
+            description = "Nome da tag",
+            example = "Noite"
     )
     private String nome;
 
-    @ManyToMany(mappedBy = "temas")
+    @ManyToMany(mappedBy = "tags")
     List<Usuario> usuarios;
 
+    @ManyToMany(mappedBy = "tags")
+    List<Imagem> imagens;
 
 }
-

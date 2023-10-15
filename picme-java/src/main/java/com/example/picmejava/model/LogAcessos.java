@@ -7,35 +7,33 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "tb_tema")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Tema implements Identificavel {
+@Table(name = "tb_log_acessos")
+public class LogAcessos {
 
     @Schema(
-            description = "Identificador do tema",
+            description = "Identificador do log",
             example = "1"
     )
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_tema")
+    @Column(name = "id_log_acessos")
     private Long id;
 
     @Schema(
-            description = "Nome do tema",
-            example = "Casamento"
+            description = "Data de Login do usuário",
+            example = "2023-10-13 12:54:36.546"
     )
-    private String nome;
+    private LocalDate dataLogin;
 
-    @ManyToMany(mappedBy = "temas")
-    List<Usuario> usuarios;
-
+    @ManyToOne
+    @JoinColumn(name = "fk_usuario")
+    private Usuario usuario;
 
 }
-

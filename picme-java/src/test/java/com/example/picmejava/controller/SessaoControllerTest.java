@@ -1,7 +1,7 @@
 package com.example.picmejava.controller;
 
-import com.example.picmejava.service.evento.EventoService;
-import com.example.picmejava.service.evento.dto.CadastroEventoDTO;
+import com.example.picmejava.service.evento.SessaoService;
+import com.example.picmejava.service.evento.dto.CadastroSessaoDTO;
 import com.example.picmejava.service.evento.dto.RetornoEventoDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -21,9 +21,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class EventoControllerTest {
+class SessaoControllerTest {
     @Mock
-    private EventoService eventoService;
+    private SessaoService sessaoService;
 
     @InjectMocks
     private EventoController eventoController;
@@ -36,10 +36,10 @@ class EventoControllerTest {
     @Test
     @DisplayName("Deve cadastrar um novo evento")
     void cadastrarEvento() {
-        CadastroEventoDTO novoEvento = new CadastroEventoDTO();
+        CadastroSessaoDTO novoEvento = new CadastroSessaoDTO();
         RetornoEventoDTO retornoEvento = new RetornoEventoDTO();
 
-        when(eventoService.cadastrar(novoEvento)).thenReturn(retornoEvento);
+        when(sessaoService.cadastrar(novoEvento)).thenReturn(retornoEvento);
 
         ResponseEntity<RetornoEventoDTO> response = eventoController.cadastrar(novoEvento);
 
@@ -53,7 +53,7 @@ class EventoControllerTest {
     void listarEventos() {
         List<RetornoEventoDTO> listaEventos = new ArrayList<>();
 
-        when(eventoService.listar()).thenReturn(listaEventos);
+        when(sessaoService.listar()).thenReturn(listaEventos);
 
         ResponseEntity<List<RetornoEventoDTO>> response = eventoController.listar();
 

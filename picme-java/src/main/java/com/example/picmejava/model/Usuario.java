@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Table(name = "USUARIO")
+@Table(name = "tb_usuario")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo_usuario", discriminatorType = DiscriminatorType.INTEGER)
 @Schema(description = "Representa um usuário")
@@ -24,7 +25,7 @@ public abstract class Usuario implements UserDetails, Identificavel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_USUARIO")
+    @Column(name = "id_usuario")
     private Long id;
 
     @Schema(description = "Nome do usuário")
@@ -44,7 +45,7 @@ public abstract class Usuario implements UserDetails, Identificavel {
     private LocalDate dataNasc;
 
     @Schema(description = "Data de cadastro do usuário")
-    private LocalDate dataCadastro;
+    private LocalDateTime dataCadastro;
 
     @Column(name = "celular")
     @Schema(description = "Número de celular do usuário")
@@ -59,13 +60,31 @@ public abstract class Usuario implements UserDetails, Identificavel {
     @Schema(description = "Token de solicitação do usuário")
     private String tokenSolicitacao;
 
+    @Schema(description = "Cidade de escolha do fotógrafo para receber propostas")
+    private String cidadePreferencia;
+
+    @Schema(description = "Estado de escolha do fotógrafo para receber propostas")
+    private String estadoPreferencia;
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "usuario_tema",
-            joinColumns = @JoinColumn(name = "ID_USUARIO"),
-            inverseJoinColumns = @JoinColumn(name = "ID_TEMA")
+            name = "tb_usuario_tema",
+            joinColumns = @JoinColumn(name = "id_usuario"),
+            inverseJoinColumns = @JoinColumn(name = "id_tema")
     )
     private List<Tema> temas;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "tb_usuario_tag",
+            joinColumns = @JoinColumn(name = "id_usuario"),
+            inverseJoinColumns = @JoinColumn(name = "id_tag")
+    )
+    private List<Tag> tags;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_log_acessos")
+    private List<LogAcessos> logAcessos;
 
     public abstract int getTipoUsuario();
 
