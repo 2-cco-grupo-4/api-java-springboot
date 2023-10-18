@@ -41,13 +41,18 @@ public class SecurityConfigurations implements WebMvcConfigurer {
                     req.requestMatchers(HttpMethod.GET, "/v3/api-docs/**").permitAll();
                     req.requestMatchers(HttpMethod.POST, "/clientes/cadastrar").permitAll();
                     req.requestMatchers(HttpMethod.POST, "/fotografos/cadastrar").permitAll();
+                    req.requestMatchers(HttpMethod.GET, "/fotografos/**").hasRole("FOTOGRAFO");
+                    req.requestMatchers(HttpMethod.POST, "/fotografos/**").hasRole("FOTOGRAFO");
+                    req.requestMatchers(HttpMethod.PATCH, "/fotografos/**").hasRole("FOTOGRAFO");
                     req.requestMatchers(HttpMethod.GET, "/eventos").hasAnyRole("FOTOGRAFO", "ADMIN");
-                    req.requestMatchers(HttpMethod.GET, "/instagram/**").hasAnyRole("FOTOGRAFO", "ADMIN");
-                    req.requestMatchers(HttpMethod.POST, "/instagram/**").hasAnyRole("FOTOGRAFO", "ADMIN");
+                    req.requestMatchers(HttpMethod.GET, "/instagram/**").permitAll();
+                    req.requestMatchers(HttpMethod.POST, "/instagram/**").permitAll();
                     req.requestMatchers(HttpMethod.POST, "/imagens").hasAnyRole("FOTOGRAFO", "ADMIN");
                     req.requestMatchers(HttpMethod.PUT, "/imagens").hasAnyRole("FOTOGRAFO", "ADMIN");
                     req.requestMatchers(HttpMethod.POST, "/albums").hasAnyRole("FOTOGRAFO", "ADMIN");
                     req.requestMatchers(HttpMethod.POST, "/temas").hasAnyRole("FOTOGRAFO", "ADMIN");
+                    req.requestMatchers(HttpMethod.GET, "/arquivo/**").hasAnyRole("ADMIN");
+                    req.requestMatchers(HttpMethod.POST, "/arquivo/**").hasAnyRole("ADMIN");
                     req.requestMatchers("/admin/**").hasRole("ADMIN");
                     req.anyRequest().authenticated();
                 })
@@ -64,7 +69,7 @@ public class SecurityConfigurations implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins("http://localhost:3000")
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT");
+                .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT");
     }
 
     @Bean

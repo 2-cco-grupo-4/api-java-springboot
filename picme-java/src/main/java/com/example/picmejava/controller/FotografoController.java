@@ -72,8 +72,9 @@ public class FotografoController {
 
 
     @Operation(summary = "Atualizar token solicitacao usuário", description = "Endpoint utilizado para atualizar o token de soliticação do usuário no banco de dados")
-    @PatchMapping("/atualizarToken/{idFotografo}")
-    public ResponseEntity<Fotografo> atualizarTokenSolicitacao(@PathVariable Long idFotografo, @RequestParam String codigo) {
+    @SecurityRequirement(name = "Bearer")
+    @PatchMapping("/atualizarToken")
+    public ResponseEntity<RetornoFotografoDTO> atualizarTokenSolicitacao(@RequestParam Long idFotografo, @RequestParam String codigo) {
 
         return ResponseEntity.status(200).body(
                 serviceFotografo.atualizarAccessToken(idFotografo, codigo)

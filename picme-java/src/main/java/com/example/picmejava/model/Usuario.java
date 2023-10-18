@@ -83,7 +83,10 @@ public abstract class Usuario implements UserDetails, Identificavel {
     private List<Tag> tags;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_log_acessos")
+    @JoinTable(name = "tb_log_acessos",
+            joinColumns = @JoinColumn(name = "id_usuario"),
+            inverseJoinColumns = @JoinColumn(name = "id_log_acessos")
+    )
     private List<LogAcessos> logAcessos;
 
     public abstract int getTipoUsuario();
