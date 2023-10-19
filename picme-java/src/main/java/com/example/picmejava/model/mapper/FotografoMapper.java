@@ -5,6 +5,7 @@ import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.service.usuario.dto.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
 public class FotografoMapper {
@@ -47,7 +48,7 @@ public class FotografoMapper {
         fotografo.setCpf(dados.getCpf());
         fotografo.setDataNasc(dados.getDataNasc());
         fotografo.setEmail(dados.getEmail());
-        fotografo.setDataCadastro(LocalDate.now());
+        fotografo.setDataCadastro(LocalDateTime.now());
         fotografo.setSenha(dados.getSenha());
         fotografo.setNumCelular(dados.getNumCelular());
         fotografo.setAutenticado(false);

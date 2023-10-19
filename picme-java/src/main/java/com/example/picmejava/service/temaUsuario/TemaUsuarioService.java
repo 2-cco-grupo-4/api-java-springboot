@@ -23,13 +23,13 @@ import java.util.List;
 @Service
 @Tag(name = "Tema Usuário Service", description = "APIs relacionadas a operações de temas para usuários")
 public class TemaUsuarioService {
-    
+
     @Autowired
     private TemaRepository temaRepository;
-    
+
     @Autowired
     private FotografoRepository fotografoRepository;
-    
+
     @Autowired
     private ClienteRepository clienteRepository;
 

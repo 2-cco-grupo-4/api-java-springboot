@@ -11,9 +11,9 @@ public class ImagemMapper {
         PerfilImagemDTO dto = new PerfilImagemDTO();
 
         dto.setId(dados.getId());
-        dto.setPath(dados.getPath());
-        dto.setTipo(dados.getTipo());
-        dto.setDescricao(dados.getDescricao());
+        dto.setPath(dados.getMediaUrl());
+        dto.setTipo(dados.getMediaType());
+        dto.setDescricao(dados.getCaption());
 
         return dto;
     }
@@ -22,9 +22,9 @@ public class ImagemMapper {
         RetornoImagemDTO dto = new RetornoImagemDTO();
 
         dto.setAlbum(AlbumMapper.toAlbumDTO(dados.getIdAlbum()));
-        dto.setDescricao(dados.getDescricao());
-        dto.setTipo(dados.getTipo());
-        dto.setPath(dados.getPath());
+        dto.setDescricao(dados.getCaption());
+        dto.setTipo(dados.getMediaType());
+        dto.setPath(dados.getMediaUrl());
         dto.setId(dados.getId());
 
         return dto;

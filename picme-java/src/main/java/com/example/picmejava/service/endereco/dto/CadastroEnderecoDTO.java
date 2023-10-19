@@ -11,7 +11,7 @@ public class CadastroEnderecoDTO {
     private String cep;
     private String bairro;
     private String logradouro;
-    private Integer numero;
+    private String numero;
     private String complemento;
     private Long idEvento;
 

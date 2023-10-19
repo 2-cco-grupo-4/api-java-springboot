@@ -15,8 +15,12 @@ import java.util.List;
 @Service
 @Tag(name = "Tema Service", description = "APIs relacionadas a operações de temas")
 public class TemaService {
+    private final TemaRepository temaRepository;
+
     @Autowired
-    private TemaRepository temaRepository;
+    public TemaService(TemaRepository temaRepository) {
+        this.temaRepository = temaRepository;
+    }
 
     @Operation(summary = "Cadastrar um novo tema")
     public PerfilTemaDTO cadastrar(CadastroTemaDto novoTema){

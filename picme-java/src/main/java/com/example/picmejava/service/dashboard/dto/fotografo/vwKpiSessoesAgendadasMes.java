@@ -1,4 +1,4 @@
-package com.example.picmejava.service.dashboard.dto;
+package com.example.picmejava.service.dashboard.dto.fotografo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +9,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ContagemClientesAcordoUmaSemana {
+public class vwKpiSessoesAgendadasMes {
 
-    private String label;
-    private Long quantidade;
+    private Long fotografo;
+    private Long total;
+
 }

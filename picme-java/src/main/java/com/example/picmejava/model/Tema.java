@@ -13,6 +13,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@Table(name = "tb_tema")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Tema implements Identificavel {
@@ -23,7 +24,7 @@ public class Tema implements Identificavel {
     )
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_TEMA")
+    @Column(name = "id_tema")
     private Long id;
 
     @Schema(

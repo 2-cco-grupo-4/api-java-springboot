@@ -14,7 +14,7 @@ public class RetornoEnderecoDTO {
     private String cep;
     private String bairro;
     private String rua;
-    private Integer numero;
+    private String numero;
     private String complemento;
     private RetornoEventoDTO evento;
 }

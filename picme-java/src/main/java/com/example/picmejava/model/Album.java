@@ -15,6 +15,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "tb_album")
 public class Album implements Identificavel{
 
     @Schema(
@@ -23,7 +24,7 @@ public class Album implements Identificavel{
     )
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_ALBUM")
+    @Column(name = "id_album")
     private Long id;
 
     @Schema(
@@ -37,7 +38,7 @@ public class Album implements Identificavel{
             example = "CASAMENTO"
     )
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "FK_TEMA")
+    @JoinColumn(name = "fk_tema")
     private Tema tema;
 
     @Schema(
@@ -51,7 +52,7 @@ public class Album implements Identificavel{
             example = "1"
     )
     @ManyToOne
-    @JoinColumn(name = "FK_FOTOGRAFO")
+    @JoinColumn(name = "fk_fotografo")
     private Fotografo fotografo;
 
     @OneToMany(mappedBy = "idAlbum", cascade = CascadeType.ALL)

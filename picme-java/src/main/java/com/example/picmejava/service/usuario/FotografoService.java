@@ -134,7 +134,7 @@ public class FotografoService {
 
     @Transactional
     @Operation(summary = "Atualizar access token")
-    public Fotografo atualizarAccessToken(Long idFotografo, String codigo) {
+    public RetornoFotografoDTO atualizarAccessToken(Long idFotografo, String codigo) {
         Optional<Fotografo> fotografoOptional = fotografoRepository.findById(idFotografo);
         Fotografo fotografo = fotografoOptional.orElseThrow(() -> new EntidadeNaoEncontradaException(
                 "Fotografo não existe")
@@ -163,11 +163,9 @@ public class FotografoService {
             }
         }
 
-        Fotografo teste = fotografoRepository.save(fotografoMapper.toFotografoAtualizado(fotografo, updateTokenUsuarioDTO));
+        Fotografo fotografoAtualizado = fotografoRepository.save(fotografoMapper.toFotografoAtualizado(fotografo, updateTokenUsuarioDTO));
 
-        System.out.printf("Teste:\n\nID Usuário: %d\ntoken: %s\n\n", teste.getId(), teste.getTokenSolicitacao());
-
-        return teste;
+        return fotografoMapper.toRetornoFotografoDTO(fotografoAtualizado);
     }
 
     @Operation(summary = "Buscar fotógrafo por ID")

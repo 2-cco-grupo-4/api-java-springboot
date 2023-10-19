@@ -18,6 +18,6 @@ public class PerfilEnderecoDTO {
     private String cep;
     private String bairro;
     private String rua;
-    private Integer numero;
+    private String numero;
     private String complemento;
 }

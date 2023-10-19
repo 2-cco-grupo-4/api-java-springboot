@@ -5,7 +5,7 @@ import com.example.picmejava.model.Imagem;
 import com.example.picmejava.repository.AlbumRepository;
 import com.example.picmejava.repository.ImagemRepository;
 import com.example.picmejava.service.album.builder.AlbumBuilder;
-import com.example.picmejava.service.evento.EventoService;
+import com.example.picmejava.service.evento.SessaoService;
 import com.example.picmejava.service.imagem.dto.RetornoImagemDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,7 +33,7 @@ class ImagemServiceTest {
     private ImagemService imagemService;
 
     @InjectMocks
-    private EventoService eventoService;
+    private SessaoService sessaoService;
 
 
     @Test

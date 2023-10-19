@@ -39,8 +39,8 @@ class EnderecoServiceTest {
         Endereco endereco = EnderecoBuilder.criarEndereco();
         CadastroEnderecoDTO cadastroEndereco = EnderecoBuilder.criarCadastroEndereco();
 
-        Mockito.when(eventoRepository.findById(endereco.getEvento().getId())).thenReturn(
-                Optional.of(endereco.getEvento())
+        Mockito.when(eventoRepository.findById(endereco.getSessao().getId())).thenReturn(
+                Optional.of(endereco.getSessao())
         );
         Mockito.when(enderecoRepository.save(Mockito.any(Endereco.class))).thenReturn(endereco);
 
@@ -54,7 +54,7 @@ class EnderecoServiceTest {
         assertEquals(endereco.getBairro(), resultado.getBairro());
         assertEquals(endereco.getComplemento(), resultado.getComplemento());
         assertEquals(endereco.getEstado(), resultado.getEstado());
-        assertNotNull(endereco.getEvento());
+        assertNotNull(endereco.getSessao());
 
         Mockito.verify(eventoRepository, Mockito.times(1)).findById(Mockito.eq(endereco.getId()));
         Mockito.verify(enderecoRepository, Mockito.times(1)).save(Mockito.any(Endereco.class));
@@ -72,7 +72,7 @@ class EnderecoServiceTest {
             enderecoService.cadastrar(cadastroEndereco);
         });
 
-        assertEquals("Evento não encontrado", exception.getMessage());
+        assertEquals("Sessao não encontrado", exception.getMessage());
     }
 
     @Test

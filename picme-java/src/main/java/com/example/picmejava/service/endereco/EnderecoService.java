@@ -1,7 +1,7 @@
 package com.example.picmejava.service.endereco;
 
 import com.example.picmejava.model.Endereco;
-import com.example.picmejava.model.Evento;
+import com.example.picmejava.model.Sessao;
 import com.example.picmejava.service.endereco.dto.CadastroEnderecoDTO;
 import com.example.picmejava.service.endereco.dto.RetornoEnderecoDTO;
 import com.example.picmejava.infra.exception.EntidadeNaoEncontradaException;
@@ -19,20 +19,24 @@ import java.util.List;
 @Tag(name = "Endereco Service", description = "APIs relacionadas a operações de endereços")
 public class EnderecoService {
 
-    @Autowired
-    private EnderecoRepository enderecoRepository;
+    private final EnderecoRepository enderecoRepository;
+    private final EventoRepository eventoRepository;
+    private final EnderecoMapper enderecoMapper = new EnderecoMapper();
 
     @Autowired
-    private EventoRepository eventoRepository;
-
-    EnderecoMapper enderecoMapper = new EnderecoMapper();
+    public EnderecoService(
+            EnderecoRepository enderecoRepository,
+            EventoRepository eventoRepository) {
+        this.enderecoRepository = enderecoRepository;
+        this.eventoRepository = eventoRepository;
+    }
 
     @Operation(summary = "Cadastrar um novo endereço")
     public RetornoEnderecoDTO cadastrar(CadastroEnderecoDTO novoEndereco){
-        Evento evento = eventoRepository.findById(novoEndereco.getIdEvento()).orElseThrow(
-                () -> new EntidadeNaoEncontradaException("Evento não encontrado")
+        Sessao sessao = eventoRepository.findById(novoEndereco.getIdEvento()).orElseThrow(
+                () -> new EntidadeNaoEncontradaException("Sessao não encontrado")
         );
-        Endereco endereco = EnderecoMapper.toEndereco(novoEndereco, evento);
+        Endereco endereco = EnderecoMapper.toEndereco(novoEndereco, sessao);
         return enderecoMapper.toRetornoEnderecoDTO(enderecoRepository.save(endereco));
     }
 

@@ -8,15 +8,17 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 public class RetornoEventoDTO {
     private Long id;
-    private LocalDate dataRealizacao;
-    private String statusEvento;
-    private Double valor;
+    private LocalDateTime dataRealizacao;
+    private String statusSessao;
+    private LocalDateTime createdAt;
     private PerfilFotografoDTO fotografo;
-    private PerfilTemaDTO tema;
     private PerfilClienteDTO cliente;
     private PerfilEnderecoDTO endereco;
+    private PerfilTemaDTO tema;
 }

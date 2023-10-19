@@ -14,7 +14,7 @@ class DashboardServiceTest {
     private Query query;
 
     @InjectMocks
-    private DashboardService dashboardService;
+    private DashboardAdminService dashboardAdminService;
 
 //    @Test
 //    public void testTrazerFaixaEtariaCliente() {
@@ -25,10 +25,10 @@ class DashboardServiceTest {
 //        when(entityManager.createNativeQuery(Mockito.anyString())).thenReturn(query);
 //        when(query.getResultList()).thenReturn(resultado);
 //
-//        List<FaixaEtariaCliente> faixaEtariaClientes = dashboardService.trazerFaixaEtariaCliente();
+//        List<vwFaixaEtariaCliente> faixaEtariaClientes = dashboardService.trazerFaixaEtariaCliente();
 //
 //        assertEquals(1, faixaEtariaClientes.size());
-//        FaixaEtariaCliente faixaEtariaCliente = faixaEtariaClientes.get(0);
+//        vwFaixaEtariaCliente faixaEtariaCliente = faixaEtariaClientes.get(0);
 //        assertEquals("Faixa 1", faixaEtariaCliente.getFaixa());
 //        assertEquals(10L, faixaEtariaCliente.getQuantidade());
 //    }
