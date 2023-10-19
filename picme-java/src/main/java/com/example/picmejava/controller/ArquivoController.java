@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @RestController
@@ -66,6 +67,39 @@ public class ArquivoController {
         arquivoService.importPlainTextFile(file);
 
         return ResponseEntity.ok("Importação realizada com sucesso!");
+
+    }
+
+    @Operation(summary = "Exportar lista de sessões de fotógrafos", description = "Download de arquivo CSV com a lista de sessões de fotógrafos")
+    @GetMapping("/sessoes-fotografos")
+    public ResponseEntity<byte[]> downloadCSVFile(Long idFotografo) throws IOException {
+
+        DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("dd_MM_yyyy_HH_mm_ss");
+        String filename = String.format("listaSessoesFotografos_%s.csv", LocalDateTime.now().format(dataFormatter));
+
+        System.out.println(filename);
+
+        arquivoService.exportarSessoesFotografo(idFotografo, filename);
+
+        byte[] fileContent = Files.readAllBytes(Paths.get(filename));
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.TEXT_PLAIN);
+        httpHeaders.setContentDispositionFormData("attachment", filename);
+
+        File archive = new File(filename);
+
+        if(archive.exists()){
+            if(archive.delete()){
+                System.out.println("Arquivo deletado com sucesso!");
+            }else{
+                System.out.println("Falha ao deletar arquivo!");
+            }
+        }
+
+        return ResponseEntity.ok()
+                .headers(httpHeaders)
+                .body(fileContent);
 
     }
 
