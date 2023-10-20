@@ -11,6 +11,8 @@ import com.example.picmejava.repository.TemaRepository;
 import com.example.picmejava.service.album.dto.AtualizarAlbumDTO;
 import com.example.picmejava.service.album.dto.CadastroAlbumDTO;
 import com.example.picmejava.service.album.dto.RetornoAlbumDTO;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,15 +29,18 @@ public class AlbumService {
     private final TemaRepository temaRepository;
     private final FotografoRepository fotografoRepository;
     private final AlbumMapper albumMapper = new AlbumMapper();
+    private EntityManager entityManager;
 
     @Autowired
     public AlbumService(
             AlbumRepository albumRepository,
             TemaRepository temaRepository,
-            FotografoRepository fotografoRepository) {
+            FotografoRepository fotografoRepository,
+            EntityManager entityManager){
         this.albumRepository = albumRepository;
         this.temaRepository = temaRepository;
         this.fotografoRepository = fotografoRepository;
+        this.entityManager = entityManager;
     }
 
     @Operation(summary = "Cadastrar um novo álbum")
@@ -66,6 +71,14 @@ public class AlbumService {
     @Operation(summary = "Listar todos os álbuns")
     public List<RetornoAlbumDTO> listar() {
         List<Album> albums = albumRepository.findAll();
+        return albums.stream()
+                .map(albumMapper::toRetornoAlbumDTO)
+                .toList();
+    }
+
+    @Operation(summary = "Listar todos os álbuns de um fotógrafo")
+    public List<RetornoAlbumDTO> listarAlbunsFotografo(Long idFotografo) {
+        List<Album> albums = albumRepository.findAllByFotografo(getFotografo(idFotografo));
         return albums.stream()
                 .map(albumMapper::toRetornoAlbumDTO)
                 .toList();

@@ -2,11 +2,14 @@ package com.example.picmejava.model.mapper;
 
 import com.example.picmejava.model.Album;
 import com.example.picmejava.model.Fotografo;
+import com.example.picmejava.model.Imagem;
 import com.example.picmejava.model.Tema;
 import com.example.picmejava.service.album.dto.CadastroAlbumDTO;
 import com.example.picmejava.service.album.dto.PerfilAlbumDTO;
 import com.example.picmejava.service.album.dto.AtualizarAlbumDTO;
 import com.example.picmejava.service.album.dto.RetornoAlbumDTO;
+
+import java.util.List;
 
 public class AlbumMapper {
 
@@ -59,5 +62,9 @@ public class AlbumMapper {
         album.setTema(tema);
 
         return album;
+    }
+
+    public Album objectToAlbum(Object[] object) {
+        return new Album((Long) object[0], (String) object[1], (String) object[2], (Tema) object[3], (Fotografo) object[4], (List<Imagem>) object[5]);
     }
 }

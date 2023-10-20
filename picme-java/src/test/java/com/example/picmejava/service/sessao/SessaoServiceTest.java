@@ -34,7 +34,7 @@ class SessaoServiceTest {
     private ClienteRepository clienteRepository;
 
     @Mock
-    private EventoRepository eventoRepository;
+    private SessaoRepository sessaoRepository;
 
     @Mock
     private TemaRepository temaRepository;
@@ -47,9 +47,9 @@ class SessaoServiceTest {
     void deveRetonarEventoQuandoCadastrarComDadosValidos(){
         Sessao sessao = SessaoBuilder.criarEvento();
 
-        Mockito.when(eventoRepository.save(Mockito.any(Sessao.class))).thenReturn(sessao);
+        Mockito.when(sessaoRepository.save(Mockito.any(Sessao.class))).thenReturn(sessao);
 
-        Sessao resultado = eventoRepository.save(sessao);
+        Sessao resultado = sessaoRepository.save(sessao);
 
         assertNotNull(resultado);
         assertEquals(sessao, resultado);
@@ -112,7 +112,7 @@ class SessaoServiceTest {
         int tamanhoEsperado = 3;
         List<Sessao> sessoes = SessaoBuilder.criarListaEvento();
 
-        Mockito.when(eventoRepository.findAll()).thenReturn(sessoes);
+        Mockito.when(sessaoRepository.findAll()).thenReturn(sessoes);
 
         List<RetornoEventoDTO> resultado = sessaoService.listar();
 
@@ -125,7 +125,7 @@ class SessaoServiceTest {
     void deveRetornarListaVaziaQuandoNenhumItemCadastrado(){
         int tamanhoEsperado = 0;
 
-        Mockito.when(eventoRepository.findAll()).thenReturn(new ArrayList<>());
+        Mockito.when(sessaoRepository.findAll()).thenReturn(new ArrayList<>());
 
         List<RetornoEventoDTO> resultado = sessaoService.listar();
 

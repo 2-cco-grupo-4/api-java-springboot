@@ -34,18 +34,18 @@ public class Album implements Identificavel{
     private String titulo;
 
     @Schema(
+            description = "Descrição do albúm",
+            example = "Fotos de um casamento no estilo vintage realizado em 18/03/2022"
+    )
+    private String descricao;
+
+    @Schema(
             description = "Tema do albúm",
             example = "CASAMENTO"
     )
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_tema")
     private Tema tema;
-
-    @Schema(
-            description = "Descrição do albúm",
-            example = "Fotos de um casamento no estilo vintage realizado em 18/03/2022"
-    )
-    private String descricao;
 
     @Schema(
             description = "Identificador do Fotógrafo",

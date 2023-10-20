@@ -3,13 +3,17 @@ package com.example.picmejava.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "tb_avaliacao")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Avaliacao {
 
 

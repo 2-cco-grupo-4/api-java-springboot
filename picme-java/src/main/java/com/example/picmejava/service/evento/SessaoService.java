@@ -17,7 +17,7 @@ import java.util.List;
 @Tag(name = "Sessao Service", description = "APIs relacionadas a operações de eventos")
 public class SessaoService {
 
-    private final EventoRepository eventoRepository;
+    private final SessaoRepository sessaoRepository;
     private final ClienteRepository clienteRepository;
     private final FotografoRepository fotografoRepository;
     private final EnderecoRepository enderecoRepository;
@@ -26,12 +26,12 @@ public class SessaoService {
 
     @Autowired
     public SessaoService(
-            EventoRepository eventoRepository,
+            SessaoRepository sessaoRepository,
             ClienteRepository clienteRepository,
             FotografoRepository fotografoRepository,
             EnderecoRepository enderecoRepository,
             TemaRepository temaRepository) {
-        this.eventoRepository = eventoRepository;
+        this.sessaoRepository = sessaoRepository;
         this.clienteRepository = clienteRepository;
         this.fotografoRepository = fotografoRepository;
         this.enderecoRepository = enderecoRepository;
@@ -45,14 +45,14 @@ public class SessaoService {
         Tema tema = getTema(novoEvento.getIdTema());
 
         Sessao sessao = sessaoMapper.toEvento(fotografo, cliente, tema, novoEvento);
-        eventoRepository.save(sessao);
+        sessaoRepository.save(sessao);
 
         return sessaoMapper.toRetornoEventoDTO(sessao);
     }
 
     @Operation(summary = "Listar todos os eventos")
     public List<RetornoEventoDTO> listar() {
-        List<Sessao> sessoes = eventoRepository.findAll();
+        List<Sessao> sessoes = sessaoRepository.findAll();
         return sessoes.stream()
                 .map(evento -> sessaoMapper.toRetornoEventoDTO(evento))
                 .toList();
