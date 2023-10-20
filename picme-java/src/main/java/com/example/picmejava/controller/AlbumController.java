@@ -54,10 +54,9 @@ public class AlbumController {
 
     @Operation(summary = "Listar albuns fotógrafo", description = "Passando o ID do fotógrafo podemos obter a lista de todos os seus albuns")
     @SecurityRequirement(name = "Bearer")
-
     @GetMapping
-    public ResponseEntity<List<RetornoAlbumDTO>> listar(){
-        if (albumService.listar().isEmpty()){
+    public ResponseEntity<List<RetornoAlbumDTO>> listar(@RequestParam Long idFotografo){
+        if (albumService.listarAlbunsFotografo(idFotografo).isEmpty()){
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.status(200).body(albumService.listar());

@@ -6,7 +6,7 @@ import com.example.picmejava.service.endereco.dto.CadastroEnderecoDTO;
 import com.example.picmejava.service.endereco.dto.RetornoEnderecoDTO;
 import com.example.picmejava.infra.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.repository.EnderecoRepository;
-import com.example.picmejava.repository.EventoRepository;
+import com.example.picmejava.repository.SessaoRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,7 +28,7 @@ class EnderecoServiceTest {
     private EnderecoRepository enderecoRepository;
 
     @Mock
-    private EventoRepository eventoRepository;
+    private SessaoRepository sessaoRepository;
 
     @InjectMocks
     private EnderecoService enderecoService;
@@ -39,7 +39,7 @@ class EnderecoServiceTest {
         Endereco endereco = EnderecoBuilder.criarEndereco();
         CadastroEnderecoDTO cadastroEndereco = EnderecoBuilder.criarCadastroEndereco();
 
-        Mockito.when(eventoRepository.findById(endereco.getSessao().getId())).thenReturn(
+        Mockito.when(sessaoRepository.findById(endereco.getSessao().getId())).thenReturn(
                 Optional.of(endereco.getSessao())
         );
         Mockito.when(enderecoRepository.save(Mockito.any(Endereco.class))).thenReturn(endereco);
@@ -56,7 +56,7 @@ class EnderecoServiceTest {
         assertEquals(endereco.getEstado(), resultado.getEstado());
         assertNotNull(endereco.getSessao());
 
-        Mockito.verify(eventoRepository, Mockito.times(1)).findById(Mockito.eq(endereco.getId()));
+        Mockito.verify(sessaoRepository, Mockito.times(1)).findById(Mockito.eq(endereco.getId()));
         Mockito.verify(enderecoRepository, Mockito.times(1)).save(Mockito.any(Endereco.class));
     }
 
@@ -66,7 +66,7 @@ class EnderecoServiceTest {
         Endereco endereco = EnderecoBuilder.criarEndereco();
         CadastroEnderecoDTO cadastroEndereco = EnderecoBuilder.criarCadastroEndereco();
 
-        Mockito.when(eventoRepository.findById(Mockito.anyLong())).thenReturn(Optional.empty());
+        Mockito.when(sessaoRepository.findById(Mockito.anyLong())).thenReturn(Optional.empty());
 
         EntidadeNaoEncontradaException exception = assertThrows(EntidadeNaoEncontradaException.class, () -> {
             enderecoService.cadastrar(cadastroEndereco);

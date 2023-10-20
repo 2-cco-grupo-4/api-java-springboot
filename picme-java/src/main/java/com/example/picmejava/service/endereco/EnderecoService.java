@@ -7,7 +7,7 @@ import com.example.picmejava.service.endereco.dto.RetornoEnderecoDTO;
 import com.example.picmejava.infra.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.model.mapper.EnderecoMapper;
 import com.example.picmejava.repository.EnderecoRepository;
-import com.example.picmejava.repository.EventoRepository;
+import com.example.picmejava.repository.SessaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import io.swagger.v3.oas.annotations.Operation;
@@ -20,20 +20,20 @@ import java.util.List;
 public class EnderecoService {
 
     private final EnderecoRepository enderecoRepository;
-    private final EventoRepository eventoRepository;
+    private final SessaoRepository sessaoRepository;
     private final EnderecoMapper enderecoMapper = new EnderecoMapper();
 
     @Autowired
     public EnderecoService(
             EnderecoRepository enderecoRepository,
-            EventoRepository eventoRepository) {
+            SessaoRepository sessaoRepository) {
         this.enderecoRepository = enderecoRepository;
-        this.eventoRepository = eventoRepository;
+        this.sessaoRepository = sessaoRepository;
     }
 
     @Operation(summary = "Cadastrar um novo endereço")
     public RetornoEnderecoDTO cadastrar(CadastroEnderecoDTO novoEndereco){
-        Sessao sessao = eventoRepository.findById(novoEndereco.getIdEvento()).orElseThrow(
+        Sessao sessao = sessaoRepository.findById(novoEndereco.getIdEvento()).orElseThrow(
                 () -> new EntidadeNaoEncontradaException("Sessao não encontrado")
         );
         Endereco endereco = EnderecoMapper.toEndereco(novoEndereco, sessao);
