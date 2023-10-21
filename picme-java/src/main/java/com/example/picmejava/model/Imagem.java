@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -57,7 +58,7 @@ public class Imagem implements Identificavel {
             description = "Data da última atualização da imagem",
             example = "2023-10-13 12:59:21.540"
     )
-    private LocalDate updatedAt;
+    private LocalDateTime updatedAt;
 
     @Schema(
             description = "ID do albúm que a imagem pertence",

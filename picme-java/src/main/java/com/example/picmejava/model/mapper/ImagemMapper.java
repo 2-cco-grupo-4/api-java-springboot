@@ -1,6 +1,9 @@
 package com.example.picmejava.model.mapper;
 
+import com.example.picmejava.model.Album;
 import com.example.picmejava.model.Imagem;
+import com.example.picmejava.service.album.AlbumService;
+import com.example.picmejava.service.imagem.dto.CadastroImagemDTO;
 import com.example.picmejava.service.imagem.dto.PerfilImagemDTO;
 import com.example.picmejava.service.imagem.dto.RetornoImagemDTO;
 
@@ -29,4 +32,19 @@ public class ImagemMapper {
 
         return dto;
     }
+
+    public Imagem toImagem(CadastroImagemDTO dados, Album album) {
+        Imagem imagem = new Imagem();
+
+        imagem.setMediaUrl(dados.getMediaUrl());
+        imagem.setIdAlbum(album);
+        imagem.setOrigemImagem(dados.getOrigemImagem());
+        imagem.setMediaType(dados.getMediaType());
+        imagem.setPermalink(dados.getPermalink());
+        imagem.setUpdatedAt(dados.getUpdatedAt());
+
+
+        return imagem;
+    }
+
 }

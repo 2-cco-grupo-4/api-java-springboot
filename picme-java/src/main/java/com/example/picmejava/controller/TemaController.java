@@ -41,4 +41,13 @@ public class TemaController {
         }
         return ResponseEntity.status(200).body(temaService.listar());
     }
+
+    @Operation(summary = "Pesquisar tema", description = "Pesquisa tema por nome")
+    @GetMapping("/pesquisar")
+    public ResponseEntity<List<PerfilTemaDTO>> pesquisarTema(@RequestParam String nome){
+        if (temaService.pesquisarTema(nome).isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.status(200).body(temaService.pesquisarTema(nome));
+    }
 }

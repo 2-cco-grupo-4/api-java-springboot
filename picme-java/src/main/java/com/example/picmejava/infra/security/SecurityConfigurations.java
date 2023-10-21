@@ -51,6 +51,7 @@ public class SecurityConfigurations implements WebMvcConfigurer {
                     req.requestMatchers(HttpMethod.PUT, "/imagens").hasAnyRole("FOTOGRAFO", "ADMIN");
                     req.requestMatchers(HttpMethod.POST, "/albums").hasAnyRole("FOTOGRAFO", "ADMIN");
                     req.requestMatchers(HttpMethod.POST, "/temas").hasAnyRole("FOTOGRAFO", "ADMIN");
+                    req.requestMatchers(HttpMethod.GET, "/temas/pesquisar").permitAll();
                     req.requestMatchers(HttpMethod.GET, "/arquivo/**").hasAnyRole("ADMIN");
                     req.requestMatchers(HttpMethod.POST, "/arquivo/**").hasAnyRole("ADMIN");
                     req.requestMatchers("/admin/**").hasRole("ADMIN");
