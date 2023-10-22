@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 public class vwMediaAvaliacaoPorTema {
 
     private String tema;
-    private BigDecimal media;
+    private Double media;
     private Long user;
 
 }

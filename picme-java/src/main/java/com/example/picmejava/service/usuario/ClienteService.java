@@ -6,9 +6,7 @@ import com.example.picmejava.model.mapper.ClienteMapper;
 import com.example.picmejava.model.utils.ListaObj;
 import com.example.picmejava.repository.ClienteRepository;
 import com.example.picmejava.infra.exception.ConflitoNoCadastroException;
-import com.example.picmejava.service.usuario.dto.AtualizarUsuarioDTO;
-import com.example.picmejava.service.usuario.dto.CadastroUsuarioDTO;
-import com.example.picmejava.service.usuario.dto.LoginUsuarioDTO;
+import com.example.picmejava.service.usuario.dto.*;
 import com.example.picmejava.service.utils.TabelaHash;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -44,6 +42,11 @@ public class ClienteService {
         }
 
         return clienteRepository.save(clienteMapper.toCliente(novoCliente));
+    }
+
+    @Operation(summary = "Cadastrar cliente externo")
+    public PerfilClienteDTO cadastrarExterno(CadastroClienteExternoDTO novoCliente) {
+        return clienteMapper.toPerfilClienteDTO(clienteRepository.save(clienteMapper.clientExternoToCliente(novoCliente)));
     }
 
     @Operation(summary = "Validar um cliente")
@@ -99,4 +102,5 @@ public class ClienteService {
 
         return true;
     }
+
 }

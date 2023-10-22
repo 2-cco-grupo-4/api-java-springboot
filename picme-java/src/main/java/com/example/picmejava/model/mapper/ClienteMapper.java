@@ -2,6 +2,7 @@ package com.example.picmejava.model.mapper;
 
 import com.example.picmejava.model.Cliente;
 import com.example.picmejava.service.usuario.dto.AtualizarUsuarioDTO;
+import com.example.picmejava.service.usuario.dto.CadastroClienteExternoDTO;
 import com.example.picmejava.service.usuario.dto.CadastroUsuarioDTO;
 import com.example.picmejava.service.usuario.dto.PerfilClienteDTO;
 
@@ -53,6 +54,15 @@ public class ClienteMapper {
         if (dadosAtualizados.getDataNasc() != null){
             cliente.setDataNasc(dadosAtualizados.getDataNasc());
         }
+        return cliente;
+    }
+
+    public Cliente clientExternoToCliente(CadastroClienteExternoDTO dados) {
+        Cliente cliente = new Cliente();
+
+        cliente.setNome(dados.getNome());
+        cliente.setNumCelular(dados.getCelular());
+
         return cliente;
     }
 }

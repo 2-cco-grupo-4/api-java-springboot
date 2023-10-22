@@ -5,20 +5,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class CadastroSessaoDTO {
+@AllArgsConstructor
+public class CadastroSessaoExternoDTO {
 
+    private String cliente;
+    private String telefone;
     private LocalDateTime dataRealizacao;
+    private String endereco;
+    private String cidade;
+    private String bairro;
+    private String estado;
+    private String complemento;
     private String statusSessao;
+    private String cep;
     private Long idFotografo;
-    private Long idCliente;
-    private Long idEndereco;
-    private Long idTema;
-    private LocalDateTime createdAt;
+
 }

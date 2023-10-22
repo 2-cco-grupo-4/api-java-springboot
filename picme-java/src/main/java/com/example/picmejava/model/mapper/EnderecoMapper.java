@@ -3,6 +3,7 @@ package com.example.picmejava.model.mapper;
 import com.example.picmejava.model.Endereco;
 import com.example.picmejava.model.Sessao;
 import com.example.picmejava.service.endereco.dto.CadastroEnderecoDTO;
+import com.example.picmejava.service.endereco.dto.CadastroEnderecoExternoDTO;
 import com.example.picmejava.service.endereco.dto.PerfilEnderecoDTO;
 import com.example.picmejava.service.endereco.dto.RetornoEnderecoDTO;
 
@@ -53,5 +54,17 @@ public class EnderecoMapper {
         dto.setEvento(sessaoMapper.toRetornoEventoDTO(endereco.getSessao()));
 
         return dto;
+    }
+
+    public Endereco fromEnderecoExternoToEndereco(CadastroEnderecoExternoDTO cadastroEnderecoExternoDTO, Sessao sessao) {
+        Endereco endereco = new Endereco();
+        endereco.setLogradouro(cadastroEnderecoExternoDTO.getEndereco());
+        endereco.setCidade(cadastroEnderecoExternoDTO.getCidade());
+        endereco.setBairro(cadastroEnderecoExternoDTO.getBairro());
+        endereco.setEstado(cadastroEnderecoExternoDTO.getEstado());
+        endereco.setComplemento(cadastroEnderecoExternoDTO.getComplemento());
+        endereco.setCep(cadastroEnderecoExternoDTO.getCep());
+        endereco.setSessao(sessao);
+        return endereco;
     }
 }
