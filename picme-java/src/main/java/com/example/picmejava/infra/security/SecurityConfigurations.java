@@ -53,6 +53,7 @@ public class SecurityConfigurations implements WebMvcConfigurer {
                     req.requestMatchers(HttpMethod.POST, "/temas").hasAnyRole("FOTOGRAFO", "ADMIN");
                     req.requestMatchers(HttpMethod.GET, "/arquivo/**").hasAnyRole("ADMIN");
                     req.requestMatchers(HttpMethod.POST, "/arquivo/**").hasAnyRole("ADMIN");
+                    req.requestMatchers(HttpMethod.POST, "/clientes/cadastrarExterno").hasRole("FOTOGRAFO");
                     req.requestMatchers("/admin/**").hasRole("ADMIN");
                     req.anyRequest().authenticated();
                 })

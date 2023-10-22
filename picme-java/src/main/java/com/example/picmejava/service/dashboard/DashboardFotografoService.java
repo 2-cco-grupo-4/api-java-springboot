@@ -21,14 +21,14 @@ public class DashboardFotografoService {
 
     @Operation(summary = "Obter valor médio cobrado por sessão", description = "Retorna o valor médio cobrado por sessão.")
     public List<vwKpiValorMedioCobrado> trazerValorMedioCobrado(Long idFotografo) {
-        Query query = entityManager.createNativeQuery("SELECT * FROM vw_kpi_valor_medio_cobrado WHERE fotografo = :idFotografo");
+        Query query = entityManager.createNativeQuery("SELECT * FROM vw_kpi_valor_medio_cobrado WHERE Fotografo = :idFotografo");
         List<Object[]> resultado = query.setParameter("idFotografo", idFotografo).getResultList();
 
         List<vwKpiValorMedioCobrado> listVwKpiValorMedioCobrados = new ArrayList<>();
 
         for (Object[] linha : resultado) {
             Long fotografo = (Long) linha[0];
-            Double media = (Double) linha[1];
+            BigDecimal media = (BigDecimal) linha[1];
 
             vwKpiValorMedioCobrado vwKpiValorMedioCobrado = new vwKpiValorMedioCobrado(fotografo, media);
             listVwKpiValorMedioCobrados.add(vwKpiValorMedioCobrado);
@@ -104,7 +104,7 @@ public class DashboardFotografoService {
 
         for (Object[] linha : resultado) {
             String tema = (String) linha[0];
-            BigDecimal media = (BigDecimal) linha[1];
+            Double media = (Double) linha[1];
             Long user = (Long) linha[2];
 
             vwMediaAvaliacaoPorTema vwMediaAvaliacaoPorTema = new vwMediaAvaliacaoPorTema(tema, media, user);

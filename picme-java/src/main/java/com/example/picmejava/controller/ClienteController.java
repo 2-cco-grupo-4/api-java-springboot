@@ -2,10 +2,7 @@ package com.example.picmejava.controller;
 
 import com.example.picmejava.model.Cliente;
 import com.example.picmejava.service.usuario.ClienteService;
-import com.example.picmejava.service.usuario.dto.AtualizarUsuarioDTO;
-import com.example.picmejava.service.usuario.dto.CadastroUsuarioDTO;
-import com.example.picmejava.service.usuario.dto.LoginUsuarioDTO;
-import com.example.picmejava.service.usuario.dto.PerfilClienteDTO;
+import com.example.picmejava.service.usuario.dto.*;
 import com.example.picmejava.model.mapper.ClienteMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -39,6 +36,14 @@ public class ClienteController {
         return ResponseEntity.status(201).body(clienteMapper.toPerfilClienteDTO(
                 serviceCliente.cadastrar(novoCadastroCliente)
         ));
+    }
+
+    @Operation(summary = "Cadastrar cliente externo",
+            description = "Passando os dados necessários, podemos cadastrar um novo cliente externo"
+    )
+    @PostMapping("/cadastrarExterno")
+    public ResponseEntity<PerfilClienteDTO> cadastrarExterno(@RequestBody @Valid CadastroClienteExternoDTO novoCadastroCliente){
+        return ResponseEntity.status(201).body(serviceCliente.cadastrarExterno(novoCadastroCliente));
     }
 
     @Operation(summary = "Listar clientes", description = "Lista todos os clientes cadastrados")
