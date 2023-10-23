@@ -62,4 +62,11 @@ public class AlbumController {
         return ResponseEntity.status(200).body(albumService.listar());
     }
 
+    @Operation(summary = "Obter album", description = "Passando o ID do album podemos obter todas as suas informações")
+    @SecurityRequirement(name = "Bearer")
+    @GetMapping("/album")
+    public ResponseEntity<RetornoAlbumDTO> obterAlbum(@RequestParam Long idAlbum){
+        return ResponseEntity.status(200).body(albumService.buscarPorIdRetornoAlbumDTO(idAlbum));
+    }
+
 }
