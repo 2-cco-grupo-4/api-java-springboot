@@ -2,6 +2,7 @@ package com.example.picmejava.service.imagem;
 
 import com.example.picmejava.model.Album;
 import com.example.picmejava.model.Imagem;
+import com.example.picmejava.service.imagem.dto.CadastroImagemDTO;
 import com.example.picmejava.service.imagem.dto.RetornoImagemDTO;
 import com.example.picmejava.infra.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.model.mapper.ImagemMapper;
@@ -31,10 +32,11 @@ public class ImagemService {
     }
 
     @Operation(summary = "Cadastrar uma nova imagem em um álbum")
-    public RetornoImagemDTO cadastrar(Long idAlbum, Imagem novaImagem) {
+    public RetornoImagemDTO cadastrar(Long idAlbum, CadastroImagemDTO novaImagem) {
         Album album = getAlbum(idAlbum);
-        novaImagem.setIdAlbum(album);
-        return imagemMapper.toRetornoImagemDTO(imagemRepository.save(novaImagem));
+        novaImagem.setIdAlbum(idAlbum);
+        Imagem imagem = imagemMapper.toImagem(novaImagem, album);
+        return imagemMapper.toRetornoImagemDTO(imagemRepository.save(imagem));
     }
 
     @Operation(summary = "Buscar uma imagem por ID")
