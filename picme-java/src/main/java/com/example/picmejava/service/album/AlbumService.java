@@ -90,6 +90,11 @@ public class AlbumService {
                 .orElseThrow(() -> new EntidadeNaoEncontradaException("Album não encontrado"));
     }
 
+    @Operation(summary = "Buscar um álbum por ID e receber RetornoAlbumDTO")
+    public RetornoAlbumDTO buscarPorIdRetornoAlbumDTO(Long idAlbum) {
+        return albumMapper.toRetornoAlbumDTO(buscarPorId(idAlbum));
+    }
+
     private Tema getTema(Long idTema) {
         return temaRepository.findById(idTema)
                 .orElseThrow(() -> new EntidadeNaoEncontradaException("Tema não existe"));

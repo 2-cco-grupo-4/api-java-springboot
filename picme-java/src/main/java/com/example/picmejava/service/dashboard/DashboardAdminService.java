@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,9 +47,10 @@ public class DashboardAdminService {
         for (Object[] linha : resultado) {
             String tema = (String) linha[0];
             Long contatos = (Long) linha[1];
+            BigDecimal valor = (BigDecimal) linha[2];
 
 
-            vwTemaCountSessoes temaContatosClienteDto = new vwTemaCountSessoes(tema, contatos);
+            vwTemaCountSessoes temaContatosClienteDto = new vwTemaCountSessoes(tema, contatos, valor);
             temaContatosClienteDtos.add(temaContatosClienteDto);
         }
 
