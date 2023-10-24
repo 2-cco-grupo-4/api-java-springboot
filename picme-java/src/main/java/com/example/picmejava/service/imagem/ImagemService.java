@@ -3,6 +3,7 @@ package com.example.picmejava.service.imagem;
 import com.example.picmejava.model.Album;
 import com.example.picmejava.model.Imagem;
 import com.example.picmejava.service.imagem.dto.CadastroImagemDTO;
+import com.example.picmejava.service.imagem.dto.FeedImagemDTO;
 import com.example.picmejava.service.imagem.dto.RetornoImagemDTO;
 import com.example.picmejava.infra.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.model.mapper.ImagemMapper;
@@ -56,6 +57,14 @@ public class ImagemService {
         List<Imagem> imagens = imagemRepository.findAll();
         return imagens.stream()
                 .map(imagem -> imagemMapper.toRetornoImagemDTO(imagem))
+                .collect(Collectors.toList());
+    }
+
+    @Operation(summary = "Listar paths das imagens e IDs dos álbuns")
+    public List<FeedImagemDTO> listarFeed() {
+        List<Imagem> imagens = imagemRepository.findAll();
+        return imagens.stream()
+                .map(imagem -> new FeedImagemDTO(imagem.getId(), imagem.getMediaUrl(), imagem.getIdAlbum().getId()))
                 .collect(Collectors.toList());
     }
 

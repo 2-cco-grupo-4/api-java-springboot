@@ -2,6 +2,7 @@ package com.example.picmejava.controller;
 
 import com.example.picmejava.model.Imagem;
 import com.example.picmejava.service.imagem.dto.CadastroImagemDTO;
+import com.example.picmejava.service.imagem.dto.FeedImagemDTO;
 import com.example.picmejava.service.imagem.dto.RetornoImagemDTO;
 import com.example.picmejava.service.imagem.ImagemService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -37,6 +38,14 @@ public class ImagemController {
     @GetMapping
     public ResponseEntity<List<RetornoImagemDTO>> listar(){
         return ResponseEntity.status(200).body(imagemService.listar());
+    }
+
+    @Operation(summary = "Listar paths das imagens e IDs dos álbuns")
+    @SecurityRequirement(name = "Bearer")
+    @GetMapping("/paths")
+    public ResponseEntity<List<FeedImagemDTO>> listarFeed() {
+        List<FeedImagemDTO> pathsAndIds = imagemService.listarFeed();
+        return ResponseEntity.status(200).body(pathsAndIds);
     }
 
     @Operation(summary = "Remover uma imagem", description = "Passando o ID da imagem, podemos excluir determinada imagem")
