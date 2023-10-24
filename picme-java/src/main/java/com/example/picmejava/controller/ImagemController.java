@@ -1,6 +1,7 @@
 package com.example.picmejava.controller;
 
 import com.example.picmejava.model.Imagem;
+import com.example.picmejava.service.imagem.dto.CadastroImagemDTO;
 import com.example.picmejava.service.imagem.dto.RetornoImagemDTO;
 import com.example.picmejava.service.imagem.ImagemService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -26,9 +27,9 @@ public class ImagemController {
 
     @Operation(summary = "Cadastrar uma nova imagem", description = "Passando os dados necessário, podemos cadastrar uma nova imagem")
     @SecurityRequirement(name = "Bearer")
-    @PostMapping("/{idAlbum}")
-    public ResponseEntity<RetornoImagemDTO> cadastrar(@PathVariable Long idAlbum, @RequestBody Imagem novaImagem){
-        return ResponseEntity.status(201).body(imagemService.cadastrar(idAlbum, novaImagem));
+    @PostMapping
+    public ResponseEntity<RetornoImagemDTO> cadastrar(@RequestBody CadastroImagemDTO novaImagem){
+        return ResponseEntity.status(201).body(imagemService.cadastrar(novaImagem.getIdAlbum(), novaImagem));
     }
 
     @Operation(summary = "Listar imagens", description = "Passando o ID do album, podemos listar todas as imagens de determinado album")
