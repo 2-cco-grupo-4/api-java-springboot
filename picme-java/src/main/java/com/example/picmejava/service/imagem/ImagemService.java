@@ -64,7 +64,7 @@ public class ImagemService {
     public List<FeedImagemDTO> listarFeed() {
         List<Imagem> imagens = imagemRepository.findAll();
         return imagens.stream()
-                .map(imagem -> new FeedImagemDTO(imagem.getId(), imagem.getMediaUrl(), imagem.getIdAlbum().getId()))
+                .map(imagem -> new FeedImagemDTO(imagem.getId(), imagem.getMediaUrl(), imagem.getIdAlbum().getId(), imagem.getIdAlbum().getFotografo().getNome()))
                 .collect(Collectors.toList());
     }
 
