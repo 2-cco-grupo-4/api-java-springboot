@@ -41,7 +41,7 @@ public class SecurityConfigurations implements WebMvcConfigurer {
                     req.requestMatchers(HttpMethod.GET, "/v3/api-docs/**").permitAll();
                     req.requestMatchers(HttpMethod.POST, "/clientes/cadastrar").permitAll();
                     req.requestMatchers(HttpMethod.POST, "/fotografos/cadastrar").permitAll();
-                    req.requestMatchers(HttpMethod.GET, "/fotografos/**").hasRole("FOTOGRAFO");
+                    req.requestMatchers(HttpMethod.GET, "/fotografos/**").hasAnyRole("FOTOGRAFO", "CLIENTE");
                     req.requestMatchers(HttpMethod.POST, "/fotografos/**").hasRole("FOTOGRAFO");
                     req.requestMatchers(HttpMethod.PATCH, "/fotografos/**").hasRole("FOTOGRAFO");
                     req.requestMatchers(HttpMethod.GET, "/eventos").hasAnyRole("FOTOGRAFO", "ADMIN");
@@ -68,8 +68,8 @@ public class SecurityConfigurations implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3000")
-                .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT");
+                .allowedOrigins("https://picme.app.br", "http://localhost:3000", "*", "**")
+                .allowedMethods("*");
     }
 
     @Bean
