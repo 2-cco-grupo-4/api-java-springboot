@@ -56,4 +56,11 @@ public class ImagemController {
         return ResponseEntity.status(204).build();
     }
 
+    @Operation(summary = "Buscar imagens de um álbum de um fotógrafo", description = "Passando o ID do fotógrafo, podemos listar as informações básicas dos álbuns do fotógrafo")
+    @SecurityRequirement(name = "Bearer")
+    @GetMapping("/albumFotografo")
+    public ResponseEntity<List<FeedImagemDTO>> listarImagensAlbumFotografo(@RequestParam Long idFotografo){
+        return ResponseEntity.status(200).body(imagemService.listarImagensAlbumFotografo(idFotografo));
+    }
+
 }

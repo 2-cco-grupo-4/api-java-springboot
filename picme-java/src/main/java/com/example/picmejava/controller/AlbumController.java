@@ -59,7 +59,7 @@ public class AlbumController {
         if (albumService.listarAlbunsFotografo(idFotografo).isEmpty()){
             return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.status(200).body(albumService.listar());
+        return ResponseEntity.status(200).body(albumService.listarAlbunsFotografo(idFotografo));
     }
 
     @Operation(summary = "Obter album", description = "Passando o ID do album podemos obter todas as suas informações")
