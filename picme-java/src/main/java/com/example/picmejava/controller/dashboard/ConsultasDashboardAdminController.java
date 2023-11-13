@@ -39,12 +39,32 @@ public class ConsultasDashboardAdminController {
     /* 3 */
     @Operation(summary = "Obter contagem de contatos por tema", description = "Obtém a contagem de contatos por tema")
     @GetMapping("/contagem-tema-contato")
-    public ResponseEntity<List<vwTemaCountSessoes>> trazerContagemTemaContato() {
-        if (dashboardAdminService.trazerContagemTemaContato().isEmpty()){
+    public ResponseEntity<List<vwTemaCountSessoes>> trazerContagemTemaContato(@RequestParam String mes, @RequestParam int ano) {
+        if (dashboardAdminService.trazerContagemTemaContato(mes, ano).isEmpty()){
             return ResponseEntity.noContent().build();
         }
 
-        return ResponseEntity.ok(dashboardAdminService.trazerContagemTemaContato());
+        return ResponseEntity.ok(dashboardAdminService.trazerContagemTemaContato(mes, ano));
+    }
+
+    @Operation(summary = "Obter fluxo de conversão de contatos em sessões", description = "Obtém o fluxo de conversão de contatos em sessões")
+    @GetMapping("/fluxo-conversao-contatos")
+    public ResponseEntity<List<vwFluxoSessoesConvertidas>> trazerFluxoConversaoContatos(@RequestParam String mes, @RequestParam int ano) {
+        if (dashboardAdminService.trazerFluxoConversaoContrato(mes, ano).isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(dashboardAdminService.trazerFluxoConversaoContrato(mes, ano));
+    }
+
+    @Operation(summary = "Obter as formas de pagamento mais utilizadas", description = "Obtém as formas de pagamento mais utilizadas")
+    @GetMapping("/formas-pagamento-mais-utilizadas")
+    public ResponseEntity<List<vwFormasPagamentoMaisPopulares>> trazerFormasPagamentoMaisUtilizadas(@RequestParam String mes, @RequestParam int ano) {
+        if (dashboardAdminService.trazerFormasPagamentoPopulares(mes, ano).isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(dashboardAdminService.trazerFormasPagamentoPopulares(mes, ano));
     }
 
     /* 2 */
