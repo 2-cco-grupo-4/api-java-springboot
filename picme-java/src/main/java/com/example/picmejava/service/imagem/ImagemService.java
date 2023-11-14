@@ -1,7 +1,10 @@
 package com.example.picmejava.service.imagem;
 
 import com.example.picmejava.model.Album;
+import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.Imagem;
+import com.example.picmejava.repository.FotografoRepository;
+import com.example.picmejava.s3.S3;
 import com.example.picmejava.service.imagem.dto.CadastroImagemDTO;
 import com.example.picmejava.service.imagem.dto.FeedImagemDTO;
 import com.example.picmejava.service.imagem.dto.RetornoImagemDTO;
@@ -9,13 +12,15 @@ import com.example.picmejava.infra.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.model.mapper.ImagemMapper;
 import com.example.picmejava.repository.AlbumRepository;
 import com.example.picmejava.repository.ImagemRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,6 +30,12 @@ public class ImagemService {
     private final AlbumRepository albumRepository;
     private final ImagemRepository imagemRepository;
     private final ImagemMapper imagemMapper = new ImagemMapper();
+    private final Logger logger = LoggerFactory.getLogger(ImagemService.class);
+    @Autowired
+    private FotografoRepository fotografoRepository;
+
+    @Autowired
+    private S3<Fotografo> s3;
 
     @Autowired
     public ImagemService(AlbumRepository albumRepository, ImagemRepository imagemRepository) {
@@ -68,9 +79,25 @@ public class ImagemService {
                 .collect(Collectors.toList());
     }
 
-    private Album getAlbum(Long idAlbum) {
+    public Album getAlbum(Long idAlbum) {
         return albumRepository.findById(idAlbum)
                 .orElseThrow(() -> new EntidadeNaoEncontradaException("Album não encontrado"));
+    }
+
+    public void uploadImage(
+            Long idUsuario,
+            MultipartFile image
+    ) {
+
+        logger.info("Adicionando foto ao usuário, id: " + idUsuario);
+        Fotografo fotografo = fotografoRepository.findById(idUsuario).orElseThrow(
+                () -> new EntidadeNaoEncontradaException("Usuário com ID: " + idUsuario + "Não encontrado")
+        );
+
+        String imagemId = s3.uploadImage(image);
+
+        //todo Após salvar a imagem do S3, salvar também o ID gerado para essa imagem do usuário, no
+        // banco de dados (tb_image)
     }
 
 }

@@ -33,7 +33,9 @@ public class SecurityConfigurations implements WebMvcConfigurer {
                 .authorizeHttpRequests(req -> {
                     req.requestMatchers(HttpMethod.POST, "/login").permitAll();
                     req.requestMatchers(HttpMethod.POST, "/usuario/**").permitAll();
-                    req.requestMatchers(HttpMethod.POST, "/s3/**").permitAll();
+                    req.requestMatchers(HttpMethod.POST, "/imagens/**").permitAll();
+                    req.requestMatchers(HttpMethod.GET, "/s3/**").permitAll();
+                    req.requestMatchers(HttpMethod.PUT, "/s3/**").permitAll();
                     req.requestMatchers(HttpMethod.GET, "/swagger-ui/**").permitAll();
                     req.requestMatchers(HttpMethod.GET, "/v3/api-docs/**").permitAll();
                     req.requestMatchers(HttpMethod.POST, "/clientes/cadastrar").permitAll();
@@ -44,8 +46,8 @@ public class SecurityConfigurations implements WebMvcConfigurer {
                     req.requestMatchers(HttpMethod.GET, "/eventos").hasAnyRole("FOTOGRAFO", "ADMIN");
                     req.requestMatchers(HttpMethod.GET, "/instagram/**").permitAll();
                     req.requestMatchers(HttpMethod.POST, "/instagram/**").permitAll();
-                    req.requestMatchers(HttpMethod.POST, "/imagens").hasAnyRole("FOTOGRAFO", "ADMIN");
-                    req.requestMatchers(HttpMethod.PUT, "/imagens").hasAnyRole("FOTOGRAFO", "ADMIN");
+//                    req.requestMatchers(HttpMethod.POST, "/imagens").hasAnyRole("FOTOGRAFO", "ADMIN");
+//                    req.requestMatchers(HttpMethod.PUT, "/imagens").hasAnyRole("FOTOGRAFO", "ADMIN");
                     req.requestMatchers(HttpMethod.POST, "/albums").hasAnyRole("FOTOGRAFO", "ADMIN");
                     req.requestMatchers(HttpMethod.POST, "/temas").hasAnyRole("FOTOGRAFO", "ADMIN");
                     req.requestMatchers(HttpMethod.GET, "/temas/pesquisar").permitAll();
