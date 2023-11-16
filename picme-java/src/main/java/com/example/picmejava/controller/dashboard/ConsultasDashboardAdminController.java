@@ -67,6 +67,16 @@ public class ConsultasDashboardAdminController {
         return ResponseEntity.ok(dashboardAdminService.trazerFormasPagamentoPopulares(mes, ano));
     }
 
+    @Operation(summary = "Obter os estados com mais sessões agendadas no mês", description = "Obtém os estados com mais sessões agendadas no mês")
+    @GetMapping("/estados-mais-sessoes-agendadas")
+    public ResponseEntity<List<vwEstadosMaisSessoes>> trazerEstadosMaisSessoesAgendadas(@RequestParam String mes, @RequestParam int ano) {
+        if (dashboardAdminService.trazerEstadosMaisSessoesAgendadas(mes, ano).isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(dashboardAdminService.trazerEstadosMaisSessoesAgendadas(mes, ano));
+    }
+
     /* 2 */
 //    @Operation(summary = "Obter faixa etária dos clientes por tema", description = "Retorna a contagem de clientes divididos pela sua faixa etária e tema de evento")
 //    @GetMapping("/faixa-etaria-clientes-tema/{tema}")

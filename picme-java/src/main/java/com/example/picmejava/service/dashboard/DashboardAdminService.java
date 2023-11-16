@@ -126,6 +126,28 @@ public class DashboardAdminService {
         return formasPagamentoPopulares;
     }
 
+    @Operation(summary = "Retornar os estados com mais sessões agendadas no mês", description = "Retorna os estados com mais sessões agendadas no mês")
+    public List<vwEstadosMaisSessoes> trazerEstadosMaisSessoesAgendadas(String mes, int ano) {
+        Query query = entityManager.createNativeQuery("SELECT * FROM vw_estados_mais_sessoes WHERE Mes = :mes AND Ano = :ano");
+        query.setParameter("mes", mes);
+        query.setParameter("ano", ano);
+        List<Object[]> resultado = query.getResultList();
+
+        List<vwEstadosMaisSessoes> estadosMaisSessoes = new ArrayList<>();
+
+        for (Object[] linha : resultado) {
+            String estado = (String) linha[0];
+            Long total = (Long) linha[1];
+            String mesQuery = (String) linha[2];
+            int anoQuery = (int) linha[3];
+
+            vwEstadosMaisSessoes estados = new vwEstadosMaisSessoes(estado, total, mesQuery, anoQuery);
+            estadosMaisSessoes.add(estados);
+        }
+
+        return estadosMaisSessoes;
+    }
+
     @Operation(summary = "Obter contagem de clientes que fecharam acordo em acordo em uma semana", description = "Retorna a contagem de clientes em acordo em uma semana.")
     public List<vwClientesImediatosMes> trazerContagemClientesAcordoUmaSemana() {
         Query query = entityManager.createNativeQuery("SELECT * FROM vw_clientes_imediatos_mes");
