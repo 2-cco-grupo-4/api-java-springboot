@@ -8,6 +8,7 @@ import com.example.picmejava.service.imagem.ImagemService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -67,8 +68,14 @@ public class ImagemController {
             @PathVariable Long id,
             @RequestParam("file") MultipartFile file
     ) {
-        imagemService.uploadImage(id, file);
+        imagemService.putImage(id, file);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
+    @GetMapping(
+            value = "{id}",
+            produces = MediaType.IMAGE_JPEG_VALUE
+    )
+    public
 
 }

@@ -23,28 +23,18 @@ public class S3<T> {
 
     private final Logger logger = LoggerFactory.getLogger(S3.class);
 
-
-//    public byte[] getImage(@NotNull T entity, String imageUrl) {
-//
-//        // Bucket, Path
-//        Pair<String, String> bucketParams = getBucketParams(entity, imageUrl);
-//
-//        logger.info("Pegando imagem do usuário no bucket: " + bucketParams.getFirst() + " e no caminho: " + bucketParams.getSecond());
-//
-//        return service.getObject(bucketParams.getFirst(), bucketParams.getSecond());
-//    }
-
-    public String uploadImage(MultipartFile image) {
+    public String putImage(MultipartFile image) {
 
         String imageId = UUID.randomUUID().toString();
 
-        logger.info("Inserindo imagem do usuário no bucket: " + bucket + " e no caminho: " + path);
+        logger.info("Inserindo imagem: " + bucket + " e no caminho: " + path);
 
         try {
-            service.upload(
+            service.putObject(
                     bucket,
                     path,
-                    image.getBytes()
+                    image.getBytes(),
+                    image.getContentType()
             );
 
         } catch (IOException e) {
@@ -53,19 +43,10 @@ public class S3<T> {
         return imageId;
     }
 
-//    private Pair<String, String> getBucketParams(@NotNull T entity, String imageId) {
-//
-//        if (entity instanceof User user) {
-//            return Pair.of(bucket.getUserBucket(), path.getImagePath(user, imageId));
-//        } else if (entity instanceof MeetingPoint meetingPoint) {
-//            return Pair.of(bucket.getMeetingPointBucket(), path.getImagePath(meetingPoint, imageId));
-//        } else if (entity instanceof Event event) {
-//            return Pair.of(bucket.getEventBucket(), path.getImagePath(event, imageId));
-//        } else {
-//            return Pair.of(bucket.getUtilsBucket(), path.getImagePath(entity, null));
-//        }
-//
-//    }
+    public byte[] getImage(String pathImage) {
+        logger.info("Retornando imagem: " + bucket + " caminho: " + path);
 
+        return service.getObject(bucket, pathImage);
+    }
 
 }

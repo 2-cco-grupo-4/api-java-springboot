@@ -84,20 +84,18 @@ public class ImagemService {
                 .orElseThrow(() -> new EntidadeNaoEncontradaException("Album não encontrado"));
     }
 
-    public void uploadImage(
-            Long idUsuario,
+    public void putImage(
+            Long idFotografo,
             MultipartFile image
     ) {
 
-        logger.info("Adicionando foto ao usuário, id: " + idUsuario);
-        Fotografo fotografo = fotografoRepository.findById(idUsuario).orElseThrow(
-                () -> new EntidadeNaoEncontradaException("Usuário com ID: " + idUsuario + "Não encontrado")
+        Fotografo fotografo = fotografoRepository.findById(idFotografo).orElseThrow(
+                () -> new EntidadeNaoEncontradaException("Usuário: " + idFotografo + "Não encontrado")
         );
 
-        String imagemId = s3.uploadImage(image);
+        String imagemId = s3.putImage(image);
 
         //todo Após salvar a imagem do S3, salvar também o ID gerado para essa imagem do usuário, no
         // banco de dados (tb_image)
     }
-
 }
