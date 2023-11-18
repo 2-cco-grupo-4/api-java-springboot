@@ -1,5 +1,7 @@
 package com.example.picmejava.controller;
 
+import com.example.picmejava.model.Fotografo;
+import com.example.picmejava.model.Sessao;
 import com.example.picmejava.service.evento.dto.CadastroSessaoDTO;
 import com.example.picmejava.service.evento.dto.CadastroSessaoExternoDTO;
 import com.example.picmejava.service.evento.dto.RetornoEventoDTO;
@@ -41,16 +43,14 @@ public class EventoController {
 
     @Operation(summary = "Cadastrar Sessão Externa", description = "Passando o JSON da sessão, podemos cadastrar uma nova sessão externa")
     @PostMapping("/cadastrarExterno")
-    public ResponseEntity<RetornoEventoDTO> cadastrarExterno(@RequestBody CadastroSessaoExternoDTO novoEvento){
+    public ResponseEntity<Sessao> cadastrarExterno(@RequestBody CadastroSessaoExternoDTO novoEvento){
         return ResponseEntity.status(201).body(sessaoService.cadastrarExterno(novoEvento));
     }
 
     @Operation(summary = "Listar sessões do fotógrafo", description = "Obter a lista de todas as sessões do fotógrafo")
     @GetMapping("/sessoes")
-    public ResponseEntity<List<RetornoEventoDTO>> listarSessoesFotografo(@RequestParam Long id){
-        if (sessaoService.listarPorFotografo(id).isEmpty()){
-            ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.status(200).body(sessaoService.listarPorFotografo(id));
+    public ResponseEntity<List<RetornoEventoDTO>> listarSessoesFotografo(@RequestParam Long idFotografo){
+
+        return ResponseEntity.status(200).body(sessaoService.listarPorFotografo(idFotografo));
     }
 }

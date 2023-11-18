@@ -5,6 +5,8 @@ import com.example.picmejava.service.album.dto.AtualizarAlbumDTO;
 import com.example.picmejava.service.album.dto.CadastroAlbumDTO;
 import com.example.picmejava.service.album.dto.RetornoAlbumDTO;
 import com.example.picmejava.service.album.AlbumService;
+
+import com.example.picmejava.service.utils.BinaryTree;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -59,7 +61,7 @@ public class AlbumController {
         if (albumService.listarAlbunsFotografo(idFotografo).isEmpty()){
             return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.status(200).body(albumService.listar());
+        return ResponseEntity.status(200).body(albumService.listar(idFotografo));
     }
 
     @Operation(summary = "Obter album", description = "Passando o ID do album podemos obter todas as suas informações")
@@ -68,5 +70,18 @@ public class AlbumController {
     public ResponseEntity<RetornoAlbumDTO> obterAlbum(@RequestParam Long idAlbum){
         return ResponseEntity.status(200).body(albumService.buscarPorIdRetornoAlbumDTO(idAlbum));
     }
+
+//    @GetMapping("/album-arvore")
+//    public ResponseEntity<BinaryTree> listarAlbumArvore(){
+//        BinaryTree arvore = new BinaryTree();
+//        List<RetornoAlbumDTO> albuns = albumService.listar();
+//
+//        for (RetornoAlbumDTO album : albuns) {
+//            arvore.insert(album);
+//        }
+//
+//        return ResponseEntity.ok(arvore);
+//    }
+//
 
 }

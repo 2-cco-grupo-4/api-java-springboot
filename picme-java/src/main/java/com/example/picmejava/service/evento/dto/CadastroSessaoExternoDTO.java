@@ -20,6 +20,7 @@ public class CadastroSessaoExternoDTO {
     private String cidade;
     private String bairro;
     private String estado;
+    private String logradouro ;
     private String complemento;
     private String statusSessao;
     private String cep;
