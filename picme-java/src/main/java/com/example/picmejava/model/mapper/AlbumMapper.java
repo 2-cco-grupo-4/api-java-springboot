@@ -4,10 +4,7 @@ import com.example.picmejava.model.Album;
 import com.example.picmejava.model.Fotografo;
 import com.example.picmejava.model.Imagem;
 import com.example.picmejava.model.Tema;
-import com.example.picmejava.service.album.dto.CadastroAlbumDTO;
-import com.example.picmejava.service.album.dto.PerfilAlbumDTO;
-import com.example.picmejava.service.album.dto.AtualizarAlbumDTO;
-import com.example.picmejava.service.album.dto.RetornoAlbumDTO;
+import com.example.picmejava.service.album.dto.*;
 
 import java.util.List;
 
@@ -62,6 +59,15 @@ public class AlbumMapper {
         album.setTema(tema);
 
         return album;
+    }
+
+    public CapaAlbumDTO toCapaAlbumDto(Album dados){
+        CapaAlbumDTO dto = new CapaAlbumDTO();
+
+        dto.setIdAlbum(dados.getId());
+        dto.setPathCapa(dados.getImagems().get(0).getMediaUrl());
+
+        return dto;
     }
 
     public Album objectToAlbum(Object[] object) {

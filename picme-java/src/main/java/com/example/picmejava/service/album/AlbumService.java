@@ -10,6 +10,7 @@ import com.example.picmejava.repository.FotografoRepository;
 import com.example.picmejava.repository.TemaRepository;
 import com.example.picmejava.service.album.dto.AtualizarAlbumDTO;
 import com.example.picmejava.service.album.dto.CadastroAlbumDTO;
+import com.example.picmejava.service.album.dto.CapaAlbumDTO;
 import com.example.picmejava.service.album.dto.RetornoAlbumDTO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
@@ -81,6 +82,14 @@ public class AlbumService {
         List<Album> albums = albumRepository.findAllByFotografo(getFotografo(idFotografo));
         return albums.stream()
                 .map(albumMapper::toRetornoAlbumDTO)
+                .toList();
+    }
+
+    @Operation(summary = "Listar todas as capas de álbum de um fotógrafo")
+    public List<CapaAlbumDTO> listarCapaAlbum(Long idFotografo) {
+        List<Album> albums = albumRepository.findAllByFotografo(getFotografo(idFotografo));
+        return albums.stream()
+                .map(albumMapper::toCapaAlbumDto)
                 .toList();
     }
 
