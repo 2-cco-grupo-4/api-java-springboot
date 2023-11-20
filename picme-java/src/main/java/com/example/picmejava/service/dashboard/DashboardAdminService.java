@@ -96,8 +96,9 @@ public class DashboardAdminService {
             Long quantidade = (Long) linha[0];
             String mesQuery = (String) linha[1];
             Long anoQuery = (Long) linha[2];
+            String status = (String) linha[3];
 
-            vwFluxoSessoesConvertidas fluxo = new vwFluxoSessoesConvertidas(quantidade, mesQuery, anoQuery);
+            vwFluxoSessoesConvertidas fluxo = new vwFluxoSessoesConvertidas(quantidade, mesQuery, anoQuery, status);
             fluxoConversaoContratoSessao.add(fluxo);
         }
 

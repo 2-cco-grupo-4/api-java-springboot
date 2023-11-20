@@ -14,5 +14,6 @@ public class vwFluxoSessoesConvertidas {
     private Long quantidade;
     private String mes;
     private Long ano;
+    private String statusSessao;
 
 }
