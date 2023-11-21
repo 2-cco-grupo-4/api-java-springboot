@@ -26,7 +26,7 @@ public class InstagramService {
 
     @Operation(summary = "Obter token de acesso do usuário do Instagram")
     public Mono<AccessToken> postUsuarioInsta(String codigo){
-        String cURL = "http://10.0.0.244:8080/instagram/access_token";
+        String cURL = "http://localhost:8090/instagram/access_token";
 
         return webClient.post()
                 .uri(cURL)
@@ -53,7 +53,7 @@ public class InstagramService {
 
     @Operation(summary = "Obter imagens do usuário no Instagram")
     public Mono<ListData> getImagensInsta(String accessToken) {
-        String cURL = "http://10.0.0.244:8080/instagram/lista_imagens?accessToken=" + accessToken;
+        String cURL = "http://localhost:8090/instagram/lista_imagens?accessToken=" + accessToken;
 
         ListData response = webClient.get()
                 .uri(cURL)
@@ -67,7 +67,7 @@ public class InstagramService {
 
     @Operation(summary = "Obter detalhes de uma imagem do Instagram")
     public Mono<Media> getImagem(String idImagem, String accessToken) {
-        String cURL = String.format("http://10.0.0.244:8080/instagram/imagem?idImagem=%s&accessToken=%s", idImagem, accessToken);
+        String cURL = String.format("http://localhost:8090/instagram/imagem?idImagem=%s&accessToken=%s", idImagem, accessToken);
 
         Media response = webClient.get()
                 .uri(cURL)
@@ -103,7 +103,7 @@ public class InstagramService {
     @Operation(summary = "Obter access token de longa duração", description = "Endpoint utilizado para gerar um acces token de longa duração (Válido por 60 dias)")
     public Mono<LongAccessToken> getLongAccessToken(String accessToken) {
 
-        String cURL = String.format("http://10.0.0.244:8080/instagram/long_access_token?accessToken=%s", accessToken);
+        String cURL = String.format("http://localhost:8090/instagram/long_access_token?accessToken=%s", accessToken);
 
         LongAccessToken longAccessToken = webClient.get()
                 .uri(cURL)
@@ -119,7 +119,7 @@ public class InstagramService {
     @Operation(summary = "Renovar access token de longa duração", description = "Endpoint utilizado para obter um long access token renovado por mais 60 dias")
     public Mono<LongAccessToken> getRefreshedLongAccessToken(String accessToken) {
 
-        String cURL = String.format("http://10.0.0.244:8080/instagram/refresh_access_token?accessToken=%s", accessToken);
+        String cURL = String.format("http://localhost:8090/instagram/refresh_access_token?accessToken=%s", accessToken);
 
         LongAccessToken longAccessToken = webClient.get()
                 .uri(cURL)
