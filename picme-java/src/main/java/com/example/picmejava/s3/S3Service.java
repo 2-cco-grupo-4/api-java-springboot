@@ -1,17 +1,15 @@
 package com.example.picmejava.s3;
 
-import org.springframework.http.ResponseEntity;
+import com.example.picmejava.infra.exception.S3UploadException;
 import org.springframework.stereotype.Service;
-import software.amazon.awssdk.core.ResponseBytes;
 import software.amazon.awssdk.core.ResponseInputStream;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.GetObjectResponse;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
-import software.amazon.awssdk.services.s3.model.S3Exception;
 
-import java.io.*;
+import java.io.IOException;
 
 @Service
 public class S3Service {
@@ -41,9 +39,12 @@ public class S3Service {
                 .bucket(bucket)
                 .build();
 
-        ResponseBytes<GetObjectResponse> objectBytes = s3Client.getObjectAsBytes(objectRequest);
-        byte[] data = objectBytes.asByteArray();
+        ResponseInputStream<GetObjectResponse> response = s3Client.getObject(objectRequest);
 
-        return data;
+        try {
+            return response.readAllBytes();
+        } catch (IOException e) {
+            throw new S3UploadException(e.getMessage());
+        }
     }
 }

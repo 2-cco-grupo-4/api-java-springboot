@@ -6,6 +6,9 @@ import com.example.picmejava.service.album.AlbumService;
 import com.example.picmejava.service.imagem.dto.CadastroImagemDTO;
 import com.example.picmejava.service.imagem.dto.PerfilImagemDTO;
 import com.example.picmejava.service.imagem.dto.RetornoImagemDTO;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.awt.*;
 
 public class ImagemMapper {
 
@@ -46,5 +49,16 @@ public class ImagemMapper {
 
         return imagem;
     }
+
+//    public Imagem toImage(Long id, String imageId) {
+//        Imagem imagem = new Imagem();
+//
+//        imagem.setOrigemImagem("S3");
+//        imagem.setMediaUrl(imageId);
+//        imagem.set
+//
+//        return imagem;
+//    }
+
 
 }

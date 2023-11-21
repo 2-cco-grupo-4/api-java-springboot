@@ -20,6 +20,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.awt.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -93,9 +94,23 @@ public class ImagemService {
                 () -> new EntidadeNaoEncontradaException("Usuário: " + idFotografo + "Não encontrado")
         );
 
+
         String imagemId = s3.putImage(image);
 
-        //todo Após salvar a imagem do S3, salvar também o ID gerado para essa imagem do usuário, no
-        // banco de dados (tb_image)
+        fotografo.setImageUrl(imagemId);
+        fotografoRepository.save(fotografo);
+    }
+
+    public byte[] getImage(Long id) {
+
+        Fotografo fotografo = fotografoRepository.findById(id).orElseThrow(
+                () -> new EntidadeNaoEncontradaException("Fotogrado com o ID: " + id + " não encontrado!")
+        );
+
+        if (fotografo.getImageUrl() == null) {
+            throw new EntidadeNaoEncontradaException("Usuário com id: " + id + " não tem imagem cadastrada");
+        }
+
+        return s3.getImage(fotografo.getImageUrl());
     }
 }

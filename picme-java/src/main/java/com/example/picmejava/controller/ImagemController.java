@@ -1,14 +1,15 @@
 package com.example.picmejava.controller;
 
-import com.example.picmejava.model.Imagem;
+import com.example.picmejava.s3.S3;
+import com.example.picmejava.service.imagem.ImagemService;
 import com.example.picmejava.service.imagem.dto.CadastroImagemDTO;
 import com.example.picmejava.service.imagem.dto.FeedImagemDTO;
 import com.example.picmejava.service.imagem.dto.RetornoImagemDTO;
-import com.example.picmejava.service.imagem.ImagemService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.Getter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -26,6 +27,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/imagens")
 public class ImagemController {
+
+    private final Logger logger = LoggerFactory.getLogger(ImagemController.class);
 
     @Autowired
     public ImagemService imagemService;
@@ -61,7 +64,7 @@ public class ImagemController {
     }
 
     @PostMapping(
-            value = "{id}/imagem",
+            value = "/{id}/upload",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE
     )
     public ResponseEntity<Void> uploadImage(
@@ -73,9 +76,16 @@ public class ImagemController {
     }
 
     @GetMapping(
-            value = "{id}",
+            value = "/{id}",
             produces = MediaType.IMAGE_JPEG_VALUE
     )
-    public
+    public ResponseEntity<byte[]> getImage(
+            @PathVariable Long id
+    ) {
+        logger.info("Recebendo requisição do id: " + id);
+        byte[] image = imagemService.getImage(id);
+
+        return ResponseEntity.ok(image);
+    }
 
 }
