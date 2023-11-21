@@ -48,6 +48,13 @@ public class ImagemController {
         return ResponseEntity.status(200).body(pathsAndIds);
     }
 
+    @Operation(summary = "Listar paths das imagens e IDs dos álbuns de um tema especifico")
+    @GetMapping("/paths/{nomeTema}")
+    public ResponseEntity<List<FeedImagemDTO>> listarFeedPorTema(@PathVariable String nomeTema) {
+        List<FeedImagemDTO> pathsAndIds = imagemService.listarFeedPorTema(nomeTema);
+        return ResponseEntity.status(200).body(pathsAndIds);
+    }
+
     @Operation(summary = "Remover uma imagem", description = "Passando o ID da imagem, podemos excluir determinada imagem")
     @SecurityRequirement(name = "Bearer")
     @DeleteMapping("/{id}")
