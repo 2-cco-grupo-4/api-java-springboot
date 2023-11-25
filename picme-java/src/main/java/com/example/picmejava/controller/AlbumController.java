@@ -61,6 +61,13 @@ public class AlbumController {
         }
         return ResponseEntity.status(200).body(albumService.listar());
     }
+    @Operation(summary = "Listar albuns", description = "Podemos obter a lista de todos os albuns com árvore Binária ")
+    @SecurityRequirement(name = "Bearer")
+    @GetMapping("/listar-arvore")
+    public ResponseEntity<List<RetornoAlbumDTO>> listarArvore(@RequestParam Long idFotografo){
+        return ResponseEntity.status(200).body(albumService.listarArvore(idFotografo));
+    }
+
 
     @Operation(summary = "Obter album", description = "Passando o ID do album podemos obter todas as suas informações")
     @SecurityRequirement(name = "Bearer")

@@ -19,6 +19,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
                 ),
                 license = @License(name = "UNLICENSED"),
                 version = "0.9"
+
         )
 )
 
