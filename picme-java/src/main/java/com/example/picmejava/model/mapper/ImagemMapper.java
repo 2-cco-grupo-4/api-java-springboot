@@ -20,6 +20,7 @@ public class ImagemMapper {
         dto.setPath(dados.getMediaUrl());
         dto.setTipo(dados.getMediaType());
         dto.setDescricao(dados.getCaption());
+        dto.setOrigemImagem(dados.getOrigemImagem());
 
         return dto;
     }
@@ -48,6 +49,18 @@ public class ImagemMapper {
 
 
         return imagem;
+    }
+
+    public Imagem toImagemFromS3(CadastroImagemDTO dados, Album album) {
+        Imagem imagem = new Imagem();
+
+        imagem.setMediaUrl(dados.getMediaUrl());
+        imagem.setOrigemImagem(dados.getOrigemImagem());
+        imagem.setUpdatedAt(dados.getUpdatedAt());
+        imagem.setIdAlbum(album);
+
+        return imagem;
+
     }
 
 //    public Imagem toImage(Long id, String imageId) {

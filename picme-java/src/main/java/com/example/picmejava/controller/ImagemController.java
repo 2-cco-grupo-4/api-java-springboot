@@ -55,6 +55,13 @@ public class ImagemController {
         return ResponseEntity.status(200).body(pathsAndIds);
     }
 
+    @Operation(summary = "Forçar teste de imagens de um album para o feed", description = "Passando o ID do album, podemos listar todas as imagens de determinado album")
+    @SecurityRequirement(name = "Bearer")
+    @GetMapping("/feed/{id}")
+    public ResponseEntity<List<FeedImagemDTO>> listarFeed(@PathVariable Long id){
+        return ResponseEntity.status(200).body(imagemService.listarFeed(id));
+    }
+
     @Operation(summary = "Remover uma imagem", description = "Passando o ID da imagem, podemos excluir determinada imagem")
     @SecurityRequirement(name = "Bearer")
     @DeleteMapping("/{id}")
@@ -86,6 +93,43 @@ public class ImagemController {
         byte[] image = imagemService.getImage(id);
 
         return ResponseEntity.ok(image);
+    }
+
+    @PostMapping(
+            value = "album/{id}/upload",
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE
+    )
+    public ResponseEntity<Void> uploadImageAlbum(
+            @PathVariable Long id,
+            @RequestParam("file") MultipartFile file
+    ) {
+        imagemService.putImageAlbum(id, file);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @GetMapping(
+            value = "album/{id}",
+            produces = MediaType.IMAGE_JPEG_VALUE
+    )
+    public ResponseEntity<byte[]> getImageAlbum(
+            @PathVariable Long id
+    ) {
+        logger.info("Recebendo requisição do id: " + id);
+        byte[] image = imagemService.getImageAlbum(id);
+
+        return ResponseEntity.ok(image);
+    }
+
+    @PostMapping(
+            value = "album/{id}/multiUpload",
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE
+    )
+    public ResponseEntity<Void> uploadMultiImageAlbum(
+            @PathVariable Long id,
+            @RequestParam("file") List<MultipartFile> files
+    ) {
+        imagemService.putListImagemAlbum(id, files);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
 }

@@ -49,4 +49,31 @@ public class S3<T> {
         return service.getObject(bucket, pathImage);
     }
 
+    public String putImageAlbum(MultipartFile image, String idAlbum) {
+
+        String imageId = UUID.randomUUID().toString();
+        path = String.format("album/%s/%s", idAlbum, imageId);
+
+        logger.info("Inserindo imagem: " + bucket + " e no caminho: " + path);
+
+        try {
+            service.putObject(
+                    bucket,
+                    path,
+                    image.getBytes(),
+                    image.getContentType()
+            );
+
+        } catch (IOException e) {
+            throw new S3UploadException("Erro ao upload imagem: " + e.getMessage());
+        }
+        return String.format("album/%s/%s", idAlbum, imageId);
+    }
+
+    public byte[] getImageAlbum(String pathImage) {
+        logger.info("Retornando imagem: " + bucket + " caminho: " + path);
+
+        return service.getObject(bucket, pathImage);
+    }
+
 }

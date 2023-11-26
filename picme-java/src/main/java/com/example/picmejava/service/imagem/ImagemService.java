@@ -21,6 +21,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.awt.*;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -76,7 +78,16 @@ public class ImagemService {
     public List<FeedImagemDTO> listarFeed() {
         List<Imagem> imagens = imagemRepository.findAll();
         return imagens.stream()
-                .map(imagem -> new FeedImagemDTO(imagem.getId(), imagem.getMediaUrl(), imagem.getIdAlbum().getId(), imagem.getIdAlbum().getFotografo().getNome()))
+                .map(imagem -> new FeedImagemDTO(imagem.getId(), imagem.getMediaUrl(), imagem.getIdAlbum().getId(), imagem.getIdAlbum().getFotografo().getNome(), imagem.getOrigemImagem()))
+                .collect(Collectors.toList());
+    }
+
+    @Operation(summary = "Forçar teste de imagens de um album para o feed")
+    public List<FeedImagemDTO> listarFeed(Long id) {
+        List<Imagem> imagens = imagemRepository.findAll();
+        return imagens.stream()
+                .filter(imagem -> imagem.getIdAlbum().getId() == id)
+                .map(imagem -> new FeedImagemDTO(imagem.getId(), imagem.getMediaUrl(), imagem.getIdAlbum().getId(), imagem.getIdAlbum().getFotografo().getNome(), imagem.getOrigemImagem()))
                 .collect(Collectors.toList());
     }
 
@@ -113,4 +124,56 @@ public class ImagemService {
 
         return s3.getImage(fotografo.getImageUrl());
     }
+
+    public void putImageAlbum(
+            Long idAlbum,
+            MultipartFile image
+    ) {
+
+        Album album = albumRepository.findById(idAlbum).orElseThrow(
+                () -> new EntidadeNaoEncontradaException("Album: " + idAlbum + "Não encontrado")
+        );
+
+        String imagemId = s3.putImageAlbum(image, Long.toString(idAlbum));
+
+        CadastroImagemDTO novaImagem = new CadastroImagemDTO(imagemId, "s3", LocalDateTime.now(), idAlbum);
+
+        Imagem imagem = imagemMapper.toImagemFromS3(novaImagem, album);
+
+        imagemRepository.save(imagem);
+    }
+
+    public byte[] getImageAlbum(Long id) {
+
+        Imagem imagem = imagemRepository.findById(id).orElseThrow(
+                () -> new EntidadeNaoEncontradaException("Imagem com o ID: " + id + " não encontrada!")
+        );
+
+        if (imagem.getMediaUrl() == null) {
+            throw new EntidadeNaoEncontradaException("Imagem com id: " + id + " não tem imagem cadastrada");
+        }
+
+        return s3.getImage(imagem.getMediaUrl());
+    }
+
+    public void putListImagemAlbum(
+            Long idAlbum,
+            List<MultipartFile> images
+    ) {
+
+        Album album = albumRepository.findById(idAlbum).orElseThrow(
+                () -> new EntidadeNaoEncontradaException("Album: " + idAlbum + "Não encontrado")
+        );
+
+        for (MultipartFile image : images) {
+            String imagemId = s3.putImageAlbum(image, Long.toString(idAlbum));
+
+            CadastroImagemDTO novaImagem = new CadastroImagemDTO(imagemId, "s3", LocalDateTime.now(), idAlbum);
+
+            Imagem imagem = imagemMapper.toImagemFromS3(novaImagem, album);
+
+            imagemRepository.save(imagem);
+        }
+    }
+
 }
