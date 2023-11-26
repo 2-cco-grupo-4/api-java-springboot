@@ -89,6 +89,7 @@ public class AlbumService {
     public List<CapaAlbumDTO> listarCapaAlbum(Long idFotografo) {
         List<Album> albums = albumRepository.findAllByFotografo(getFotografo(idFotografo));
         return albums.stream()
+                .filter(album -> !album.getImagems().isEmpty())
                 .map(albumMapper::toCapaAlbumDto)
                 .toList();
     }

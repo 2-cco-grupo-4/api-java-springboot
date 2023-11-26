@@ -65,7 +65,12 @@ public class AlbumMapper {
         CapaAlbumDTO dto = new CapaAlbumDTO();
 
         dto.setIdAlbum(dados.getId());
-        dto.setPathCapa(dados.getImagems().get(0).getMediaUrl());
+        if (dados.getImagems().size() > 0){
+            dto.setPathCapa(dados.getImagems().get(0).getMediaUrl());
+            dto.setOrigemImagem(dados.getImagems().get(0).getOrigemImagem());
+            dto.setIdImagem(dados.getImagems().get(0).getId());
+        }
+//        dto.setPathCapa(dados.getImagems().get(0).getMediaUrl());
 
         return dto;
     }

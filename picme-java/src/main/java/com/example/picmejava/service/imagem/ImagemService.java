@@ -96,18 +96,18 @@ public class ImagemService {
         List<Imagem> imagens = imagemRepository.findAll();
         return imagens.stream()
                 .filter(imagem -> imagem.getIdAlbum().getFotografo().getId().equals(idFotografo))
-                .map(imagem -> new FeedImagemDTO(imagem.getId(), imagem.getMediaUrl(), imagem.getIdAlbum().getId(), imagem.getIdAlbum().getFotografo().getNome()))
+                .map(imagem -> new FeedImagemDTO(imagem.getId(), imagem.getMediaUrl(), imagem.getIdAlbum().getId(), imagem.getIdAlbum().getFotografo().getNome(), imagem.getOrigemImagem()))
                 .collect(Collectors.toList());
     }
 
-    @Operation(summary = "Listar paths das imagens e IDs dos álbuns de um fotógrafo")
-    public List<FeedImagemDTO> listarImagensAlbumFotografo(Long idFotografo) {
-        List<Imagem> imagens = imagemRepository.findAll();
-        return imagens.stream()
-                .filter(imagem -> imagem.getIdAlbum().getFotografo().getId().equals(idFotografo))
-                .map(imagem -> new FeedImagemDTO(imagem.getId(), imagem.getMediaUrl(), imagem.getIdAlbum().getId(), imagem.getIdAlbum().getFotografo().getNome()))
-                .collect(Collectors.toList());
-    }
+//    @Operation(summary = "Listar paths das imagens e IDs dos álbuns de um fotógrafo")
+//    public List<FeedImagemDTO> listarImagensAlbumFotografo(Long idFotografo) {
+//        List<Imagem> imagens = imagemRepository.findAll();
+//        return imagens.stream()
+//                .filter(imagem -> imagem.getIdAlbum().getFotografo().getId().equals(idFotografo))
+//                .map(imagem -> new FeedImagemDTO(imagem.getId(), imagem.getMediaUrl(), imagem.getIdAlbum().getId(), imagem.getIdAlbum().getFotografo().getNome(), imagem.getOrigemImagem()))
+//                .collect(Collectors.toList());
+//    }
 
     public Album getAlbum(Long idAlbum) {
         return albumRepository.findById(idAlbum)
