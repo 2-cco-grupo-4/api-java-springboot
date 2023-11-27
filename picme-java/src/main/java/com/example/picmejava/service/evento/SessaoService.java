@@ -3,6 +3,7 @@ package com.example.picmejava.service.evento;
 import com.example.picmejava.model.*;
 import com.example.picmejava.model.mapper.*;
 import com.example.picmejava.service.endereco.dto.CadastroEnderecoExternoDTO;
+import com.example.picmejava.service.evento.dto.CadastroContratoDTO;
 import com.example.picmejava.service.evento.dto.CadastroSessaoDTO;
 import com.example.picmejava.service.evento.dto.CadastroSessaoExternoDTO;
 import com.example.picmejava.service.evento.dto.RetornoEventoDTO;
@@ -61,6 +62,25 @@ public class SessaoService {
         sessaoRepository.save(sessao);
 
         return sessaoMapper.toRetornoEventoDTO(sessao);
+    }
+
+    public RetornoEventoDTO cadastrarContrato(CadastroContratoDTO novoContrato) {
+        try {
+            Fotografo fotografo = getFotografo(novoContrato.getIdFotografo());
+            Cliente cliente = getCliente(novoContrato.getIdCliente());
+            Tema tema = getTema(novoContrato.getIdTema());
+
+            Sessao contrato = sessaoMapper.toContrato(fotografo, cliente, tema, novoContrato);
+            sessaoRepository.save(contrato);
+
+            return sessaoMapper.toRetornoEventoDTO(contrato);
+        } catch (EntidadeNaoEncontradaException e) {
+            System.out.println("Entidade não encontrada no service: " + e.getMessage());
+            throw e;
+        } catch (Exception e) {
+            System.out.println("Erro ao processar a requisição no service: " + e.getMessage());
+            throw new RuntimeException("Erro ao processar a requisição");
+        }
     }
 
     @Operation(summary = "Cadastrar sessão externa")
