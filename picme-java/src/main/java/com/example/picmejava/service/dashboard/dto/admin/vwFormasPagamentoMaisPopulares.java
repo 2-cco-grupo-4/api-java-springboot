@@ -5,17 +5,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class vwTemaCountSessoes {
+public class vwFormasPagamentoMaisPopulares {
 
-    private String tema;
-    private Long sessoes;
-    private BigDecimal valorGerado;
+    private String forma;
+    private Long total;
     private String mes;
     private int ano;
+
 }

@@ -38,23 +38,115 @@ public class DashboardAdminService {
     }
 
     @Operation(summary = "Obter contagem de contatos por tema", description = "Retorna a contagem de contatos por tema.")
-    public List<vwTemaCountSessoes> trazerContagemTemaContato() {
-        Query query = entityManager.createNativeQuery("SELECT * FROM vw_tema_count_sessoes");
+    public List<vwTemaCountSessoes> trazerContagemTemaContato(String mes, int ano) {
+        Query query = entityManager.createNativeQuery("SELECT * FROM vw_tema_count_sessoes WHERE Mes = :mes AND Ano = :ano");
+        query.setParameter("mes", mes);
+        query.setParameter("ano", ano);
         List<Object[]> resultado = query.getResultList();
 
         List<vwTemaCountSessoes> temaContatosClienteDtos = new ArrayList<>();
 
         for (Object[] linha : resultado) {
             String tema = (String) linha[0];
-            Long contatos = (Long) linha[1];
+            Long sessoes = (Long) linha[1];
             BigDecimal valor = (BigDecimal) linha[2];
+            String mesQuery = (String) linha[3];
+            int anoQuery = (int) linha[4];
 
 
-            vwTemaCountSessoes temaContatosClienteDto = new vwTemaCountSessoes(tema, contatos, valor);
+            vwTemaCountSessoes temaContatosClienteDto = new vwTemaCountSessoes(tema, sessoes, valor, mesQuery, anoQuery);
             temaContatosClienteDtos.add(temaContatosClienteDto);
         }
 
         return temaContatosClienteDtos;
+    }
+
+    @Operation(summary = "Obter estados com mais sessões", description = "Retorna os estados com mais sessões")
+    public List<vwEstadosMaisSessoes> trazerEstadosMaisSessoes(String mes, int ano) {
+        Query query = entityManager.createNativeQuery("SELECT * FROM vw_estados_mais_sessoes WHERE Mes = :mes AND Ano = :ano");
+        query.setParameter("mes", mes);
+        query.setParameter("ano", ano);
+        List<Object[]> resultado = query.getResultList();
+
+        List<vwEstadosMaisSessoes> estadosMaisSessoes = new ArrayList<>();
+
+        for (Object[] linha : resultado) {
+            String estado = (String) linha[0];
+            Long total = (Long) linha[1];
+            String mesQuery = (String) linha[2];
+            int anoQuery = (int) linha[3];
+
+            vwEstadosMaisSessoes estados = new vwEstadosMaisSessoes(estado, total, mesQuery, anoQuery);
+            estadosMaisSessoes.add(estados);
+        }
+
+        return estadosMaisSessoes;
+    }
+
+    @Operation(summary = "Obter fluxo de conversão de contratos em sessões", description = "Retorna o fluxo de conversão de contratos em sessões")
+    public List<vwFluxoSessoesConvertidas> trazerFluxoConversaoContrato(String mes, int ano) {
+        Query query = entityManager.createNativeQuery("SELECT * FROM vw_fluxo_sessoes_covertidas WHERE Mes = :mes AND Ano = :ano");
+        query.setParameter("mes", mes);
+        query.setParameter("ano", ano);
+        List<Object[]> resultado = query.getResultList();
+
+        List<vwFluxoSessoesConvertidas> fluxoConversaoContratoSessao = new ArrayList<>();
+
+        for (Object[] linha : resultado) {
+            Long quantidade = (Long) linha[0];
+            String mesQuery = (String) linha[1];
+            Long anoQuery = (Long) linha[2];
+            String status = (String) linha[3];
+
+            vwFluxoSessoesConvertidas fluxo = new vwFluxoSessoesConvertidas(quantidade, mesQuery, anoQuery, status);
+            fluxoConversaoContratoSessao.add(fluxo);
+        }
+
+        return fluxoConversaoContratoSessao;
+    }
+
+    @Operation(summary = "Retornar as formas de pagamento mais populares", description = "Retorna as formas de pagamento mais populares")
+    public List<vwFormasPagamentoMaisPopulares> trazerFormasPagamentoPopulares(String mes, int ano) {
+        Query query = entityManager.createNativeQuery("SELECT * FROM vw_formas_pagamentos_populares WHERE Mes = :mes AND Ano = :ano");
+        query.setParameter("mes", mes);
+        query.setParameter("ano", ano);
+        List<Object[]> resultado = query.getResultList();
+
+        List<vwFormasPagamentoMaisPopulares> formasPagamentoPopulares = new ArrayList<>();
+
+        for (Object[] linha : resultado) {
+            String forma = (String) linha[0];
+            Long total = (Long) linha[1];
+            String mesQuery = (String) linha[2];
+            int anoQuery = (int) linha[3];
+
+            vwFormasPagamentoMaisPopulares formas = new vwFormasPagamentoMaisPopulares(forma, total, mesQuery, anoQuery);
+            formasPagamentoPopulares.add(formas);
+        }
+
+        return formasPagamentoPopulares;
+    }
+
+    @Operation(summary = "Retornar os estados com mais sessões agendadas no mês", description = "Retorna os estados com mais sessões agendadas no mês")
+    public List<vwEstadosMaisSessoes> trazerEstadosMaisSessoesAgendadas(String mes, int ano) {
+        Query query = entityManager.createNativeQuery("SELECT * FROM vw_estados_mais_sessoes WHERE Mes = :mes AND Ano = :ano");
+        query.setParameter("mes", mes);
+        query.setParameter("ano", ano);
+        List<Object[]> resultado = query.getResultList();
+
+        List<vwEstadosMaisSessoes> estadosMaisSessoes = new ArrayList<>();
+
+        for (Object[] linha : resultado) {
+            String estado = (String) linha[0];
+            Long total = (Long) linha[1];
+            String mesQuery = (String) linha[2];
+            int anoQuery = (int) linha[3];
+
+            vwEstadosMaisSessoes estados = new vwEstadosMaisSessoes(estado, total, mesQuery, anoQuery);
+            estadosMaisSessoes.add(estados);
+        }
+
+        return estadosMaisSessoes;
     }
 
     @Operation(summary = "Obter contagem de clientes que fecharam acordo em acordo em uma semana", description = "Retorna a contagem de clientes em acordo em uma semana.")

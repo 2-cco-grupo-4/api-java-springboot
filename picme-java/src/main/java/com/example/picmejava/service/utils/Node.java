@@ -1,48 +1,37 @@
 package com.example.picmejava.service.utils;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Node {
-    int value;
-    Node left;
-    Node right;
+    private Object data;
+    private Node left;
+    private Node right;
 
-    Node(int value) {
-        this.value = value;
-        left = null;
-        right = null;
+    public Node(Object data) {
+        this.data = data;
+        this.left = null;
+        this.right = null;
     }
 
-
-    boolean isLeaf() {
-        return left == null && right == null;
+    public Object getData() {
+        return data;
     }
 
-
-    boolean hasLeftChild() {
-        return left != null;
+    public Node getLeft() {
+        return left;
     }
 
-    boolean hasRightChild() {
-        return right != null;
+    public Node getRight() {
+        return right;
     }
 
-    public void insert(long value) {
-        if (value < this.value) {
-            if (left == null) {
-                left = new Node((int) value);
-            } else {
-                left.insert(value);
-            }
-        } else if (value > this.value) {
-            if (right == null) {
-                right = new Node((int) value);
-            } else {
-                right.insert(value);
-            }
-        }
+    public void setData(Object data) {
+        this.data = data;
     }
 
+    public void setLeft(Node left) {
+        this.left = left;
+    }
+
+    public void setRight(Node right){
+        this.right = right;
+    }
 }
-
