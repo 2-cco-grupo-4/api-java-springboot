@@ -71,11 +71,13 @@ public class AlbumService {
     }
 
     @Operation(summary = "Listar todos os álbuns")
-    public List<RetornoAlbumDTO> listar() {
-        List<Album> albums = albumRepository.findAll();
-        return albums.stream()
-                .map(albumMapper::toRetornoAlbumDTO)
-                .toList();
+    public List<RetornoAlbumDTO> listar(Long idFotografo) {
+            List<Album> albuns = albumRepository.findAllByFotografo(getFotografo(idFotografo));
+            return albuns.stream()
+                    .map(albumMapper::toRetornoAlbumDTO)
+                    .toList();
+
+
     }
 
     @Operation(summary = "Listar todos os álbuns de um fotógrafo")

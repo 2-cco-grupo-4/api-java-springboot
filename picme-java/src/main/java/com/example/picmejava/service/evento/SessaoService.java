@@ -33,7 +33,6 @@ public class SessaoService {
     private final SessaoMapper sessaoMapper = new SessaoMapper();
     private final ClienteMapper clienteMapper = new ClienteMapper();
     private final FotografoMapper fotografoMapper = new FotografoMapper();
-
     private final EnderecoMapper enderecoMapper = new EnderecoMapper();
 
     @Autowired
@@ -65,26 +64,42 @@ public class SessaoService {
     }
 
     @Operation(summary = "Cadastrar sessão externa")
-    public RetornoEventoDTO cadastrarExterno(CadastroSessaoExternoDTO cadastroSessaoExternoDTO){
+    public Sessao cadastrarExterno(CadastroSessaoExternoDTO cadastroSessaoExternoDTO) {
 
         Fotografo fotografo = getFotografo(cadastroSessaoExternoDTO.getIdFotografo());
-        CadastroClienteExternoDTO cadastroClienteExternoDTO = new CadastroClienteExternoDTO(cadastroSessaoExternoDTO.getCliente(), cadastroSessaoExternoDTO.getTelefone());
-        Cliente cliente = clienteRepository.save((clienteMapper.clientExternoToCliente(cadastroClienteExternoDTO)));
-        CadastroSessaoDTO cadastroSessaoDTO = new CadastroSessaoDTO(cadastroSessaoExternoDTO.getDataRealizacao(), cadastroSessaoExternoDTO.getStatusSessao(), cliente.getId(), fotografo.getId(), null, null, LocalDateTime.now());
 
-        Sessao sessao = sessaoMapper.toEvento(fotografo, cliente, null, cadastroSessaoDTO);
+        Cliente cliente = new Cliente();
+        cliente.setNome(cadastroSessaoExternoDTO.getCliente());
+
+        clienteRepository.save(cliente);
+
+        Sessao sessao = new Sessao();
+        sessao.setCliente(cliente);
+        sessao.setStatusSessao(cadastroSessaoExternoDTO.getStatusSessao());
+        sessao.setDataRealizacao(cadastroSessaoExternoDTO.getDataRealizacao());
+        sessao.setFotografo(fotografo);
+        sessao.setCliente(cliente);
+
         sessaoRepository.save(sessao);
 
-        CadastroEnderecoExternoDTO cadastroEnderecoExternoDTO = new CadastroEnderecoExternoDTO(cadastroSessaoExternoDTO.getEndereco(), cadastroSessaoExternoDTO.getCidade(), cadastroSessaoExternoDTO.getBairro(), cadastroSessaoExternoDTO.getEstado(), cadastroSessaoExternoDTO.getComplemento(), cadastroSessaoExternoDTO.getCep(), sessao.getId());
-
-        Endereco endereco  = enderecoRepository.save(enderecoMapper.fromEnderecoExternoToEndereco(cadastroEnderecoExternoDTO, sessao));
-
-        sessao.setEndereco(enderecoRepository.getReferenceById(endereco.getId()));
-        sessaoRepository.save(sessao);
+        Endereco endereco = new Endereco();
 
 
-        return sessaoMapper.toRetornoEventoDTO(sessao);
+        endereco.setCep(cadastroSessaoExternoDTO.getCep());
+        endereco.setEstado(cadastroSessaoExternoDTO.getEstado());
+        endereco.setCidade(cadastroSessaoExternoDTO.getCidade());
+        endereco.setBairro(cadastroSessaoExternoDTO.getBairro());
+        endereco.setLogradouro(cadastroSessaoExternoDTO.getEndereco());
+        endereco.setComplemento(cadastroSessaoExternoDTO.getComplemento());
+        endereco.setNumero("123");
+        endereco.setSessao(sessao);
+
+        enderecoRepository.save(endereco);
+
+
+        return sessao;
     }
+
 
     @Operation(summary = "Listar todos os eventos")
     public List<RetornoEventoDTO> listar() {
@@ -96,26 +111,10 @@ public class SessaoService {
 
     @Operation(summary = "Listar eventos por fotografo")
     public List<RetornoEventoDTO> listarPorFotografo(Long idFotografo) {
-        Query query = entityManager.createNativeQuery("SELECT * FROM tb_sessao WHERE fk_fotografo = :idFotografo");
-        query.setParameter("idFotografo", idFotografo);
-        List<Object[]> sessoes = query.getResultList();
-
-        List<RetornoEventoDTO> listRetorno = new ArrayList<>();
-
-        for (Object[] sessao : sessoes) {
-            RetornoEventoDTO retornoEventoDTO = new RetornoEventoDTO();
-            retornoEventoDTO.setId((Long) sessao[0]);
-            retornoEventoDTO.setDataRealizacao((LocalDateTime) sessao[1]);
-            retornoEventoDTO.setStatusSessao((String) sessao[2]);
-            retornoEventoDTO.setCreatedAt((LocalDateTime) sessao[3]);
-            retornoEventoDTO.setCliente(clienteMapper.toPerfilClienteDTO(getCliente((Long) sessao[4])));
-            retornoEventoDTO.setFotografo(fotografoMapper.toPerfilFotogradoDTO(getFotografo((Long) sessao[5])));
-            retornoEventoDTO.setTema(TemaMapper.toPerfilTemaDTO(getTema((Long) sessao[6])));
-            retornoEventoDTO.setEndereco(EnderecoMapper.toPerfilEnderecoDTO(getEndereco((Long) sessao[7])));
-            listRetorno.add(retornoEventoDTO);
-        }
-
-        return listRetorno;
+        List<Sessao> sessoes = sessaoRepository.findAllByFotografoId(idFotografo);
+        return sessoes.stream()
+                .map(evento -> sessaoMapper.toRetornoEventoDTO(evento))
+                .toList();
     }
 
     private Fotografo getFotografo(Long idFotografo) {

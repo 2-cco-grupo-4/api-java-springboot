@@ -38,8 +38,10 @@ public class Sessao {
     @JoinColumn(name = "fk_tema")
     private Tema tema;
 
-    @ManyToOne
+
     @JoinColumn(name = "fk_cliente")
+    @ManyToOne(
+            cascade = CascadeType.ALL)
     private Cliente cliente;
 
     @OneToOne(mappedBy = "sessao")

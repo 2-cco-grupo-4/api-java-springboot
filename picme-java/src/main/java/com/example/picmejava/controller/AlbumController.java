@@ -6,6 +6,8 @@ import com.example.picmejava.service.album.dto.CadastroAlbumDTO;
 import com.example.picmejava.service.album.dto.CapaAlbumDTO;
 import com.example.picmejava.service.album.dto.RetornoAlbumDTO;
 import com.example.picmejava.service.album.AlbumService;
+
+import com.example.picmejava.service.utils.BinaryTree;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -85,5 +87,18 @@ public class AlbumController {
     public ResponseEntity<RetornoAlbumDTO> obterAlbum(@RequestParam Long idAlbum){
         return ResponseEntity.status(200).body(albumService.buscarPorIdRetornoAlbumDTO(idAlbum));
     }
+
+//    @GetMapping("/album-arvore")
+//    public ResponseEntity<BinaryTree> listarAlbumArvore(){
+//        BinaryTree arvore = new BinaryTree();
+//        List<RetornoAlbumDTO> albuns = albumService.listar();
+//
+//        for (RetornoAlbumDTO album : albuns) {
+//            arvore.insert(album);
+//        }
+//
+//        return ResponseEntity.ok(arvore);
+//    }
+//
 
 }
