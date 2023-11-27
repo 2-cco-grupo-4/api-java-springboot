@@ -169,11 +169,11 @@ public class FotografoService {
     }
 
     @Operation(summary = "Buscar fotógrafo por ID")
-    public Fotografo findById(Long idFotografo) {
+    public PerfilFotografoDTO findById(Long idFotografo) {
         Optional<Fotografo> fotografoOptional = fotografoRepository.findById(idFotografo);
-        return fotografoOptional.orElseThrow(() -> new EntidadeNaoEncontradaException(
+        return fotografoMapper.toPerfilFotogradoDTO(fotografoOptional.orElseThrow(() -> new EntidadeNaoEncontradaException(
                 "Fotografo não existe")
-        );
+        ));
     }
 
 
