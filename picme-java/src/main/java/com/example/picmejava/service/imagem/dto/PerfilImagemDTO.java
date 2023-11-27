@@ -10,5 +10,6 @@ public class PerfilImagemDTO {
     private String path;
     private String tipo;
     private String descricao;
+    private String origemImagem;
 
 }

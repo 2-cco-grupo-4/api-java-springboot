@@ -3,6 +3,7 @@ package com.example.picmejava.controller;
 import com.example.picmejava.model.Album;
 import com.example.picmejava.service.album.dto.AtualizarAlbumDTO;
 import com.example.picmejava.service.album.dto.CadastroAlbumDTO;
+import com.example.picmejava.service.album.dto.CapaAlbumDTO;
 import com.example.picmejava.service.album.dto.RetornoAlbumDTO;
 import com.example.picmejava.service.album.AlbumService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -59,7 +60,16 @@ public class AlbumController {
         if (albumService.listarAlbunsFotografo(idFotografo).isEmpty()){
             return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.status(200).body(albumService.listar());
+        return ResponseEntity.status(200).body(albumService.listarAlbunsFotografo(idFotografo));
+    }
+
+    @Operation(summary = "Listar capa de albuns de um fotógrafo", description = "Passando o ID fotógrafo podemos istar capa de albuns")
+    @GetMapping("/capa")
+    public ResponseEntity<List<CapaAlbumDTO>> listarCapaAlbunsFotografo(@RequestParam Long idFotografo){
+        if (albumService.listarCapaAlbum(idFotografo).isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.status(200).body(albumService.listarCapaAlbum(idFotografo));
     }
     @Operation(summary = "Listar albuns", description = "Podemos obter a lista de todos os albuns com árvore Binária ")
     @SecurityRequirement(name = "Bearer")

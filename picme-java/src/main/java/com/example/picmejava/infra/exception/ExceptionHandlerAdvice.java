@@ -26,4 +26,12 @@ public class ExceptionHandlerAdvice extends ResponseEntityExceptionHandler {
         );
         return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
+
+    @ExceptionHandler(S3UploadException.class)
+    public ResponseEntity<MensagemExceptionHandler> S3UploadException(S3UploadException ex){
+        MensagemExceptionHandler error = new MensagemExceptionHandler(
+                LocalDateTime.now(), HttpStatus.BAD_REQUEST.value(), ex.getMessage()
+        );
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
 }
