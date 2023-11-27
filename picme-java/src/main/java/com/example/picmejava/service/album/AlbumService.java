@@ -12,6 +12,7 @@ import com.example.picmejava.service.album.dto.AtualizarAlbumDTO;
 import com.example.picmejava.service.album.dto.CadastroAlbumDTO;
 import com.example.picmejava.service.album.dto.CapaAlbumDTO;
 import com.example.picmejava.service.album.dto.RetornoAlbumDTO;
+import com.example.picmejava.service.utils.ArvoreBin;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,6 +104,24 @@ public class AlbumService {
     @Operation(summary = "Buscar um álbum por ID e receber RetornoAlbumDTO")
     public RetornoAlbumDTO buscarPorIdRetornoAlbumDTO(Long idAlbum) {
         return albumMapper.toRetornoAlbumDTO(buscarPorId(idAlbum));
+
+    }
+
+    @Operation(summary = "Listar todos os álbuns de um fotógrafo | árvore")
+    public List<RetornoAlbumDTO> listarArvore(Long idFotografo) {
+        ArvoreBin arvore = new ArvoreBin();
+        Query query = entityManager.createQuery("SELECT a FROM Album a WHERE a.fotografo.id = :idFotografo");
+        query.setParameter("idFotografo", idFotografo);
+        List<Album> albums = query.getResultList();
+        for (Album album : albums) {
+            arvore.insert(album);
+        }
+        List<Album> lista = arvore.toList();
+        List<RetornoAlbumDTO> listaDTO = lista.stream()
+                .map(albumMapper::toRetornoAlbumDTO)
+                .toList();
+        return listaDTO;
+
     }
 
     private Tema getTema(Long idTema) {
@@ -114,5 +133,7 @@ public class AlbumService {
         return fotografoRepository.findById(idFotografo)
                 .orElseThrow(() -> new EntidadeNaoEncontradaException("Fotografo não encontrado"));
     }
+
+
 
 }
