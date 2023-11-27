@@ -7,7 +7,6 @@ import com.example.picmejava.service.album.dto.CapaAlbumDTO;
 import com.example.picmejava.service.album.dto.RetornoAlbumDTO;
 import com.example.picmejava.service.album.AlbumService;
 
-import com.example.picmejava.service.utils.BinaryTree;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
