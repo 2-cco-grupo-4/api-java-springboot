@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Setter
 public class RetornoEventoDTO {
     private Long id;
-    private LocalDateTime dataRealizacao;
+    private LocalDate dataRealizacao;
     private String statusSessao;
     private LocalDateTime createdAt;
     private PerfilFotografoDTO fotografo;

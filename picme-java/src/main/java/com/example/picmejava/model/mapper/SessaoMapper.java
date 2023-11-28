@@ -1,10 +1,7 @@
 package com.example.picmejava.model.mapper;
 
 import com.example.picmejava.model.*;
-import com.example.picmejava.service.evento.dto.CadastroSessaoDTO;
-import com.example.picmejava.service.evento.dto.CadastroSessaoExternoDTO;
-import com.example.picmejava.service.evento.dto.PerfilEventoDTO;
-import com.example.picmejava.service.evento.dto.RetornoEventoDTO;
+import com.example.picmejava.service.evento.dto.*;
 
 public class SessaoMapper {
 
@@ -24,6 +21,7 @@ public class SessaoMapper {
         }
         return dto;
     }
+
 
     public Sessao toEvento(Fotografo fotografo, Cliente cliente, Tema tema, CadastroSessaoDTO dadosSessao) {
         Sessao sessao = new Sessao();
@@ -60,6 +58,32 @@ public class SessaoMapper {
         cadastroSessaoDTO.setIdFotografo(cadastroSessaoExternoDTO.getIdFotografo());
         cadastroSessaoDTO.setIdEndereco(endereco.getId());
         cadastroSessaoDTO.setIdTema(null);
+
+        return cadastroSessaoDTO;
+    }
+
+    public Sessao toContrato(Fotografo fotografo, Cliente cliente, Tema tema, CadastroContratoDTO contratoDTO) {
+        Sessao contrato = new Sessao();
+
+        contrato.setCliente(cliente);
+        contrato.setFotografo(fotografo);
+        contrato.setTema(tema);
+        contrato.setStatusSessao(contratoDTO.getStatusSessao());
+        contrato.setDataRealizacao(contratoDTO.getDataRealizacao());
+        contrato.setCreatedAt(contratoDTO.getCreatedAt());
+
+        return contrato;
+    }
+
+    public CadastroSessaoDTO fromContratoToCadastroSessaoDTO(Sessao contrato) {
+        CadastroSessaoDTO cadastroSessaoDTO = new CadastroSessaoDTO();
+
+        cadastroSessaoDTO.setStatusSessao(contrato.getStatusSessao());
+        cadastroSessaoDTO.setDataRealizacao(contrato.getDataRealizacao());
+        cadastroSessaoDTO.setIdCliente(contrato.getCliente().getId());
+        cadastroSessaoDTO.setIdFotografo(contrato.getFotografo().getId());
+        cadastroSessaoDTO.setIdTema(contrato.getTema().getId());
+        cadastroSessaoDTO.setCreatedAt(contrato.getCreatedAt());
 
         return cadastroSessaoDTO;
     }

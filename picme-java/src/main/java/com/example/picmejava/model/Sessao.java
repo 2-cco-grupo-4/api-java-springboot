@@ -22,7 +22,7 @@ public class Sessao {
     private Long id;
 
     @Schema(description = "Data de realização da sessão")
-    private LocalDateTime dataRealizacao;
+    private LocalDate dataRealizacao;
 
     @Schema(description = "Status da sessão")
     private String statusSessao;
