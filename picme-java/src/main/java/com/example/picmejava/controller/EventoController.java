@@ -2,11 +2,9 @@ package com.example.picmejava.controller;
 
 import com.example.picmejava.infra.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.model.Fotografo;
+import com.example.picmejava.model.Pagamento;
 import com.example.picmejava.model.Sessao;
-import com.example.picmejava.service.evento.dto.CadastroContratoDTO;
-import com.example.picmejava.service.evento.dto.CadastroSessaoDTO;
-import com.example.picmejava.service.evento.dto.CadastroSessaoExternoDTO;
-import com.example.picmejava.service.evento.dto.RetornoEventoDTO;
+import com.example.picmejava.service.evento.dto.*;
 import com.example.picmejava.service.evento.SessaoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -47,6 +45,17 @@ public class EventoController {
         } catch (Exception e) {
             System.out.println("Erro ao processar a requisição: " + e.getMessage());
             return new ResponseEntity<>("Erro ao processar a requisição", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/cadastrarPagamento")
+    @Operation(summary = "Cadastrar pagamento para uma sessão")
+    public ResponseEntity<Pagamento> cadastrarPagamento(@RequestBody CadastrarPagamentoDTO cadastrarPagamentoDTO) {
+        try {
+            Pagamento pagamento = sessaoService.cadastrarPagamento(cadastrarPagamentoDTO);
+            return new ResponseEntity<>(pagamento, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class CadastroSessaoDTO {
 
-    private LocalDateTime dataRealizacao;
+    private LocalDate dataRealizacao;
     private String statusSessao;
     private Long idFotografo;
     private Long idCliente;

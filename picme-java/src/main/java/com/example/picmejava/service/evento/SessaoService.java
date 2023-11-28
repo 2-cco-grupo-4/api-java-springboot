@@ -2,23 +2,15 @@ package com.example.picmejava.service.evento;
 
 import com.example.picmejava.model.*;
 import com.example.picmejava.model.mapper.*;
-import com.example.picmejava.service.endereco.dto.CadastroEnderecoExternoDTO;
-import com.example.picmejava.service.evento.dto.CadastroContratoDTO;
-import com.example.picmejava.service.evento.dto.CadastroSessaoDTO;
-import com.example.picmejava.service.evento.dto.CadastroSessaoExternoDTO;
-import com.example.picmejava.service.evento.dto.RetornoEventoDTO;
+import com.example.picmejava.service.evento.dto.*;
 import com.example.picmejava.infra.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.repository.*;
-import com.example.picmejava.service.usuario.dto.CadastroClienteExternoDTO;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -30,6 +22,7 @@ public class SessaoService {
     private final FotografoRepository fotografoRepository;
     private final EnderecoRepository enderecoRepository;
     private final TemaRepository temaRepository;
+    private final PagamentoRepository pagamentoRepository;
     private EntityManager entityManager;
     private final SessaoMapper sessaoMapper = new SessaoMapper();
     private final ClienteMapper clienteMapper = new ClienteMapper();
@@ -43,12 +36,14 @@ public class SessaoService {
             FotografoRepository fotografoRepository,
             EnderecoRepository enderecoRepository,
             TemaRepository temaRepository,
+            PagamentoRepository pagamentoRepository,
             EntityManager entityManager) {
         this.sessaoRepository = sessaoRepository;
         this.clienteRepository = clienteRepository;
         this.fotografoRepository = fotografoRepository;
         this.enderecoRepository = enderecoRepository;
         this.temaRepository = temaRepository;
+        this.pagamentoRepository = pagamentoRepository;
         this.entityManager = entityManager;
     }
 
@@ -74,6 +69,31 @@ public class SessaoService {
             sessaoRepository.save(contrato);
 
             return sessaoMapper.toRetornoEventoDTO(contrato);
+        } catch (EntidadeNaoEncontradaException e) {
+            System.out.println("Entidade não encontrada no service: " + e.getMessage());
+            throw e;
+        } catch (Exception e) {
+            System.out.println("Erro ao processar a requisição no service: " + e.getMessage());
+            throw new RuntimeException("Erro ao processar a requisição");
+        }
+    }
+
+
+    @Operation(summary = "Cadastrar pagamento para uma sessão")
+    public Pagamento cadastrarPagamento(CadastrarPagamentoDTO cadastrarPagamentoDTO) {
+        try {
+            Sessao sessao = sessaoRepository.findById(cadastrarPagamentoDTO.getIdSessao())
+                    .orElseThrow(() -> new EntidadeNaoEncontradaException("Sessão não encontrada"));
+
+            Pagamento pagamento = new Pagamento();
+            pagamento.setForma(cadastrarPagamentoDTO.getForma());
+            pagamento.setValor(cadastrarPagamentoDTO.getValor());
+            pagamento.setParcelas(cadastrarPagamentoDTO.getParcelas());
+            pagamento.setSessao(sessao);
+
+            pagamentoRepository.save(pagamento);
+
+            return pagamento;
         } catch (EntidadeNaoEncontradaException e) {
             System.out.println("Entidade não encontrada no service: " + e.getMessage());
             throw e;

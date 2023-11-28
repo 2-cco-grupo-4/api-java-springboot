@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class PerfilEventoDTO {
 
     private Long id;
-    private LocalDateTime dataRealizacao;
+    private LocalDate dataRealizacao;
     private String statusEvento;
     private LocalDateTime createdAt;
     private PerfilFotografoDTO fotografo;
