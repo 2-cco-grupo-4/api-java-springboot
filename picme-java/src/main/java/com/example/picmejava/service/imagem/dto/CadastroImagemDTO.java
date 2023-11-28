@@ -15,6 +15,13 @@ import java.time.LocalDateTime;
 
 public class CadastroImagemDTO {
 
+    public CadastroImagemDTO(String mediaUrl, String origemImagem, LocalDateTime updatedAt, Long idAlbum) {
+        this.mediaUrl = mediaUrl;
+        this.origemImagem = origemImagem;
+        this.updatedAt = updatedAt;
+        this.idAlbum = idAlbum;
+    }
+
     private String mediaUrl;
     private String permalink;
     private String mediaType;

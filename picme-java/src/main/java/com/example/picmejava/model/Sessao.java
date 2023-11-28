@@ -22,7 +22,7 @@ public class Sessao {
     private Long id;
 
     @Schema(description = "Data de realização da sessão")
-    private LocalDateTime dataRealizacao;
+    private LocalDate dataRealizacao;
 
     @Schema(description = "Status da sessão")
     private String statusSessao;
@@ -38,8 +38,10 @@ public class Sessao {
     @JoinColumn(name = "fk_tema")
     private Tema tema;
 
-    @ManyToOne
+
     @JoinColumn(name = "fk_cliente")
+    @ManyToOne(
+            cascade = CascadeType.ALL)
     private Cliente cliente;
 
     @OneToOne(mappedBy = "sessao")

@@ -66,6 +66,8 @@ public abstract class Usuario implements UserDetails, Identificavel {
     @Schema(description = "Estado de escolha do fotógrafo para receber propostas")
     private String estadoPreferencia;
 
+    private String imageUrl;
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "tb_usuario_tema",

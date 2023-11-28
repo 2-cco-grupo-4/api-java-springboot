@@ -10,7 +10,9 @@ import com.example.picmejava.repository.FotografoRepository;
 import com.example.picmejava.repository.TemaRepository;
 import com.example.picmejava.service.album.dto.AtualizarAlbumDTO;
 import com.example.picmejava.service.album.dto.CadastroAlbumDTO;
+import com.example.picmejava.service.album.dto.CapaAlbumDTO;
 import com.example.picmejava.service.album.dto.RetornoAlbumDTO;
+import com.example.picmejava.service.utils.ArvoreBin;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,11 +71,13 @@ public class AlbumService {
     }
 
     @Operation(summary = "Listar todos os álbuns")
-    public List<RetornoAlbumDTO> listar() {
-        List<Album> albums = albumRepository.findAll();
-        return albums.stream()
-                .map(albumMapper::toRetornoAlbumDTO)
-                .toList();
+    public List<RetornoAlbumDTO> listar(Long idFotografo) {
+            List<Album> albuns = albumRepository.findAllByFotografo(getFotografo(idFotografo));
+            return albuns.stream()
+                    .map(albumMapper::toRetornoAlbumDTO)
+                    .toList();
+
+
     }
 
     @Operation(summary = "Listar todos os álbuns de um fotógrafo")
@@ -81,6 +85,15 @@ public class AlbumService {
         List<Album> albums = albumRepository.findAllByFotografo(getFotografo(idFotografo));
         return albums.stream()
                 .map(albumMapper::toRetornoAlbumDTO)
+                .toList();
+    }
+
+    @Operation(summary = "Listar todas as capas de álbum de um fotógrafo")
+    public List<CapaAlbumDTO> listarCapaAlbum(Long idFotografo) {
+        List<Album> albums = albumRepository.findAllByFotografo(getFotografo(idFotografo));
+        return albums.stream()
+                .filter(album -> !album.getImagems().isEmpty())
+                .map(albumMapper::toCapaAlbumDto)
                 .toList();
     }
 
@@ -93,6 +106,24 @@ public class AlbumService {
     @Operation(summary = "Buscar um álbum por ID e receber RetornoAlbumDTO")
     public RetornoAlbumDTO buscarPorIdRetornoAlbumDTO(Long idAlbum) {
         return albumMapper.toRetornoAlbumDTO(buscarPorId(idAlbum));
+
+    }
+
+    @Operation(summary = "Listar todos os álbuns de um fotógrafo | árvore")
+    public List<RetornoAlbumDTO> listarArvore(Long idFotografo) {
+        ArvoreBin arvore = new ArvoreBin();
+        Query query = entityManager.createQuery("SELECT a FROM Album a WHERE a.fotografo.id = :idFotografo");
+        query.setParameter("idFotografo", idFotografo);
+        List<Album> albums = query.getResultList();
+        for (Album album : albums) {
+            arvore.insert(album);
+        }
+        List<Album> lista = arvore.toList();
+        List<RetornoAlbumDTO> listaDTO = lista.stream()
+                .map(albumMapper::toRetornoAlbumDTO)
+                .toList();
+        return listaDTO;
+
     }
 
     private Tema getTema(Long idTema) {
@@ -104,5 +135,7 @@ public class AlbumService {
         return fotografoRepository.findById(idFotografo)
                 .orElseThrow(() -> new EntidadeNaoEncontradaException("Fotografo não encontrado"));
     }
+
+
 
 }

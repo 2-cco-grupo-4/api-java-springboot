@@ -12,13 +12,11 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CadastroSessaoDTO {
+public class CadastrarPagamentoDTO {
 
-    private LocalDate dataRealizacao;
-    private String statusSessao;
-    private Long idFotografo;
-    private Long idCliente;
-    private Long idEndereco;
-    private Long idTema;
-    private LocalDateTime createdAt;
+    private String forma;
+    private Double valor;
+    private int parcelas;
+    private Long idSessao;
+
 }

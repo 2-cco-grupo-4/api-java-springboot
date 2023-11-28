@@ -1,0 +1,7 @@
+aws:
+  region: us-east-1
+  s3:
+    buckets:
+      fotografo-bucket: picme-s3
+    path:
+      fotografo-imagem-path: imagens
