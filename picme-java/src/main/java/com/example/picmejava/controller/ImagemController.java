@@ -55,6 +55,13 @@ public class ImagemController {
         return ResponseEntity.status(200).body(pathsAndIds);
     }
 
+    @Operation(summary = "Listar paths das imagens e IDs dos álbuns de um tema especifico")
+    @GetMapping("/paths/{nomeTema}")
+    public ResponseEntity<List<FeedImagemDTO>> listarFeedPorTema(@PathVariable String nomeTema) {
+        List<FeedImagemDTO> pathsAndIds = imagemService.listarFeedPorTema(nomeTema);
+        return ResponseEntity.status(200).body(pathsAndIds);
+    }
+
     @Operation(summary = "Forçar teste de imagens de um album para o feed", description = "Passando o ID do album, podemos listar todas as imagens de determinado album")
     @SecurityRequirement(name = "Bearer")
     @GetMapping("/feed/{id}")
