@@ -94,5 +94,15 @@ public class FotografoController {
 
     }
 
+    @Operation(summary = "Buscar fotógrafo pelo ID", description = "Busca um fotógrafo pelo seu ID")
+    @GetMapping("/buscar/id/{idFotografo}")
+    public ResponseEntity<PerfilFotografoDTO> buscarFotografoPorId(@PathVariable Long idFotografo){
+
+        return ResponseEntity.status(200).body(
+                serviceFotografo.findById(idFotografo)
+        );
+
+    }
+
 
 }
