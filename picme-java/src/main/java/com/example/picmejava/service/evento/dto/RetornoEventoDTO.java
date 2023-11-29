@@ -20,6 +20,7 @@ public class RetornoEventoDTO {
     private PerfilFotografoDTO fotografo;
     private PerfilClienteDTO cliente;
     private PerfilEnderecoDTO endereco;
+    private CadastrarPagamentoDTO pagamento;
     private PerfilTemaDTO tema;
 
 

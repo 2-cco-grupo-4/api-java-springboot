@@ -19,6 +19,10 @@ public class SessaoMapper {
         if (novaSessao.getEndereco() != null){
             dto.setEndereco(EnderecoMapper.toPerfilEnderecoDTO(novaSessao.getEndereco()));
         }
+        if (novaSessao.getPagamento() != null){
+            dto.setPagamento(toCadastrarPagamentoDTO(novaSessao.getPagamento()));
+        }
+
         return dto;
     }
 
@@ -34,6 +38,16 @@ public class SessaoMapper {
         sessao.setCreatedAt(dadosSessao.getCreatedAt());
 
         return sessao;
+    }
+
+    public CadastrarPagamentoDTO toCadastrarPagamentoDTO(Pagamento pagamento) {
+        CadastrarPagamentoDTO dto = new CadastrarPagamentoDTO();
+
+        dto.setForma(pagamento.getForma());
+        dto.setValor(pagamento.getValor());
+        dto.setParcelas(pagamento.getParcelas());
+
+        return dto;
     }
 
     public PerfilEventoDTO toPerfilSessaoDTO(Sessao sessao){
