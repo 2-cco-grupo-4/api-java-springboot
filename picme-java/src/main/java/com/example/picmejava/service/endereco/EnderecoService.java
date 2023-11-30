@@ -69,8 +69,7 @@ public class EnderecoService {
 
     @Operation(summary = "Visualizar um endereço específico")
     public RetornoEnderecoDTO visualizarEndereco(Long idEndereco) {
-        Endereco endereco = enderecoRepository.findById(idEndereco)
-                .orElseThrow(() -> new EntidadeNaoEncontradaException("Endereço não encontrado"));
+        Endereco endereco = enderecoRepository.findBySessaoId(idEndereco);
 
         return enderecoMapper.toRetornoEnderecoDTO(endereco);
     }

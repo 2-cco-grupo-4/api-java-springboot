@@ -50,9 +50,9 @@ public class EventoController {
 
     @PostMapping("/cadastrarPagamento")
     @Operation(summary = "Cadastrar pagamento para uma sessão")
-    public ResponseEntity<Pagamento> cadastrarPagamento(@RequestBody CadastrarPagamentoDTO cadastrarPagamentoDTO) {
+    public ResponseEntity<RetornoPagamentoDTO> cadastrarPagamento(@RequestBody CadastrarPagamentoDTO cadastrarPagamentoDTO) {
         try {
-            Pagamento pagamento = sessaoService.cadastrarPagamento(cadastrarPagamentoDTO);
+            RetornoPagamentoDTO pagamento = sessaoService.cadastrarPagamento(cadastrarPagamentoDTO);
             return new ResponseEntity<>(pagamento, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -68,10 +68,10 @@ public class EventoController {
     }
 
     @PutMapping("/pagamento/{idPagamento}")
-    public ResponseEntity<Pagamento> editarPagamento(
+    public ResponseEntity<RetornoPagamentoDTO> editarPagamento(
             @PathVariable Long idPagamento,
             @RequestBody EditaPagamentoDTO pagamentoAtualizado) {
-        Pagamento resultado = sessaoService.editarPagamento(idPagamento, pagamentoAtualizado);
+        RetornoPagamentoDTO resultado = sessaoService.editarPagamento(idPagamento, pagamentoAtualizado);
         return ResponseEntity.ok(resultado);
     }
 
@@ -82,8 +82,8 @@ public class EventoController {
     }
 
     @GetMapping("/pagamento/{idPagamento}")
-    public ResponseEntity<Pagamento> visualizarPagamento(@PathVariable Long idPagamento) {
-        Pagamento pagamento = sessaoService.visualizarPagamento(idPagamento);
+    public ResponseEntity<RetornoPagamentoDTO> visualizarPagamento(@PathVariable Long idPagamento) {
+        RetornoPagamentoDTO pagamento = sessaoService.visualizarPagamento(idPagamento);
         return ResponseEntity.ok(pagamento);
     }
 

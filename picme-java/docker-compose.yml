@@ -1,21 +1,9 @@
-version: "3.9"
+version: "3.3"
 services:
-  mysqldb:
-    image: mysql
-    container_name: picme_database
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-    networks:
-      - compose-bridge
-
   picmespring:
-    image: picmeapi
-    container_name: spring_api_picme
-    networks:
-      - compose-bridge
+    image: teste
+    container_name: picme_api
     ports:
       - 8080:8080
-
-networks:
-  compose-bridge:
-    driver: bridge
+    env_file:
+      - ./.aws-credentials

@@ -101,4 +101,13 @@ public class SessaoMapper {
 
         return cadastroSessaoDTO;
     }
+
+    public RetornoPagamentoDTO toRetornoPagamentoDTO(Pagamento pagamento) {
+        RetornoPagamentoDTO dto = new RetornoPagamentoDTO();
+
+        dto.setForma(pagamento.getForma());
+        dto.setId(pagamento.getId());
+
+        return dto;
+    }
 }
