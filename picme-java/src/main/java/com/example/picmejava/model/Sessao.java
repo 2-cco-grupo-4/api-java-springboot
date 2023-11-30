@@ -50,8 +50,8 @@ public class Sessao {
     @OneToOne(mappedBy = "sessao")
     private Pagamento pagamento;
 
-    @OneToOne(mappedBy = "sessao")
-    private Avaliacao avaliacao;
+    @OneToMany(mappedBy = "sessao")
+    private List<Avaliacao> avaliacao;
 
     @OneToMany(mappedBy = "sessao")
     private List<LogSessao> logsSessao;

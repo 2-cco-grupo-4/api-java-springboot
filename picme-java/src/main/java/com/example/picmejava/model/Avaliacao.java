@@ -35,7 +35,7 @@ public class Avaliacao {
     @Max(5)
     private Double nota;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "fk_sessao")
     private Sessao sessao;
 }
