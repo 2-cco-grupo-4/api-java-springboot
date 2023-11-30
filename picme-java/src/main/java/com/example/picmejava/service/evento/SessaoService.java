@@ -6,6 +6,7 @@ import com.example.picmejava.service.evento.dto.*;
 import com.example.picmejava.infra.exception.EntidadeNaoEncontradaException;
 import com.example.picmejava.repository.*;
 import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import io.swagger.v3.oas.annotations.Operation;
@@ -78,7 +79,6 @@ public class SessaoService {
         }
     }
 
-
     @Operation(summary = "Cadastrar pagamento para uma sessão")
     public Pagamento cadastrarPagamento(CadastrarPagamentoDTO cadastrarPagamentoDTO) {
         try {
@@ -90,6 +90,49 @@ public class SessaoService {
             pagamento.setValor(cadastrarPagamentoDTO.getValor());
             pagamento.setParcelas(cadastrarPagamentoDTO.getParcelas());
             pagamento.setSessao(sessao);
+
+            pagamentoRepository.save(pagamento);
+
+            return pagamento;
+        } catch (EntidadeNaoEncontradaException e) {
+            System.out.println("Entidade não encontrada no service: " + e.getMessage());
+            throw e;
+        } catch (Exception e) {
+            System.out.println("Erro ao processar a requisição no service: " + e.getMessage());
+            throw new RuntimeException("Erro ao processar a requisição");
+        }
+    }
+
+    public RetornoEventoDTO editarContrato(Long idContrato, EditaSessaoDTO contratoAtualizado) {
+        try {
+            Sessao contrato = sessaoRepository.findById(idContrato)
+                    .orElseThrow(() -> new EntidadeNaoEncontradaException("Contrato não encontrado"));
+
+            contrato.setDataRealizacao(contratoAtualizado.getDataRealizacao());
+            contrato.setStatusSessao(contratoAtualizado.getStatusSessao());
+
+            sessaoRepository.save(contrato);
+
+            return sessaoMapper.toRetornoEventoDTO(contrato);
+        } catch (EntidadeNaoEncontradaException e) {
+            System.out.println("Entidade não encontrada no service: " + e.getMessage());
+            throw e;
+        } catch (Exception e) {
+            System.out.println("Erro ao processar a requisição no service: " + e.getMessage());
+            throw new RuntimeException("Erro ao processar a requisição");
+        }
+    }
+
+    @Operation(summary = "Editar pagamento e salvar no banco")
+    @Transactional
+    public Pagamento editarPagamento(Long idPagamento, EditaPagamentoDTO pagamentoAtualizado) {
+        try {
+            Pagamento pagamento = pagamentoRepository.findById(idPagamento)
+                    .orElseThrow(() -> new EntidadeNaoEncontradaException("Pagamento não encontrado"));
+
+            pagamento.setForma(pagamentoAtualizado.getForma());
+            pagamento.setValor(pagamentoAtualizado.getValor());
+            pagamento.setParcelas(pagamentoAtualizado.getParcelas());
 
             pagamentoRepository.save(pagamento);
 
@@ -155,6 +198,20 @@ public class SessaoService {
         return sessoes.stream()
                 .map(evento -> sessaoMapper.toRetornoEventoDTO(evento))
                 .toList();
+    }
+
+    @Operation(summary = "Visualizar informações de uma sessão")
+    public RetornoEventoDTO visualizarSessao(Long idSessao) {
+        Sessao sessao = sessaoRepository.findById(idSessao)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Sessão não encontrada"));
+
+        return sessaoMapper.toRetornoEventoDTO(sessao);
+    }
+
+    @Operation(summary = "Visualizar informações de um pagamento")
+    public Pagamento visualizarPagamento(Long idPagamento) {
+        return pagamentoRepository.findById(idPagamento)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Pagamento não encontrado"));
     }
 
     private Fotografo getFotografo(Long idFotografo) {

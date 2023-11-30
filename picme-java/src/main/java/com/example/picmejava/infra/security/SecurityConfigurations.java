@@ -47,9 +47,18 @@ public class SecurityConfigurations implements WebMvcConfigurer {
                     req.requestMatchers(HttpMethod.GET, "/eventos/**").permitAll();
                     req.requestMatchers(HttpMethod.POST, "/fotografos/**").hasRole("FOTOGRAFO");
                     req.requestMatchers(HttpMethod.PATCH, "/fotografos/**").hasRole("FOTOGRAFO");
+                    req.requestMatchers(HttpMethod.GET, "/eventos").hasAnyRole("FOTOGRAFO", "ADMIN");
+                    req.requestMatchers(HttpMethod.POST, "/eventos/contrato").permitAll();
+                    req.requestMatchers(HttpMethod.PUT, "/eventos/contrato/{idContrato}").permitAll();
+                    req.requestMatchers(HttpMethod.PUT, "/eventos/pagamento/{idPagamento}").permitAll();
+                    req.requestMatchers(HttpMethod.GET, "/eventos/pagamento/{idPagamento}").permitAll();
+                    req.requestMatchers(HttpMethod.GET, "/eventos/{idSessao}").permitAll();
                     req.requestMatchers(HttpMethod.GET, "/eventos/**").permitAll();
                     req.requestMatchers(HttpMethod.GET, "/instagram/**").permitAll();
                     req.requestMatchers(HttpMethod.POST, "/instagram/**").permitAll();
+                    req.requestMatchers(HttpMethod.POST, "/enderecos/**").permitAll();
+                    req.requestMatchers(HttpMethod.GET, "/enderecos/**").permitAll();
+                    req.requestMatchers(HttpMethod.PUT, "/enderecos/**").permitAll();
 //                    req.requestMatchers(HttpMethod.POST, "/imagens").hasAnyRole("FOTOGRAFO", "ADMIN");
 //                    req.requestMatchers(HttpMethod.PUT, "/imagens").hasAnyRole("FOTOGRAFO", "ADMIN");
                     req.requestMatchers(HttpMethod.POST, "/albums").hasAnyRole("FOTOGRAFO", "ADMIN");

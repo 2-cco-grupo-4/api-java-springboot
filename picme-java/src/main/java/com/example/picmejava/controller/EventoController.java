@@ -59,6 +59,34 @@ public class EventoController {
         }
     }
 
+    @PutMapping("/contrato/{idContrato}")
+    public ResponseEntity<RetornoEventoDTO> editarContrato(
+            @PathVariable Long idContrato,
+            @RequestBody EditaSessaoDTO contratoAtualizado) {
+        RetornoEventoDTO resultado = sessaoService.editarContrato(idContrato, contratoAtualizado);
+        return ResponseEntity.ok(resultado);
+    }
+
+    @PutMapping("/pagamento/{idPagamento}")
+    public ResponseEntity<Pagamento> editarPagamento(
+            @PathVariable Long idPagamento,
+            @RequestBody EditaPagamentoDTO pagamentoAtualizado) {
+        Pagamento resultado = sessaoService.editarPagamento(idPagamento, pagamentoAtualizado);
+        return ResponseEntity.ok(resultado);
+    }
+
+    @GetMapping("/{idSessao}")
+    public ResponseEntity<RetornoEventoDTO> visualizarSessao(@PathVariable Long idSessao) {
+        RetornoEventoDTO sessao = sessaoService.visualizarSessao(idSessao);
+        return ResponseEntity.ok(sessao);
+    }
+
+    @GetMapping("/pagamento/{idPagamento}")
+    public ResponseEntity<Pagamento> visualizarPagamento(@PathVariable Long idPagamento) {
+        Pagamento pagamento = sessaoService.visualizarPagamento(idPagamento);
+        return ResponseEntity.ok(pagamento);
+    }
+
     @Operation(summary = "Listar eventos", description = "Obter a lista de todos os eventos")
     @GetMapping
     public ResponseEntity<List<RetornoEventoDTO>> listar(){

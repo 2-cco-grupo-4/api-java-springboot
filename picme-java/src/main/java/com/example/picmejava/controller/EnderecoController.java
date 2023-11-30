@@ -1,6 +1,7 @@
 package com.example.picmejava.controller;
 
 import com.example.picmejava.service.endereco.dto.CadastroEnderecoDTO;
+import com.example.picmejava.service.endereco.dto.EditaEnderecoDTO;
 import com.example.picmejava.service.endereco.dto.RetornoEnderecoDTO;
 import com.example.picmejava.service.endereco.EnderecoService;
 import jakarta.validation.Valid;
@@ -33,5 +34,19 @@ public class EnderecoController {
     @GetMapping
     public ResponseEntity<List<RetornoEnderecoDTO>> listar(){
         return ResponseEntity.status(200).body(enderecoService.listar());
+    }
+
+    @PutMapping("/{idEndereco}")
+    public ResponseEntity<RetornoEnderecoDTO> editarEndereco(
+            @PathVariable Long idEndereco,
+            @RequestBody EditaEnderecoDTO enderecoAtualizado) {
+        RetornoEnderecoDTO resultado = enderecoService.editarEndereco(idEndereco, enderecoAtualizado);
+        return ResponseEntity.ok(resultado);
+    }
+
+    @GetMapping("/{idEndereco}")
+    public ResponseEntity<RetornoEnderecoDTO> visualizarEndereco(@PathVariable Long idEndereco) {
+        RetornoEnderecoDTO endereco = enderecoService.visualizarEndereco(idEndereco);
+        return ResponseEntity.ok(endereco);
     }
 }
