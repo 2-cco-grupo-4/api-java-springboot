@@ -80,7 +80,7 @@ public class SessaoService {
     }
 
     @Operation(summary = "Cadastrar pagamento para uma sessão")
-    public Pagamento cadastrarPagamento(CadastrarPagamentoDTO cadastrarPagamentoDTO) {
+    public RetornoPagamentoDTO cadastrarPagamento(CadastrarPagamentoDTO cadastrarPagamentoDTO) {
         try {
             Sessao sessao = sessaoRepository.findById(cadastrarPagamentoDTO.getIdSessao())
                     .orElseThrow(() -> new EntidadeNaoEncontradaException("Sessão não encontrada"));
@@ -93,7 +93,10 @@ public class SessaoService {
 
             pagamentoRepository.save(pagamento);
 
-            return pagamento;
+            RetornoPagamentoDTO retornoPagamentoDTO = new RetornoPagamentoDTO();
+            retornoPagamentoDTO.setForma(pagamento.getForma());
+
+            return retornoPagamentoDTO;
         } catch (EntidadeNaoEncontradaException e) {
             System.out.println("Entidade não encontrada no service: " + e.getMessage());
             throw e;
@@ -125,7 +128,7 @@ public class SessaoService {
 
     @Operation(summary = "Editar pagamento e salvar no banco")
     @Transactional
-    public Pagamento editarPagamento(Long idPagamento, EditaPagamentoDTO pagamentoAtualizado) {
+    public RetornoPagamentoDTO editarPagamento(Long idPagamento, EditaPagamentoDTO pagamentoAtualizado) {
         try {
             Pagamento pagamento = pagamentoRepository.findById(idPagamento)
                     .orElseThrow(() -> new EntidadeNaoEncontradaException("Pagamento não encontrado"));
@@ -136,7 +139,9 @@ public class SessaoService {
 
             pagamentoRepository.save(pagamento);
 
-            return pagamento;
+            RetornoPagamentoDTO retornoPagamentoDTO = new RetornoPagamentoDTO();
+
+            return retornoPagamentoDTO;
         } catch (EntidadeNaoEncontradaException e) {
             System.out.println("Entidade não encontrada no service: " + e.getMessage());
             throw e;
@@ -209,9 +214,10 @@ public class SessaoService {
     }
 
     @Operation(summary = "Visualizar informações de um pagamento")
-    public Pagamento visualizarPagamento(Long idPagamento) {
-        return pagamentoRepository.findById(idPagamento)
-                .orElseThrow(() -> new EntidadeNaoEncontradaException("Pagamento não encontrado"));
+    public RetornoPagamentoDTO visualizarPagamento(Long idPagamento) {
+        Pagamento pagamento = pagamentoRepository.findBySessaoId(idPagamento);
+
+        return sessaoMapper.toRetornoPagamentoDTO(pagamento);
     }
 
     private Fotografo getFotografo(Long idFotografo) {
